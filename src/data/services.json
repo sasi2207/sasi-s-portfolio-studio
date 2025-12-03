@@ -1,0 +1,56 @@
+{
+  "services": [
+    {
+      "id": "website-development",
+      "title": "Website Development",
+      "description": "Custom websites that are fast, responsive, and built to convert visitors into customers.",
+      "icon": "Globe",
+      "features": [
+        "Responsive Design",
+        "SEO Optimization",
+        "Performance Focused",
+        "CMS Integration"
+      ],
+      "price": "Starting at ₹25,000"
+    },
+    {
+      "id": "fullstack-apps",
+      "title": "Full-Stack Applications",
+      "description": "End-to-end web applications with robust backends, databases, and modern frontends.",
+      "icon": "Layers",
+      "features": [
+        "Custom APIs",
+        "Database Design",
+        "Authentication",
+        "Cloud Deployment"
+      ],
+      "price": "Starting at ₹75,000"
+    },
+    {
+      "id": "admin-dashboards",
+      "title": "Admin Dashboards",
+      "description": "Powerful admin panels with data visualization, user management, and analytics.",
+      "icon": "LayoutDashboard",
+      "features": [
+        "Real-time Analytics",
+        "User Management",
+        "Custom Reports",
+        "Role-based Access"
+      ],
+      "price": "Starting at ₹50,000"
+    },
+    {
+      "id": "deployment-hosting",
+      "title": "Deployment & Hosting",
+      "description": "Reliable deployment solutions with CI/CD pipelines, monitoring, and maintenance.",
+      "icon": "Cloud",
+      "features": [
+        "AWS/Vercel/Netlify",
+        "CI/CD Setup",
+        "SSL & Security",
+        "24/7 Monitoring"
+      ],
+      "price": "Starting at ₹15,000"
+    }
+  ]
+}
