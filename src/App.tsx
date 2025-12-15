@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // App.tsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -12,6 +13,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import "./app.css";
 
 // Pages
+=======
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+>>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -22,6 +30,7 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+<<<<<<< HEAD
 // Utils
 import { ScrollToTop } from "./ScrollToTop";
 import { PageLoader } from "./PageLoader";
@@ -124,5 +133,30 @@ const App: React.FC = () => {
     </QueryClientProvider>
   );
 };
+=======
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<CaseStudy />} />
+          <Route path="/proposal" element={<Proposal />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+>>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
 
 export default App;
