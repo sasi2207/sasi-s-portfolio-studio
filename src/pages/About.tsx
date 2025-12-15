@@ -385,8 +385,4 @@ const About = () => {
         </div>
       </section>
 >>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
-    </Layout>
-  );
-};
-
-export default About;
+0fe
