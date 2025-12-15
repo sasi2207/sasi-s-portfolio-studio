@@ -7,7 +7,7 @@ import { BubbleBackground } from "./BubbleBackground";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen mt-5 pt-5 flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen mt-5 flex items-center justify-center overflow-hidden">
    <BubbleBackground/>
       {/* Background Effects */}
       <div className="absolute inset-0 grid-pattern opacity-30" />
