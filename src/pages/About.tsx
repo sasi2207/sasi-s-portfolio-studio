@@ -47,7 +47,7 @@ const About = () => {
     <Layout>
       {/* HERO */}
       <ParallaxSection
-        className="pt-32 pb-20"
+        className="pt-32 pb-20 overflow-hidden"
         bgClassName="bg-gradient-to-b from-orange-50 to-white"
       >
         <div className="container-custom">
