@@ -1,14 +1,31 @@
-import { useEffect } from 'react';
-import AOS from 'aos';
-import { Layout } from '@/components/layout/Layout';
-import { SectionHeader } from '@/components/common/SectionHeader';
-import { ParallaxSection } from '@/components/common/ParallaxSection';
-import { Award, Briefcase, GraduationCap } from 'lucide-react';
-  import { motion } from "framer-motion";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-const skills = [
-  'React', 'TypeScript', 'Node.js', 'Next.js', 'PostgreSQL', 'MongoDB',
-  'Tailwind CSS', 'AWS', 'Docker', 'Git', 'REST APIs', 'GraphQL',
+import { Layout } from "@/components/layout/Layout";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { ParallaxSection } from "@/components/common/ParallaxSection";
+
+import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+
+/* ----------------------------------
+   DATA
+----------------------------------- */
+
+const skills: string[] = [
+  "React",
+  "TypeScript",
+  "Node.js",
+  "Next.js",
+  "PostgreSQL",
+  "MongoDB",
+  "Tailwind CSS",
+  "AWS",
+  "Docker",
+  "Git",
+  "REST APIs",
+  "GraphQL",
 ];
 
 const timeline = [
@@ -38,13 +55,22 @@ const timeline = [
   },
 ];
 
+/* ----------------------------------
+   COMPONENT
+----------------------------------- */
+
 const About = () => {
   useEffect(() => {
-    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
   return (
-    <Layout>
+    <Layout >
+        <div className="overflow-hidden">
       {/* HERO */}
       <ParallaxSection
         className="pt-32 pb-20 overflow-hidden"
@@ -75,8 +101,7 @@ const About = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
-            
-            {/* PROFILE CARD */}
+            {/* PROFILE */}
             <div data-aos="fade-right">
               <div className="relative max-w-md mx-auto">
                 <div className="aspect-square rounded-2xl bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center shadow-lg">
@@ -87,7 +112,9 @@ const About = () => {
 
                 <div className="absolute -bottom-5 -right-5 bg-white rounded-xl shadow-lg px-5 py-3 border border-orange-100">
                   <div className="text-xl font-bold text-orange-500">5+</div>
-                  <div className="text-xs text-gray-500">Years Experience</div>
+                  <div className="text-xs text-gray-500">
+                    Years Experience
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,16 +126,16 @@ const About = () => {
               </h2>
 
               <p className="text-gray-600 mb-4 leading-relaxed">
-                I’m SasiKumar, a full-stack developer based in Mettur, Salem.
-                I specialize in building modern web applications that balance
+                I’m SasiKumar, a full-stack developer based in Mettur, Salem. I
+                specialize in building modern web applications that balance
                 performance, scalability, and great user experience.
               </p>
 
               <p className="text-gray-600 leading-relaxed">
-                With hands-on expertise in React, Node.js, and cloud platforms,
-                I help businesses transform ideas into reliable digital products.
-                I strongly believe in clean architecture, maintainable code,
-                and long-term value.
+                With hands-on expertise in React, Node.js, and cloud platforms, I
+                help businesses transform ideas into reliable digital products.
+                I believe strongly in clean architecture, maintainable code, and
+                long-term value.
               </p>
             </div>
           </div>
@@ -127,17 +154,7 @@ const About = () => {
             {skills.map((skill, index) => (
               <span
                 key={skill}
-                className="
-                  px-4 py-2
-                  rounded-full
-                  text-sm font-medium
-                  bg-white
-                  border border-orange-100
-                  text-gray-700
-                  shadow-sm
-                  hover:bg-orange-50
-                  transition
-                "
+                className="px-4 py-2 rounded-full text-sm font-medium bg-white border border-orange-100 text-gray-700 shadow-sm hover:bg-orange-50 transition"
                 data-aos="fade-up"
                 data-aos-delay={index * 40}
               >
@@ -149,114 +166,83 @@ const About = () => {
       </section>
 
       {/* TIMELINE */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <h2 className="text-3xl font-bold text-center mb-16">
+            My Journey
+          </h2>
 
+          <div className="relative max-w-5xl mx-auto">
+            {/* CENTER LINE */}
+            <motion.div
+              className="absolute left-1/2 top-0 w-[3px] bg-orange-300 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)]"
+              initial={{ height: 0, opacity: 0 }}
+              whileInView={{ height: "100%", opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              style={{ transform: "translateX(-50%)" }}
+            />
 
- <section className="section-padding bg-white">
-      <div className="container-custom">
-        <h2 className="text-3xl font-bold text-center mb-16">
-          My Journey
-        </h2>
+            <div className="flex flex-col gap-20">
+              {timeline.map((item, index) => {
+                const isLeft = index % 2 === 0;
+                const Icon = item.icon;
 
-        <div className="relative max-w-5xl mx-auto">
-
-          {/* CENTER LINE */}
-          <motion.div
-            className="
-              absolute left-1/2 top-0
-              w-[3px] bg-orange-300
-              rounded-full
-              shadow-[0_0_20px_rgba(249,115,22,0.6)]
-            "
-            initial={{ height: 0, opacity: 0 }}
-            whileInView={{ height: "100%", opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            style={{ transform: "translateX(-50%)" }}
-          />
-
-          {/* ITEMS */}
-          <div className="flex flex-col gap-20">
-            {timeline.map((item, index) => {
-              const isLeft = index % 2 === 0;
-
-              return (
-                <motion.div
-                  key={item.year}
-                  className={`
-                    relative flex items-center
-                    ${isLeft ? "justify-start pr-10" : "justify-end pl-10"}
-                  `}
-                  initial={{
-                    opacity: 0,
-                    x: isLeft ? -120 : 120,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    x: isLeft ? -120 : 120,
-                  }}
-                  viewport={{ once: false, amount: 0.4 }}
-                  transition={{
-                    duration: 0.7,
-                    ease: [0.4, 0.0, 0.2, 1],
-                  }}
-                >
-                  {/* CONTENT */}
-                  <div
-                    className={`
-                      w-full max-w-md
-                      rounded-xl bg-white
-                      border border-orange-100
-                      shadow-lg
-                      p-6
-                      ${isLeft ? "text-right" : "text-left"}
-                    `}
-                  >
-                    <div className="text-sm font-semibold text-orange-500 mb-1">
-                      {item.year}
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {/* DOT */}
+                return (
                   <motion.div
-                    className="
-                      absolute left-1/2
-                      w-5 h-5
-                      bg-orange-500
-                      rounded-full
-                      shadow-[0_0_15px_rgba(249,115,22,0.9)]
-                      flex items-center justify-center
-                    "
-                    style={{ transform: "translateX(-50%)" }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.4 }}
+                    key={item.year}
+                    className={`relative flex items-center ${
+                      isLeft
+                        ? "justify-start pr-10"
+                        : "justify-end pl-10"
+                    }`}
+                    initial={{
+                      opacity: 0,
+                      x: isLeft ? -120 : 120,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    viewport={{ once: false, amount: 0.4 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
                   >
-                    <item.icon size={10} className="text-white" />
+                    <div
+                      className={`w-full max-w-md rounded-xl bg-white border border-orange-100 shadow-lg p-6 ${
+                        isLeft ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <div className="text-sm font-semibold text-orange-500 mb-1">
+                        {item.year}
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {/* DOT */}
+                    <motion.div
+                      className="absolute left-1/2 w-5 h-5 bg-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,0.9)] flex items-center justify-center"
+                      style={{ transform: "translateX(-50%)" }}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <Icon size={10} className="text-white" />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
+      </section>
       </div>
-    </section>
-
-
-
-
     </Layout>
   );
 };
 
-export default About;  
+export default About;
