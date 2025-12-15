@@ -16,11 +16,7 @@ export const CtaSection = () => {
             className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6"
             data-aos="fade-up"
           >
-<<<<<<< HEAD
             Ready to Start Your <span className="text-orange-400">Project?</span>
-=======
-            Ready to Start Your <span className="text-primary">Project?</span>
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
           </h2>
           <p 
             className="text-lg text-secondary-foreground/70 mb-8"

@@ -25,11 +25,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="text-2xl font-heading font-bold">
-<<<<<<< HEAD
              Tech<span className="text-orange-400">Sasi</span>
-=======
-              Sasi<span className="text-primary">Kumar</span>
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
             </Link>
             <p className="mt-4 text-secondary-foreground/70 text-sm leading-relaxed">
               Full-stack developer crafting modern web experiences. Based in Mettur, Salem.
@@ -113,19 +109,11 @@ export const Footer = () => {
         <div className="mt-12 pt-8 border-t border-secondary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-secondary-foreground/50 text-sm">
-<<<<<<< HEAD
               © {currentYear} TechSasi. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-secondary-foreground/50">
               <a href="https://soolya.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 TechSasi Projects
-=======
-              © {currentYear} SasiKumar. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-secondary-foreground/50">
-              <a href="https://soolya.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                Soolya Projects
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
               </a>
               <Link to="/contact" className="hover:text-primary transition-colors">
                 Privacy Policy

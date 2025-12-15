@@ -47,10 +47,10 @@
     "cmdk": "^1.1.1",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
-<<<<<<< HEAD
+ 
     "framer-motion": "^12.23.26",
-=======
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
+ 
+ 
     "input-otp": "^1.4.2",
     "jspdf": "^3.0.4",
     "lucide-react": "^0.462.0",
@@ -58,10 +58,10 @@
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
+ 
     "react-helmet-async": "^2.0.5",
-=======
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
+ 
+ 
     "react-hook-form": "^7.61.1",
     "react-resizable-panels": "^2.1.9",
     "react-router-dom": "^6.30.1",

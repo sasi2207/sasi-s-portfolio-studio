@@ -3,12 +3,8 @@ import AOS from 'aos';
 import { Layout } from '@/components/layout/Layout';
 import { SectionHeader } from '@/components/common/SectionHeader';
 import { ParallaxSection } from '@/components/common/ParallaxSection';
-<<<<<<< HEAD
 import { Award, Briefcase, GraduationCap } from 'lucide-react';
   import { motion } from "framer-motion";
-=======
-import { Download, Award, Briefcase, GraduationCap } from 'lucide-react';
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
 
 const skills = [
   'React', 'TypeScript', 'Node.js', 'Next.js', 'PostgreSQL', 'MongoDB',
@@ -17,7 +13,6 @@ const skills = [
 
 const timeline = [
   {
-<<<<<<< HEAD
     year: "2024",
     title: "Senior Freelance Developer",
     description: "Working with global clients on scalable web platforms",
@@ -39,45 +34,17 @@ const timeline = [
     year: "2019",
     title: "Computer Science Degree",
     description: "Graduated with focus on software engineering",
-=======
-    year: '2024',
-    title: 'Senior Freelance Developer',
-    description: 'Working with clients worldwide on complex web applications',
-    icon: Briefcase,
-  },
-  {
-    year: '2022',
-    title: 'Full-Stack Developer',
-    description: 'Developed enterprise solutions for various industries',
-    icon: Award,
-  },
-  {
-    year: '2020',
-    title: 'Started Freelancing',
-    description: 'Began offering web development services independently',
-    icon: Briefcase,
-  },
-  {
-    year: '2019',
-    title: 'Computer Science Degree',
-    description: 'Graduated with focus on software engineering',
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
     icon: GraduationCap,
   },
 ];
 
 const About = () => {
   useEffect(() => {
-<<<<<<< HEAD
     AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
-=======
-    AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
   }, []);
 
   return (
     <Layout>
-<<<<<<< HEAD
       {/* HERO */}
       <ParallaxSection
         className="pt-32 pb-20"
@@ -99,26 +66,11 @@ const About = () => {
             >
               I’m a passionate full-stack developer crafting reliable, scalable,
               and user-focused digital experiences.
-=======
-      {/* Hero Section */}
-      <ParallaxSection 
-        className="pt-32 pb-16 bg-hero-pattern"
-        bgClassName="bg-gradient-to-b from-primary/5 to-transparent"
-      >
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6" data-aos="fade-up">
-              About <span className="gradient-text">Me</span>
-            </h1>
-            <p className="text-lg text-muted-foreground" data-aos="fade-up" data-aos-delay="100">
-              Passionate developer crafting digital experiences from Mettur, Salem.
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
             </p>
           </div>
         </div>
       </ParallaxSection>
 
-<<<<<<< HEAD
       {/* BIO */}
       <section className="section-padding">
         <div className="container-custom">
@@ -136,25 +88,10 @@ const About = () => {
                 <div className="absolute -bottom-5 -right-5 bg-white rounded-xl shadow-lg px-5 py-3 border border-orange-100">
                   <div className="text-xl font-bold text-orange-500">5+</div>
                   <div className="text-xs text-gray-500">Years Experience</div>
-=======
-      {/* Bio Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-              <div className="relative">
-                <div className="w-full aspect-square max-w-md mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-8xl font-heading font-bold text-primary/30">SK</span>
-                </div>
-                <div className="absolute -bottom-4 -right-4 p-4 glass-card rounded-xl">
-                  <div className="text-2xl font-bold text-primary">5+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
                 </div>
               </div>
             </div>
 
-<<<<<<< HEAD
             {/* CONTENT */}
             <div data-aos="fade-left">
               <h2 className="text-3xl font-heading font-bold mb-6 text-gray-900">
@@ -173,37 +110,11 @@ const About = () => {
                 I strongly believe in clean architecture, maintainable code,
                 and long-term value.
               </p>
-=======
-            <div data-aos="fade-left">
-              <h2 className="text-3xl font-heading font-bold mb-6">
-                Full-Stack Developer & Problem Solver
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                I'm SasiKumar, a passionate full-stack developer based in Mettur, Salem. 
-                I specialize in building modern web applications that are not only visually 
-                appealing but also highly performant and user-friendly.
-              </p>
-              <p className="text-muted-foreground mb-6">
-                With expertise in React, Node.js, and cloud technologies, I help businesses 
-                transform their ideas into scalable digital solutions. I believe in clean code, 
-                attention to detail, and delivering exceptional results.
-              </p>
-              
-              <a 
-                href="/resume.pdf" 
-                download
-                className="btn-primary inline-flex items-center gap-2"
-              >
-                <Download size={18} />
-                Download Resume
-              </a>
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
             </div>
           </div>
         </div>
       </section>
 
-<<<<<<< HEAD
       {/* SKILLS */}
       <section className="section-padding bg-orange-50/40">
         <div className="container-custom">
@@ -229,20 +140,6 @@ const About = () => {
                 "
                 data-aos="fade-up"
                 data-aos-delay={index * 40}
-=======
-      {/* Skills Section */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-custom">
-          <SectionHeader title="Skills & Technologies" subtitle="Tools and technologies I work with" />
-          
-          <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-            {skills.map((skill, index) => (
-              <span 
-                key={skill} 
-                className="chip"
-                data-aos="fade-up"
-                data-aos-delay={index * 50}
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
               >
                 {skill}
               </span>
@@ -251,7 +148,6 @@ const About = () => {
         </div>
       </section>
 
-<<<<<<< HEAD
       {/* TIMELINE */}
 
 
@@ -359,30 +255,8 @@ const About = () => {
 
 
 
-=======
-      {/* Timeline Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeader title="My Journey" subtitle="Key milestones in my professional career" />
-          
-          <div className="max-w-2xl mx-auto">
-            {timeline.map((item, index) => (
-              <div 
-                key={item.year}
-                className="relative pl-8 pb-8 border-l-2 border-primary/20 last:pb-0"
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-              >
-                <div className="absolute -left-3.5 top-0 w-7 h-7 rounded-full bg-primary flex items-center justify-center">
-                  <item.icon size={14} className="text-primary-foreground" />
-                </div>
-                <div className="text-sm text-primary font-semibold mb-1">{item.year}</div>
-                <h3 className="text-lg font-heading font-semibold mb-1">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
->>>>>>> c6cd4c171dc44d8e0f1e28f785d59919f35800fe
-0fe
+    </Layout>
+  );
+};
+
+export default About;  
