@@ -110,6 +110,7 @@ const Services = () => {
                     transition-all duration-300
                   "
                 >
+                  <BubbleBackground/>
                   {/* Hover Glow */}
                   <div
                     className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
