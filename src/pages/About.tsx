@@ -1,259 +1,214 @@
 import { useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css";
+import {
+  Code,
+  Globe,
+  Rocket,
+  Award,
+  Users,
+  Briefcase,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { Layout } from "@/components/layout/Layout";
-import { SectionHeader } from "@/components/common/SectionHeader";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
-
-import { Award, Briefcase, GraduationCap } from "lucide-react";
-import { motion } from "framer-motion";
-
-/* ----------------------------------
-   DATA
------------------------------------ */
-
-const skills: string[] = [
-  "React",
-  "TypeScript",
-  "Node.js",
-  "Next.js",
-  "PostgreSQL",
-  "MongoDB",
-  "Tailwind CSS",
-  "AWS",
-  "Docker",
-  "Git",
-  "REST APIs",
-  "GraphQL",
-];
-
-const timeline = [
-  {
-    year: "2024",
-    title: "Senior Freelance Developer",
-    description: "Working with global clients on scalable web platforms",
-    icon: Briefcase,
-  },
-  {
-    year: "2022",
-    title: "Full-Stack Developer",
-    description: "Built enterprise applications and admin dashboards",
-    icon: Award,
-  },
-  {
-    year: "2020",
-    title: "Started Freelancing",
-    description: "Delivered modern websites and business solutions",
-    icon: Briefcase,
-  },
-  {
-    year: "2019",
-    title: "Computer Science Degree",
-    description: "Graduated with focus on software engineering",
-    icon: GraduationCap,
-  },
-];
-
-/* ----------------------------------
-   COMPONENT
------------------------------------ */
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 const About = () => {
   useEffect(() => {
-    AOS.init({
-      duration: 900,
-      once: true,
-      easing: "ease-out-cubic",
-    });
+    AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
   }, []);
 
   return (
     <Layout>
-      <div className="overflow-hidden">
-        {/* HERO */}
-        <ParallaxSection
-          className="pt-32 pb-20"
-          bgClassName="bg-gradient-to-b from-orange-50 to-white"
-        >
-          <div className="container-custom">
-            <div className="max-w-3xl">
-              <h1
-                className="text-4xl md:text-5xl font-heading font-bold mb-6"
-                data-aos="fade-up"
-              >
-                About <span className="text-orange-500">Me</span>
-              </h1>
+      {/* ==============================
+          HERO SECTION
+      =============================== */}
+      <ParallaxSection
+        className="pt-32 pb-20"
+        bgClassName="bg-gradient-to-b from-indigo-50 via-sky-50 to-transparent"
+      >
+        <div className="container-custom">
+          <div className="max-w-3xl">
+            <h1
+              className="text-4xl md:text-5xl font-heading font-bold mb-6"
+              data-aos="fade-up"
+            >
+              About{" "}
+              <span className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500 bg-clip-text text-transparent">
+                TechSasi
+              </span>
+            </h1>
 
-              <p
-                className="text-lg text-gray-600"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                I’m a passionate full-stack developer crafting reliable,
-                scalable, and user-focused digital experiences.
-              </p>
-            </div>
+            <p
+              className="text-lg text-muted-foreground"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              I’m Sasi Kumar — a freelance full-stack developer helping
+              startups, businesses, and entrepreneurs build fast, secure,
+              and scalable digital products.
+            </p>
           </div>
-        </ParallaxSection>
+        </div>
+      </ParallaxSection>
 
-        {/* BIO */}
-        <section className="section-padding">
-          <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-14 items-center">
-              {/* PROFILE */}
-              <div data-aos="fade-right">
-                <div className="relative max-w-md mx-auto">
-                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center shadow-lg">
-                    <span className="text-7xl font-heading font-bold text-orange-300">
-                      SK
-                    </span>
-                  </div>
+      {/* ==============================
+          WHO I AM
+      =============================== */}
+      <section className="section-padding">
+        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
+              Who I Am
+            </h2>
 
-                  <div className="absolute -bottom-5 -right-5 bg-white rounded-xl shadow-lg px-5 py-3 border border-orange-100">
-                    <div className="text-xl font-bold text-orange-500">
-                      5+
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      Years Experience
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <p className="text-muted-foreground mb-6">
+              I’m a passionate freelance software developer and the founder
+              of <strong>TechSasi</strong>. I specialize in building modern
+              websites, web applications, mobile apps, and scalable backend
+              systems for real-world business needs.
+            </p>
 
-              {/* CONTENT */}
-              <div data-aos="fade-left">
-                <h2 className="text-3xl font-heading font-bold mb-6 text-gray-900">
-                  Full-Stack Developer & Problem Solver
-                </h2>
+            <p className="text-muted-foreground mb-6">
+              With hands-on experience in React, Node.js, Java, Spring Boot,
+              cloud deployment, and UI/UX design, I deliver end-to-end
+              solutions — from idea to production.
+            </p>
 
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  I’m SasiKumar, a full-stack developer based in Mettur,
-                  Salem. I specialize in building modern web applications
-                  that balance performance, scalability, and great user
-                  experience.
-                </p>
-
-                <p className="text-gray-600 leading-relaxed">
-                  With hands-on expertise in React, Node.js, and cloud
-                  platforms, I help businesses transform ideas into
-                  reliable digital products. I believe in clean
-                  architecture, maintainable code, and long-term value.
-                </p>
-              </div>
-            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700
+                         text-white font-semibold px-6 py-3 rounded-xl transition"
+            >
+              Let’s Work Together
+              <ArrowRight size={18} />
+            </Link>
           </div>
-        </section>
 
-        {/* SKILLS */}
-        <section className="section-padding bg-orange-50/40">
-          <div className="container-custom">
-            <SectionHeader
-              title="Skills & Technologies"
-              subtitle="Tools and technologies I work with"
-            />
-
-            <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-              {skills.map((skill, index) => (
-                <span
-                  key={skill}
-                  className="px-4 py-2 rounded-full text-sm font-medium bg-white border border-orange-100 text-gray-700 shadow-sm hover:bg-orange-50 transition"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 40}
+          <div
+            data-aos="fade-left"
+            className="rounded-2xl bg-white shadow-lg p-8"
+          >
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                { icon: Code, label: "Clean Code" },
+                { icon: Globe, label: "Global Clients" },
+                { icon: Rocket, label: "Fast Delivery" },
+                { icon: Award, label: "Quality Focus" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-3"
                 >
-                  {skill}
-                </span>
+                  <item.icon className="text-sky-500" />
+                  <span className="font-medium">{item.label}</span>
+                </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* TIMELINE */}
-        <section className="section-padding bg-white">
-          <div className="container-custom">
-            <h2 className="text-3xl font-bold text-center mb-16">
-              My Journey
+      {/* ==============================
+          WHAT I DO
+      =============================== */}
+      <section className="section-padding bg-slate-50">
+        <div className="container-custom">
+          <SectionHeader
+            title="What I Do"
+            subtitle="Services I provide as a freelancer under TechSasi"
+          />
+
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {[
+              {
+                icon: Globe,
+                title: "Website Development",
+                desc: "Static, dynamic, business, e-commerce & portfolio websites",
+              },
+              {
+                icon: Code,
+                title: "Web Applications",
+                desc: "Admin dashboards, CRM, ERP & custom software solutions",
+              },
+              {
+                icon: Rocket,
+                title: "Deployment & Cloud",
+                desc: "AWS, Azure, VPS, cPanel, CI/CD & server management",
+              },
+            ].map((item, index) => (
+              <div
+                key={item.title}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition"
+              >
+                <item.icon className="text-indigo-600 mb-4" size={32} />
+                <h3 className="font-heading font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==============================
+          WHY CHOOSE ME
+      =============================== */}
+      <section className="section-padding">
+        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
+              Why Choose TechSasi?
             </h2>
 
-            <div className="relative max-w-5xl mx-auto">
-              {/* CENTER LINE */}
-              <motion.div
-                className="absolute left-1/2 top-0 w-[3px] bg-orange-300 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)]"
-                initial={{ height: 0, opacity: 0 }}
-                whileInView={{ height: "100%", opacity: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                style={{ transform: "translateX(-50%)" }}
-              />
-
-              <div className="flex flex-col gap-20">
-                {timeline.map((item, index) => {
-                  const isLeft = index % 2 === 0;
-                  const Icon = item.icon;
-
-                  return (
-                    <motion.div
-                      key={item.year}
-                      className={`relative flex items-center ${
-                        isLeft
-                          ? "justify-start pr-10"
-                          : "justify-end pl-10"
-                      }`}
-                      initial={{
-                        opacity: 0,
-                        y: 60,
-                        scale: 0.96,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                      }}
-                      viewport={{ once: false, amount: 0.35 }}
-                      transition={{
-                        duration: 0.7,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      {/* CARD */}
-                      <div
-                        className={`w-full max-w-md rounded-xl bg-white border border-orange-100 shadow-lg p-6 ${
-                          isLeft ? "text-right" : "text-left"
-                        }`}
-                      >
-                        <div className="text-sm font-semibold text-orange-500 mb-1">
-                          {item.year}
-                        </div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm">
-                          {item.description}
-                        </p>
-                      </div>
-
-                      {/* DOT */}
-                      <motion.div
-                        className="absolute left-1/2 w-5 h-5 bg-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,0.9)] flex items-center justify-center"
-                        style={{ transform: "translateX(-50%)" }}
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 18,
-                        }}
-                      >
-                        <Icon size={10} className="text-white" />
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
+            <ul className="space-y-4">
+              {[
+                "Freelancer with full project ownership",
+                "Business-focused solutions",
+                "Clean, scalable & secure code",
+                "Affordable pricing & transparent communication",
+                "Long-term support & maintenance",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Briefcase className="text-teal-500 mt-1" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
-      </div>
+
+          <div
+            data-aos="fade-left"
+            className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500
+                       rounded-3xl p-10 text-white"
+          >
+            <Users size={36} className="mb-4" />
+            <h3 className="text-2xl font-heading font-semibold mb-3">
+              Let’s Build Something Great
+            </h3>
+            <p className="text-white/90 mb-6">
+              Whether you’re a startup, small business, or individual,
+              I can help turn your ideas into powerful digital products.
+            </p>
+
+            <Link
+              to="/proposal"
+              className="inline-flex items-center gap-2 bg-white text-indigo-700
+                         font-semibold px-6 py-3 rounded-xl hover:bg-indigo-50 transition"
+            >
+              Get a Free Proposal
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };

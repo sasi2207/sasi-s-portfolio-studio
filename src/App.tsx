@@ -25,6 +25,14 @@ import NotFound from "./pages/NotFound";
 // Utils
 import { ScrollToTop } from "./ScrollToTop";
 import { PageLoader } from "./PageLoader";
+import StaticWebsite from "./web/StaticWebsite";
+import DynamicWebsite from "./web/DynamicWebsite";
+import EcommerceWebsite from "./web/EcommerceWebsite";
+import PortfolioWebsite from "./web/PortfolioWebsite";
+import BusinessWebsite from "./web/BusinessWebsite";
+import MobileAppDevelopment from "./web/MobileAppDevelopment";
+import SeoOptimization from "./web/SeoOptimization";
+import DeploymentHosting from "./web/DeploymentHosting";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +69,15 @@ const AnimatedRoutes = () => {
         <Route path="/proposal" element={<Proposal />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+
+        <Route path="service/static-webside" element={<StaticWebsite/>} />
+        <Route path="service/dynamic-website" element={<DynamicWebsite/>} />
+        <Route path="service/ecommerce-website" element={<EcommerceWebsite/>} />
+        <Route path="service/portfolio-website" element={<PortfolioWebsite/>} />
+        <Route path="service/business-website" element={<BusinessWebsite/>} />
+        <Route path="service/MobileApplication-Development" element={<MobileAppDevelopment/>} />
+        <Route path="service/SeoOptimization" element={<SeoOptimization/>} />
+        <Route path="/service/DeploymentHosting" element={<DeploymentHosting/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

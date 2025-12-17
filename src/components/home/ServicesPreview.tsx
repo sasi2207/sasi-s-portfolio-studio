@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   Globe,
   Layers,
@@ -6,15 +6,34 @@ import {
   Cloud,
   ArrowRight,
   LucideIcon,
-} from 'lucide-react';
-import { SectionHeader } from '../common/SectionHeader';
-import servicesData from '@/data/services.json';
+  FileCode,
+  RefreshCw,
+  ShoppingCart,
+  User,
+  Briefcase,
+  Smartphone,
+  TrendingUp,
+} from "lucide-react";
 
+import { SectionHeader } from "../common/SectionHeader";
+import servicesData from "@/data/services.json";
+import { BubbleBackground } from "./BubbleBackground";
+
+/* ----------------------------------
+   FULL ICON MAP
+----------------------------------- */
 const iconMap: Record<string, LucideIcon> = {
   Globe,
   Layers,
   LayoutDashboard,
   Cloud,
+  FileCode,
+  RefreshCw,
+  ShoppingCart,
+  User,
+  Briefcase,
+  Smartphone,
+  TrendingUp,
 };
 
 export const ServicesPreview = () => {
@@ -26,72 +45,94 @@ export const ServicesPreview = () => {
           subtitle="Specialized services to help your business thrive in the digital world"
         />
 
-        {/* SERVICES GRID */}
+        {/* ==============================
+            SERVICES GRID
+        =============================== */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {servicesData.services.map((service, index) => {
-            const IconComponent = iconMap[service.icon];
+            const Icon = iconMap[service.icon];
 
             return (
-              <div
-                key={service.id}
-                className="
-                  group
-                  rounded-2xl
-                  bg-white
-                  p-6
-                  border border-orange-100
-                  shadow-sm
-                  hover:shadow-lg
-                  hover:-translate-y-1
-                  transition-all duration-300
-                "
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-              >
-                {/* ICON */}
-                <div
-                  className="
-                    w-14 h-14 mb-4
-                    rounded-xl
-                    bg-orange-100
-                    flex items-center justify-center
-                    group-hover:bg-orange-500
-                    group-hover:scale-110
-                    transition-all duration-300
-                  "
-                >
-                  {IconComponent && (
-                    <IconComponent
-                      size={28}
-                      className="
-                        text-orange-500
-                        group-hover:text-white
-                        transition-colors
-                      "
-                    />
-                  )}
-                </div>
+             <div
+  key={service.id}
+  className="
+    relative
+    group
+    rounded-2xl
+    bg-white
+    p-6
+    pb-14
+    border border-orange-100
+    shadow-sm
+    hover:shadow-lg
+    hover:-translate-y-1
+    transition-all duration-300
+  "
+  data-aos="fade-up"
+  data-aos-delay={index * 100}
+>
+  <BubbleBackground />
 
-                {/* TITLE */}
-                <h3 className="text-lg font-semibold mb-2 text-gray-900">
-                  {service.title}
-                </h3>
+  {/* Hover Gradient */}
+  <div
+    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+    style={{
+      background: `linear-gradient(135deg, ${service.iconColor}22, transparent)`,
+    }}
+  />
 
-                {/* DESCRIPTION */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {service.description}
-                </p>
+  {/* ICON */}
+  <div
+    className="w-14 h-14 mb-4 rounded-xl flex items-center justify-center
+               transition-all duration-300 group-hover:scale-110"
+    style={{ backgroundColor: `${service.iconColor}22` }}
+  >
+    {Icon && <Icon size={28} style={{ color: service.iconColor }} />}
+  </div>
 
-                {/* PRICE */}
-                <div className="text-sm font-semibold text-orange-500">
-                  {service.price}
-                </div>
-              </div>
+  {/* TITLE */}
+  <h3 className="text-lg font-semibold mb-2 text-gray-900">
+    {service.title}
+  </h3>
+
+  {/* DESCRIPTION */}
+  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+    {service.description}
+  </p>
+
+  {/* PRICE */}
+  <div
+    className="text-sm font-semibold"
+    style={{ color: service.iconColor }}
+  >
+    {service.price}
+  </div>
+
+  {/* ==============================
+      VIEW DETAILS – RIGHT BOTTOM
+  =============================== */}
+  <Link
+    to={service.path}
+    className="
+      absolute bottom-5 right-6
+      inline-flex items-center gap-2
+      text-sm font-semibold
+      transition-all hover:gap-3
+    "
+    style={{ color: service.iconColor }}
+  >
+    View Details
+    <ArrowRight size={16} />
+  </Link>
+</div>
+
             );
           })}
         </div>
 
-        {/* VIEW ALL */}
+        {/* ==============================
+            VIEW ALL
+        =============================== */}
         <div
           className="text-center mt-12"
           data-aos="fade-up"
@@ -99,13 +140,8 @@ export const ServicesPreview = () => {
         >
           <Link
             to="/services"
-            className="
-              inline-flex items-center gap-2
-              text-orange-500 font-semibold
-              hover:text-orange-600
-              hover:gap-3
-              transition-all
-            "
+            className="inline-flex items-center gap-2 font-semibold transition-all hover:gap-3"
+            style={{ color: "#f97316" }}
           >
             View All Services
             <ArrowRight size={18} />
