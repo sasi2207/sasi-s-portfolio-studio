@@ -15,6 +15,27 @@ import { Layout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
 import { SectionHeader } from "@/components/common/SectionHeader";
 
+/* ----------------------------------
+   COLOR SET (3 COLORS)
+----------------------------------- */
+const cardColors = [
+  {
+    bg: "from-indigo-50 to-indigo-100/60",
+    icon: "text-indigo-600",
+    border: "border-indigo-200",
+  },
+  {
+    bg: "from-sky-50 to-sky-100/60",
+    icon: "text-sky-600",
+    border: "border-sky-200",
+  },
+  {
+    bg: "from-teal-50 to-teal-100/60",
+    icon: "text-teal-600",
+    border: "border-teal-200",
+  },
+];
+
 const About = () => {
   useEffect(() => {
     AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
@@ -26,29 +47,26 @@ const About = () => {
           HERO SECTION
       =============================== */}
       <ParallaxSection
-        className="pt-32 pb-20"
+        className="pt-32 pb-24 relative overflow-hidden"
         bgClassName="bg-gradient-to-b from-indigo-50 via-sky-50 to-transparent"
       >
-        <div className="container-custom">
+        {/* Background Blobs */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -right-24 w-96 h-96 bg-teal-200/30 rounded-full blur-3xl" />
+
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <h1
-              className="text-4xl md:text-5xl font-heading font-bold mb-6"
-              data-aos="fade-up"
-            >
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
               About{" "}
               <span className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500 bg-clip-text text-transparent">
                 TechSasi
               </span>
             </h1>
 
-            <p
-              className="text-lg text-muted-foreground"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              I’m Sasi Kumar — a freelance full-stack developer helping
-              startups, businesses, and entrepreneurs build fast, secure,
-              and scalable digital products.
+            <p className="text-lg text-muted-foreground">
+              I’m Sasi Kumar — a freelance full-stack developer helping startups,
+              businesses, and entrepreneurs build fast, secure, and scalable
+              digital products.
             </p>
           </div>
         </div>
@@ -57,7 +75,7 @@ const About = () => {
       {/* ==============================
           WHO I AM
       =============================== */}
-      <section className="section-padding">
+      <section className="section-padding relative">
         <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
             <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
@@ -65,16 +83,15 @@ const About = () => {
             </h2>
 
             <p className="text-muted-foreground mb-6">
-              I’m a passionate freelance software developer and the founder
-              of <strong>TechSasi</strong>. I specialize in building modern
-              websites, web applications, mobile apps, and scalable backend
-              systems for real-world business needs.
+              I’m a passionate freelance software developer and the founder of{" "}
+              <strong>TechSasi</strong>. I build modern websites, web
+              applications, mobile apps, and scalable backend systems.
             </p>
 
             <p className="text-muted-foreground mb-6">
-              With hands-on experience in React, Node.js, Java, Spring Boot,
-              cloud deployment, and UI/UX design, I deliver end-to-end
-              solutions — from idea to production.
+              With strong experience in React, Node.js, Java, Spring Boot, and
+              cloud deployment, I deliver complete solutions from idea to
+              production.
             </p>
 
             <Link
@@ -87,26 +104,30 @@ const About = () => {
             </Link>
           </div>
 
+          {/* 3-Color Info Cards */}
           <div
             data-aos="fade-left"
-            className="rounded-2xl bg-white shadow-lg p-8"
+            className="grid grid-cols-2 gap-6"
           >
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { icon: Code, label: "Clean Code" },
-                { icon: Globe, label: "Global Clients" },
-                { icon: Rocket, label: "Fast Delivery" },
-                { icon: Award, label: "Quality Focus" },
-              ].map((item) => (
+            {[
+              { icon: Code, label: "Clean Code" },
+              { icon: Globe, label: "Global Clients" },
+              { icon: Rocket, label: "Fast Delivery" },
+              { icon: Award, label: "Quality Focus" },
+            ].map((item, index) => {
+              const color = cardColors[index % 3];
+
+              return (
                 <div
                   key={item.label}
-                  className="flex items-center gap-3"
+                  className={`bg-gradient-to-br ${color.bg} border ${color.border}
+                              rounded-2xl p-5 shadow-sm hover:shadow-md transition`}
                 >
-                  <item.icon className="text-sky-500" />
+                  <item.icon className={`${color.icon} mb-2`} />
                   <span className="font-medium">{item.label}</span>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -114,8 +135,10 @@ const About = () => {
       {/* ==============================
           WHAT I DO
       =============================== */}
-      <section className="section-padding bg-slate-50">
-        <div className="container-custom">
+      <section className="section-padding bg-slate-50 relative overflow-hidden">
+        <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl" />
+
+        <div className="container-custom relative z-10">
           <SectionHeader
             title="What I Do"
             subtitle="Services I provide as a freelancer under TechSasi"
@@ -138,22 +161,27 @@ const About = () => {
                 title: "Deployment & Cloud",
                 desc: "AWS, Azure, VPS, cPanel, CI/CD & server management",
               },
-            ].map((item, index) => (
-              <div
-                key={item.title}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition"
-              >
-                <item.icon className="text-indigo-600 mb-4" size={32} />
-                <h3 className="font-heading font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+            ].map((item, index) => {
+              const color = cardColors[index % 3];
+
+              return (
+                <div
+                  key={item.title}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                  className={`bg-gradient-to-br ${color.bg} border ${color.border}
+                              rounded-2xl p-6 shadow-md hover:shadow-lg transition`}
+                >
+                  <item.icon className={`${color.icon} mb-4`} size={32} />
+                  <h3 className="font-heading font-semibold text-lg mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {item.desc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -173,7 +201,7 @@ const About = () => {
                 "Freelancer with full project ownership",
                 "Business-focused solutions",
                 "Clean, scalable & secure code",
-                "Affordable pricing & transparent communication",
+                "Affordable pricing & clear communication",
                 "Long-term support & maintenance",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
@@ -194,8 +222,8 @@ const About = () => {
               Let’s Build Something Great
             </h3>
             <p className="text-white/90 mb-6">
-              Whether you’re a startup, small business, or individual,
-              I can help turn your ideas into powerful digital products.
+              I help ideas turn into powerful, production-ready digital
+              products.
             </p>
 
             <Link

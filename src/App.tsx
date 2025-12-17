@@ -70,7 +70,7 @@ const AnimatedRoutes = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="service/static-webside" element={<StaticWebsite/>} />
+        <Route path="service/static-website" element={<StaticWebsite/>} />
         <Route path="service/dynamic-website" element={<DynamicWebsite/>} />
         <Route path="service/ecommerce-website" element={<EcommerceWebsite/>} />
         <Route path="service/portfolio-website" element={<PortfolioWebsite/>} />
