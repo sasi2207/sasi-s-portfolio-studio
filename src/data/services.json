@@ -86,7 +86,7 @@
       "description": "High-performance Android and iOS mobile applications with modern UI/UX.",
       "icon": "Smartphone",
       "iconColor": "#ef4444",
-      "path": "/service/mobile-application-development",
+      "path": "/service/MobileApplication-Development",
       "features": [
         "Android & iOS Apps",
         "React Native / Flutter",
@@ -102,7 +102,7 @@
       "description": "Search Engine Optimization to improve Google rankings and organic traffic.",
       "icon": "TrendingUp",
       "iconColor": "#06b6d4",
-      "path": "/service/seo-optimization",
+      "path": "/service/SeoOptimization",
       "features": [
         "On-Page SEO",
         "Technical SEO",
@@ -118,7 +118,7 @@
       "description": "Secure and scalable deployment solutions for websites and applications.",
       "icon": "Cloud",
       "iconColor": "#6366f1",
-      "path": "/service/deployment-hosting",
+      "path": "/service/DeploymentHosting",
       "features": [
         "AWS & Azure Deployment",
         "VPS / Dedicated Server Setup",

@@ -7,9 +7,8 @@ import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
 /* ----------------------------------
-   VALIDATION
+   VALIDATION SCHEMA
 ----------------------------------- */
-
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
@@ -33,18 +32,21 @@ const Contact = () => {
   }, []);
 
   /* ----------------------------------
-     HANDLERS
+     INPUT CHANGE
   ----------------------------------- */
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: "" });
     }
   };
 
+  /* ----------------------------------
+     SUBMIT → WHATSAPP
+  ----------------------------------- */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -52,16 +54,23 @@ const Contact = () => {
     try {
       const validated = contactSchema.parse(formData);
 
-      const subject = encodeURIComponent(validated.subject);
-      const body = encodeURIComponent(
-        `Name: ${validated.name}\nEmail: ${validated.email}\n\nMessage:\n${validated.message}`
+      const whatsappMessage = encodeURIComponent(
+        `📩 New Contact Inquiry - TechSasi\n\n` +
+          `👤 Name: ${validated.name}\n` +
+          `📧 Email: ${validated.email}\n` +
+          `📝 Subject: ${validated.subject}\n\n` +
+          `💬 Message:\n${validated.message}`
       );
+
+      // 👉 YOUR WHATSAPP NUMBER (COUNTRY CODE INCLUDED)
+      const whatsappNumber = "917448788879";
 
       window.open(
-        `mailto:sasikumarp2207@gmail.com?subject=${subject}&body=${body}`
+        `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
+        "_blank"
       );
 
-      toast.success("Opening email client...");
+      toast.success("Redirecting to WhatsApp...");
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -81,9 +90,9 @@ const Contact = () => {
 
   return (
     <Layout>
-      {/* ----------------------------------
-         HERO SECTION
-      ----------------------------------- */}
+      {/* ==============================
+          HERO SECTION
+      =============================== */}
       <ParallaxSection
         className="pt-32 pb-16"
         bgClassName="bg-gradient-to-b from-orange-50 to-transparent"
@@ -110,9 +119,9 @@ const Contact = () => {
         </div>
       </ParallaxSection>
 
-      {/* ----------------------------------
-         CONTACT SECTION
-      ----------------------------------- */}
+      {/* ==============================
+          CONTACT SECTION
+      =============================== */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
@@ -128,13 +137,12 @@ const Contact = () => {
               </p>
 
               <div className="space-y-6">
-                {/* PHONE */}
                 <a
                   href="tel:+917448788879"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all group shadow-sm"
+                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center group-hover:bg-orange-500 transition">
-                    <Phone className="text-orange-500 group-hover:text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+                    <Phone className="text-orange-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold">Phone</h3>
@@ -142,15 +150,14 @@ const Contact = () => {
                   </div>
                 </a>
 
-                {/* WHATSAPP */}
                 <a
                   href="https://wa.me/917448788879"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all group shadow-sm"
+                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center group-hover:bg-orange-500 transition">
-                    <MessageCircle className="text-orange-500 group-hover:text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+                    <MessageCircle className="text-orange-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold">WhatsApp</h3>
@@ -158,13 +165,12 @@ const Contact = () => {
                   </div>
                 </a>
 
-                {/* EMAIL */}
                 <a
                   href="mailto:sasikumarp2207@gmail.com"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all group shadow-sm"
+                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center group-hover:bg-orange-500 transition">
-                    <Mail className="text-orange-500 group-hover:text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+                    <Mail className="text-orange-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold">Email</h3>
@@ -174,7 +180,6 @@ const Contact = () => {
                   </div>
                 </a>
 
-                {/* LOCATION */}
                 <div className="flex gap-4 p-4 rounded-xl bg-orange-50 shadow-sm">
                   <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
                     <MapPin className="text-orange-500" />
@@ -208,7 +213,9 @@ const Contact = () => {
                         value={(formData as any)[field]}
                         onChange={handleChange}
                         className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
-                          errors[field] ? "border-red-500" : "border-gray-200"
+                          errors[field]
+                            ? "border-red-500"
+                            : "border-gray-200"
                         }`}
                       />
                       {errors[field] && (
@@ -229,7 +236,9 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       className={`w-full rounded-xl border px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 ${
-                        errors.message ? "border-red-500" : "border-gray-200"
+                        errors.message
+                          ? "border-red-500"
+                          : "border-gray-200"
                       }`}
                     />
                     {errors.message && (

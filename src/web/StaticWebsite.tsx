@@ -1,289 +1,284 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 import {
   ArrowRight,
-  CheckCircle,
   Zap,
-  Layout,
+  ShieldCheck,
   Search,
-  Shield,
+  Layout,
+  Globe,
+  Layers,
+  CheckCircle,
 } from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
 
 /* ----------------------------------
-   STATIC WEBSITE PAGE
+   INTERSECTION BLUR HOOK
 ----------------------------------- */
-const StaticWebsite = () => {
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
   useEffect(() => {
-    AOS.init({
-      duration: 900,
-      easing: "ease-out-cubic",
-      once: true,
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
+
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ----------------------------------
+   FEATURES
+----------------------------------- */
+const staticFeatures = [
+  {
+    icon: Zap,
+    title: "Ultra-Fast Performance",
+    text: "Static pages load instantly with no server or database delays.",
+    color: "card-au-violet",
+  },
+  {
+    icon: ShieldCheck,
+    title: "High Security",
+    text: "No backend means fewer vulnerabilities and better protection.",
+    color: "card-au-amber",
+  },
+  {
+    icon: Search,
+    title: "SEO Friendly",
+    text: "Clean HTML structure that search engines love.",
+    color: "card-au-violet",
+  },
+  {
+    icon: Layout,
+    title: "Responsive Design",
+    text: "Optimized layouts for mobile, tablet, and desktop devices.",
+    color: "card-au-amber",
+  },
+  {
+    icon: Globe,
+    title: "Global CDN Ready",
+    text: "Deploy on CDN platforms for worldwide fast delivery.",
+    color: "card-au-violet",
+  },
+  {
+    icon: Layers,
+    title: "Low Cost & Maintenance",
+    text: "Minimal hosting cost with almost zero maintenance.",
+    color: "card-au-amber",
+  },
+];
+
+const StaticWebsite = () => {
+  const reveal = useBlurReveal();
 
   return (
     <PageLayout>
-      {/* ==============================
-          HERO SECTION
-      =============================== */}
+      {/* ================= HERO ================= */}
       <ParallaxSection
-        className="pt-32 pb-24"
-        bgClassName="bg-gradient-to-b from-indigo-50 via-sky-50 to-transparent"
+        className="pt-36 pb-32"
+        bgClassName="bg-gradient-to-br from-violet-50 via-white to-amber-50"
       >
-        <div className="container-custom">
-          <div
-            className="max-w-3xl"
-            data-aos="fade-up"
-          >
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="blur-reveal is-visible">
+            <h1 className="text-5xl xl:text-6xl font-heading font-bold mb-6 text-au-heading">
               Static Website{" "}
-              <span className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500 bg-clip-text text-transparent">
-                Development
-              </span>
+              <span className="text-au-gradient">Development</span>
             </h1>
 
-            <p
-              className="text-lg text-muted-foreground mb-8"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              Lightweight, fast-loading static websites designed for small
-              businesses, startups, and high-converting landing pages.
+            <p className="text-xl text-au-body mb-10 max-w-xl">
+              Lightweight, fast-loading static websites designed to build trust,
+              improve SEO, and deliver a smooth user experience.
             </p>
 
             <Link
               to="/proposal"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-              className="inline-flex items-center gap-2
-                         bg-indigo-600 hover:bg-indigo-700
-                         text-white font-semibold px-7 py-3 rounded-xl transition
-                         hover:gap-3"
+              className="inline-flex items-center gap-3 bg-violet-700 hover:bg-violet-800 text-white font-semibold px-8 py-4 rounded-xl transition"
             >
-              Get Quote
-              <ArrowRight size={18} />
+              Request Quote <ArrowRight size={18} />
             </Link>
+          </div>
+
+          <div ref={reveal} className="hidden lg:block blur-reveal">
+            <div className="h-[420px] rounded-3xl bg-gradient-to-br from-violet-100 via-white to-amber-100 shadow-inner" />
           </div>
         </div>
       </ParallaxSection>
 
-      {/* ==============================
-          WHAT IS STATIC WEBSITE
-      =============================== */}
-      <section className="section-padding">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              What is a Static Website?
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              A static website is built using HTML, CSS, and JavaScript where
-              content is fixed and served directly to the user without database
-              processing.
-            </p>
-
-            <p className="text-muted-foreground mb-6">
-              Because there is no backend computation, static websites are
-              extremely fast, secure, and cost-effective.
-            </p>
-
-            <ul className="space-y-4">
-              {[
-                "Ultra-fast page loading",
-                "No database or server-side delays",
-                "Highly secure & stable",
-                "Low hosting and maintenance cost",
-              ].map((item, i) => (
-                <li
-                  key={item}
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle className="text-teal-500 animate-pulse" />
-                  <span className="font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Image placeholder */}
-          <div
-            data-aos="fade-left"
-            className="rounded-2xl bg-white shadow-lg h-64 hover:shadow-xl transition"
-          />
-        </div>
-      </section>
-
-      {/* ==============================
-          SPEED & PERFORMANCE
-      =============================== */}
-      <section className="section-padding bg-slate-50">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div
-            data-aos="zoom-in"
-            className="order-2 lg:order-1 rounded-2xl bg-white shadow-lg h-64 hover:scale-[1.02] transition"
-          />
-
-          <div data-aos="fade-left" className="order-1 lg:order-2">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              Lightning Fast Performance
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              Static websites load instantly because the browser receives
-              pre-built files without server-side processing or database calls.
-            </p>
-
-            <div className="space-y-4">
-              <div
-                data-aos="fade-up"
-                className="flex gap-4"
-              >
-                <Zap className="text-sky-500 animate-bounce" />
-                <div>
-                  <h4 className="font-semibold">Faster Than CMS</h4>
-                  <p className="text-sm text-muted-foreground">
-                    No plugins, no backend delays, pure performance.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                data-aos="fade-up"
-                data-aos-delay="100"
-                className="flex gap-4"
-              >
-                <Shield className="text-sky-500" />
-                <div>
-                  <h4 className="font-semibold">High Security</h4>
-                  <p className="text-sm text-muted-foreground">
-                    No database means fewer attack points.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==============================
-          RESPONSIVE DESIGN
-      =============================== */}
-      <section className="section-padding">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              Fully Responsive Design
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              Your website automatically adapts to all screen sizes — mobile,
-              tablet, laptop, and desktop.
-            </p>
-
-            <div className="space-y-4">
-              <div data-aos="fade-up" className="flex gap-4">
-                <Layout className="text-teal-500" />
-                <p className="text-muted-foreground">
-                  Mobile-first layouts for better user engagement.
-                </p>
-              </div>
-              <div data-aos="fade-up" data-aos-delay="100" className="flex gap-4">
-                <CheckCircle className="text-teal-500" />
-                <p className="text-muted-foreground">
-                  Touch-friendly UI and clean typography.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            data-aos="fade-left"
-            className="rounded-2xl bg-white shadow-lg h-64 hover:shadow-xl transition"
-          />
-        </div>
-      </section>
-
-      {/* ==============================
-          SEO SECTION
-      =============================== */}
-      <section className="section-padding bg-slate-50">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div
-            data-aos="zoom-in"
-            className="rounded-2xl bg-white shadow-lg h-64"
-          />
-
-          <div data-aos="fade-left">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              SEO Friendly Structure
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              Static websites are naturally SEO-friendly due to clean code,
-              faster loading speeds, and structured content.
-            </p>
-
-            <ul className="space-y-4">
-              {[
-                "Proper heading hierarchy",
-                "Optimized meta tags",
-                "Clean URL structure",
-                "Fast page speed",
-              ].map((item, i) => (
-                <li
-                  key={item}
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                  className="flex items-center gap-3"
-                >
-                  <Search className="text-sky-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ==============================
-          PRICING & CTA
-      =============================== */}
-      <section className="section-padding">
+      {/* ================= VALUE ================= */}
+      <section className="section-padding bg-white">
         <div
-          className="container-custom"
-          data-aos="zoom-in"
+          ref={reveal}
+          className="container-custom max-w-6xl px-6 lg:px-12 blur-reveal text-center"
         >
-          <div className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500 rounded-3xl p-12 text-white text-center">
+          <p className="text-2xl md:text-3xl font-medium leading-relaxed text-au-body">
+            Static websites focus on what matters most —
+            <span className="text-au-gradient font-semibold">
+              {" "}speed, reliability, and simplicity.
+            </span>
+          </p>
+        </div>
+      </section>
+
+      {/* ================= FEATURES GRID ================= */}
+      <section className="section-padding bg-slate-50">
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {staticFeatures.map((f) => (
+            <div
+              key={f.title}
+              ref={reveal}
+              className={`blur-reveal hover-lift ${f.color} border border-white/40 p-8 rounded-2xl`}
+            >
+              <f.icon className="text-violet-700 mb-4" />
+              <h3 className="font-semibold text-lg mb-2 text-au-heading">
+                {f.title}
+              </h3>
+              <p className="text-au-muted">{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================= USE CASES ================= */}
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-14">
+          <div ref={reveal} className="blur-reveal">
+            <h2 className="text-3xl font-heading font-bold mb-6 text-au-heading">
+              Ideal Use Cases
+            </h2>
+            <p className="text-lg text-au-muted max-w-lg">
+              Static websites are perfect for businesses that need speed,
+              clarity, and reliability.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              "Company profile websites",
+              "Personal & portfolio sites",
+              "Landing pages",
+              "Startup presentation websites",
+              "Service-based business sites",
+              "SEO-focused informational sites",
+            ].map((item) => (
+              <div
+                key={item}
+                ref={reveal}
+                className="blur-reveal flex gap-3"
+              >
+                <CheckCircle className="text-amber-500 mt-1" />
+                <span className="text-lg text-au-body">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PRICING ================= */}
+      <section className="section-padding bg-slate-50">
+        <div className="container-custom max-w-7xl px-6 lg:px-12">
+          <div ref={reveal} className="blur-reveal mb-10">
+            <h2 className="text-3xl font-heading font-bold text-au-heading">
+              Static Website Pricing
+            </h2>
+            <p className="text-lg text-au-muted max-w-xl">
+              Affordable pricing based on pages and design complexity.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Basic",
+                price: "₹4,000+",
+                features: [
+                  "Single-page website",
+                  "Responsive design",
+                  "Basic SEO setup",
+                  "Deployment",
+                ],
+              },
+              {
+                title: "Professional",
+                price: "₹8,000+",
+                features: [
+                  "Multi-page website",
+                  "Modern UI design",
+                  "SEO optimization",
+                  "Performance optimization",
+                ],
+              },
+              {
+                title: "Premium",
+                price: "₹15,000+",
+                features: [
+                  "Custom animations",
+                  "Advanced UI/UX",
+                  "Content optimization",
+                  "Ongoing support",
+                ],
+              },
+            ].map((plan) => (
+              <div
+                key={plan.title}
+                ref={reveal}
+                className="blur-reveal hover-lift bg-white border border-slate-200 p-8 rounded-2xl"
+              >
+                <h3 className="font-semibold text-xl mb-2 text-au-heading">
+                  {plan.title}
+                </h3>
+                <div className="text-3xl font-bold text-violet-700 mb-4">
+                  {plan.price}
+                </div>
+                <ul className="space-y-2">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex gap-2 text-au-body">
+                      <CheckCircle className="text-amber-500 mt-1" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-7xl px-6 lg:px-12">
+          <div
+            ref={reveal}
+            className="blur-reveal bg-gradient-to-r from-violet-700 via-white to-amber-600 rounded-3xl p-16 text-slate-900 text-center shadow-xl"
+          >
             <h2 className="text-3xl font-heading font-bold mb-4">
-              Static Website Package
+              Launch Your Static Website Today
             </h2>
 
-            <p className="text-white/90 mb-6">
-              Ideal for small businesses, startups, and personal brands.
+            <p className="mb-6 text-slate-700">
+              Get a fast, secure, and SEO-ready website built professionally.
             </p>
-
-            <div className="text-4xl font-bold mb-6">
-              Starting at ₹4,000
-            </div>
 
             <Link
               to="/proposal"
-              className="inline-flex items-center gap-2
-                         bg-white text-indigo-700
-                         font-semibold px-7 py-3 rounded-xl
-                         hover:gap-3 hover:bg-indigo-50 transition"
+              className="inline-flex items-center gap-3 bg-violet-700 text-white font-semibold px-8 py-4 rounded-xl hover:bg-violet-800 transition"
             >
-              Get Quote
-              <ArrowRight size={18} />
+              Get Started <ArrowRight size={18} />
             </Link>
           </div>
         </div>

@@ -63,3 +63,135 @@
     opacity: 0;
   }
 }
+
+/* Blur reveal */
+.blur-reveal {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(28px);
+  transition: all 0.9s ease;
+  will-change: opacity, filter, transform;
+}
+.blur-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* SaaS card colors */
+.card-saas {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+.card-indigo {
+  background: linear-gradient(135deg, #eef2ff, #ffffff);
+}
+.card-sky {
+  background: linear-gradient(135deg, #e0f2fe, #ffffff);
+}
+.card-teal {
+  background: linear-gradient(135deg, #ecfeff, #ffffff);
+}
+.card-saas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.card-indigo::after {
+  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+}
+.card-sky::after {
+  background: linear-gradient(135deg, #38bdf8, #22d3ee);
+}
+.card-teal::after {
+  background: linear-gradient(135deg, #2dd4bf, #06b6d4);
+}
+.card-saas:hover::after {
+  opacity: 0.12;
+}
+.card-saas > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover lift */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+
+
+
+/* ==============================
+   AURORA SLATE COLOR SYSTEM
+============================== */
+:root {
+  --au-slate: #0f172a;
+  --au-violet: #6d28d9;
+  --au-violet-soft: #f5f3ff;
+  --au-amber: #f59e0b;
+  --au-amber-soft: #fffbeb;
+  --au-body: #334155;
+  --au-muted: #64748b;
+}
+
+/* Text styles */
+.text-au-heading {
+  color: var(--au-slate);
+}
+
+.text-au-body {
+  color: var(--au-body);
+}
+
+.text-au-muted {
+  color: var(--au-muted);
+}
+
+.text-au-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--au-violet),
+    var(--au-amber)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card backgrounds */
+.card-au-violet {
+  background: linear-gradient(135deg, var(--au-violet-soft), #ffffff);
+}
+
+.card-au-amber {
+  background: linear-gradient(135deg, var(--au-amber-soft), #ffffff);
+}
+
+/* Hover lift */
+.hover-lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+}
+
+/* Blur reveal */
+.blur-reveal {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(28px);
+  transition: all 0.9s ease;
+}
+.blur-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}

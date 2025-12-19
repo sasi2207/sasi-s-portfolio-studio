@@ -1,234 +1,319 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 import {
   ArrowRight,
-  Building2,
-  Users,
-  Target,
   Briefcase,
+  Layout,
   ShieldCheck,
   Search,
+  Gauge,
+  Globe,
+  Users,
+  CheckCircle,
 } from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
 
-const BusinessWebsite = () => {
+/* ----------------------------------
+   INTERSECTION BLUR HOOK
+----------------------------------- */
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
   useEffect(() => {
-    AOS.init({
-      duration: 900,
-      easing: "ease-out-cubic",
-      once: true,
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
+
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ----------------------------------
+   FEATURES
+----------------------------------- */
+const businessFeatures = [
+  {
+    icon: Briefcase,
+    title: "Professional Brand Presence",
+    text: "Establish credibility with a clean, modern business website.",
+    color: "card-au-violet",
+  },
+  {
+    icon: Layout,
+    title: "Custom Business Design",
+    text: "Layouts tailored to your industry, audience, and goals.",
+    color: "card-au-amber",
+  },
+  {
+    icon: Search,
+    title: "SEO Optimized Structure",
+    text: "Built to rank your services and business on search engines.",
+    color: "card-au-violet",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure & Reliable",
+    text: "SSL, best practices, and secure deployment included.",
+    color: "card-au-amber",
+  },
+  {
+    icon: Gauge,
+    title: "Fast Performance",
+    text: "Optimized assets and clean code for fast loading speeds.",
+    color: "card-au-violet",
+  },
+  {
+    icon: Globe,
+    title: "Scalable for Growth",
+    text: "Designed to expand with new pages, services, and features.",
+    color: "card-au-amber",
+  },
+];
+
+const BusinessWebsite = () => {
+  const reveal = useBlurReveal();
 
   return (
     <PageLayout>
-      {/* ==============================
-          HERO SECTION
-      =============================== */}
+      {/* ================= HERO ================= */}
       <ParallaxSection
-        className="pt-32 pb-24"
-        bgClassName="bg-gradient-to-b from-slate-50 via-blue-50 to-transparent"
+        className="pt-36 pb-32"
+        bgClassName="bg-gradient-to-br from-violet-50 via-white to-amber-50"
       >
-        <div className="container-custom">
-          <div className="max-w-3xl" data-aos="fade-up">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Business / Corporate{" "}
-              <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
-                Website Development
-              </span>
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="blur-reveal is-visible">
+            <h1 className="text-5xl xl:text-6xl font-heading font-bold mb-6 text-au-heading">
+              Business{" "}
+              <span className="text-au-gradient">Website</span>
             </h1>
 
-            <p
-              className="text-lg text-muted-foreground mb-8"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              Professional corporate websites designed to build trust, showcase
-              services, and convert visitors into real business leads.
+            <p className="text-xl text-au-body mb-10 max-w-xl">
+              Professional business websites designed to build trust,
+              showcase services, and convert visitors into customers.
             </p>
 
             <Link
               to="/proposal"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-              className="inline-flex items-center gap-2
-                         bg-blue-700 hover:bg-blue-800
-                         text-white font-semibold px-7 py-3 rounded-xl transition
-                         hover:gap-3"
+              className="inline-flex items-center gap-3 bg-violet-700 hover:bg-violet-800 text-white font-semibold px-8 py-4 rounded-xl transition"
             >
-              Get Quote
-              <ArrowRight size={18} />
+              Request Business Website Proposal <ArrowRight size={18} />
             </Link>
+          </div>
+
+          <div ref={reveal} className="hidden lg:block blur-reveal">
+            <div className="h-[420px] rounded-3xl bg-gradient-to-br from-violet-100 via-white to-amber-100 shadow-inner" />
           </div>
         </div>
       </ParallaxSection>
 
-      {/* ==============================
-          WHAT IS A BUSINESS WEBSITE
-      =============================== */}
-      <section className="section-padding">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-blue-700">
-              What is a Business Website?
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              A business or corporate website represents your company online,
-              communicates your services, values, and credibility, and acts as a
-              24/7 digital salesperson.
-            </p>
-
-            <ul className="space-y-4">
-              {[
-                "Build trust & brand credibility",
-                "Showcase company services & expertise",
-                "Generate leads & inquiries",
-                "Professional corporate presence",
-              ].map((item, i) => (
-                <li
-                  key={item}
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                  className="flex items-center gap-3"
-                >
-                  <Building2 className="text-indigo-600" />
-                  <span className="font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div
-            data-aos="fade-left"
-            className="rounded-2xl bg-white shadow-xl h-64 hover:shadow-2xl transition"
-          />
+      {/* ================= VALUE ================= */}
+      <section className="section-padding bg-white">
+        <div
+          ref={reveal}
+          className="container-custom max-w-6xl px-6 lg:px-12 blur-reveal text-center"
+        >
+          <p className="text-2xl md:text-3xl font-medium leading-relaxed text-au-body">
+            Your website is often your first impression —
+            <span className="text-au-gradient font-semibold">
+              {" "}make it professional, clear, and conversion-focused.
+            </span>
+          </p>
         </div>
       </section>
 
-      {/* ==============================
-          KEY SECTIONS
-      =============================== */}
+      {/* ================= FEATURES GRID ================= */}
       <section className="section-padding bg-slate-50">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div
-            data-aos="zoom-in"
-            className="rounded-2xl bg-white shadow-xl h-64 hover:scale-[1.02] transition"
-          />
-
-          <div data-aos="fade-left">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              Key Sections Included
-            </h2>
-
-            <div className="space-y-4">
-              <div data-aos="fade-up" className="flex gap-4">
-                <Target className="text-blue-600" />
-                <p className="text-muted-foreground">
-                  About Company – mission, vision & values.
-                </p>
-              </div>
-
-              <div data-aos="fade-up" data-aos-delay="100" className="flex gap-4">
-                <Briefcase className="text-blue-600" />
-                <p className="text-muted-foreground">
-                  Services – detailed offerings with CTA.
-                </p>
-              </div>
-
-              <div data-aos="fade-up" data-aos-delay="200" className="flex gap-4">
-                <Users className="text-blue-600" />
-                <p className="text-muted-foreground">
-                  Team – leadership & company culture.
-                </p>
-              </div>
-
-              <div data-aos="fade-up" data-aos-delay="300" className="flex gap-4">
-                <ShieldCheck className="text-blue-600" />
-                <p className="text-muted-foreground">
-                  Trust elements – testimonials & certifications.
-                </p>
-              </div>
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {businessFeatures.map((f) => (
+            <div
+              key={f.title}
+              ref={reveal}
+              className={`blur-reveal hover-lift ${f.color} border border-white/40 p-8 rounded-2xl`}
+            >
+              <f.icon className="text-violet-700 mb-4" />
+              <h3 className="font-semibold text-lg mb-2 text-au-heading">
+                {f.title}
+              </h3>
+              <p className="text-au-muted">{f.text}</p>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ==============================
-          SEO & LEAD GENERATION
-      =============================== */}
-      <section className="section-padding">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-blue-700">
-              SEO Optimized & Lead Focused
+      {/* ================= USE CASES ================= */}
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-14">
+          <div ref={reveal} className="blur-reveal">
+            <h2 className="text-3xl font-heading font-bold mb-6 text-au-heading">
+              Who Needs a Business Website?
             </h2>
-
-            <p className="text-muted-foreground mb-6">
-              Corporate websites are built with SEO, performance, and conversion
-              in mind to ensure maximum business growth.
+            <p className="text-lg text-au-muted max-w-lg">
+              Business websites are essential for organizations that want
+              credibility, visibility, and customer trust.
             </p>
-
-            <ul className="space-y-4">
-              {[
-                "SEO-friendly structure & content",
-                "Fast loading & mobile optimized",
-                "Conversion-focused CTAs",
-                "Google Analytics & Search Console ready",
-              ].map((item, i) => (
-                <li
-                  key={item}
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                  className="flex items-center gap-3"
-                >
-                  <Search className="text-indigo-600" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <div
-            data-aos="fade-left"
-            className="rounded-2xl bg-white shadow-xl h-64"
-          />
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              "Small & medium businesses",
+              "Service-based companies",
+              "Startups & new ventures",
+              "Consultants & agencies",
+              "Manufacturing & B2B firms",
+              "Local businesses",
+            ].map((item) => (
+              <div
+                key={item}
+                ref={reveal}
+                className="blur-reveal flex gap-3"
+              >
+                <CheckCircle className="text-amber-500 mt-1" />
+                <span className="text-lg text-au-body">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ==============================
-          PRICING & CTA
-      =============================== */}
-      <section className="section-padding">
-        <div className="container-custom" data-aos="zoom-in">
-          <div className="bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600 rounded-3xl p-12 text-white text-center">
+      {/* ================= PROCESS ================= */}
+      <section className="section-padding bg-slate-50">
+        <div className="container-custom max-w-7xl px-6 lg:px-12">
+          <div ref={reveal} className="blur-reveal mb-12">
+            <h2 className="text-3xl font-heading font-bold text-au-heading">
+              Business Website Development Process
+            </h2>
+            <p className="text-lg text-au-muted max-w-xl">
+              A structured process to deliver reliable business websites.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              "Requirement & Content Analysis",
+              "UI/UX & Brand Design",
+              "Development & Review",
+              "Deployment & Launch",
+            ].map((step, i) => (
+              <div
+                key={step}
+                ref={reveal}
+                className="blur-reveal bg-white border border-slate-200 p-6 rounded-xl shadow-sm"
+              >
+                <div className="text-violet-700 font-bold mb-2">
+                  Step {i + 1}
+                </div>
+                <div className="font-medium text-au-body">{step}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PRICING ================= */}
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-7xl px-6 lg:px-12">
+          <div ref={reveal} className="blur-reveal mb-10">
+            <h2 className="text-3xl font-heading font-bold text-au-heading">
+              Business Website Pricing
+            </h2>
+            <p className="text-lg text-au-muted max-w-xl">
+              Pricing based on pages, design, and business requirements.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Starter",
+                price: "₹6,000+",
+                features: [
+                  "Up to 5 pages",
+                  "Responsive design",
+                  "Basic SEO setup",
+                  "Deployment",
+                ],
+              },
+              {
+                title: "Professional",
+                price: "₹15,000+",
+                features: [
+                  "Custom design",
+                  "Service pages",
+                  "SEO optimization",
+                  "Performance tuning",
+                ],
+              },
+              {
+                title: "Enterprise",
+                price: "₹30,000+",
+                features: [
+                  "Advanced UI/UX",
+                  "Custom sections",
+                  "Scalable architecture",
+                  "Ongoing support",
+                ],
+              },
+            ].map((plan) => (
+              <div
+                key={plan.title}
+                ref={reveal}
+                className="blur-reveal hover-lift bg-white border border-slate-200 p-8 rounded-2xl"
+              >
+                <h3 className="font-semibold text-xl mb-2 text-au-heading">
+                  {plan.title}
+                </h3>
+                <div className="text-3xl font-bold text-violet-700 mb-4">
+                  {plan.price}
+                </div>
+                <ul className="space-y-2">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex gap-2 text-au-body">
+                      <CheckCircle className="text-amber-500 mt-1" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="section-padding bg-slate-50">
+        <div className="container-custom max-w-7xl px-6 lg:px-12">
+          <div
+            ref={reveal}
+            className="blur-reveal bg-gradient-to-r from-violet-700 via-white to-amber-600 rounded-3xl p-16 text-slate-900 text-center shadow-xl"
+          >
             <h2 className="text-3xl font-heading font-bold mb-4">
-              Business Website Package
+              Build a Website That Represents Your Business
             </h2>
 
-            <p className="text-white/90 mb-6">
-              Ideal for startups, companies, enterprises, and service-based
-              businesses.
+            <p className="mb-6 text-slate-700">
+              Let’s create a professional business website that drives growth.
             </p>
-
-            <div className="text-4xl font-bold mb-6">
-              Starting at ₹15,000
-            </div>
 
             <Link
               to="/proposal"
-              className="inline-flex items-center gap-2
-                         bg-white text-blue-700
-                         font-semibold px-7 py-3 rounded-xl
-                         hover:gap-3 hover:bg-blue-50 transition"
+              className="inline-flex items-center gap-3 bg-violet-700 text-white font-semibold px-8 py-4 rounded-xl hover:bg-violet-800 transition"
             >
-              Get Quote
-              <ArrowRight size={18} />
+              Get Business Website Proposal <ArrowRight size={18} />
             </Link>
           </div>
         </div>

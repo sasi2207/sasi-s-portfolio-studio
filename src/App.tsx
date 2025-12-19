@@ -94,18 +94,20 @@ const App: React.FC = () => {
         <TooltipProvider>
           {/* 🔥 GLOBAL SEO */}
           <Helmet>
-            <title>
-              TechSasi | SasiTech – Website & App Development Training Institute in Mettur
-            </title>
+           
 
-            <meta
-              name="description"
-              content="TechSasi (SasiTech) is a leading website development and app development training institute in Mettur offering full stack courses, live projects, software services, web design, mobile apps and IT solutions."
-            />
+          
+    <title>TechSasi — Website & Mobile App Development</title>
+
+
+   <meta
+  name="description"
+  content="TechSasi by SasiKumar offers professional website development, mobile app development, and custom software solutions. Expert in React, full-stack development, admin dashboards, and scalable SaaS platforms."
+/>
 
             <meta
               name="keywords"
-              content="TechSasi, SasiTech, website development Mettur, app development training, full stack course, React training, Java training, software company Mettur, IT institute Mettur, web design services, mobile app development, real time projects"
+              content="TechSasi, SasiTech, website development Mettur, app development mettur, full stack course, React training mettur, Java training, software company Mettur, IT institute Mettur, web design services mettur, mobile app development mettur, real time projects"
             />
 
             <meta name="author" content="TechSasi / SasiTech" />
