@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { AnimatePresence } from "framer-motion";
-
+import ProtectedRoute from "./Auth/ProtectedRoute";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,6 +33,12 @@ import BusinessWebsite from "./web/BusinessWebsite";
 import MobileAppDevelopment from "./web/MobileAppDevelopment";
 import SeoOptimization from "./web/SeoOptimization";
 import DeploymentHosting from "./web/DeploymentHosting";
+import ProposalDetails from "./pages/Get/ProposalDetails";
+import Register from "./Auth/Register";
+import Login from "./Auth/Login";
+import Dashboard from "./Auth/Dashboard";
+import ContactList from "./pages/Get/ContactList";
+import ContactDetails from "./pages/Get/ContactDetails";
 
 const queryClient = new QueryClient();
 
@@ -78,6 +84,23 @@ const AnimatedRoutes = () => {
         <Route path="service/MobileApplication-Development" element={<MobileAppDevelopment/>} />
         <Route path="service/SeoOptimization" element={<SeoOptimization/>} />
         <Route path="/service/DeploymentHosting" element={<DeploymentHosting/>} />
+
+        {/* <Route path="Register" element={<Register/>}/> */}
+        <Route path="Login"element={<Login/>}/>
+    
+<Route
+  path="dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
+
+<Route path="dashboard/proposals"element={<ProtectedRoute><ProposalDetails /></ProtectedRoute>}/>
+
+  <Route path="dashboard/contacts" element={<ProtectedRoute><ContactList /></ProtectedRoute>} />
+    {/* <Route path="dashboard/contact/:id" element={<ContactDetails />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -117,7 +140,7 @@ const App: React.FC = () => {
             <meta property="og:type" content="website" />
             <meta
               property="og:title"
-              content="TechSasi | SasiTech – Website & App Development Training Institute in Mettur"
+              content="TechSasi | SasiTech – Website & App Development  in Mettur"
             />
             <meta
               property="og:description"

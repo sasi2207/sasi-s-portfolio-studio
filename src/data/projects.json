@@ -1,14 +1,54 @@
 {
   "projects": [
     {
+      "id": "bharathi-thervu-kalam",
+      "title": "Bharathi Thervu Kalam",
+      "category": "Web Application",
+      "description": "A personal/professional landing website showcasing Bharathi’s vision, skills, and online presence with a modern, responsive design.",
+      "image": "/projects/bharathi-thervu-kalam.png",
+      "technologies": ["Next.js", "React", "Tailwind CSS", "Vercel"],
+      "liveUrl": "https://bharathi-thervu-kalam-com.vercel.app/",
+      "githubUrl": "",
+      "featured": false,
+      "metrics": {
+        "loadTime": "0.9s",
+        "responsiveness": "100%",
+        "seoScore": "92+"
+      },
+      "caseStudy": {
+        "problem": "Needed an online presence to introduce personal brand, highlight professional skills, and connect with visitors easily.",
+        "solution": "Built a lightweight and responsive personal site using modern React/Next.js stack deployed on Vercel, optimized for SEO and performance.",
+        "outcome": "Enhanced online identity with a fast-loading, mobile-friendly site that serves as a professional landing page."
+      }
+    },
+    {
+      "id": "service-hub-platform",
+      "title": "Soolya Service Hub Platform",
+      "category": "Full-Stack",
+      "description": "A centralized service marketplace platform that connects customers with verified service providers through a modern, scalable web application.",
+      "image": "/projects/service-hub.png",
+      "technologies": ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "AWS"],
+      "liveUrl": "https://soolya-service-hub.vercel.app/",
+      "featured": true,
+      "metrics": {
+        "loadTime": "1.1s",
+        "userGrowth": "+60%",
+        "uptime": "99.9%"
+      },
+      "caseStudy": {
+        "problem": "The client needed a unified platform where users could discover, book, and manage multiple local services with real-time availability and secure authentication.",
+        "solution": "Designed and developed a full-stack service hub using React for the frontend and Node.js with MongoDB for the backend. Implemented role-based access for customers and service providers, along with optimized API responses.",
+        "outcome": "Improved user onboarding speed by 50%, reduced service booking friction, and achieved high platform stability with 99.9% uptime."
+      }
+    },
+    {
       "id": "ecommerce-platform",
       "title": "E-Commerce Platform",
       "category": "Full-Stack",
       "description": "A complete e-commerce solution with inventory management, payment processing, and analytics dashboard.",
       "image": "/placeholder.svg",
       "technologies": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
+      "liveUrl": "https://stellar-cart-mu.vercel.app/",
       "featured": true,
       "metrics": {
         "loadTime": "1.2s",
@@ -21,111 +61,31 @@
         "outcome": "Reduced page load time by 60%, increased conversion rate by 45%, and achieved 99.9% uptime during peak sales."
       }
     },
+  
+ 
     {
-      "id": "admin-dashboard",
-      "title": "Analytics Dashboard",
-      "category": "Dashboard",
-      "description": "Real-time analytics dashboard with interactive charts, user management, and automated reporting.",
-      "image": "/placeholder.svg",
-      "technologies": ["React", "TypeScript", "D3.js", "Firebase", "Tailwind"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
-      "featured": true,
-      "metrics": {
-        "loadTime": "0.8s",
-        "dataPoints": "1M+",
-        "users": "500+"
-      },
-      "caseStudy": {
-        "problem": "Company needed a centralized dashboard to visualize data from multiple sources in real-time.",
-        "solution": "Created a modular dashboard with customizable widgets, real-time data streaming, and role-based access control.",
-        "outcome": "Enabled data-driven decisions, reduced reporting time by 80%, and improved team productivity."
-      }
-    },
-    {
-      "id": "saas-application",
-      "title": "Project Management SaaS",
-      "category": "Full-Stack",
-      "description": "Cloud-based project management tool with team collaboration, task tracking, and time management features.",
-      "image": "/placeholder.svg",
-      "technologies": ["Next.js", "Prisma", "PostgreSQL", "Websockets", "Vercel"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
+      "id": "sanctus-vision-portal",
+      "title": "Sanctus Vision Portal",
+      "category": "Web Portal",
+      "description": "A modern vision platform providing users with intuitive access to services and tools through a secure, responsive web interface.",
+      "image": "/projects/sanctus-vision-portal.png",
+      "technologies": ["React", "Next.js", "Tailwind CSS", "Node.js", "Vercel"],
+      "liveUrl": "https://sanctus-vision-portal.vercel.app/",
+      "githubUrl": "",
       "featured": false,
       "metrics": {
         "loadTime": "1.0s",
-        "activeUsers": "2,000+",
-        "satisfaction": "4.8/5"
+        "responsiveness": "98%",
+        "uptime": "99.5%"
       },
       "caseStudy": {
-        "problem": "Startup needed a custom project management solution that could scale with their growing team.",
-        "solution": "Developed a real-time collaborative platform with drag-and-drop kanban boards, time tracking, and integrations.",
-        "outcome": "Achieved 2,000+ active users within 6 months, with a 4.8/5 customer satisfaction rating."
-      }
-    },
-    {
-      "id": "portfolio-website",
-      "title": "Creative Agency Website",
-      "category": "Website",
-      "description": "Stunning portfolio website with smooth animations, CMS integration, and optimized performance.",
-      "image": "/placeholder.svg",
-      "technologies": ["React", "GSAP", "Sanity CMS", "Netlify"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
-      "featured": false,
-      "metrics": {
-        "loadTime": "0.9s",
-        "bounceRate": "-30%",
-        "engagement": "+60%"
-      },
-      "caseStudy": {
-        "problem": "Creative agency wanted a portfolio that showcases their work with immersive animations and easy content updates.",
-        "solution": "Built a visually stunning site with GSAP animations, parallax effects, and Sanity CMS for content management.",
-        "outcome": "Reduced bounce rate by 30%, increased time on site by 60%, and simplified content updates for the team."
-      }
-    },
-    {
-      "id": "booking-system",
-      "title": "Appointment Booking System",
-      "category": "Full-Stack",
-      "description": "Online booking platform with calendar integration, payment processing, and automated reminders.",
-      "image": "/placeholder.svg",
-      "technologies": ["React", "Express", "MongoDB", "Twilio", "Stripe"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
-      "featured": false,
-      "metrics": {
-        "bookings": "5,000+/mo",
-        "noShows": "-40%",
-        "revenue": "+25%"
-      },
-      "caseStudy": {
-        "problem": "Healthcare clinic needed an online booking system to reduce phone calls and no-shows.",
-        "solution": "Created a user-friendly booking platform with SMS reminders, Google Calendar sync, and online payments.",
-        "outcome": "Processed 5,000+ monthly bookings, reduced no-shows by 40%, and increased revenue by 25%."
-      }
-    },
-    {
-      "id": "landing-page",
-      "title": "Product Launch Landing",
-      "category": "Website",
-      "description": "High-converting landing page with A/B testing capabilities and lead capture optimization.",
-      "image": "/placeholder.svg",
-      "technologies": ["React", "Tailwind", "Framer Motion", "Google Analytics"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com",
-      "featured": false,
-      "metrics": {
-        "loadTime": "0.6s",
-        "conversionRate": "12%",
-        "leads": "3,000+"
-      },
-      "caseStudy": {
-        "problem": "Tech startup needed a landing page that converts visitors into beta sign-ups for their new product.",
-        "solution": "Designed a conversion-optimized landing page with compelling copy, social proof, and smooth animations.",
-        "outcome": "Achieved 12% conversion rate, captured 3,000+ leads, and successfully launched the product."
+        "problem": "Users needed a centralized portal with secure access to vision-related resources and tools with fast load and modern UI.",
+        "solution": "Developed a scalable web portal using Next.js and React with responsive design and optimized performance, deployed on Vercel for global access.",
+        "outcome": "Delivered a fast, responsive portal that improves user engagement and provides seamless access across all devices."
       }
     }
+    
+   
   ],
-  "categories": ["All", "Full-Stack", "Website", "Dashboard"]
+  "categories": ["All", "Full-Stack", "Website", "Dashboard", "Web Application", "Web Portal"]
 }

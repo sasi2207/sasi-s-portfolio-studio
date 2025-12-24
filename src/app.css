@@ -195,3 +195,53 @@
   filter: blur(0);
   transform: translateY(0);
 }
+
+
+
+
+/* Scroll blur → clear */
+.blur-text {
+  filter: blur(8px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.9s ease;
+}
+
+[data-aos].aos-animate.blur-text {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Soft sunshine glow */
+.group:hover {
+  box-shadow: 0 20px 40px rgba(251, 146, 60, 0.28);
+}
+
+
+
+
+
+/* Base blur state */
+.scroll-blur {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(24px);
+  transition: all 0.8s ease;
+}
+
+/* Visible state */
+.scroll-blur.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .scroll-blur {
+    filter: blur(6px);
+    transform: translateY(16px);
+  }
+}
+

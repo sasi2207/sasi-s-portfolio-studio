@@ -71,7 +71,7 @@ export const ServicesPreview = () => {
   data-aos="fade-up"
   data-aos-delay={index * 100}
 >
-  <BubbleBackground />
+  {/* <BubbleBackground /> */}
 
   {/* Hover Gradient */}
   <div

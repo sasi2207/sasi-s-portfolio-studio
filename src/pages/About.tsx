@@ -8,6 +8,7 @@ import {
   Users,
   Briefcase,
   ArrowRight,
+  ArrowLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -54,6 +55,8 @@ const About = () => {
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl" />
         <div className="absolute top-1/3 -right-24 w-96 h-96 bg-teal-200/30 rounded-full blur-3xl" />
 
+       
+
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
@@ -69,6 +72,8 @@ const About = () => {
               digital products.
             </p>
           </div>
+
+          
         </div>
       </ParallaxSection>
 

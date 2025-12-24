@@ -3,23 +3,30 @@ import AOS from "aos";
 import { z } from "zod";
 import { Layout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
-import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
+import API_URL from "./api";
 
 /* ----------------------------------
    VALIDATION SCHEMA
 ----------------------------------- */
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
+  phone: z
+    .string()
+    .trim()
+    .min(10, "Phone number is required")
+    .max(15, "Invalid phone number"),
   subject: z.string().trim().min(1, "Subject is required").max(200),
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
+type ContactFormData = z.infer<typeof contactSchema>;
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
-    email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -37,56 +44,76 @@ const Contact = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
-    if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: "" });
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   /* ----------------------------------
-     SUBMIT → WHATSAPP
+     FORM SUBMIT
+     → GLOBAL API CALL
+     → BACKEND SENDS TO WHATSAPP
   ----------------------------------- */
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  /* -----------------------------
+     ZOD VALIDATION
+  ----------------------------- */
+  const result = contactSchema.safeParse(formData);
+
+  if (!result.success) {
+    const fieldErrors: Record<string, string> = {};
+    result.error.errors.forEach((err) => {
+      const field = err.path[0] as string;
+      fieldErrors[field] = err.message;
+    });
+    setErrors(fieldErrors);
+    return;
+  }
+
+  try {
     setIsSubmitting(true);
 
-    try {
-      const validated = contactSchema.parse(formData);
+    const response = await fetch(`${API_URL}/contact.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+      }),
+    });
 
-      const whatsappMessage = encodeURIComponent(
-        `📩 New Contact Inquiry - TechSasi\n\n` +
-          `👤 Name: ${validated.name}\n` +
-          `📧 Email: ${validated.email}\n` +
-          `📝 Subject: ${validated.subject}\n\n` +
-          `💬 Message:\n${validated.message}`
-      );
+    const data = await response.json();
 
-      // 👉 YOUR WHATSAPP NUMBER (COUNTRY CODE INCLUDED)
-      const whatsappNumber = "917448788879";
-
-      window.open(
-        `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
-        "_blank"
-      );
-
-      toast.success("Redirecting to WhatsApp...");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const fieldErrors: Record<string, string> = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            fieldErrors[err.path[0] as string] = err.message;
-          }
-        });
-        setErrors(fieldErrors);
-        toast.error("Please fix the form errors");
-      }
-    } finally {
-      setIsSubmitting(false);
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Failed");
     }
-  };
+
+    toast.success("Message sent successfully 🚀");
+
+    setFormData({
+      name: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <Layout>
@@ -132,15 +159,12 @@ const Contact = () => {
               </h2>
 
               <p className="text-muted-foreground mb-8">
-                Reach out through phone, WhatsApp, or email. I usually reply
-                within 24 hours.
+                Reach out through phone or email. I usually reply within 24
+                hours.
               </p>
 
               <div className="space-y-6">
-                <a
-                  href="tel:+917448788879"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
-                >
+                <div className="flex gap-4 p-4 rounded-xl bg-orange-50 shadow-sm">
                   <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
                     <Phone className="text-orange-500" />
                   </div>
@@ -148,27 +172,9 @@ const Contact = () => {
                     <h3 className="font-semibold">Phone</h3>
                     <p className="text-muted-foreground">+91 7448788879</p>
                   </div>
-                </a>
+                </div>
 
-                <a
-                  href="https://wa.me/917448788879"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
-                    <MessageCircle className="text-orange-500" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">WhatsApp</h3>
-                    <p className="text-muted-foreground">Chat instantly</p>
-                  </div>
-                </a>
-
-                <a
-                  href="mailto:sasikumarp2207@gmail.com"
-                  className="flex gap-4 p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all shadow-sm"
-                >
+                <div className="flex gap-4 p-4 rounded-xl bg-orange-50 shadow-sm">
                   <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
                     <Mail className="text-orange-500" />
                   </div>
@@ -178,7 +184,7 @@ const Contact = () => {
                       sasikumarp2207@gmail.com
                     </p>
                   </div>
-                </a>
+                </div>
 
                 <div className="flex gap-4 p-4 rounded-xl bg-orange-50 shadow-sm">
                   <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
@@ -202,13 +208,13 @@ const Contact = () => {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  {["name", "email", "subject"].map((field) => (
+                  {["name", "phone", "subject"].map((field) => (
                     <div key={field}>
                       <label className="block text-sm font-medium mb-2 capitalize">
                         {field} *
                       </label>
                       <input
-                        type={field === "email" ? "email" : "text"}
+                        type="text"
                         name={field}
                         value={(formData as any)[field]}
                         onChange={handleChange}
@@ -251,7 +257,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition shadow-md"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition shadow-md disabled:opacity-60"
                   >
                     <Send size={18} />
                     {isSubmitting ? "Sending..." : "Send Message"}
