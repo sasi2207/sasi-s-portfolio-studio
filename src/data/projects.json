@@ -61,8 +61,6 @@
         "outcome": "Reduced page load time by 60%, increased conversion rate by 45%, and achieved 99.9% uptime during peak sales."
       }
     },
-  
- 
     {
       "id": "sanctus-vision-portal",
       "title": "Sanctus Vision Portal",
@@ -83,9 +81,35 @@
         "solution": "Developed a scalable web portal using Next.js and React with responsive design and optimized performance, deployed on Vercel for global access.",
         "outcome": "Delivered a fast, responsive portal that improves user engagement and provides seamless access across all devices."
       }
+    },
+    {
+      "id": "amudham-women-welfare-foundation",
+      "title": "Amudham Women Welfare Foundation",
+      "category": "Website",
+      "description": "A responsive website for Amudham Women Welfare Foundation, showcasing social initiatives, programs, events, and community services with a modern and user-friendly interface.",
+      "image": "/projects/amudham-women-welfare-foundation.png",
+      "technologies": ["React", "Next.js", "Tailwind CSS", "Vercel"],
+      "liveUrl": "https://amudham-rho.vercel.app/",
+      "githubUrl": "",
+      "featured": true,
+      "metrics": {
+        "loadTime": "0.8s",
+        "responsiveness": "100%",
+        "seoScore": "95+"
+      },
+      "caseStudy": {
+        "problem": "The foundation needed an online platform to create awareness about its social initiatives, showcase activities, and provide easy access to information for beneficiaries and supporters.",
+        "solution": "Developed a modern, responsive website using React and Next.js with Tailwind CSS, optimized for SEO and deployed on Vercel for fast global performance.",
+        "outcome": "Delivered a fast-loading and mobile-friendly platform that improves visibility, strengthens community engagement, and enhances the organization's digital presence."
+      }
     }
-    
-   
   ],
-  "categories": ["All", "Full-Stack", "Website", "Dashboard", "Web Application", "Web Portal"]
+  "categories": [
+    "All",
+    "Full-Stack",
+    "Website",
+    "Dashboard",
+    "Web Application",
+    "Web Portal"
+  ]
 }
