@@ -1,4 +1,3 @@
-
 name: Deploy to cPanel
 
 on:
@@ -32,12 +31,11 @@ jobs:
       - name: Deploy to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ftp.techsasi.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          protocol: ftp
+          protocol: ftps
+          port: 21
           local-dir: ./dist/
-          server-dir: /  
+          server-dir: public_html/
           dangerous-clean-slate: true
-
