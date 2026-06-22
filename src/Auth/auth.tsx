@@ -1,5 +1,5 @@
 // const API = "http://localhost/Rakshan/api";
-const API = "https://techsasi.com/Rakshan/api";
+const API = "https://www.techsasi.com/Rakshan/api";
 
 
 export const register = async (username: string, password: string) => {

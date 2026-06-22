@@ -85,7 +85,7 @@ export const Navbar = () => {
                 TS
               </div>
               <div className="flex flex-col leading-tight">
-                <span className="text-2xl font-bold">TechSasi</span>
+                <span className="text-2xl font-bold">Tech<span className='text-orange-400'>Sasi</span></span>
                 <span className="text-sm font-semibold text-orange-500">
                   டெக் சசி
                 </span>

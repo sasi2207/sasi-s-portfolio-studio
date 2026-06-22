@@ -48,11 +48,11 @@ export const CtaSection = () => {
             data-aos-delay="300"
           >
             <a 
-              href="mailto:sasikumarp2207@gmail.com" 
+              href="mailto: techsasi22@gmail.com" 
               className="flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors"
             >
               <Mail size={16} />
-              sasikumarp2207@gmail.com
+               techsasi22@gmail.com
             </a>
             <a 
               href="tel:+917448788879" 

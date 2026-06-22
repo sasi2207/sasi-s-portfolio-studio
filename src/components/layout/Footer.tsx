@@ -71,7 +71,12 @@ export const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm"
+                    className="  text-secondary-foreground/70
+    hover:text-orange-500
+    transition-all
+    duration-300
+    ease-in-out
+    text-sm"
                   >
                     {link.name}
                   </Link>
@@ -88,12 +93,20 @@ export const Footer = () => {
             <ul className="space-y-3">
               {servicesData.services.map((service) => (
                 <li key={service.id}>
-                  <Link
-                    to={service.path}
-                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm"
-                  >
-                    {service.title}
-                  </Link>
+                 <Link
+  to={service.path}
+  className="
+    text-secondary-foreground/70
+    hover:text-orange-500
+    transition-all
+    duration-300
+    ease-in-out
+    text-sm
+  "
+>
+  {service.title}
+</Link>
+
                 </li>
               ))}
             </ul>
@@ -108,7 +121,14 @@ export const Footer = () => {
               <li>
                 <a
                   href="tel:+917448788879"
-                  className="flex items-center gap-3 text-secondary-foreground/70 hover:text-primary transition-colors text-sm"
+                  className="flex items-center gap-3  
+    text-secondary-foreground/70
+    hover:text-orange-500
+    transition-all
+    duration-300
+    ease-in-out
+    text-sm
+  "
                 >
                   <Phone size={16} />
                   +91 7448788879
@@ -117,15 +137,25 @@ export const Footer = () => {
 
               <li>
                 <a
-                  href="mailto:sasikumarp2207@gmail.com"
-                  className="flex items-center gap-3 text-secondary-foreground/70 hover:text-primary transition-colors text-sm"
+                  href="mailto: techsasi22@gmail.com"
+                  className="flex items-center gap-3   text-secondary-foreground/70
+    hover:text-orange-500
+    transition-all
+    duration-300
+    ease-in-out
+    text-sm"
                 >
                   <Mail size={16} />
-                  sasikumarp2207@gmail.com
+                   techsasi22@gmail.com
                 </a>
               </li>
 
-              <li className="flex items-center gap-3 text-secondary-foreground/70 text-sm">
+              <li className="flex items-center gap-3   text-secondary-foreground/70
+    hover:text-orange-500
+    transition-all
+    duration-300
+    ease-in-out
+    text-sm " style={{cursor:"pointer"}}>
                 <MapPin size={16} />
                 Mettur, Salem, Tamil Nadu
               </li>
@@ -142,7 +172,7 @@ export const Footer = () => {
 
             <div className="flex gap-6 text-sm text-secondary-foreground/50">
               <a
-                href="https://soolya.com"
+                href="https://www.techsasi.com/projects"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"

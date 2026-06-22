@@ -39,6 +39,7 @@ import Login from "./Auth/Login";
 import Dashboard from "./Auth/Dashboard";
 import ContactList from "./pages/Get/ContactList";
 import ContactDetails from "./pages/Get/ContactDetails";
+import OfferForm from "./Offers/OfferForm";
 
 const queryClient = new QueryClient();
 
@@ -85,7 +86,9 @@ const AnimatedRoutes = () => {
         <Route path="service/SeoOptimization" element={<SeoOptimization/>} />
         <Route path="/service/DeploymentHosting" element={<DeploymentHosting/>} />
 
-        {/* <Route path="Register" element={<Register/>}/> */}
+        <Route path="Offers" element={<OfferForm/>} />
+
+        <Route path="Register-2207" element={<Register/>}/>
         <Route path="Login"element={<Login/>}/>
     
 <Route
@@ -130,7 +133,7 @@ const App: React.FC = () => {
 
             <meta
               name="keywords"
-              content="TechSasi, SasiTech, website development Mettur, app development mettur, full stack course, React training mettur, Java training, software company Mettur, IT institute Mettur, web design services mettur, mobile app development mettur, real time projects"
+              content="TechSasi,SasiTech, website development Mettur, app development mettur, full stack course, React training mettur, Java training, software company Mettur, IT institute Mettur, web design services mettur, mobile app development mettur, real time projects"
             />
 
             <meta name="author" content="TechSasi / SasiTech" />

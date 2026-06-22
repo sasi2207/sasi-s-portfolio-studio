@@ -181,7 +181,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   <div>
                     <h3 className="font-semibold">Email</h3>
                     <p className="text-muted-foreground">
-                      sasikumarp2207@gmail.com
+                       techsasi22@gmail.com
                     </p>
                   </div>
                 </div>

@@ -1,15 +1,16 @@
-import { MessageCircle, Phone, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Phone, FileText } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const ContactFab = () => {
   const whatsappUrl =
-    'https://wa.me/917448788879?text=Hi%20SasiKumar%2C%20I%27m%20interested%20in%20your%20services.';
-  const callUrl = 'tel:+917448788879';
+    "https://wa.me/917448788879?text=Hi%20SasiKumar%2C%20I%27m%20interested%20in%20your%20services.";
+  const callUrl = "tel:+917448788879";
 
   return (
     <div className="fixed bottom-6 right-6 z-[999] flex flex-col gap-3">
 
-      {/* GET PROPOSAL BUTTON (INTERNAL PAGE VISIT) */}
+      {/* GET PROPOSAL BUTTON */}
       <Link
         to="/proposal"
         aria-label="Get a Proposal"
@@ -29,7 +30,6 @@ export const ContactFab = () => {
           className="text-white group-hover:scale-110 transition-transform"
         />
 
-        {/* Tooltip */}
         <span
           className="
             absolute right-full mr-3
@@ -83,7 +83,7 @@ export const ContactFab = () => {
         </span>
       </a>
 
-      {/* WHATSAPP BUTTON */}
+      {/* WHATSAPP BUTTON – ORIGINAL ICON */}
       <a
         href={whatsappUrl}
         target="_blank"
@@ -100,8 +100,8 @@ export const ContactFab = () => {
           transition-transform
         "
       >
-        <MessageCircle
-          size={26}
+        <FaWhatsapp
+          size={30}
           className="text-white group-hover:scale-110 transition-transform"
         />
 
