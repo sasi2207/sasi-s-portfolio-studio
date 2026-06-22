@@ -153,13 +153,7 @@ const Services = () => {
                         ))}
                       </ul>
 
-                      {/* PRICE */}
-                      <span
-                        className="text-lg font-semibold"
-                        style={{ color: service.iconColor }}
-                      >
-                        {service.price}
-                      </span>
+                  
                     </div>
                   </div>
 

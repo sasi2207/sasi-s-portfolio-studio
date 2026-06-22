@@ -28,7 +28,7 @@
       "description": "A centralized service marketplace platform that connects customers with verified service providers through a modern, scalable web application.",
       "image": "/projects/service-hub.png",
       "technologies": ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "AWS"],
-      "liveUrl": "https://soolya-service-hub.vercel.app/",
+      "liveUrl": "https://www.soolya.com/",
       "featured": true,
       "metrics": {
         "loadTime": "1.1s",

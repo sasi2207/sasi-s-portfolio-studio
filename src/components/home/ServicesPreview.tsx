@@ -100,13 +100,7 @@ export const ServicesPreview = () => {
     {service.description}
   </p>
 
-  {/* PRICE */}
-  <div
-    className="text-sm font-semibold"
-    style={{ color: service.iconColor }}
-  >
-    {service.price}
-  </div>
+ 
 
   {/* ==============================
       VIEW DETAILS – RIGHT BOTTOM
