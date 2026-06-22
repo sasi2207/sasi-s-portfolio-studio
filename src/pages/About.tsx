@@ -80,7 +80,7 @@ const About = () => {
       {/* ==============================
           WHO I AM
       =============================== */}
-      <section className="section-padding relative">
+      <section className="section-padding relative overflow-hidden">
         <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
             <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
@@ -194,7 +194,7 @@ const About = () => {
       {/* ==============================
           WHY CHOOSE ME
       =============================== */}
-      <section className="section-padding">
+      <section className="section-padding overflow-hidden">
         <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
             <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
