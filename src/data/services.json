@@ -120,51 +120,9 @@
         "CI/CD Pipeline"
       ]
     },
-    {
-      "id": "uiux-design",
-      "title": "UI/UX Design",
-      "description": "Creative and user-friendly interfaces designed to enhance user experience.",
-      "icon": "LayoutDashboard",
-      "iconColor": "#ec4899",
-      "path": "/service/uiux-design",
-      "features": [
-        "Wireframes",
-        "Modern UI Design",
-        "Mobile Responsive",
-        "User Experience Research",
-        "Figma Prototypes"
-      ]
-    },
-    {
-      "id": "custom-software",
-      "title": "Custom Software Development",
-      "description": "Tailor-made software solutions to automate and streamline business operations.",
-      "icon": "Layers",
-      "iconColor": "#14b8a6",
-      "path": "/service/custom-software",
-      "features": [
-        "ERP Systems",
-        "CRM Solutions",
-        "Inventory Software",
-        "Billing Applications",
-        "Custom Dashboards"
-      ]
-    },
-    {
-      "id": "api-development",
-      "title": "API Development & Integration",
-      "description": "Secure REST APIs and third-party integrations for scalable applications.",
-      "icon": "RefreshCw",
-      "iconColor": "#8b5cf6",
-      "path": "/service/api-development",
-      "features": [
-        "REST APIs",
-        "Payment Integration",
-        "Authentication",
-        "Third-party Services",
-        "Documentation"
-      ]
-    },
+    
+ 
+   
     {
       "id": "maintenance-support",
       "title": "Website Maintenance & Support",

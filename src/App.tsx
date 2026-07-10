@@ -41,6 +41,44 @@ import ContactList from "./pages/Get/ContactList";
 import ContactDetails from "./pages/Get/ContactDetails";
 import OfferForm from "./Offers/OfferForm";
 
+
+
+
+import { Aws14ConceptsHub } from "./pages/courses/AwsCourse";
+import { MernExplanationHub } from "./pages/courses/MernStackCourse";
+import { JavaFullStackMasterHub } from "./pages/courses/JavaFullStackCourse";
+import { ReactFullStackMasterHub } from "./pages/courses/React Development";
+import { PythonFullStackMasterHub } from "./pages/courses/PythonFullStackCourse";
+import { WebDevInternship } from "./pages/internships/WebDevInternship";
+import { PythonInternship } from "./pages/internships/PythonInternship";
+import { ReactInternship } from "./pages/internships/ReactInternship";
+import { JavaInternship } from "./pages/internships/JavaInternship";
+import { FullStack } from "./pages/internships/FullStackInternship";
+import { DigitalMarketingInternship15Hub } from "./pages/internships/DigitalMarketingInternship";
+
+
+
+
+
+// Course Page Components
+// import ReactCourse from './pages/courses/ReactCourse';
+// import PythonFullStackCourse from './pages/courses/PythonFullStackCourse';
+// import JavaFullStackCourse from './pages/courses/JavaFullStackCourse';
+// import MernStackCourse from './pages/courses/MernStackCourse';
+// import UiUxCourse from './pages/courses/UiUxCourse';
+// import AwsCourse from './pages/courses/AwsCourse';
+
+// Internship Page Components
+// import WebDevInternship from './pages/internships/WebDevInternship';
+// import PythonInternship from './pages/internships/PythonInternship';
+// import ReactInternship from './pages/internships/ReactInternship';
+// import JavaInternship from './pages/internships/JavaInternship';
+// import FullStackInternship from './pages/internships/FullStackInternship';
+// import DigitalMarketingInternship from './pages/internships/DigitalMarketingInternship';
+
+// 404 Component
+// import NotFound from './pages/NotFound';
+
 const queryClient = new QueryClient();
 
 /* -------------------------------------------
@@ -87,6 +125,30 @@ const AnimatedRoutes = () => {
         <Route path="/service/DeploymentHosting" element={<DeploymentHosting/>} />
 
         <Route path="Offers" element={<OfferForm/>} />
+
+
+
+{/* --- COURSES MODULE ROUTES --- */}
+            <Route path="/courses/react" element={<ReactFullStackMasterHub/>} />
+            <Route path="/courses/python-fullstack" element={<PythonFullStackMasterHub/>} />
+            <Route path="/courses/java-fullstack" element={<JavaFullStackMasterHub/>} />
+             <Route path="/courses/mern-stack" element={<MernExplanationHub/>} />
+           
+            <Route path="/courses/aws" element={<Aws14ConceptsHub/>} />
+
+            {/* --- INTERNSHIP PROGRAM MODULE ROUTES --- */}
+           <Route path="/internships/web-development" element={<WebDevInternship/>} />
+          <Route path="/internships/python" element={<PythonInternship/>} />
+              <Route path="/internships/react" element={<ReactInternship/>} />
+             <Route path="/internships/java" element={<JavaInternship/>} />
+             <Route path="/internships/full-stack" element={<FullStack/>} />
+            <Route path="/internships/digital-marketing" element={<DigitalMarketingInternship15Hub/>} /> 
+
+            {/* Fallback Route Error Handling */}
+            <Route path="*" element={<NotFound />} />
+
+
+        
 
         <Route path="Register-2207" element={<Register/>}/>
         <Route path="Login"element={<Login/>}/>

@@ -7,7 +7,7 @@ import { BubbleBackground } from "./BubbleBackground";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen  flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen   flex items-center justify-center overflow-hidden">
    <BubbleBackground/>
       {/* Background Effects */}
       <div className="absolute inset-0 grid-pattern opacity-30" />
@@ -31,8 +31,8 @@ const Hero = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
+      <div className="container mx-auto px-4 mt-5 pt-5 relative z-10">
+        <div className="max-w-5xl mx-auto mt-5 pt-5 text-center">
           {/* Badge */}
        
 
