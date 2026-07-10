@@ -48,7 +48,7 @@ export const Footer = () => {
   const linkStyles = "text-secondary-foreground/70 hover:text-orange-500 transition-all duration-300 ease-in-out text-sm";
 
   return (
-    <footer className="bg-secondary text-secondary-foreground w-full">
+    <footer className="bg-zinc-950 text-secondary-foreground w-full">
       <div className="container mx-auto px-4 py-12 md:py-16 max-w-7xl">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
