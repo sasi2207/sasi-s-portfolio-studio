@@ -59,7 +59,7 @@ export const ServicesPreview = () => {
   };
 
   return (
-    <section className="py-24 bg-slate-950 border-t border-slate-900 overflow-hidden relative">
+    <section className="py-24 bg-zinc-950 border-t border-slate-900 overflow-hidden relative">
       {/* Background Micro Details */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />

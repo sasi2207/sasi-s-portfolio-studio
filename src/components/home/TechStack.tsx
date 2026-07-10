@@ -32,7 +32,7 @@ const TechStackScroller = () => {
   const duplicatedRow2 = [...secondRow, ...secondRow, ...secondRow];
 
   return (
-    <section className="py-20 bg-slate-950 overflow-hidden border-y border-slate-900 relative">
+    <section className="py-20 bg-zinc-950 overflow-hidden border-y border-slate-900 relative">
       {/* Background Section Accent */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
       
@@ -104,7 +104,7 @@ const TechCard = ({ tech, index }: { tech: { name: string; category: string }; i
       role="listitem"
       aria-label={`${tech.name} - ${tech.category}`}
     >
-      <div className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 group-hover:text-amber-400 transition-colors duration-300">
+      <div className="p-1.5 rounded-lg bg-zinc-950 border border-slate-800 text-slate-400 group-hover:text-amber-400 transition-colors duration-300">
         <Code2 className="w-4 h-4" />
       </div>
       <div className="flex flex-col text-left">

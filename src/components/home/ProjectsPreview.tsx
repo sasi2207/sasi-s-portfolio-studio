@@ -39,7 +39,7 @@ export const ProjectsPreview = () => {
   };
 
   return (
-    <section className="py-24 bg-slate-950 border-t border-slate-900 relative overflow-hidden">
+    <section className="py-24 bg-zinc-950 border-t border-slate-900 relative overflow-hidden">
       {/* Structural Ambient Glow System */}
       <div className="absolute inset-0 grid-pattern opacity-5 pointer-events-none" />
       <div className="absolute -bottom-40 right-1/4 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -78,7 +78,7 @@ export const ProjectsPreview = () => {
                 className="rounded-2xl bg-slate-900/30 border border-slate-900 hover:border-amber-500/20 shadow-2xl overflow-hidden backdrop-blur-md group flex flex-col justify-between transition-all duration-300 relative"
               >
                 {/* BRAND NAME ANIMATION WRAPPER */}
-                <div className="relative h-44 bg-slate-950 flex flex-col items-center justify-center border-b border-slate-900/60 overflow-hidden px-6">
+                <div className="relative h-44 bg-zinc-950 flex flex-col items-center justify-center border-b border-slate-900/60 overflow-hidden px-6">
                   {/* Inner abstract geometric grid texture */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60 pointer-events-none" />
                   

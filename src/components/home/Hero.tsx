@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 py-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950 py-24">
       <BubbleBackground />
       
       {/* Background Grids and Accents */}
