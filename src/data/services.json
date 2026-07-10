@@ -45,21 +45,7 @@
         "Invoice Support"
       ]
     },
-    {
-      "id": "portfolio-website",
-      "title": "Portfolio Website",
-      "description": "Professional portfolio websites to showcase your skills, projects, and achievements.",
-      "icon": "User",
-      "iconColor": "#a855f7",
-      "path": "/service/portfolio-website",
-      "features": [
-        "Modern Design",
-        "Project Showcase",
-        "Resume Download",
-        "Contact Form",
-        "SEO Optimization"
-      ]
-    },
+    
     {
       "id": "business-website",
       "title": "Business Website Development",

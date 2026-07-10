@@ -1,158 +1,178 @@
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, ExternalLink } from "lucide-react";
-
-import { SectionHeader } from "../common/SectionHeader";
-import { ParallaxSection } from "../common/ParallaxSection";
+import { motion } from "framer-motion";
+import { ArrowRight, Code2, GraduationCap, LayoutGrid } from "lucide-react";
 import projectsData from "@/data/projects.json";
+
+interface Project {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  technologies: string[];
+  featured: boolean;
+}
 
 export const ProjectsPreview = () => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
-  const featuredProjects = projectsData.projects
+  const featuredProjects = (projectsData.projects as Project[])
     .filter((p) => p.featured)
     .slice(0, 3);
 
+  // Parent animation cascade orchestrator
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: "spring", stiffness: 100, damping: 18 } 
+    }
+  };
+
   return (
-    <ParallaxSection
-      className="section-padding"
-      bgClassName="bg-gradient-to-b from-orange-50 to-white"
-    >
-      <div className="container-custom">
-        {/* HEADER */}
-        <SectionHeader
-          title="Featured Projects"
-          subtitle="A curated preview of selected projects, crafted with clarity, performance, and purpose."
-        />
+    <section className="py-24 bg-slate-950 border-t border-slate-900 relative overflow-hidden">
+      {/* Structural Ambient Glow System */}
+      <div className="absolute inset-0 grid-pattern opacity-5 pointer-events-none" />
+      <div className="absolute -bottom-40 right-1/4 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-        {/* PROJECT GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="
-                rounded-2xl
-                bg-white
-                border border-orange-100
-                shadow-sm
-                overflow-hidden
-              "
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              {/* PREVIEW AREA */}
-              <div className="relative h-48 bg-gradient-to-br from-orange-100 to-orange-50 overflow-hidden">
-                {/* LIVE PREVIEW (ONLY ON HOME) */}
-                {isHome && project.liveUrl ? (
-                  <>
-                    {/* IFRAME PREVIEW */}
-                    <iframe
-                      src={project.liveUrl}
-                      title={project.title}
-                      className="w-full h-full pointer-events-none scale-[0.35] origin-top-left"
-                      style={{
-                        width: "285%",
-                        height: "285%",
-                      }}
-                      loading="lazy"
-                    />
-
-                    {/* LIVE LINK ICON */}
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="
-                        absolute bottom-3 right-3
-                        p-2 rounded-full
-                        bg-white text-orange-500
-                        shadow
-                        hover:bg-orange-50
-                        transition
-                      "
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  </>
-                ) : (
-                  /* PLACEHOLDER (NOT HOME) */
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-6xl font-bold text-orange-200">
-                      {project.title.charAt(0)}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* CONTENT */}
-              <div className="p-6">
-                {/* CATEGORY */}
-                <span className="inline-block mb-3 text-xs font-semibold px-3 py-1 rounded-full bg-orange-50 text-orange-600">
-                  {project.category}
-                </span>
-
-                {/* TITLE */}
-                <h3 className="text-lg font-semibold mb-2 text-gray-900">
-                  {project.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {project.description}
-                </p>
-
-                {/* TECH STACK */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <Link
-                  to={`/projects/${project.id}`}
-                  className="
-                    inline-flex items-center gap-1
-                    text-orange-500 text-sm font-semibold
-                    hover:text-orange-600
-                    hover:gap-2
-                    transition-all
-                  "
-                >
-                  View Case Study
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-          ))}
+      <div className="container mx-auto px-4 relative z-10">
+        
+        {/* Modern Section Header */}
+        <div className="text-center mb-20 space-y-3">
+          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full inline-flex items-center gap-2">
+            <LayoutGrid className="w-3.5 h-3.5" /> Selected Works
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Case Deployments
+          </h2>
+          <p className="text-slate-400 text-base max-w-xl mx-auto">
+            Explore live production engines engineered for enterprise ecosystems and academic platforms.
+          </p>
         </div>
 
-        {/* VIEW ALL → ONLY ON HOME */}
+        {/* PROJECTS GRID */}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {featuredProjects.map((project) => {
+            const isAcademic = project.category.toLowerCase().includes("coaching") || project.category.toLowerCase().includes("training");
+
+            return (
+              <motion.div
+                key={project.id}
+                variants={cardVariants}
+                whileHover="hover"
+                className="rounded-2xl bg-slate-900/30 border border-slate-900 hover:border-amber-500/20 shadow-2xl overflow-hidden backdrop-blur-md group flex flex-col justify-between transition-all duration-300 relative"
+              >
+                {/* BRAND NAME ANIMATION WRAPPER */}
+                <div className="relative h-44 bg-slate-950 flex flex-col items-center justify-center border-b border-slate-900/60 overflow-hidden px-6">
+                  {/* Inner abstract geometric grid texture */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  
+                  {/* Dynamic Brand Text Loop Accent */}
+                  <motion.div
+                    variants={{
+                      hover: { scale: 1.06, y: -2 }
+                    }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    className="text-center z-10 select-none"
+                  >
+                    <h3 className="text-3xl font-black tracking-tight text-slate-300 group-hover:bg-gradient-to-r group-hover:from-amber-400 group-hover:to-orange-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-600 group-hover:text-amber-500/60 transition-colors duration-300 mt-1.5">
+                      Verified Deployment
+                    </p>
+                  </motion.div>
+
+                  {/* Micro Tech Label Watermark */}
+                  <div className="absolute top-4 left-5 font-mono text-[10px] text-slate-700 select-none">
+                    SYS_ID // {project.id.toUpperCase()}
+                  </div>
+                </div>
+
+                {/* CONTENT INFORMATION METRICS */}
+                <div className="p-6 flex-1 flex flex-col justify-between bg-slate-900/20">
+                  <div>
+                    {/* Classification Row */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`text-[10px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-md flex items-center gap-1 border ${
+                        isAcademic 
+                          ? "bg-amber-500/10 text-amber-400 border-amber-500/20" 
+                          : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                      }`}>
+                        {isAcademic ? <GraduationCap className="w-3 h-3" /> : <Code2 className="w-3 h-3" />}
+                        {project.category}
+                      </span>
+                    </div>
+
+                    {/* Description Text */}
+                    <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* TECHNOLOGY STACK LABELS */}
+                  <div>
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-950 border border-slate-800/80 text-slate-400"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* REDIRECTION blueprint LINK */}
+                    <Link
+                      to={`/projects/${project.id}`}
+                      className="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider group/link hover:text-amber-300 transition-colors"
+                    >
+                      <span>Analyze Architecture</span>
+                      <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* GLOBAL BOTTOM LINK -> HOME SPECIFIC */}
         {isHome && (
-          <div className="text-center mt-12" data-aos="fade-up">
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
             <Link
               to="/projects"
-              className="
-                inline-flex items-center gap-2
-                px-6 py-3
-                rounded-full
-                border border-orange-300
-                text-orange-500 font-semibold
-                hover:bg-orange-50
-                transition
-              "
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 border border-slate-800 hover:border-amber-500/40 text-slate-200 font-semibold transition-all shadow-xl group"
             >
-              View All Projects
-              <ArrowRight size={18} />
+              <span>Review Complete Portfolio</span>
+              <ArrowRight size={16} className="text-amber-500 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
         )}
+
       </div>
-    </ParallaxSection>
+    </section>
   );
 };
