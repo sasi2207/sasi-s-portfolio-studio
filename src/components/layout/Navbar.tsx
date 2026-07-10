@@ -246,19 +246,33 @@ export const Navbar = () => {
               className="fixed top-0 left-0 z-[9999] h-screen w-[85%] max-w-[340px] bg-white shadow-2xl flex flex-col"
             >
               {/* Drawer Top Branding */}
-              <div className="px-5 py-5 border-b flex items-center justify-between">
-                <h1 className="text-2xl font-black tracking-tight">
-                  <span className="text-gray-900">TECH</span>
-                  <span className="text-orange-500">SASI</span>
-                </h1>
+             <div className="px-5 py-5 border-b flex items-center justify-between">
+  {/* Left Side: Logo and Tagline grouped together */}
+  <div className="flex flex-col">
+    <h1 className="text-2xl font-black tracking-tight">
+      <span className="text-gray-900">TECH</span>
+      <span className="text-orange-500">SASI</span>
+    </h1> 
+    
+    <div className="flex items-center gap-1 mt-1 text-[9px] md:text-[10px] font-bold uppercase text-gray-400">
+      <div className="w-3 md:w-4 h-[1.5px] bg-orange-500"></div>
+      <span>Learn</span>
+      <span className="text-orange-500">•</span>
+      <span>Build</span>
+      <span className="text-orange-500">•</span>
+      <span>Grow</span>
+      <div className="w-3 md:w-4 h-[1.5px] bg-orange-500"></div>
+    </div>
+  </div>
 
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-md hover:bg-gray-100 text-gray-500 transition"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+  {/* Right Side: Close Button */}
+  <button
+    onClick={() => setIsOpen(false)}
+    className="p-1.5 rounded-md hover:bg-gray-100 text-gray-500 transition"
+  >
+    <X size={20} />
+  </button>
+</div>
 
               {/* Mobile Sidebar Navigation */}
               <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
