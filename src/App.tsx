@@ -18,7 +18,7 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import CaseStudy from "./pages/CaseStudy";
 import Proposal from "./pages/Proposal";
-import Blog from "./pages/Blog";
+
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -55,6 +55,15 @@ import { ReactInternship } from "./pages/internships/ReactInternship";
 import { JavaInternship } from "./pages/internships/JavaInternship";
 import { FullStack } from "./pages/internships/FullStackInternship";
 import { DigitalMarketingInternship15Hub } from "./pages/internships/DigitalMarketingInternship";
+import { StaticWebService } from "./pages/services/StaticWebService";
+import { DynamicWebService } from "./pages/services/DynamicWebService";
+import { BusinessWebService } from "./pages/services/BusinessWebService";
+import { EcommerceWebService } from "./pages/services/EcommerceWebService";
+import { AppDevelopmentService } from "./pages/services/AppDevelopmentService";
+import { DeploymentHostingService } from "./pages/services/DeploymentHostingService";
+import { DigitalMarketingService } from "./pages/services/DigitalMarketingService";
+import { CoachingCenterLabsService } from "./pages/services/CoachingCenterLabsService";
+import { BlogPage } from "./pages/Blog";
 
 
 
@@ -112,7 +121,7 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<CaseStudy />} />
         <Route path="/proposal" element={<Proposal />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog" element={<BlogPage/>} />
         <Route path="/contact" element={<Contact />} />
 
         <Route path="service/static-website" element={<StaticWebsite/>} />
@@ -143,6 +152,22 @@ const AnimatedRoutes = () => {
              <Route path="/internships/java" element={<JavaInternship/>} />
              <Route path="/internships/full-stack" element={<FullStack/>} />
             <Route path="/internships/digital-marketing" element={<DigitalMarketingInternship15Hub/>} /> 
+
+
+  {/* Services */}
+                   <Route path="/services/static-web" element={<StaticWebService/>} />
+          <Route path="/services/dynamic-web" element={<DynamicWebService/>} />
+              <Route path="/services/business-web" element={<BusinessWebService/>} />
+               <Route path="/services/ecommerce" element={<EcommerceWebService/>} />
+            <Route path="/servicesapp-development" element={<AppDevelopmentService/>} />
+          <Route path="/services/deployment-hosting" element={<DeploymentHostingService/>} /> 
+ <Route path="/services/digital-marketing" element={<DigitalMarketingService/>} />
+          <Route path="/services/coaching" element={<CoachingCenterLabsService/>} />  
+
+
+
+
+
 
             {/* Fallback Route Error Handling */}
             <Route path="*" element={<NotFound />} />

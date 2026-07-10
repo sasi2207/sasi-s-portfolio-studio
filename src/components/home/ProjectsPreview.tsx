@@ -104,50 +104,7 @@ export const ProjectsPreview = () => {
                   </div>
                 </div>
 
-                {/* CONTENT INFORMATION METRICS */}
-                <div className="p-6 flex-1 flex flex-col justify-between bg-slate-900/20">
-                  <div>
-                    {/* Classification Row */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`text-[10px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-md flex items-center gap-1 border ${
-                        isAcademic 
-                          ? "bg-amber-500/10 text-amber-400 border-amber-500/20" 
-                          : "bg-blue-500/10 text-blue-400 border-blue-500/20"
-                      }`}>
-                        {isAcademic ? <GraduationCap className="w-3 h-3" /> : <Code2 className="w-3 h-3" />}
-                        {project.category}
-                      </span>
-                    </div>
-
-                    {/* Description Text */}
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* TECHNOLOGY STACK LABELS */}
-                  <div>
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.technologies.slice(0, 3).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-950 border border-slate-800/80 text-slate-400"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* REDIRECTION blueprint LINK */}
-                    <Link
-                      to={`/projects/${project.id}`}
-                      className="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider group/link hover:text-amber-300 transition-colors"
-                    >
-                      <span>Analyze Architecture</span>
-                      <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
+               
               </motion.div>
             );
           })}

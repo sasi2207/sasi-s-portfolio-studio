@@ -1,45 +1,23 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import {
-  Code,
-  Globe,
+  Code2,
+  Globe2,
   Rocket,
   Award,
   Users,
-  Briefcase,
+  CheckCircle2,
   ArrowRight,
-  ArrowLeft
+  Sparkles,
+  ServerCrash
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { Layout } from "@/components/layout/Layout";
-import { ParallaxSection } from "@/components/common/ParallaxSection";
-import { SectionHeader } from "@/components/common/SectionHeader";
 
-/* ----------------------------------
-   COLOR SET (3 COLORS)
------------------------------------ */
-const cardColors = [
-  {
-    bg: "from-indigo-50 to-indigo-100/60",
-    icon: "text-indigo-600",
-    border: "border-indigo-200",
-  },
-  {
-    bg: "from-sky-50 to-sky-100/60",
-    icon: "text-sky-600",
-    border: "border-sky-200",
-  },
-  {
-    bg: "from-teal-50 to-teal-100/60",
-    icon: "text-teal-600",
-    border: "border-teal-200",
-  },
-];
-
-const About = () => {
+export const About = () => {
   useEffect(() => {
-    AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
+    AOS.init({ duration: 800, once: true, easing: "ease-out-cubic" });
   }, []);
 
   return (
@@ -47,199 +25,195 @@ const About = () => {
       {/* ==============================
           HERO SECTION
       =============================== */}
-      <ParallaxSection
-        className="pt-32 pb-24 relative overflow-hidden"
-        bgClassName="bg-gradient-to-b from-indigo-50 via-sky-50 to-transparent"
-      >
-        {/* Background Blobs */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -right-24 w-96 h-96 bg-teal-200/30 rounded-full blur-3xl" />
+      <section className="pt-36 pb-24 relative overflow-hidden bg-slate-950 border-b border-slate-900">
+        {/* Modern Ambient Structural Glows */}
+        <div className="absolute inset-0 grid-pattern opacity-5 pointer-events-none" />
+        <div className="absolute top-1/4 -left-24 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/3 -right-24 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-       
-
-        <div className="container-custom relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              About{" "}
-              <span className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500 bg-clip-text text-transparent">
-                TechSasi
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl space-y-4">
+            <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3" /> The Mind Behind The Code
+            </span>
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-none">
+              Engineering Digital <br />
+              <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 bg-clip-text text-transparent">
+                Ecosystems
               </span>
             </h1>
 
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-slate-400 max-w-2xl font-medium leading-relaxed pt-2">
               I’m Sasi Kumar — a freelance full-stack developer helping startups,
-              businesses, and entrepreneurs build fast, secure, and scalable
-              digital products.
+              scale-ups, and modern enterprises build lightning-fast, highly secure, 
+              and robust software infrastructures.
             </p>
-          </div>
-
-          
-        </div>
-      </ParallaxSection>
-
-      {/* ==============================
-          WHO I AM
-      =============================== */}
-      <section className="section-padding relative overflow-hidden">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              Who I Am
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              I’m a passionate freelance software developer and the founder of{" "}
-              <strong>TechSasi</strong>. I build modern websites, web
-              applications, mobile apps, and scalable backend systems.
-            </p>
-
-            <p className="text-muted-foreground mb-6">
-              With strong experience in React, Node.js, Java, Spring Boot, and
-              cloud deployment, I deliver complete solutions from idea to
-              production.
-            </p>
-
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700
-                         text-white font-semibold px-6 py-3 rounded-xl transition"
-            >
-              Let’s Work Together
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-
-          {/* 3-Color Info Cards */}
-          <div
-            data-aos="fade-left"
-            className="grid grid-cols-2 gap-6"
-          >
-            {[
-              { icon: Code, label: "Clean Code" },
-              { icon: Globe, label: "Global Clients" },
-              { icon: Rocket, label: "Fast Delivery" },
-              { icon: Award, label: "Quality Focus" },
-            ].map((item, index) => {
-              const color = cardColors[index % 3];
-
-              return (
-                <div
-                  key={item.label}
-                  className={`bg-gradient-to-br ${color.bg} border ${color.border}
-                              rounded-2xl p-5 shadow-sm hover:shadow-md transition`}
-                >
-                  <item.icon className={`${color.icon} mb-2`} />
-                  <span className="font-medium">{item.label}</span>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
 
       {/* ==============================
-          WHAT I DO
+          WHO I AM & VALUE PROPOSITION
       =============================== */}
-      <section className="section-padding bg-slate-50 relative overflow-hidden">
-        <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl" />
+      <section className="py-24 bg-slate-950 relative overflow-hidden">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+          
+          <div data-aos="fade-right" className="space-y-6">
+            <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+              Architecting solutions from inception to production deployment.
+            </h2>
 
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="What I Do"
-            subtitle="Services I provide as a freelancer under TechSasi"
-          />
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
+              I’m a passionate freelance software engineer and the creator of{" "}
+              <span className="text-amber-400 font-bold">TechSasi</span>. I build modern custom software, high-frequency APIs, and highly scalable cloud backend systems tailored to concrete business logic.
+            </p>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Leveraging deep architectural expertise across React, Node.js, Java, Spring Boot, and 
+              automated DevOps pipelines, I transform high-level concepts into fluid user experiences.
+            </p>
+
+            <div className="pt-2">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-slate-900 border border-slate-800 hover:border-amber-500/40 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all group"
+              >
+                <span>Initiate Deployment</span>
+                <ArrowRight size={16} className="text-amber-400 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Minimal High-Contrast Core Pillars Grid */}
+          <div data-aos="fade-left" className="grid grid-cols-2 gap-4">
+            {[
+              { icon: Code2, label: "Clean Architecture", desc: "Maintainable systems" },
+              { icon: Globe2, label: "Global Protocols", desc: "Cross-border products" },
+              { icon: Rocket, label: "Optimized Velocity", desc: "Fast time-to-market" },
+              { icon: Award, label: "Enterprise Grade", desc: "Zero compromise safety" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="bg-slate-900/40 border border-slate-900 hover:border-amber-500/20 rounded-2xl p-5 shadow-2xl transition-all duration-300 group"
+              >
+                <item.icon className="text-slate-500 group-hover:text-amber-400 transition-colors duration-200 mb-3" size={24} />
+                <h4 className="text-sm font-bold text-slate-200 mb-1">{item.label}</h4>
+                <p className="text-[11px] text-slate-500 font-medium">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==============================
+          SERVICES ARRAY
+      =============================== */}
+      <section className="py-24 bg-slate-950 border-t border-slate-900 relative overflow-hidden">
+        <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-rose-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 space-y-2">
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
+              Operational Matrix
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-medium">
+              Technical core competencies and execution vectors handled under TechSasi.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
-                icon: Globe,
-                title: "Website Development",
-                desc: "Static, dynamic, business, e-commerce & portfolio websites",
+                icon: Globe2,
+                title: "Web Platform Development",
+                desc: "High-performance marketing platforms, localized portals, e-commerce engines, and premium custom web applications built for retention.",
               },
               {
-                icon: Code,
-                title: "Web Applications",
-                desc: "Admin dashboards, CRM, ERP & custom software solutions",
+                icon: Code2,
+                title: "Custom Cloud Applications",
+                desc: "Secure administrative back-offices, modular SaaS environments, CRM hooks, and complete enterprise application integration layers.",
               },
               {
-                icon: Rocket,
-                title: "Deployment & Cloud",
-                desc: "AWS, Azure, VPS, cPanel, CI/CD & server management",
+                icon: ServerCrash,
+                title: "Cloud Infrastructure & CI/CD",
+                desc: "Production deployments on AWS, automated build pipelines, containerized orchestration, secure VPS mapping, and active system uptime engineering.",
               },
-            ].map((item, index) => {
-              const color = cardColors[index % 3];
-
-              return (
-                <div
-                  key={item.title}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                  className={`bg-gradient-to-br ${color.bg} border ${color.border}
-                              rounded-2xl p-6 shadow-md hover:shadow-lg transition`}
-                >
-                  <item.icon className={`${color.icon} mb-4`} size={32} />
-                  <h3 className="font-heading font-semibold text-lg mb-2">
+            ].map((item, index) => (
+              <div
+                key={item.title}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-slate-900/20 border border-slate-900 hover:border-slate-800/80 rounded-2xl p-6 shadow-xl transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center border border-slate-800 mb-4">
+                    <item.icon className="text-amber-400" size={20} />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-200 mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ==============================
-          WHY CHOOSE ME
+          WHY CHOOSE ME / CTA SECTION
       =============================== */}
-      <section className="section-padding overflow-hidden">
-        <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-indigo-700">
-              Why Choose TechSasi?
+      <section className="py-24 bg-slate-950 border-t border-slate-900 overflow-hidden">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+          
+          <div data-aos="fade-right" className="space-y-6">
+            <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+              Why Engineers & Founders Choose TechSasi
             </h2>
 
-            <ul className="space-y-4">
+            <ul className="space-y-3.5">
               {[
-                "Freelancer with full project ownership",
-                "Business-focused solutions",
-                "Clean, scalable & secure code",
-                "Affordable pricing & clear communication",
-                "Long-term support & maintenance",
+                "Direct single-point developer ownership with no agency layers",
+                "Strict adherence to robust architectural guidelines and system performance",
+                "Production-ready clean codebases explicitly formatted for handoff",
+                "Completely transparent sprint tracking and daily staging builds",
+                "Committed long-term cloud updates and system maintenance windows",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <Briefcase className="text-teal-500 mt-1" />
+                <li key={item} className="flex items-start gap-3.5 text-sm md:text-base text-slate-300 font-medium">
+                  <CheckCircle2 className="text-amber-500 mt-1 shrink-0" size={16} />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Premium Call to Action Container Panel */}
           <div
             data-aos="fade-left"
-            className="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-500
-                       rounded-3xl p-10 text-white"
+            className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-900 rounded-3xl p-8 md:p-10 text-left relative overflow-hidden shadow-2xl"
           >
-            <Users size={36} className="mb-4" />
-            <h3 className="text-2xl font-heading font-semibold mb-3">
-              Let’s Build Something Great
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px] pointer-events-none" />
+            
+            <Users size={32} className="text-amber-400 mb-4" />
+            <h3 className="text-xl md:text-2xl font-black text-white tracking-tight mb-2">
+              Let’s Build Something Absolute
             </h3>
-            <p className="text-white/90 mb-6">
-              I help ideas turn into powerful, production-ready digital
-              products.
+            <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6">
+              Accelerate your engineering schedule. Bring clear parameters and we will formulate a clean, production-ready implementation timeline.
             </p>
 
             <Link
               to="/proposal"
-              className="inline-flex items-center gap-2 bg-white text-indigo-700
-                         font-semibold px-6 py-3 rounded-xl hover:bg-indigo-50 transition"
+              className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition shadow-lg"
             >
-              Get a Free Proposal
-              <ArrowRight size={18} />
+              <span>Request Structural Blueprint</span>
+              <ArrowRight size={14} />
             </Link>
           </div>
+
         </div>
       </section>
     </Layout>
