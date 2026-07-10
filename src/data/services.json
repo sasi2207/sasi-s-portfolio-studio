@@ -6,7 +6,7 @@
       "description": "Fast, lightweight, and responsive websites ideal for startups, portfolios, and landing pages.",
       "icon": "FileCode",
       "iconColor": "#f97316",
-      "path": "/service/static-website",
+      "path": "/services/static-web",
       "features": [
         "Responsive Design",
         "SEO Friendly",
@@ -21,7 +21,7 @@
       "description": "Interactive websites with database integration and powerful admin panels.",
       "icon": "RefreshCw",
       "iconColor": "#0ea5e9",
-      "path": "/service/dynamic-website",
+      "path": "/services/dynamic-web",
       "features": [
         "Admin Dashboard",
         "Database Integration",
@@ -36,7 +36,7 @@
       "description": "Complete online shopping platforms with secure payment integration.",
       "icon": "ShoppingCart",
       "iconColor": "#22c55e",
-      "path": "/service/ecommerce-website",
+      "path": "/services/ecommerce",
       "features": [
         "Product Management",
         "Payment Gateway",
@@ -52,7 +52,7 @@
       "description": "Professional corporate websites that build trust and generate leads.",
       "icon": "Briefcase",
       "iconColor": "#f59e0b",
-      "path": "/service/business-website",
+      "path": "/services/business-web",
       "features": [
         "Corporate Design",
         "Service Pages",
@@ -67,7 +67,7 @@
       "description": "Cross-platform Android and iOS applications with modern user experiences.",
       "icon": "Smartphone",
       "iconColor": "#ef4444",
-      "path": "/service/mobile-application-development",
+      "path": "/servicesapp-development",
       "features": [
         "Android & iOS",
         "React Native / Flutter",
@@ -82,7 +82,7 @@
       "description": "Improve your website visibility and rankings with advanced SEO strategies.",
       "icon": "TrendingUp",
       "iconColor": "#06b6d4",
-      "path": "/service/seo-optimization",
+      "path": "/services/digital-marketing",
       "features": [
         "On-Page SEO",
         "Technical SEO",
@@ -97,7 +97,7 @@
       "description": "Reliable cloud hosting and deployment solutions for modern applications.",
       "icon": "Cloud",
       "iconColor": "#6366f1",
-      "path": "/service/deployment-hosting",
+      "path": "/services/deployment-hosting",
       "features": [
         "AWS & Azure",
         "VPS Setup",
@@ -115,7 +115,7 @@
       "description": "Keep your website secure, updated, and running smoothly with ongoing support.",
       "icon": "Globe",
       "iconColor": "#10b981",
-      "path": "/service/maintenance-support",
+      "path": "/services/MaintenanceSupport",
       "features": [
         "Bug Fixes",
         "Security Updates",

@@ -1,174 +1,336 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { 
-  Cloud, Cpu, Database, HardDrive, ShieldCheck, Server, Terminal,
-  Globe, Radio, MessageSquare, Activity, CheckCircle2, ChevronDown, PlayCircle, FileText, ArrowUpRight
-} from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowUpRight,
+  Shield,
+  Layers,
+  Network,
+  Database,
+  Terminal,
+  Cpu,
+  Zap,
+  HelpCircle,
+  FileCode,
+  Sliders,
+  Check
+} from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
 
-const aws14Concepts = [
-  { id: "ec2", label: "1. EC2 Compute Instances", icon: Cpu, color: "from-orange-500 to-amber-600", bg: "bg-orange-50/80", text: "text-orange-600", headline: "On-Demand Virtual Server Nodes", desc: "Provision virtual machines configurations mapping custom CPU bounds.", topics: ["AMI Machine Images Configurations", "Instance Types Allocation Profiles", "Spot & Reserved Instancing Optimization", "Elastic IP Management Layers"] },
-  { id: "lambda", label: "2. AWS Lambda Execution", icon: Terminal, color: "from-amber-500 to-yellow-600", bg: "bg-amber-50/80", text: "text-amber-600", headline: "Serverless Event-Driven Runtime Engine", desc: "Run individual processing scripts logic loops triggered on-demand without infrastructure costs.", topics: ["Cold Start Latency Optimizations", "Event Source Routing Triggers", "Concurrency Limit Threshold Bounds", "Serverless Layers Shared Packages"] },
-  { id: "containers", label: "3. ECS & EKS Clusters", icon: Server, color: "from-blue-500 to-indigo-600", bg: "bg-blue-50/80", text: "text-blue-600", headline: "Microservice Container Orchestration", desc: "Scale Dockerized task definitions and automated Kubernetes configurations across distributed nodes.", topics: ["Fargate Serverless Task Management", "Kubernetes Pod Allocation Engines", "Service Mesh Communication Channels", "Container Image Registry (ECR) Pipelines"] },
-  { id: "s3", label: "4. Amazon S3 Buckets", icon: HardDrive, color: "from-emerald-500 to-teal-600", bg: "bg-emerald-50/80", text: "text-emerald-600", headline: "Highly Available Global Object Store", desc: "Store images, database archival files, logs and video artifacts safely with absolute durability.", topics: ["Bucket Access Control Lists Policies", "Intelligent Lifecycle Archival Tiering", "Static Website Asset Hosting Protocols", "Object Versioning Recovery Trees"] },
-  { id: "ebs", label: "5. EBS Block Volumes", icon: Database, color: "from-cyan-500 to-blue-600", bg: "bg-cyan-50/80", text: "text-cyan-600", headline: "Persistent High-IOPS EC2 Storage Blocks", desc: "Attach high-performance elastic network drives to active computational engines for local storage operations.", topics: ["SSD General Purpose vs Provisioned IOPS", "Snapshot Backups Point-In-Time Restoration", "Volume Encryption Using AWS KMS Keys", "Dynamic Size Expansion Pipelines"] },
-  { id: "rds", label: "6. RDS Managed DB Engines", icon: Database, color: "from-indigo-600 to-purple-700", bg: "bg-indigo-50/80", text: "text-indigo-600", headline: "Relational Enterprise Database Multi-AZ Pools", desc: "Automate engine provisioning, storage patches and recovery schedules for Postgres/MySQL infrastructure.", topics: ["Multi-AZ Real-Time Failure Failover Routing", "Read Replicating Cluster Scaling Pipelines", "Automated Automated Maintenance Windows", "Storage Auto-Sizing Scaling Allocator"] },
-  { id: "dynamodb", label: "7. NoSQL DynamoDB Engine", icon: Terminal, color: "from-rose-500 to-red-600", bg: "bg-rose-50/80", text: "text-rose-600", headline: "Sub-Millisecond Document Transaction Store", desc: "Fully managed schema-less NoSQL storage built to process billions of high-throughput transactional requests seamlessly.", topics: ["Partition vs Sort Key Design Models", "Global Secondary Index (GSI) Optimizations", "DynamoDB Streams Change Pipeline Logs", "On-Demand Capacity Scaling Mode Setups"] },
-  { id: "vpc", label: "8. VPC Virtual Subnets", icon: ShieldCheck, color: "from-purple-600 to-violet-700", bg: "bg-purple-50/80", text: "text-purple-700", headline: "Isolated Perimeter Cloud Networks", desc: "Design logical virtual firewalled subnets mapping internet gateways or internal data layers.", topics: ["Public vs Private Subnet Route Maps", "NAT Gateways Asymmetric Outbound Traffic", "Network Access Control Lists (NACL) Rules", "VPC Peering Inter-Network Integration Mesh"] },
-  { id: "iam", label: "9. AWS IAM Entitlements", icon: ShieldCheck, color: "from-slate-600 to-slate-800", bg: "bg-slate-100/80", text: "text-slate-700", headline: "Granular Identity & Access Governance", desc: "Control precise service access matrices across enterprise roles, user endpoints and active tracking processes.", topics: ["Least Privilege Policy JSON Contracts", "Cross-Account IAM AssumeRole Execution", "Multi-Factor Authentication (MFA) Enforcements", "Service Control Policies (SCP) Organizations"] },
-  { id: "cloudfront", label: "10. CloudFront CDN Network", icon: Globe, color: "from-sky-500 to-blue-600", bg: "bg-sky-50/80", text: "text-sky-600", headline: "Edge-Cached Global Content Distribution", desc: "Accelerate web platform load speed by caching high-frequency user data at edge routing facilities internationally.", topics: ["Origin Shield Architecture Integration", "Cache Behavioral Condition Configurations", "SSL/TLS Custom Domain Extensions Binding", "Lambda@Edge Request Dynamic Interceptions"] },
-  { id: "route53", label: "11. Route 53 Resilient DNS", icon: Radio, color: "from-pink-500 to-rose-600", bg: "bg-pink-50/80", text: "text-pink-600", headline: "Global Anycast Domain Name Router", desc: "Manage domain endpoint structures utilizing automated load failover and geo-proximity latency controls.", topics: ["Weighted Round-Robin Route Traffic Maps", "Active Health Check Automatic Endpoint Drop", "Latency-Based Routing Latency Optimization", "Private DNS Zones Internal VPC Layouts"] },
-  { id: "apigateway", label: "12. API Gateway Routers", icon: Globe, color: "from-teal-500 to-emerald-600", bg: "bg-teal-50/80", text: "text-teal-600", headline: "Centralized Microservices Entry Interface", desc: "Construct, publish and defend robust HTTP/WebSocket API gateways scaling request traffic paths gracefully.", topics: ["Throttling Burst Limit Access Controls", "Cognito Authorizer User Token Decryptors", "CORS Preflight Configurations Parameters", "Stage Mocking Variables Deployments Environments"] },
-  { id: "sqs-sns", label: "13. SQS & SNS Messaging Assemblies", icon: MessageSquare, color: "from-lime-600 to-green-700", bg: "bg-lime-50/80", text: "text-lime-700", headline: "Decoupled Asynchronous Pub-Sub Systems", desc: "Broadcast event streams or sequence payload data structures across multi-tier backend processing frameworks reliably.", topics: ["FIFO Guaranteed Sequential Processing Queues", "Dead Letter Queues (DLQ) Fallback Analysis", "SNS Topic Fan-Out Microservices Distribution", "Message Retain TTL Configuration Windows"] },
-  { id: "cloudwatch", label: "14. CloudWatch Observability Suite", icon: Activity, color: "from-fuchsia-600 to-purple-700", bg: "bg-fuchsia-50/80", text: "text-fuchsia-600", headline: "Full Infrastructure Real-Time Telemetry Logs", desc: "Collect performance metric curves, aggregation logs, and deploy active alert alerts to guarantee platform infrastructure uptime.", topics: ["Custom Metrics CloudWatch Dashboards Plots", "Metric Alarms Slack Auto Notification Triggers", "Log Insights Fast Query Log Aggregators", "EventBridge Infrastructure State Event Processors"] }
+/* ------------------------------------------------------------------
+   1. ANIMATION HOOK: Elements screen-la neat-ah reveal aaga
+--------------------------------------------------------------------- */
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ------------------------------------------------------------------
+   2. AWS ROADMAP ALL SERVICES SYLLABUS DATA ARRAY
+--------------------------------------------------------------------- */
+const awsSyllabus = [
+  {
+    phase: "01",
+    levelName: "Foundations, Edge Routing & Core Compute",
+    modules: [
+      {
+        icon: Network,
+        title: "Amazon VPC & Global Infrastructure Mesh",
+        details: "Subnet planning (Public/Private), Route Tables, Internet Gateways (IGW), NAT Gateways, Security Groups vs NACLs, VPC Peering, and Transit Gateway architecture.",
+        tag: "VPC, NAT, TGW"
+      },
+      {
+        icon: Cpu,
+        title: "Amazon EC2 & Elastic Compute Sizing",
+        details: "Instance profiles, EBS Volumes (gp3, io2) & Snapshots, Elastic Load Balancing (ALB, NLB, GLB), Auto Scaling Groups (ASG) setup, and EC2 pricing models.",
+        tag: "EC2, EBS, ALB"
+      },
+      {
+        icon: Layers,
+        title: "Amazon Route 53 & Global Content Edge",
+        details: "DNS Routing Policies (Latency, Failover, Geolocation), Domain registration, Route 53 Health Checks, and Amazon CloudFront CDN distribution edge setup.",
+        tag: "Route 53, CloudFront"
+      }
+    ]
+  },
+  {
+    phase: "02",
+    levelName: "Cloud Storage Tiers & Database Engines",
+    modules: [
+      {
+        icon: Database,
+        title: "Amazon S3 & Network File Systems",
+        details: "Object storage matrices, Versioning, Lifecycle Configuration rule cards, S3 Bucket Policies, IAM integration, Cross-Region Replication (CRR), and Amazon EFS network files.",
+        tag: "S3, EFS, Glacier"
+      },
+      {
+        icon: Database,
+        title: "Amazon RDS, Aurora & Global Caching",
+        details: "Provisioning relational database instances (PostgreSQL, MySQL). Managing Multi-AZ replication failovers, Read Replicas setup, Amazon Aurora Serverless, and Amazon ElastiCache (Redis).",
+        tag: "RDS, Aurora, Redis"
+      },
+      {
+        icon: Terminal,
+        title: "Amazon DynamoDB NoSQL Architecture",
+        details: "Designing high-throughput NoSQL database layers. Core concepts of Partition Keys, Sort Keys, Global Secondary Indexes (GSI), Local Secondary Indexes (LSI), and DynamoDB Streams tracking.",
+        tag: "DynamoDB, Indexes"
+      }
+    ]
+  },
+  {
+    phase: "03",
+    levelName: "Serverless Architecture & Event-Driven Stacks",
+    modules: [
+      {
+        icon: Zap,
+        title: "AWS Lambda & Serverless Compute Logic",
+        details: "Configuring ephemeral code execution hooks. Lambda memory allocations, Execution time limits, Layer optimizations, and private VPC deployment runtime mappings.",
+        tag: "Lambda, Serverless"
+      },
+      {
+        icon: Sliders,
+        title: "Amazon API Gateway & Microservice Routing",
+        details: "Building production REST and HTTP APIs. Managing path parameters, Stage variables, CORS verification parameters, API Keys setup, and direct AWS service integration proxies.",
+        tag: "API Gateway"
+      },
+      {
+        icon: Network,
+        title: "Amazon SQS, SNS & EventBridge Message Hubs",
+        details: "Decoupling application message patterns. Standard vs FIFO Amazon SQS queues, Amazon SNS publish/subscribe fan-out topologies, and Amazon EventBridge scheduled cron rules.",
+        tag: "SQS, SNS, EventBridge"
+      }
+    ]
+  },
+  {
+    phase: "04",
+    levelName: "Governance, Security & Automated DevOps Pipelines",
+    modules: [
+      {
+        icon: Shield,
+        title: "AWS IAM & Enterprise Security Controls",
+        details: "Ironclad identity authorization blueprints. Crafting granular JSON policies, explicit denials, Role assumption tracking, cross-account access controls, and AWS Secrets Manager integration.",
+        tag: "IAM, KMS, Secrets"
+      },
+      {
+        icon: FileCode,
+        title: "AWS CloudFormation Infrastructure as Code (IaC)",
+        details: "Declaring infrastructure configurations entirely via code blocks. Managing Parameters, Mappings, Custom Resources, Stack updates, drift detection checks, and nested stacks execution loops.",
+        tag: "CloudFormation, IaC"
+      },
+      {
+        icon: Terminal,
+        title: "AWS CI/CD Automation & Systems Telemetry",
+        details: "Configuring automated delivery paths via AWS CodePipeline, CodeBuild, and CodeDeploy. Tracking production systems runtime using Amazon CloudWatch metrics, customized alert alarms, and AWS CloudTrail audit logs.",
+        tag: "CodePipeline, CloudWatch"
+      }
+    ]
+  }
 ];
 
-export const Aws14ConceptsHub = () => {
-  const [activeConceptId, setActiveConceptId] = useState<string>("ec2");
-  const overallContainerRef = useRef(null);
+const AwsCourse = () => {
+  const reveal = useBlurReveal();
+  const [selectedPhase, setSelectedPhase] = useState(0);
 
-  // DYNAMIC COMPONENT TRANSFORMATION METRICS ON SCROLL TIMELINE
-  const { scrollYProgress } = useScroll({
-    target: overallContainerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const scrollLinkBlur = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], ["blur(30px)", "blur(60px)", "blur(40px)", "blur(10px)"]);
-  const adaptiveScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
+  /* ------------------------------------------------------------------
+     3. SCROLL HANDLING FUNCTION (Mobile view point-ah target panna)
+  --------------------------------------------------------------------- */
+  const handlePhaseSelection = (index: number) => {
+    setSelectedPhase(index);
+    
+    // Mobile screen-la auto-scroll panni card blocks content-ah neat-ah point panra function loop
+    setTimeout(() => {
+      const element = document.getElementById(`phase-content-block`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
 
   return (
-
     <PageLayout>
-    <div ref={overallContainerRef} className="bg-slate-50 min-h-screen pt-28 pb-24 overflow-hidden relative font-sans antialiased selection:bg-orange-500 selection:text-white">
-      
-      {/* 🌪️ INTERACTIVE SCROLL-LINKED BLUR AMBIENT ATMOSPHERE MESH */}
-      <motion.div style={{ filter: scrollLinkBlur }} className="absolute inset-0 pointer-events-none z-0 transition-all duration-300">
-        <div className="absolute top-[-5%] left-[-8%] w-[650px] h-[650px] bg-orange-100/30 rounded-full mix-blend-multiply blur-3xl" />
-        <div className="absolute top-[35%] right-[-10%] w-[700px] h-[700px] bg-indigo-100/30 rounded-full mix-blend-multiply blur-3xl" />
-        <div className="absolute bottom-[5%] left-[5%] w-[600px] h-[600px] bg-emerald-100/20 rounded-full mix-blend-multiply blur-2xl" />
-      </motion.div>
-
-      {/* TOP HERO ANCHOR BLOCK */}
-      <motion.section style={{ scale: adaptiveScale }} className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
-        <div className="bg-slate-900 rounded-3xl p-8 md:p-14 lg:p-20 text-white relative overflow-hidden shadow-2xl border border-slate-800">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+      {/* Studio Clean Dark Matrix Interface Wrapper */}
+      <div className="bg-zinc-950 text-zinc-200 min-h-screen selection:bg-orange-500 selection:text-black font-sans antialiased">
+        
+        {/* ================= HERO INTRO SECTION ================= */}
+        <section className="relative pt-44 pb-24 border-b border-zinc-900 bg-zinc-950">
+          <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-orange-500/[0.02] rounded-full blur-[140px] pointer-events-none" />
           
-          <div className="max-w-4xl space-y-6 relative z-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-500/10 text-orange-300 text-xs font-semibold uppercase tracking-wider rounded-full border border-orange-500/30 backdrop-blur-xs">
-              <Cloud size={14} className="text-orange-400" /> Enterprise AWS Roadmap
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
-              Cloud Architecture <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-indigo-400">
-                14 Core Pillars Blueprint
-              </span>
-            </h1>
-            <p className="text-slate-400 text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-3xl">
-              Production scale environment systems-a direct-a engineer panna thevaiyana complete infrastructure blocks layout mapping panels. Real-time labs processing data-va breakdown panni kathinga.
-            </p>
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto grid lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Header Box: White & Orange Typography */}
+            <div ref={reveal} className="blur-reveal lg:col-span-8 space-y-6 text-left">
+              <div className="text-xs font-mono uppercase tracking-widest text-orange-500 flex items-center gap-2 font-semibold">
+                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Architectural Engineering Suite
+              </div>
+              
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-heading tracking-tight text-white leading-[1.05]">
+                AWS Cloud Masterclass <br />
+                <span className="bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
+                  Complete A to Z Syllabus
+                </span>
+              </h1>
+              
+              <p className="text-sm sm:text-lg text-zinc-400 max-w-xl font-light leading-relaxed">
+                Zero level-la irunthu absolute industry-production grade engineering varai. Master core networking, distributed databases, high-availability scaling compute layers, and automated DevOps configurations.
+              </p>
+            </div>
+
+            {/* Right Strategic Action Buttons */}
+            <div ref={reveal} className="blur-reveal lg:col-span-4 text-left lg:text-right space-y-4 pt-4 lg:pt-16">
+              <Link
+                to="/enroll"
+                className="inline-flex w-full lg:w-auto items-center justify-between lg:justify-center gap-4 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-lg transition duration-200 shadow-xl shadow-orange-500/10"
+              >
+                Access Course Console <ArrowUpRight size={14} className="text-zinc-950" />
+              </Link>
+              <p className="text-[11px] font-mono text-zinc-500 lg:text-right">
+                Includes AWS Certified Solutions Architect syllabus.
+              </p>
+            </div>
+
           </div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* TWO-COLUMN GRID DATA EXPLORATION PANEL */}
-      <section className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* LEFT CHIPS NAVIGATION CONTROLLER COLUMN (SCROLLABLE ON HIGH RESOLUTION DESKTOPS) */}
-          <div className="lg:col-span-5 space-y-2.5 max-h-[720px] overflow-y-auto pr-2 custom-scrollbar">
-            {aws14Concepts.map((item) => {
-              const CurrentIcon = item.icon;
-              const activeFlag = activeConceptId === item.id;
-
-              return (
-                <motion.div
-                  key={item.id}
-                  whileHover={{ x: 5 }}
-                  onClick={() => setActiveConceptId(item.id)}
-                  className={`p-4 rounded-xl border cursor-pointer transition-all duration-200 flex items-center justify-between shadow-xs ${
-                    activeFlag 
-                      ? 'bg-white border-slate-900 ring-1 ring-slate-900' 
-                      : 'bg-white/70 border-slate-200/50 backdrop-blur-xs hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <div className={`p-2.5 rounded-lg ${item.bg} ${item.text}`}>
-                      <CurrentIcon size={20} />
-                    </div>
-                    <span className="font-bold text-slate-900 tracking-tight text-sm sm:text-base">{item.label}</span>
-                  </div>
-                  <ArrowUpRight size={16} className={`${activeFlag ? 'text-slate-900' : 'text-slate-300'} transition-colors`} />
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* RIGHT DETAILED BLUEPRINT SHOWCASE DISPLAY WINDOW */}
-          <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-xs relative min-h-[520px] flex flex-col justify-between">
-            <AnimatePresence mode="wait">
-              {aws14Concepts.map((concept) => concept.id === activeConceptId && (
-                <motion.div
-                  key={concept.id}
-                  initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -12, filter: "blur(5px)" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="space-y-6 flex-1 flex flex-col justify-between"
-                >
-                  <div className="space-y-6">
-                    <div className="flex items-center">
-                      <span className={`px-3 py-1 bg-gradient-to-r ${concept.color} text-white text-xs font-bold uppercase tracking-widest rounded-md shadow-xs`}>
-                        AWS Technical Specs Architecture
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h2 className="text-2xl font-black text-slate-900 tracking-tight sm:text-3xl">
-                        {concept.headline}
-                      </h2>
-                      <p className="text-slate-500 font-light text-base leading-relaxed">
-                        {concept.desc}
-                      </p>
-                    </div>
-
-                    <div className="border-t border-slate-100 pt-6 space-y-4">
-                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Operational Pipeline Target Labs:</h4>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        {concept.topics.map((topic, index) => (
-                          <motion.li 
-                            key={index}
-                            initial={{ opacity: 0, x: -5 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.04 }}
-                            className="flex items-start gap-2.5 text-sm text-slate-600"
-                          >
-                            <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
-                            <span className="font-light leading-tight">{topic}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="pt-8 border-t border-slate-100/80 flex flex-wrap gap-3">
-                    <button className="flex-1 px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm rounded-xl transition flex items-center justify-center gap-2">
-                      <PlayCircle size={16} /> Open AWS Cloud Sandbox Lab
-                    </button>
-                    <button className="px-5 py-3.5 bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100/70 font-semibold text-sm rounded-xl transition flex items-center justify-center gap-2">
-                      <FileText size={16} className="text-slate-400" /> Infrastructure Code Template
-                    </button>
-                  </div>
-                </motion.div>
+        {/* ================= DIAGNOSTIC TRACK ENGINE ROW ================= */}
+        <section className="border-b border-zinc-900 bg-zinc-950">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-900">
+              {[
+                { label: "Total Concept Depth", data: "45+ Hours" },
+                { label: "Production Sandbox Labs", data: "30 Projects" },
+                { label: "Deployment Targets", data: "AWS SAA-C03" },
+                { label: "Core Infrastructure Framework", data: "100% Practical" },
+              ].map((kpi, index) => (
+                <div key={index} ref={reveal} className="blur-reveal bg-zinc-950 py-8 px-2 text-left space-y-1">
+                  <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider">{kpi.label}</div>
+                  <div className="text-lg sm:text-xl font-mono text-orange-400 font-semibold tracking-tight">{kpi.data}</div>
+                </div>
               ))}
-            </AnimatePresence>
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ================= SPLIT ROADMAP MONITOR CONSOLE ================= */}
+        <section className="py-24 sm:py-32 bg-zinc-950">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Sticky Left Tracker Column */}
+            <div className="lg:col-span-4 lg:sticky lg:top-32 space-y-6 sm:space-y-8 text-left">
+              <div className="space-y-2">
+                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// Curriculum Blueprint</div>
+                <h2 className="text-3xl font-bold tracking-tight text-white">Course Roadmaps</h2>
+                <p className="text-xs text-zinc-500 block sm:hidden">Level name-ah click panna cards keela point aagum</p>
+              </div>
 
-    </div>
+              {/* Dynamic Selector Buttons with mobile auto-scroll handler */}
+              <div className="space-y-2 border-l border-zinc-900 pl-4">
+                {awsSyllabus.map((lvl, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handlePhaseSelection(index)}
+                    className={`w-full text-left py-2.5 px-3 rounded-lg text-xs font-mono transition duration-200 block ${
+                      selectedPhase === index
+                        ? "text-orange-400 bg-zinc-900/60 border border-zinc-850 font-semibold"
+                        : "text-zinc-500 bg-transparent border-transparent hover:text-zinc-300"
+                    }`}
+                  >
+                    Phase {lvl.phase} — {lvl.levelName}
+                  </button>
+                ))}
+              </div>
+            </div>
 
+            {/* Right Dynamic Column: Content Target Block with scroll margin */}
+            <div id="phase-content-block" className="lg:col-span-8 text-left space-y-8 scroll-mt-28">
+              <div className="pb-4 border-b border-zinc-900 flex justify-between items-center">
+                <span className="text-xs font-mono text-zinc-500">Displaying Phase Array ({awsSyllabus[selectedPhase].phase}/04)</span>
+                <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
+                  {awsSyllabus[selectedPhase].levelName}
+                </span>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {awsSyllabus[selectedPhase].modules.map((mod, mIdx) => (
+                  <div
+                    key={mIdx}
+                    className="p-6 bg-zinc-900/20 border border-zinc-900 hover:border-orange-500/30 rounded-xl transition duration-300 flex flex-col justify-between space-y-6 group"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <div className="text-orange-400 bg-zinc-900 p-2.5 rounded-lg border border-zinc-850 group-hover:border-orange-500/20 transition duration-300">
+                          <mod.icon size={16} className="stroke-[1.5]" />
+                        </div>
+                        <span className="text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-900 px-2 py-0.5 rounded text-zinc-400">
+                          {mod.tag}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-white text-base font-semibold tracking-tight group-hover:text-orange-400 transition duration-200">{mod.title}</h3>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">{mod.details}</p>
+                    </div>
+
+                    <div className="pt-4 border-t border-zinc-900/60 flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+                      <span className="w-1 h-1 rounded-full bg-orange-500 animate-pulse" /> Architecture Deployment Lab Active
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ================= CALL TO ACTION FOOTER BANNER ================= */}
+        <section className="py-24 bg-zinc-950 border-t border-zinc-900">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
+            <div
+              ref={reveal}
+              className="blur-reveal bg-zinc-900/30 border border-zinc-900 rounded-2xl p-8 sm:p-14 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/[0.01] rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="space-y-2 text-left max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  Ready to lock your <span className="text-orange-500">AWS Credentials?</span>
+                </h2>
+                <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
+                  Join an enterprise-grade cloud workspace curriculum. Learn architecture patterns via clear code structures, multi-region failover blueprints, and direct cloud pipeline executions.
+                </p>
+              </div>
+
+              <Link
+                to="/enroll"
+                className="inline-flex items-center gap-2 bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold px-6 py-4 rounded-lg transition duration-200 shadow-xl flex-shrink-0 w-full lg:w-auto justify-center"
+              >
+                Launch Course Dashboard <ArrowUpRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </PageLayout>
   );
 };
+
+export default AwsCourse;

@@ -2,24 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowUpRight,
-  Terminal,
-  Briefcase,
+  Figma,
+  Compass,
   Layers,
   Cpu,
   Globe,
-  CheckCircle,
-  Clock,
-  MapPin,
-  Building,
-  Layout,
+  PenTool,
+  Eye,
+  Monitor,
+  Check,
   Zap,
-  Boxes
+  Sparkles
 } from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
 
 /* ------------------------------------------------------------------
-   1. ANIMATION HOOK: Elements view-la neat-ah reveal aaga
+   1. ANIMATION HOOK: Elements screen-la neat-ah reveal aaga
 --------------------------------------------------------------------- */
 const useBlurReveal = () => {
   const refs = useRef<HTMLDivElement[]>([]);
@@ -47,94 +46,94 @@ const useBlurReveal = () => {
 };
 
 /* ------------------------------------------------------------------
-   2. REACT INTERNSHIP PROFILES DATA ARRAY
+   2. UI/UX DESIGN STRATEGY SYLLABUS DATA ARRAY
 --------------------------------------------------------------------- */
-const reactInternships = [
+const uiuxSyllabus = [
   {
     phase: "01",
-    levelName: "Core UI Component Engineering",
-    roles: [
+    levelName: "UX Research & Structural Wireframing",
+    modules: [
       {
-        icon: Layout,
-        title: "Frontend UI Intern (React + Tailwind)",
-        company: "PixelCraft Studios",
-        location: "Remote / Chennai Labs",
-        duration: "3 Months",
-        details: "Convert complex high-fidelity Figma canvases into responsive functional layout blocks. Implement precise Tailwind CSS styling patterns, component states, and dynamic list trees.",
-        tag: "React.js, Tailwind"
+        icon: Compass,
+        title: "User Research & Information Architecture",
+        details: "Conducting user interviews, mapping user personas, creating comprehensive empathy maps, and structuring absolute user flow charts.",
+        tag: "UX Strategy"
       },
       {
-        icon: Zap,
-        title: "Junior React Developer (Hooks Audit)",
-        company: "DevSync Systems",
-        location: "Remote (India)",
-        duration: "3 - 6 Months",
-        details: "Build functional application modules. Manage component local dependencies, isolate side-effects using custom clean-up routines, and optimize form structures via React Hook Form.",
-        tag: "React Hooks, Formik"
+        icon: Layers,
+        title: "Low-Fidelity & High-Fidelity Wireframes",
+        details: "Translating loose layout ideas into structural digital grids. Low-fi sketching rules, layout positioning parameters, and information hierarchies.",
+        tag: "Wireframing"
       }
     ]
   },
   {
     phase: "02",
-    levelName: "State Management & API Integration",
-    roles: [
+    levelName: "Figma Mechanics & Design Systems",
+    modules: [
       {
-        icon: Boxes,
-        title: "Global State Architecture Intern",
-        company: "Vortex Data Networks",
-        location: "Hybrid / Bangalore",
-        duration: "6 Months",
-        details: "Eliminate prop-drilling models inside existing setups. Wire dynamic state spaces utilizing Redux Toolkit slices or Context API provider patterns cleanly.",
-        tag: "Redux Toolkit, Context"
+        icon: Figma,
+        title: "Advanced Figma Vector Workspaces",
+        details: "Mastering Figma pen tools, boolean operations, auto-layout 5.0 systems, constraint properties, and modular responsive element behaviors.",
+        tag: "Figma Core"
       },
       {
-        icon: Terminal,
-        title: "Client-Side Integration Associate",
-        company: "Apex Ledger Corp",
-        location: "Remote",
-        duration: "3 Months",
-        details: "Bind frontend interfaces securely with operational server API lines. Handle asynchronous Axios parameter queries, state loading loops, and map data payloads safely.",
-        tag: "Axios, REST Proxies"
+        icon: Sparkles,
+        title: "Scalable Design Systems & UI Tokens",
+        details: "Creating atomic design structures. Mapping global color typography matrices, component variants, custom properties, and variable design modes.",
+        tag: "Design Systems"
       }
     ]
   },
   {
     phase: "03",
-    levelName: "Next-Gen Tooling & Single Page Routing",
-    roles: [
+    levelName: "Visual Design Core & Micro-Interactions",
+    modules: [
       {
-        icon: Globe,
-        title: "SPA Routing & Optimization Intern",
-        company: "CloudPath Solutions",
-        location: "Hybrid / Coimbatore",
-        duration: "6 Months",
-        details: "Configure modular application pathways under React Router v6. Establish nested dynamic routing frameworks, guard protected endpoints, and optimize bundle lazy-loading.",
-        tag: "React Router, Vite"
+        icon: Eye,
+        title: "Visual Hierarchy & Typography Rules",
+        details: "Applying standard grid principles, layout alignments, psychological color balances, spatial management ratios, and extreme text scale pairings.",
+        tag: "UI Aesthetics"
       },
       {
-        icon: Layers,
-        title: "TypeScript React Engineer Intern",
-        company: "Nova Stack Labs",
-        location: "Remote / Hyderabad",
-        duration: "3 Months",
-        details: "Migrate traditional JavaScript source assets into type-safe modules. Interface functional component props, type state contexts, and track application schemas perfectly.",
-        tag: "TypeScript, Jest"
+        icon: Zap,
+        title: "Advanced Smart Animate & Prototyping",
+        details: "Building fluid interaction loops. Custom component transitions, interactive hover loops, overlay triggers, and high-fidelity prototype flows.",
+        tag: "Prototyping"
+      }
+    ]
+  },
+  {
+    phase: "04",
+    levelName: "Usability Audits & Developer Handoff",
+    modules: [
+      {
+        icon: Monitor,
+        title: "Usability Testing & Conversion Audits",
+        details: "Setting up recursive A/B testing matrix profiles, analyzing maze telemetry reports, and locating friction patterns across interface views.",
+        tag: "UX Auditing"
+      },
+      {
+        icon: PenTool,
+        title: "Design Handoff, Specs & Documentation",
+        details: "Exporting clean layouts, structuring documentation specs, spacing rules, and communicating asset packages perfectly to frontend developers.",
+        tag: "Dev Handoff"
       }
     ]
   }
 ];
 
-const ReactInternshipsPage = () => {
+const UiUxCourse = () => {
   const reveal = useBlurReveal();
-  const [selectedTrack, setSelectedTrack] = useState(0);
+  const [selectedPhase, setSelectedPhase] = useState(0);
 
   /* ------------------------------------------------------------------
      3. SCROLL HANDLING FUNCTION (Mobile view point-ah target panna)
   --------------------------------------------------------------------- */
-  const handleTrackSelection = (index: number) => {
-    setSelectedTrack(index);
+  const handlePhaseSelection = (index: number) => {
+    setSelectedPhase(index);
     
-    // Mobile viewport-la track selector map aagumpothu auto-scroll panni details kaatum
+    // Mobile screen-la auto-scroll panni target canvas card viewport-ah point panra function
     setTimeout(() => {
       const element = document.getElementById(`phase-content-block`);
       if (element) {
@@ -157,31 +156,31 @@ const ReactInternshipsPage = () => {
             {/* Left Header Box: White & Orange Typography */}
             <div ref={reveal} className="blur-reveal lg:col-span-8 space-y-6 text-left">
               <div className="text-xs font-mono uppercase tracking-widest text-orange-500 flex items-center gap-2 font-semibold">
-                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Frontend Engineering Deployment
+                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Product Interface Suite
               </div>
               
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-heading tracking-tight text-white leading-[1.05]">
-                React.js Frontend <br />
+                UI/UX Product Design <br />
                 <span className="bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
-                  Internship Trackers
+                  Masterclass Ecosystem
                 </span>
               </h1>
               
               <p className="text-sm sm:text-lg text-zinc-400 max-w-xl font-light leading-relaxed">
-                Step into live code trees. Fast-track your engineering workspace career by assembling responsive hook hierarchies, isolating global app nodes, and anchoring production-grade single page structures.
+                Zero sketch mechanics-la irunthu scalable variable design tokens varai. Master raw information architecture, pixel-perfect layouts, responsive system components, and fluid prototyping models.
               </p>
             </div>
 
             {/* Right Strategic Action Buttons */}
             <div ref={reveal} className="blur-reveal lg:col-span-4 text-left lg:text-right space-y-4 pt-4 lg:pt-16">
               <Link
-                to="/apply-general"
+                to="/enroll"
                 className="inline-flex w-full lg:w-auto items-center justify-between lg:justify-center gap-4 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-lg transition duration-200 shadow-xl shadow-orange-500/10"
               >
-                Submit UI Profile <ArrowUpRight size={14} className="text-zinc-950" />
+                Launch Design Studio <ArrowUpRight size={14} className="text-zinc-950" />
               </Link>
               <p className="text-[11px] font-mono text-zinc-500 lg:text-right">
-                All submittals undergo automated performance audits.
+                Includes industrial Figma workspaces and product handoff files.
               </p>
             </div>
 
@@ -193,10 +192,10 @@ const ReactInternshipsPage = () => {
           <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-900">
               {[
-                { label: "Available Positions", data: "14 Allocations Open" },
-                { label: "Stipend Bounds", data: "₹12k - ₹30k/mo" },
-                { label: "Operational View", data: "Remote / On-Site" },
-                { label: "Evaluation Path", data: "Direct Performance PPO" },
+                { label: "Studio Concept Labs", data: "45+ Hours" },
+                { label: "Verified Case Studies", data: "6 Projects" },
+                { label: "Core Canvas Engine", data: "Figma Advanced" },
+                { label: "Portfolio Metrics", data: "100% Practical" },
               ].map((kpi, index) => (
                 <div key={index} ref={reveal} className="blur-reveal bg-zinc-950 py-8 px-2 text-left space-y-1">
                   <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider">{kpi.label}</div>
@@ -214,24 +213,24 @@ const ReactInternshipsPage = () => {
             {/* Sticky Left Tracker Column */}
             <div className="lg:col-span-4 lg:sticky lg:top-32 space-y-6 sm:space-y-8 text-left">
               <div className="space-y-2">
-                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// Skill Matrix Sorting</div>
-                <h2 className="text-3xl font-bold tracking-tight text-white">Internship Sub-Tracks</h2>
-                <p className="text-xs text-zinc-500 block sm:hidden">Track name-ah click panna cards keela auto scroll aagum</p>
+                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// Interface Curriculum Blueprint</div>
+                <h2 className="text-3xl font-bold tracking-tight text-white">Course Roadmaps</h2>
+                <p className="text-xs text-zinc-500 block sm:hidden">Level name-ah click panna cards keela point aagum</p>
               </div>
 
-              {/* Dynamic Selector Buttons with mobile auto-scroll trigger hook */}
+              {/* Dynamic Selector Buttons with mobile auto-scroll handler loop */}
               <div className="space-y-2 border-l border-zinc-900 pl-4">
-                {reactInternships.map((track, index) => (
+                {uiuxSyllabus.map((lvl, index) => (
                   <button
                     key={index}
-                    onClick={() => handleTrackSelection(index)}
+                    onClick={() => handlePhaseSelection(index)}
                     className={`w-full text-left py-2.5 px-3 rounded-lg text-xs font-mono transition duration-200 block ${
-                      selectedTrack === index
+                      selectedPhase === index
                         ? "text-orange-400 bg-zinc-900/60 border border-zinc-850 font-semibold"
                         : "text-zinc-500 bg-transparent border-transparent hover:text-zinc-300"
                     }`}
                   >
-                    Track {track.phase} — {track.levelName}
+                    Phase {lvl.phase} — {lvl.levelName}
                   </button>
                 ))}
               </div>
@@ -240,54 +239,34 @@ const ReactInternshipsPage = () => {
             {/* Right Dynamic Column: Content Target Block with scroll margin */}
             <div id="phase-content-block" className="lg:col-span-8 text-left space-y-8 scroll-mt-28">
               <div className="pb-4 border-b border-zinc-900 flex justify-between items-center">
-                <span className="text-xs font-mono text-zinc-500">Displaying Component Array ({reactInternships[selectedTrack].phase}/03)</span>
+                <span className="text-xs font-mono text-zinc-500">Displaying Phase Array ({uiuxSyllabus[selectedPhase].phase}/04)</span>
                 <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
-                  {reactInternships[selectedTrack].levelName}
+                  {uiuxSyllabus[selectedPhase].levelName}
                 </span>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {reactInternships[selectedTrack].roles.map((role, rIdx) => (
+                {uiuxSyllabus[selectedPhase].modules.map((mod, mIdx) => (
                   <div
-                    key={rIdx}
+                    key={mIdx}
                     className="p-6 bg-zinc-900/20 border border-zinc-900 hover:border-orange-500/30 rounded-xl transition duration-300 flex flex-col justify-between space-y-6 group"
                   >
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <div className="text-orange-400 bg-zinc-900 p-2.5 rounded-lg border border-zinc-850 group-hover:border-orange-500/20 transition duration-300">
-                          <role.icon size={16} className="stroke-[1.5]" />
+                          <mod.icon size={16} className="stroke-[1.5]" />
                         </div>
                         <span className="text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-900 px-2 py-0.5 rounded text-zinc-400">
-                          {role.tag}
+                          {mod.tag}
                         </span>
                       </div>
                       
-                      <div className="space-y-1">
-                        <h3 className="text-white text-base font-semibold tracking-tight group-hover:text-orange-400 transition duration-200">
-                          {role.title}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 font-mono">
-                          <span className="flex items-center gap-1"><Building size={12} /> {role.company}</span>
-                          <span className="flex items-center gap-1"><MapPin size={12} /> {role.location}</span>
-                          <span className="flex items-center gap-1"><Clock size={12} /> {role.duration}</span>
-                        </div>
-                      </div>
-
-                      <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
-                        {role.details}
-                      </p>
+                      <h3 className="text-white text-base font-semibold tracking-tight group-hover:text-orange-400 transition duration-200">{mod.title}</h3>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">{mod.details}</p>
                     </div>
 
-                    <div className="pt-4 border-t border-zinc-900/60 flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Sprints Open
-                      </div>
-                      <Link
-                        to={`/apply/${role.title.toLowerCase().replace(/ /g, "-")}`}
-                        className="text-[11px] font-mono text-orange-400 hover:text-orange-300 flex items-center gap-1 group/link"
-                      >
-                        Apply Console <ArrowUpRight size={12} className="transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                      </Link>
+                    <div className="pt-4 border-t border-zinc-900/60 flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+                      <span className="w-1 h-1 rounded-full bg-orange-500 animate-pulse" /> Visual UI Sandbox Framework Active
                     </div>
                   </div>
                 ))}
@@ -308,18 +287,18 @@ const ReactInternshipsPage = () => {
               
               <div className="space-y-2 text-left max-w-2xl">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                  Want your frontend skills <span className="text-orange-500">vouched for by companies?</span>
+                  Ready to deploy high-end <span className="text-orange-500">Product Layouts?</span>
                 </h2>
                 <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
-                  Route your structural portfolio code files directly into our core review system pipelines. Selected code bases secure immediate routing options straight to technical hiring boards.
+                  Join an active collaborative design workspace. Wireframe structured layout flows, compile comprehensive digital tokens variables setups, and pass over design parameters seamlessly to development lines.
                 </p>
               </div>
 
               <Link
-                to="/apply-general"
+                to="/enroll"
                 className="inline-flex items-center gap-2 bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold px-6 py-4 rounded-lg transition duration-200 shadow-xl flex-shrink-0 w-full lg:w-auto justify-center"
               >
-                Launch General Registry <ArrowUpRight size={14} />
+                Access Design Console <ArrowUpRight size={14} />
               </Link>
             </div>
           </div>
@@ -330,4 +309,4 @@ const ReactInternshipsPage = () => {
   );
 };
 
-export default ReactInternshipsPage;
+export default UiUxCourse;

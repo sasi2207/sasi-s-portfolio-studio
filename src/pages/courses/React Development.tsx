@@ -1,174 +1,312 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowUpRight,
+  Terminal,
+  Code,
+  Layers,
+  Cpu,
+  Globe,
+  Settings,
+  ShieldCheck,
+  Layout,
+  Check,
+  Zap,
+  Boxes
+} from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { 
-  Cpu, Layers, Globe, Server, Terminal, ShieldCheck, Activity, Radio, 
-  MessageSquare, HardDrive, Database, Box, Sliders, CheckCircle2, PlayCircle, FileText, ArrowUpRight
-} from 'lucide-react';
 
-const react14Concepts = [
-  { id: "vdom", label: "1. Virtual DOM & Diffing", icon: Cpu, color: "from-sky-500 to-blue-600", bg: "bg-sky-50/80", text: "text-sky-600", headline: "Fiber Reconciliation Engine Mechanics", desc: "Understand how React creates a lightweight memory representation of the real DOM, executing batch updates using the heuristic O(n) diffing algorithm.", topics: ["Fiber Tree Node Allocation States", "Batching Mutation Event Updates Loops", "Heuristic Tree Traversal Diffing Rules", "Keys Optimization Element Stability Identification"] },
-  { id: "state", label: "2. State & Prop Mutators", icon: Sliders, color: "from-blue-600 to-indigo-700", bg: "bg-blue-50/80", text: "text-blue-600", headline: "Unidirectional Declarative Data Flows", desc: "Manage component transactional snapshot allocations safely tracking functional renders lifecycle triggers when local boundaries mutate.", topics: ["Asynchronous State Setter Batch Enqueues", "Immutability Maintenance Spread Operations", "Props Drilling Bounds Isolation Patterns", "Functional State Functional Updater Closures"] },
-  { id: "hooks", label: "3. Advanced Core Hooks", icon: Terminal, color: "from-indigo-500 to-purple-600", bg: "bg-indigo-50/80", text: "text-indigo-600", headline: "Functional Lifecycle Interception Hooks", desc: "Orchestrate structural component mounts, updates setup cleanup workflows, and dynamic instance references across render iterations.", topics: ["useEffect Dependency Array Cache Triggers", "useRef Persistent Memory Addresses Safe Storing", "useLayoutEffect Synchronous Screen Paint Execution", "useImperativeHandle Controlled Child Method Exposures"] },
-  { id: "memo", label: "4. Render Memoization Engine", icon: Layers, color: "from-purple-600 to-fuchsia-700", bg: "bg-purple-50/80", text: "text-purple-600", headline: "Preventing Unnecessary Render Propagations", desc: "Cache compute-heavy functions results arrays and prevent downstream layout re-evaluation triggers via strict reference checks.", topics: ["React.memo Shallow Prop Reference Evaluations", "useMemo Heavy Mathematical Computation Caching", "useCallback Referential Referential Function Safeguards", "Profiling Component Render Saturation Spikes"] },
-  { id: "context", label: "5. Context Global Storage", icon: Box, color: "from-pink-500 to-rose-600", bg: "bg-pink-50/80", text: "text-pink-600", headline: "Native Multi-Tier Component Data Broadcast", desc: "Construct native state broadcast infrastructure providers eliminating continuous prop tree distribution loops globally.", topics: ["Provider / Consumer Architecture Scopes Mapping", "Context Splitting Performance Isolation Fixes", "Dynamic Object State Multi-Provider Trees", "Custom Consumers Execution Encapsulations Modules"] },
-  { id: "redux", label: "6. Redux Toolkit Architecture", icon: Database, color: "from-violet-600 to-purple-800", bg: "bg-violet-50/80", text: "text-violet-600", headline: "Predictable Deterministic Global State Stores", desc: "Orchestrate large-scale immutable transactional central stores using unified modern action slicing configurations mechanics.", topics: ["ConfigureStore Middleware Pipeline Injections", "Slice Reducers Actions Auto Generation Maps", "Immer Library Abstract Mutator Conversions", "Async Thunk API Interface Data Fetch Pipelines"] },
-  { id: "routing", label: "7. React Router Protected Nodes", icon: Globe, color: "from-emerald-600 to-teal-700", bg: "bg-emerald-50/80", text: "text-emerald-600", headline: "Dynamic Client-Side History Router Engines", desc: "Architect client route trees, search query states parsing engines, and protected authentication gate wraps validation protocols.", topics: ["Data Router Actions Loaders Data Fetching Sync", "Nested Layout Routing Outlet View Renders", "Protected Token Gate Wrap Access Interceptors", "Dynamic Path Tokens Parameter State Synchronizers"] },
-  { id: "query", label: "8. TanStack Query Caching", icon: Radio, color: "from-amber-500 to-orange-600", bg: "bg-amber-50/80", text: "text-amber-600", headline: "Asynchronous Server-State Cache Aggregation", desc: "Eliminate manual fetch useEffects caching server side parameters dynamically using staled asset revalidation hooks tracking metrics.", topics: ["StaleTime vs CacheTime Eviction Matrices Config", "Automated Background Query Poll Revalidation Actions", "Optimistic Updates Client Immediate Layout Changes", "Infinite Scroll Pagination Data Aggregator Query Buffers"] },
-  { id: "forms", label: "9. React Hook Form Validators", icon: ShieldCheck, color: "from-teal-500 to-emerald-600", bg: "bg-teal-50/80", text: "text-teal-600", headline: "Uncontrolled Highly Performant Form Handlers", desc: "Mitigate keypress component render loops subscribing input references using automated json schema constraint validation bindings.", topics: ["Ref Register Elements Node Event Hooks Injections", "Zod Schema Validation Engine Integrations Profiles", "FormState Tracking Dirty Touched Element Validation Logs", "Dynamic Field Array Allocation Append Append Matrices"] },
-  { id: "perf", label: "10. Suspense & Code Splitting", icon: Activity, color: "from-rose-500 to-red-600", bg: "bg-rose-50/80", text: "text-rose-600", headline: "Dynamic Incremental Bundle Chunk Lazy Loading", desc: "Optimize bundle overhead allocations lazy loading view routes chunk separations falling back onto custom visual indicator layouts.", topics: ["React.lazy Programmatic Dynamic Import Extractions", "Suspense Boundary Boundary Component Wrapper Wraps", "Concurrent Transition useTransition Priority Queue Sets", "Network Chunk Pre-fetching Optimization Triggers Execution"] },
-  { id: "error", label: "11. React Error Boundaries", icon: ShieldCheck, color: "from-red-600 to-orange-700", bg: "bg-red-50/80", text: "text-red-600", headline: "Declarative Component Crash Containment Barriers", desc: "Catch runtime client execution loop errors gracefully rendering localized fallback elements preventing complete screen wipeouts.", topics: ["getDerivedStateFromError Static Safety State Flags", "componentDidCatch Remote Telemetry Crash Logging Profiles", "Localized Crash Container Scope Partition Blocks", "Dynamic Error Recovery State Reset Reset Handlers"] },
-  { id: "custom", label: "12. Custom Hook Factories", icon: Terminal, color: "from-slate-700 to-slate-900", bg: "bg-slate-100/80", text: "text-slate-700", headline: "Reusable Cross-Cutting Logic Synthesizers", desc: "Encapsulate clean browser network tracking mutations or event stream interactions compiling reusable custom code blueprints frameworks.", topics: ["Composable Stateful Logic Flow Extractions Hooks", "Event Listener Subscriptions Document Node Wraps", "Custom Fetch Timeout Interceptor Wrappers Patterns", "Shared Context Use State Mutation Abstractions"] },
-  { id: "css", label: "13. Tailwind & Framer Motion", icon: Server, color: "from-cyan-500 to-blue-600", bg: "bg-cyan-50/80", text: "text-cyan-600", headline: "Declarative GPU Accelerated UI Animation Layouts", desc: "Build enterprise class design templates managing layout state frame shifts utilizing utility parameters bindings.", topics: ["AnimatePresence Exit State Lifecycle Trackings", "Layout Id Fluid Layout Component Transformations Maps", "Dynamic Arbitrary Tailwind Utility Themes Customizations", "GPU Accelerated Hardware Transform Tween Timelines"] },
-  { id: "build", label: "14. Vite Bundler & CI/CD Push", icon: Box, color: "from-orange-500 to-red-600", bg: "bg-orange-50/80", text: "text-orange-600", headline: "Modern Lightning-Fast ESM HMR Bundling Setup", desc: "Compile client builds optimize trees shaking unnecessary elements deploy production bundles globally across static hosting platforms.", topics: ["Rollup Code Chunk Asset Tree Shaking Configurations", "Vite Config Alias Modules Multi Routing Configs", "GitHub Actions Build Compression Asset Check Pipelines", "Vercel Edge Distribution Static Hydration Provisionings"] }
+/* ------------------------------------------------------------------
+   1. ANIMATION HOOK: Elements screen-la neat-ah reveal aaga
+--------------------------------------------------------------------- */
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ------------------------------------------------------------------
+   2. REACT.JS ARCHITECTURE SYLLABUS DATA ARRAY
+--------------------------------------------------------------------- */
+const reactSyllabus = [
+  {
+    phase: "01",
+    levelName: "UI Foundations & Component Mechanics",
+    modules: [
+      {
+        icon: Layout,
+        title: "Modern JSX, Props & Core Rendering",
+        details: "Understanding the Virtual DOM, declarative UI patterns, conditional rendering structures, props destructuring, and list keys optimization rules.",
+        tag: "React Core"
+      },
+      {
+        icon: Code,
+        title: "State Mechanics & Component Lifecycle",
+        details: "Deep dive into useState hooks, managing local execution arrays, processing event handlers, and structural state batching updates.",
+        tag: "State Management"
+      }
+    ]
+  },
+  {
+    phase: "02",
+    levelName: "Advanced Side Effects & Custom Hooks",
+    modules: [
+      {
+        icon: Zap,
+        title: "Side Effects via useEffect Ecosystem",
+        details: "Managing continuous side-effects, handling synchronization loops, cleanup execution calls, api fetch structures, and dependency array rules.",
+        tag: "Hooks Core"
+      },
+      {
+        icon: Settings,
+        title: "Performance Hooks & Custom Logic Hooks",
+        details: "Optimizing render tree pipelines using useMemo, useCallback memory locks, and bundling modular business logic inside custom reusable hooks.",
+        tag: "Performance Optimization"
+      }
+    ]
+  },
+  {
+    phase: "03",
+    levelName: "Enterprise Global State & Architecture Routing",
+    modules: [
+      {
+        icon: Boxes,
+        title: "Global State Spaces (Context API & Redux Toolkit)",
+        details: "Eliminating prop-drilling patterns completely. Crafting unified data providers with Context API, slices management, and Redux data store structures.",
+        tag: "Global State"
+      },
+      {
+        icon: Globe,
+        title: "Dynamic Single Page Routing (React Router v6)",
+        details: "Building client-side single-page routing paths, nested layout structures, route loaders parameters, dynamic path params, and protected route wrappers.",
+        tag: "SPA Routing"
+      }
+    ]
+  },
+  {
+    phase: "04",
+    levelName: "Production Testing, Tooling & Cloud Delivery",
+    modules: [
+      {
+        icon: ShieldCheck,
+        title: "Component Testing & Form Validation",
+        details: "Writing structured unit testing layouts using React Testing Library and Jest, alongside high-performance client forms powered by React Hook Form & Yup.",
+        tag: "Testing & Validation"
+      },
+      {
+        icon: Layers,
+        title: "Next-Gen Tooling (Vite, TypeScript & Hosting)",
+        details: "Typing component properties via TypeScript interfaces, configuring Vite multi-build setups, and deploying bundles onto Vercel or Netlify cloud meshes.",
+        tag: "DevOps Frontend"
+      }
+    ]
+  }
 ];
 
-export const ReactFullStackMasterHub = () => {
-  const [activeConceptId, setActiveConceptId] = useState<string>("vdom");
-  const overallContainerRef = useRef(null);
+const ReactJsCourse = () => {
+  const reveal = useBlurReveal();
+  const [selectedPhase, setSelectedPhase] = useState(0);
 
-  // DYNAMIC SCROLL-LINKED BLUR MATRIX CONTROL
-  const { scrollYProgress } = useScroll({
-    target: overallContainerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const scrollLinkBlur = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], ["blur(30px)", "blur(60px)", "blur(40px)", "blur(10px)"]);
-  const adaptiveScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
+  /* ------------------------------------------------------------------
+     3. SCROLL HANDLING FUNCTION (Mobile view point-ah target panna)
+  --------------------------------------------------------------------- */
+  const handlePhaseSelection = (index: number) => {
+    setSelectedPhase(index);
+    
+    // Mobile screen-la auto-scroll panni target frontend view points block identity kaatum
+    setTimeout(() => {
+      const element = document.getElementById(`phase-content-block`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
 
   return (
-
     <PageLayout>
-    <div ref={overallContainerRef} className="bg-slate-50 min-h-screen pt-28 pb-24 overflow-hidden relative font-sans antialiased selection:bg-sky-500 selection:text-white">
-      
-      {/* 🌪️ INTERACTIVE SCROLL-LINKED BLUR AMBIENT ATMOSPHERE MESH */}
-      <motion.div style={{ filter: scrollLinkBlur }} className="absolute inset-0 pointer-events-none z-0 transition-all duration-300">
-        <div className="absolute top-[-5%] left-[-8%] w-[650px] h-[650px] bg-sky-100/40 rounded-full mix-blend-multiply blur-3xl" />
-        <div className="absolute top-[35%] right-[-10%] w-[700px] h-[700px] bg-indigo-100/20 rounded-full mix-blend-multiply blur-3xl" />
-        <div className="absolute bottom-[5%] left-[5%] w-[600px] h-[600px] bg-purple-100/30 rounded-full mix-blend-multiply blur-2xl" />
-      </motion.div>
-
-      {/* TOP HERO ANCHOR BLOCK */}
-      <motion.section style={{ scale: adaptiveScale }} className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
-        <div className="bg-slate-900 rounded-3xl p-8 md:p-14 lg:p-20 text-white relative overflow-hidden shadow-2xl border border-slate-800">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+      {/* Studio Clean Dark Matrix Interface Wrapper */}
+      <div className="bg-zinc-950 text-zinc-200 min-h-screen selection:bg-orange-500 selection:text-black font-sans antialiased">
+        
+        {/* ================= HERO INTRO SECTION ================= */}
+        <section className="relative pt-44 pb-24 border-b border-zinc-900 bg-zinc-950">
+          <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-orange-500/[0.02] rounded-full blur-[140px] pointer-events-none" />
           
-          <div className="max-w-4xl space-y-6 relative z-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-sky-500/10 text-sky-300 text-xs font-semibold uppercase tracking-wider rounded-full border border-sky-500/30 backdrop-blur-xs">
-              <Cpu size={14} className="text-sky-400" /> Enterprise UI Engineering
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
-              React.js Advanced <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">
-                14 Architecture Pillars
-              </span>
-            </h1>
-            <p className="text-slate-400 text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-3xl">
-              High performance client side view layers, virtual tree optimizations, complex deterministic store synchronization loops, code splitting automation matrum bundle deployments layout master maps.
-            </p>
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto grid lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Header Box: White & Orange Typography */}
+            <div ref={reveal} className="blur-reveal lg:col-span-8 space-y-6 text-left">
+              <div className="text-xs font-mono uppercase tracking-widest text-orange-500 flex items-center gap-2 font-semibold">
+                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Frontend Engineering Suite
+              </div>
+              
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-heading tracking-tight text-white leading-[1.05]">
+                React.js Frontend <br />
+                <span className="bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
+                  Architecture Masterclass
+                </span>
+              </h1>
+              
+              <p className="text-sm sm:text-lg text-zinc-400 max-w-xl font-light leading-relaxed">
+                Zero component hook parameters-la irunthu scalable production application bundles varai. Master custom hooks optimization, global state matrices, complex data fetching, and nested layout engines.
+              </p>
+            </div>
+
+            {/* Right Strategic Action Buttons */}
+            <div ref={reveal} className="blur-reveal lg:col-span-4 text-left lg:text-right space-y-4 pt-4 lg:pt-16">
+              <Link
+                to="/enroll"
+                className="inline-flex w-full lg:w-auto items-center justify-between lg:justify-center gap-4 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-lg transition duration-200 shadow-xl shadow-orange-500/10"
+              >
+                Launch Course Console <ArrowUpRight size={14} className="text-zinc-950" />
+              </Link>
+              <p className="text-[11px] font-mono text-zinc-500 lg:text-right">
+                Includes industrial frontend framework workflow portfolios.
+              </p>
+            </div>
+
           </div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* TWO-COLUMN GRID DATA EXPLORATION PANEL */}
-      <section className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* LEFT CHIPS NAVIGATION CONTROLLER COLUMN */}
-          <div className="lg:col-span-5 space-y-2.5 max-h-[720px] overflow-y-auto pr-2 custom-scrollbar">
-            {react14Concepts.map((item) => {
-              const CurrentIcon = item.icon;
-              const activeFlag = activeConceptId === item.id;
-
-              return (
-                <motion.div
-                  key={item.id}
-                  whileHover={{ x: 5 }}
-                  onClick={() => setActiveConceptId(item.id)}
-                  className={`p-4 rounded-xl border cursor-pointer transition-all duration-200 flex items-center justify-between shadow-xs ${
-                    activeFlag 
-                      ? 'bg-white border-slate-900 ring-1 ring-slate-900' 
-                      : 'bg-white/70 border-slate-200/50 backdrop-blur-xs hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <div className={`p-2.5 rounded-lg ${item.bg} ${item.text}`}>
-                      <CurrentIcon size={20} />
-                    </div>
-                    <span className="font-bold text-slate-900 tracking-tight text-sm sm:text-base">{item.label}</span>
-                  </div>
-                  <ArrowUpRight size={16} className={`${activeFlag ? 'text-slate-900' : 'text-slate-300'} transition-colors`} />
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* RIGHT DETAILED BLUEPRINT SHOWCASE DISPLAY WINDOW */}
-          <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-xs relative min-h-[520px] flex flex-col justify-between">
-            <AnimatePresence mode="wait">
-              {react14Concepts.map((concept) => concept.id === activeConceptId && (
-                <motion.div
-                  key={concept.id}
-                  initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -12, filter: "blur(5px)" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="space-y-6 flex-1 flex flex-col justify-between"
-                >
-                  <div className="space-y-6">
-                    <div className="flex items-center">
-                      <span className={`px-3 py-1 bg-gradient-to-r ${concept.color} text-white text-xs font-bold uppercase tracking-widest rounded-md shadow-xs`}>
-                        React Core System Target Specs
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h2 className="text-2xl font-black text-slate-900 tracking-tight sm:text-3xl">
-                        {concept.headline}
-                      </h2>
-                      <p className="text-slate-500 font-light text-base leading-relaxed">
-                        {concept.desc}
-                      </p>
-                    </div>
-
-                    <div className="border-t border-slate-100 pt-6 space-y-4">
-                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Engineering Deep Dive Spec:</h4>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        {concept.topics.map((topic, index) => (
-                          <motion.li 
-                            key={index}
-                            initial={{ opacity: 0, x: -5 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.04 }}
-                            className="flex items-start gap-2.5 text-sm text-slate-600"
-                          >
-                            <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
-                            <span className="font-light leading-tight">{topic}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="pt-8 border-t border-slate-100/80 flex flex-wrap gap-3">
-                    <button className="flex-1 px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm rounded-xl transition flex items-center justify-center gap-2">
-                      <PlayCircle size={16} /> Mount Sandbox Environment
-                    </button>
-                    <button className="px-5 py-3.5 bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100/70 font-semibold text-sm rounded-xl transition flex items-center justify-center gap-2">
-                      <FileText size={16} className="text-slate-400" /> Component Core Blueprint
-                    </button>
-                  </div>
-                </motion.div>
+        {/* ================= DIAGNOSTIC TRACK ENGINE ROW ================= */}
+        <section className="border-b border-zinc-900 bg-zinc-950">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-900">
+              {[
+                { label: "Engineering Content", data: "40+ Hours" },
+                { label: "Production Level Labs", data: "15 UI Apps" },
+                { label: "Framework Metrics", data: "React.js Ecosystem" },
+                { label: "Practicals Target", data: "100% Component-Driven" },
+              ].map((kpi, index) => (
+                <div key={index} ref={reveal} className="blur-reveal bg-zinc-950 py-8 px-2 text-left space-y-1">
+                  <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider">{kpi.label}</div>
+                  <div className="text-lg sm:text-xl font-mono text-orange-400 font-semibold tracking-tight">{kpi.data}</div>
+                </div>
               ))}
-            </AnimatePresence>
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ================= SPLIT ROADMAP MONITOR CONSOLE ================= */}
+        <section className="py-24 sm:py-32 bg-zinc-950">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Sticky Left Tracker Column */}
+            <div className="lg:col-span-4 lg:sticky lg:top-32 space-y-6 sm:space-y-8 text-left">
+              <div className="space-y-2">
+                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// React Curriculum Blueprint</div>
+                <h2 className="text-3xl font-bold tracking-tight text-white">Course Roadmaps</h2>
+                <p className="text-xs text-zinc-500 block sm:hidden">Level name-ah click panna cards keela point aagum</p>
+              </div>
 
-    </div>
+              {/* Dynamic Selector Buttons with mobile auto-scroll trigger hook */}
+              <div className="space-y-2 border-l border-zinc-900 pl-4">
+                {reactSyllabus.map((lvl, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handlePhaseSelection(index)}
+                    className={`w-full text-left py-2.5 px-3 rounded-lg text-xs font-mono transition duration-200 block ${
+                      selectedPhase === index
+                        ? "text-orange-400 bg-zinc-900/60 border border-zinc-850 font-semibold"
+                        : "text-zinc-500 bg-transparent border-transparent hover:text-zinc-300"
+                    }`}
+                  >
+                    Phase {lvl.phase} — {lvl.levelName}
+                  </button>
+                ))}
+              </div>
+            </div>
 
+            {/* Right Dynamic Column: Content Target Block with scroll margin */}
+            <div id="phase-content-block" className="lg:col-span-8 text-left space-y-8 scroll-mt-28">
+              <div className="pb-4 border-b border-zinc-900 flex justify-between items-center">
+                <span className="text-xs font-mono text-zinc-500">Displaying Phase Array ({reactSyllabus[selectedPhase].phase}/04)</span>
+                <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
+                  {reactSyllabus[selectedPhase].levelName}
+                </span>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {reactSyllabus[selectedPhase].modules.map((mod, mIdx) => (
+                  <div
+                    key={mIdx}
+                    className="p-6 bg-zinc-900/20 border border-zinc-900 hover:border-orange-500/30 rounded-xl transition duration-300 flex flex-col justify-between space-y-6 group"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <div className="text-orange-400 bg-zinc-900 p-2.5 rounded-lg border border-zinc-850 group-hover:border-orange-500/20 transition duration-300">
+                          <mod.icon size={16} className="stroke-[1.5]" />
+                        </div>
+                        <span className="text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-900 px-2 py-0.5 rounded text-zinc-400">
+                          {mod.tag}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-white text-base font-semibold tracking-tight group-hover:text-orange-400 transition duration-200">{mod.title}</h3>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">{mod.details}</p>
+                    </div>
+
+                    <div className="pt-4 border-t border-zinc-900/60 flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+                      <span className="w-1 h-1 rounded-full bg-orange-500 animate-pulse" /> Active Application Environment Target
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ================= CALL TO ACTION FOOTER BANNER ================= */}
+        <section className="py-24 bg-zinc-950 border-t border-zinc-900">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
+            <div
+              ref={reveal}
+              className="blur-reveal bg-zinc-900/30 border border-zinc-900 rounded-2xl p-8 sm:p-14 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/[0.01] rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="space-y-2 text-left max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  Ready to deploy fluid <span className="text-orange-500">React Components?</span>
+                </h2>
+                <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
+                  Join a verified frontend engineering workspace. Package highly optimized functional hooks, isolate architectural states across tree layers, and bundle modern application trees at lightning speeds.
+                </p>
+              </div>
+
+              <Link
+                to="/enroll"
+                className="inline-flex items-center gap-2 bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold px-6 py-4 rounded-lg transition duration-200 shadow-xl flex-shrink-0 w-full lg:w-auto justify-center"
+              >
+                Access React Workspace <ArrowUpRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </PageLayout>
   );
 };
+
+export default ReactJsCourse;

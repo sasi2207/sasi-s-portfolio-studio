@@ -1,246 +1,289 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Zap, 
-  ShieldCheck, 
-  ArrowRight, 
-  Gauge, 
-  Globe2, 
-  Terminal, 
-  Sparkles,
-  Server,
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Search,
+  Layout,
+  Globe,
   Layers,
-  Cpu,
-  RefreshCw
-} from 'lucide-react';
+  CheckCircle,
+} from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
+import { ParallaxSection } from "@/components/common/ParallaxSection";
 
-// Deeply analyzed performance metrics for B2B validation
-const enterpriseMetrics = [
-  { value: "100%", label: "Core Web Vitals Performance", desc: "Guaranteed absolute score alignment across real-world browser engines." },
-  { value: "<350ms", label: "Edge TTFB Latency Threshold", desc: "Global distribution bypassing multi-region backend processing delays." },
-  { value: "Zero", label: "Runtime Database Surface Area", desc: "Eliminating the continuous cycle of plugin patches and server updates." }
-];
+/* ------------------------------------------------------------------
+   1. ANIMATION HOOK: Scroll pannumpoothu smooth-ah reveal aagurathuku
+--------------------------------------------------------------------- */
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
 
-const technicalPillars = [
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ------------------------------------------------------------------
+   2. FEATURES DATA: Grid-la kaamikira advanced features list
+--------------------------------------------------------------------- */
+const staticFeatures = [
   {
-    title: "Global Edge Provisioning",
-    desc: "Your source trees are pre-compiled into immutable production bundles and automatically cached across vast edge data nodes for rapid regional loading.",
-    icon: <Globe2 className="w-5 h-5 text-orange-500" />,
-    tag: "CDN-Architecture"
+    icon: Zap,
+    title: "Ultra-Fast Performance",
+    text: "Pre-rendered HTML files direct-ah load aagum, so database delays irukathu.",
+    borderColor: "hover:border-violet-500/50",
+    glowColor: "group-hover:bg-violet-500/10",
   },
   {
-    title: "Hardened Defensive Security",
-    desc: "By separating content delivery from application engines, dynamic exploit pathways, runtime memory leaks, and malicious scripts are structural impossibilities.",
-    icon: <ShieldCheck className="w-5 h-5 text-cyan-400" />,
-    tag: "Zero-Trust Layout"
+    icon: ShieldCheck,
+    title: "Serverless Security",
+    text: "Backend/Database illathathaala SQL injection or hacking threats zero level.",
+    borderColor: "hover:border-amber-500/50",
+    glowColor: "group-hover:bg-amber-500/10",
   },
   {
-    title: "Optimized Search Indexing",
-    desc: "Pre-rendered HTML models serve clean DOM structures instantly to crawling systems, guaranteeing efficient crawl-budget usage and higher keyword parsing accuracy.",
-    icon: <Gauge className="w-5 h-5 text-emerald-400" />,
-    tag: "SEO Supremacy"
-  }
-];
-
-const operationalPipelines = [
-  { step: "01", phase: "System Specifications", detail: "Figma wireframing maps & asset performance modeling blueprints." },
-  { step: "02", phase: "Component Implementation", detail: "Strict modular assembly using clean, enterprise TypeScript structures." },
-  { step: "03", phase: "Asset Optimization Audits", detail: "Tree-shaking, automated media encoding, and static asset minification." },
-  { step: "04", phase: "CI/CD Distribution", detail: "GitHub build pipelines pushes updates seamlessly to live edge nodes." }
-];
-
-const targetedSolutions = [
-  { 
-    title: "Enterprise Corporate Hubs", 
-    useCase: "Deliver high-end company narratives with lightning-fast load times to maintain market authority." 
+    icon: Search,
+    title: "Advanced Jamstack SEO",
+    text: "Lightweight clean structure rendering, search engine bots-ku romba pudikum.",
+    borderColor: "hover:border-violet-500/50",
+    glowColor: "group-hover:bg-violet-500/10",
   },
-  { 
-    title: "High-Conversion Landing Nodes", 
-    useCase: "Maintain absolute uptime and steady conversions during massive ad-driven traffic surges." 
+  {
+    icon: Layout,
+    title: "Next-Gen Responsiveness",
+    text: "Mobile, Tablet, Desktop-nu ella screen size-kum automatic-ah adapt aagum.",
+    borderColor: "hover:border-amber-500/50",
+    glowColor: "group-hover:bg-amber-500/10",
   },
-  { 
-    title: "Technical Documentation Repositories", 
-    useCase: "Provide high-performance, easily searchable product specs with zero server overhead." 
-  }
+  {
+    icon: Globe,
+    title: "Edge CDN Deployment",
+    text: "Vercel, Netlify, or AWS Edge Cloud-la deploy panuvom. Global-ah fast-ah irukum.",
+    borderColor: "hover:border-violet-500/50",
+    glowColor: "group-hover:bg-violet-500/10",
+  },
+  {
+    icon: Layers,
+    title: "Near-Zero Upkeep Cost",
+    text: "Heavy hosting dynamic servers thevaiyillai. Monthly maintenance expense illa.",
+    borderColor: "hover:border-amber-500/50",
+    glowColor: "group-hover:bg-amber-500/10",
+  },
 ];
 
-export const StaticWebService = () => {
+const StaticWebsite = () => {
+  const reveal = useBlurReveal();
+
   return (
     <PageLayout>
-      <div id="static-web" className="min-h-screen bg-slate-950 text-slate-200 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans selection:bg-orange-500/30">
+      {/* Black Theme Wrapper with Glow Accents */}
+      <div className="bg-black text-zinc-100 min-h-screen selection:bg-violet-500 selection:text-white">
         
-        {/* Elite Cybernetic Background Infrastructure */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_80%,transparent_100%)] opacity-25" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-orange-500/10 to-transparent rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-20 w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
+        {/* ================= HERO SECTION (Top Entry) ================= */}
+        <ParallaxSection
+          className="pt-40 pb-32 overflow-hidden relative"
+          bgClassName="bg-black border-b border-zinc-800"
+        >
+          {/* Advanced Visual Neon Glows Behind Content */}
+          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-        {/* SECTION HEADER */}
-        <div className="max-w-6xl mx-auto text-center mb-24 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-1.5 rounded-full backdrop-blur-md">
-              <Sparkles size={12} className="text-orange-500 animate-pulse" />
-              <span className="text-slate-400 text-xs font-semibold tracking-wider uppercase font-mono">
-                Performance Architecture Matrix
-              </span>
+          <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            {/* Left Column: Heading and CTAs */}
+            <div className="blur-reveal is-visible">
+              <h1 className="text-5xl xl:text-6xl font-heading font-bold mb-6 tracking-tight text-white">
+                Static Website{" "}
+                <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-amber-400 bg-clip-text text-transparent">
+                  Development
+                </span>
+              </h1>
+
+              <p className="text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
+                Speed, extreme security, and top-tier SEO outcomes. Modern web applications 
+                built using advanced static pre-rendering architectures.
+              </p>
+
+              <Link
+                to="/proposal"
+                className="inline-flex items-center gap-3 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-8 py-4 rounded-xl transition duration-300 shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 group"
+              >
+                Request Quote{" "}
+                <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-white leading-none">
-              Static Web <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 bg-clip-text text-transparent">Engineering</span>
-            </h1>
-            
-            <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed font-normal">
-              Move past vulnerable, heavy content management systems. We architect beautifully optimized, pre-rendered static systems custom-built for exceptional user engagement and extreme platform speed.
-            </p>
-          </motion.div>
-        </div>
 
-        {/* ENTERPRISE METRICS CONTROL GRID */}
-        <div className="max-w-6xl mx-auto mb-28 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {enterpriseMetrics.map((metric, i) => (
-              <div key={i} className="bg-slate-900/40 backdrop-blur-sm p-8 rounded-2xl border border-slate-900/80 shadow-2xl relative group hover:border-slate-800/40 transition-all">
-                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <p className="text-4xl md:text-5xl font-extrabold text-orange-500 tracking-tight mb-2 font-mono">{metric.value}</p>
-                <p className="text-xs font-bold text-slate-200 mb-1.5 uppercase font-mono tracking-wide">{metric.label}</p>
-                <p className="text-xs text-slate-500 leading-relaxed">{metric.desc}</p>
+            {/* Right Column: Premium Graphical Box Design */}
+            <div ref={reveal} className="hidden lg:block blur-reveal">
+              <div className="h-[420px] rounded-3xl bg-gradient-to-br from-zinc-900 to-black p-[1px] border border-zinc-800 shadow-2xl relative group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-amber-500/10 opacity-50 group-hover:opacity-100 transition duration-500" />
+                <div className="w-full h-full bg-zinc-950 rounded-[23px]" />
+              </div>
+            </div>
+          </div>
+        </ParallaxSection>
+
+        {/* ================= VALUE STATEMENT (Simple Catchy Quote) ================= */}
+        <section className="py-24 bg-zinc-950 border-b border-zinc-900 relative">
+          <div
+            ref={reveal}
+            className="container-custom max-w-6xl px-6 lg:px-12 blur-reveal text-center"
+          >
+            <p className="text-2xl md:text-3xl font-medium leading-relaxed text-zinc-300">
+              We focus on what builds business conversions —{" "}
+              <span className="bg-gradient-to-r from-violet-400 to-amber-400 bg-clip-text text-transparent font-semibold">
+                speed, unmatched reliability, and core simplicity.
+              </span>
+            </p>
+          </div>
+        </section>
+
+        {/* ================= FEATURES GRID (6 Dynamic Cards) ================= */}
+        <section className="py-32 bg-black">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {staticFeatures.map((f) => (
+              <div
+                key={f.title}
+                ref={reveal}
+                className={`blur-reveal group relative bg-zinc-900/40 border border-zinc-800 p-8 rounded-2xl transition duration-300 ${f.borderColor} overflow-hidden`}
+              >
+                {/* Advanced Neon Hover Effect */}
+                <div className={`absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-500 blur-xl rounded-2xl -z-10 ${f.glowColor}`} />
+                
+                <f.icon className="text-violet-400 mb-5 w-8 h-8 transform group-hover:scale-110 transition duration-300" />
+                <h3 className="font-semibold text-xl mb-3 text-white">
+                  {f.title}
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">{f.text}</p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* TECHNICAL PILLARS GRID */}
-        <div className="max-w-6xl mx-auto mb-32 relative z-10">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 border-b border-slate-900 pb-6">
-            <div>
-              <h2 className="text-xl md:text-3xl font-extrabold text-white tracking-tight">Technical Supremacy Standards</h2>
-              <p className="text-xs md:text-sm text-slate-500 mt-1">Replacing bloated plugins with compiled web assets.</p>
-            </div>
-            <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-widest hidden md:inline-block">
-              System_Status: Operational
-            </span>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {technicalPillars.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="bg-slate-900/20 border border-slate-900/60 p-8 rounded-2xl flex flex-col justify-between hover:border-slate-800/60 transition-all group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 bg-slate-950 border border-slate-900 rounded-xl shadow-inner text-slate-400 group-hover:text-orange-500 transition-colors">
-                      {item.icon}
-                    </div>
-                    <span className="text-[10px] font-mono font-bold tracking-wider bg-slate-900 border border-slate-800/80 px-2.5 py-0.5 rounded text-slate-500">
-                      {item.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-100 mb-2.5 tracking-tight group-hover:text-white transition-colors">{item.title}</h3>
-                  <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-normal">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* WORKFLOW MATRIX PANEL */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32 relative z-10">
-          
-          {/* TARGET SYSTEM ENVIRONMENTS */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 space-y-8"
-          >
-            <div className="space-y-3">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
-                Optimized Framework Tailored for Growth
-              </h3>
-              <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-                We configure tailored modern web systems designed carefully around distinct operational needs, traffic loads, and organizational goals.
+        {/* ================= PRICING SECTION (Standard Data Mapping) ================= */}
+        <section className="py-32 bg-black border-t border-zinc-900">
+          <div className="container-custom max-w-7xl px-6 lg:px-12">
+            <div ref={reveal} className="blur-reveal mb-16 text-center lg:text-left">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+                Transparent Engineering Pricing
+              </h2>
+              <p className="text-lg text-zinc-400 max-w-xl">
+                Affordable, high-end plans adapted around your scaling complexity.
               </p>
             </div>
 
-            <div className="space-y-4">
-              {targetedSolutions.map((sol, i) => (
-                <div key={i} className="p-4 bg-slate-900/10 border border-slate-900/50 rounded-xl flex flex-col space-y-1 hover:border-slate-800/80 transition-all">
-                  <h4 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                    {sol.title}
-                  </h4>
-                  <p className="text-xs text-slate-500 leading-relaxed pl-3.5">{sol.useCase}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* CODE TERMINAL SIMULATION GRAPHIC */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 bg-slate-900/50 border border-slate-900/80 rounded-2xl p-6 text-white shadow-2xl relative"
-          >
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-900/80">
-              <div className="flex items-center gap-2">
-                <Terminal size={14} className="text-orange-500" />
-                <span className="text-xs font-mono tracking-wider text-slate-500">production_pipeline.ts</span>
-              </div>
-              <div className="flex gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {operationalPipelines.map((pipeline, i) => (
-                <div key={i} className="flex items-start justify-between p-3.5 bg-slate-950/40 border border-slate-900 rounded-xl hover:border-slate-800 transition-all group">
-                  <div className="flex items-start gap-4">
-                    <span className="text-xs font-mono font-bold text-slate-600 group-hover:text-orange-500 transition-colors mt-0.5">
-                      {pipeline.step}
+            <div className="grid md:grid-cols-3 gap-8 items-stretch">
+              {[
+                {
+                  title: "Basic Suite",
+                  price: "₹4,000+",
+                  description: "Single-page responsive layouts optimized for fast discovery.",
+                  features: ["Single-page framework", "Mobile responsive design", "Semantic Core SEO setup", "Edge CDN deployment"],
+                  highlighted: false,
+                },
+                {
+                  title: "Professional Tier",
+                  price: "₹8,000+",
+                  description: "Multi-page brand architectures with customized conversion tunnels.",
+                  features: ["Multi-page infrastructure", "Advanced UI styling architecture", "Rigorous speed optimization", "Analytics & Form routing integrations"],
+                  highlighted: true,
+                },
+                {
+                  title: "Premium Architecture",
+                  price: "₹15,000+",
+                  description: "Bespoke custom UI configurations with intensive micro-interactions.",
+                  features: ["Custom web animations via GSAP/Framer", "Advanced structural UX setups", "Content architecture optimizations", "Priority engineering support hours"],
+                  highlighted: false,
+                },
+              ].map((plan) => (
+                <div
+                  key={plan.title}
+                  ref={reveal}
+                  className={`blur-reveal flex flex-col justify-between p-8 rounded-2xl transition duration-300 relative ${
+                    plan.highlighted
+                      ? "bg-zinc-900 border-2 border-violet-500 shadow-xl shadow-violet-500/5 scale-105 z-10"
+                      : "bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700"
+                  }`}
+                >
+                  {/* Popular tag highlighted card-ku mattum display aagum */}
+                  {plan.highlighted && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                      Most Popular
                     </span>
-                    <div>
-                      <p className="text-xs md:text-sm font-bold text-slate-300 group-hover:text-slate-100 transition-colors">{pipeline.phase}</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5 leading-normal">{pipeline.detail}</p>
-                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-semibold text-xl mb-1 text-white">{plan.title}</h3>
+                    <p className="text-zinc-400 text-sm mb-6">{plan.description}</p>
+                    <div className="text-4xl font-bold text-white mb-6">{plan.price}</div>
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((f) => (
+                        <li key={f} className="flex gap-3 text-zinc-300 text-sm items-start">
+                          <CheckCircle className="text-violet-400 mt-0.5 flex-shrink-0" size={16} />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ArrowRight size={12} className="text-slate-800 group-hover:translate-x-1 transition-all group-hover:text-slate-500 mt-1 flex-shrink-0" />
+                  <Link
+                    to="/proposal"
+                    className={`w-full text-center font-semibold py-3 rounded-xl transition duration-200 ${
+                      plan.highlighted
+                        ? "bg-violet-600 text-white hover:bg-violet-500"
+                        : "bg-zinc-800 text-zinc-200 hover:bg-zinc-700"
+                    }`}
+                  >
+                    Select Plan
+                  </Link>
                 </div>
               ))}
             </div>
-          </motion.div>
-        </div>
-
-        {/* CALL TO ACTION */}
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="bg-gradient-to-b from-slate-900/80 to-slate-950/40 p-8 md:p-14 rounded-2xl text-center border border-slate-900 shadow-2xl relative overflow-hidden">
-            <h3 className="text-xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
-              Transition to Modern Web Architectures
-            </h3>
-            <p className="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
-              Connect with our core technical strategists to map out your infrastructure needs, optimize application delivery speeds, and completely cut hosting maintenance overheads.
-            </p>
-            <button className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-slate-950 font-bold text-xs md:text-sm px-6 py-3 rounded-lg transition-all shadow-xl shadow-orange-500/5 group">
-              <span className="text-white">Request Infrastructure Assessment</span>
-              <ArrowRight size={14} className="transform group-hover:translate-x-0.5 transition-transform text-white" />
-            </button>
           </div>
-        </div>
+        </section>
 
+        {/* ================= CTA INTERACTIVE CARD ================= */}
+        <section className="py-24 bg-black relative">
+          <div className="container-custom max-w-7xl px-6 lg:px-12">
+            <div
+              ref={reveal}
+              className="blur-reveal bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-violet-500/10 rounded-full blur-[100px] pointer-events-none" />
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
+                Ready to Launch Your High-Performance Site?
+              </h2>
+              <p className="mb-10 text-zinc-400 max-w-xl mx-auto leading-relaxed">
+                Unlock industry-leading load times and robust cloud architectures. Let's engineer your platform today.
+              </p>
+              <Link
+                to="/proposal"
+                className="inline-flex items-center gap-3 bg-white text-black font-semibold px-8 py-4 rounded-xl hover:bg-zinc-200 transition duration-200 shadow-xl"
+              >
+                Get Started <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </PageLayout>
   );
 };
+
+export default StaticWebsite;

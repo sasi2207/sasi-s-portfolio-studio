@@ -11,9 +11,10 @@ import {
   Clock,
   MapPin,
   Building,
-  Layout,
-  Zap,
-  Boxes
+  Cloud,
+  ShieldAlert,
+  Database,
+  Server
 } from "lucide-react";
 
 import { Layout as PageLayout } from "@/components/layout/Layout";
@@ -47,84 +48,84 @@ const useBlurReveal = () => {
 };
 
 /* ------------------------------------------------------------------
-   2. REACT INTERNSHIP PROFILES DATA ARRAY
+   2. AWS CLOUD INTERNSHIP PROFILES DATA ARRAY
 --------------------------------------------------------------------- */
-const reactInternships = [
+const awsInternships = [
   {
     phase: "01",
-    levelName: "Core UI Component Engineering",
+    levelName: "Cloud Infrastructure & Compute Operations",
     roles: [
       {
-        icon: Layout,
-        title: "Frontend UI Intern (React + Tailwind)",
-        company: "PixelCraft Studios",
+        icon: Server,
+        title: "AWS Cloud Operations Intern (EC2 & VPC)",
+        company: "Stratus Scale Tech",
         location: "Remote / Chennai Labs",
         duration: "3 Months",
-        details: "Convert complex high-fidelity Figma canvases into responsive functional layout blocks. Implement precise Tailwind CSS styling patterns, component states, and dynamic list trees.",
-        tag: "React.js, Tailwind"
+        details: "Manage active infrastructure boundaries. Provision modular EC2 compute nodes, configure custom VPC network subnets, structure precise security group filters, and allocate Elastic IP routing layers.",
+        tag: "AWS EC2, VPC, IAM"
       },
       {
-        icon: Zap,
-        title: "Junior React Developer (Hooks Audit)",
-        company: "DevSync Systems",
+        icon: Cloud,
+        title: "Serverless Architecture Intern (Lambda)",
+        company: "Apex Cloud Native",
         location: "Remote (India)",
         duration: "3 - 6 Months",
-        details: "Build functional application modules. Manage component local dependencies, isolate side-effects using custom clean-up routines, and optimize form structures via React Hook Form.",
-        tag: "React Hooks, Formik"
+        details: "Build high-speed serverless compute pipelines. Map event triggers from AWS S3 buckets, structure lambda execution parameters, and route dynamic backend logs via API Gateway.",
+        tag: "AWS Lambda, API Gateway"
       }
     ]
   },
   {
     phase: "02",
-    levelName: "State Management & API Integration",
+    levelName: "Database Systems & Storage Management",
     roles: [
       {
-        icon: Boxes,
-        title: "Global State Architecture Intern",
-        company: "Vortex Data Networks",
+        icon: Database,
+        title: "Cloud Database Administrator Intern (RDS)",
+        company: "DataMesh Infrastructure",
         location: "Hybrid / Bangalore",
         duration: "6 Months",
-        details: "Eliminate prop-drilling models inside existing setups. Wire dynamic state spaces utilizing Redux Toolkit slices or Context API provider patterns cleanly.",
-        tag: "Redux Toolkit, Context"
+        details: "Maintain relational and non-relational storage clusters. Set up automated snapshots routines inside AWS RDS, optimize DynamoDB key-value indexing paths, and manage storage classes.",
+        tag: "AWS RDS, DynamoDB, S3"
       },
       {
-        icon: Terminal,
-        title: "Client-Side Integration Associate",
-        company: "Apex Ledger Corp",
+        icon: Layers,
+        title: "Cloud Migration & Backup Associate",
+        company: "OmniMigration Labs",
         location: "Remote",
         duration: "3 Months",
-        details: "Bind frontend interfaces securely with operational server API lines. Handle asynchronous Axios parameter queries, state loading loops, and map data payloads safely.",
-        tag: "Axios, REST Proxies"
+        details: "Assist with data migration matrices. Configure lifecycle rules across S3 storage vaults, set up AWS Backup routines, and track bandwidth allocation parameters using CloudWatch.",
+        tag: "AWS S3, Backup, CloudWatch"
       }
     ]
   },
   {
     phase: "03",
-    levelName: "Next-Gen Tooling & Single Page Routing",
+    levelName: "DevOps Pipelines & Infrastructure as Code",
     roles: [
       {
-        icon: Globe,
-        title: "SPA Routing & Optimization Intern",
-        company: "CloudPath Solutions",
+        icon: Terminal,
+        title: "AWS DevOps Pipeline Intern (CI/CD)",
+        company: "CoreStack Automation",
         location: "Hybrid / Coimbatore",
         duration: "6 Months",
-        details: "Configure modular application pathways under React Router v6. Establish nested dynamic routing frameworks, guard protected endpoints, and optimize bundle lazy-loading.",
-        tag: "React Router, Vite"
+        details: "Automate code compilation networks. Package source modules into Docker artifacts, configure target deployment steps via AWS CodePipeline, and trigger continuous validation systems.",
+        tag: "CodePipeline, ECS, Docker"
       },
       {
-        icon: Layers,
-        title: "TypeScript React Engineer Intern",
-        company: "Nova Stack Labs",
+        icon: Globe,
+        title: "Cloud Infrastructure Scripting Intern",
+        company: "Velocity Cloud Solutions",
         location: "Remote / Hyderabad",
         duration: "3 Months",
-        details: "Migrate traditional JavaScript source assets into type-safe modules. Interface functional component props, type state contexts, and track application schemas perfectly.",
-        tag: "TypeScript, Jest"
+        details: "Translate physical deployment specs into code blocks. Write structural CloudFormation templates, automate infrastructure resources setup using AWS SDK (Boto3), and trace security posture matrices.",
+        tag: "CloudFormation, Boto3, IAM"
       }
     ]
   }
 ];
 
-const ReactInternshipsPage = () => {
+const AwsInternshipsPage = () => {
   const reveal = useBlurReveal();
   const [selectedTrack, setSelectedTrack] = useState(0);
 
@@ -134,7 +135,7 @@ const ReactInternshipsPage = () => {
   const handleTrackSelection = (index: number) => {
     setSelectedTrack(index);
     
-    // Mobile viewport-la track selector map aagumpothu auto-scroll panni details kaatum
+    // Mobile viewport-la track selector trigger aagumpothu auto-scroll panni card views flat-ah point pannum
     setTimeout(() => {
       const element = document.getElementById(`phase-content-block`);
       if (element) {
@@ -157,18 +158,18 @@ const ReactInternshipsPage = () => {
             {/* Left Header Box: White & Orange Typography */}
             <div ref={reveal} className="blur-reveal lg:col-span-8 space-y-6 text-left">
               <div className="text-xs font-mono uppercase tracking-widest text-orange-500 flex items-center gap-2 font-semibold">
-                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Frontend Engineering Deployment
+                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> Cloud Operations & Architecture Placement
               </div>
               
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-heading tracking-tight text-white leading-[1.05]">
-                React.js Frontend <br />
+                AWS Cloud Engineering <br />
                 <span className="bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
                   Internship Trackers
                 </span>
               </h1>
               
               <p className="text-sm sm:text-lg text-zinc-400 max-w-xl font-light leading-relaxed">
-                Step into live code trees. Fast-track your engineering workspace career by assembling responsive hook hierarchies, isolating global app nodes, and anchoring production-grade single page structures.
+                Step into cloud infrastructure control nodes. Kickstart your solutions career by orchestrating compute servers, wiring virtual storage parameters, and launching automated serverless automation pipelines.
               </p>
             </div>
 
@@ -178,10 +179,10 @@ const ReactInternshipsPage = () => {
                 to="/apply-general"
                 className="inline-flex w-full lg:w-auto items-center justify-between lg:justify-center gap-4 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-lg transition duration-200 shadow-xl shadow-orange-500/10"
               >
-                Submit UI Profile <ArrowUpRight size={14} className="text-zinc-950" />
+                Submit Solutions Profile <ArrowUpRight size={14} className="text-zinc-950" />
               </Link>
               <p className="text-[11px] font-mono text-zinc-500 lg:text-right">
-                All submittals undergo automated performance audits.
+                All portfolios undergo cloud metrics security assessments.
               </p>
             </div>
 
@@ -193,10 +194,10 @@ const ReactInternshipsPage = () => {
           <div className="container-custom max-w-7xl px-6 lg:px-12 mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-900">
               {[
-                { label: "Available Positions", data: "14 Allocations Open" },
-                { label: "Stipend Bounds", data: "₹12k - ₹30k/mo" },
-                { label: "Operational View", data: "Remote / On-Site" },
-                { label: "Evaluation Path", data: "Direct Performance PPO" },
+                { label: "Active Nodes Open", data: "16 Positions Live" },
+                { label: "Stipend Bounds", data: "₹20k - ₹45k/mo" },
+                { label: "Architecture View", data: "Remote / Hybrid" },
+                { label: "Pipeline Status", data: "Direct Performance PPO" },
               ].map((kpi, index) => (
                 <div key={index} ref={reveal} className="blur-reveal bg-zinc-950 py-8 px-2 text-left space-y-1">
                   <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider">{kpi.label}</div>
@@ -214,14 +215,14 @@ const ReactInternshipsPage = () => {
             {/* Sticky Left Tracker Column */}
             <div className="lg:col-span-4 lg:sticky lg:top-32 space-y-6 sm:space-y-8 text-left">
               <div className="space-y-2">
-                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// Skill Matrix Sorting</div>
-                <h2 className="text-3xl font-bold tracking-tight text-white">Internship Sub-Tracks</h2>
-                <p className="text-xs text-zinc-500 block sm:hidden">Track name-ah click panna cards keela auto scroll aagum</p>
+                <div className="text-xs font-mono text-orange-500 uppercase tracking-widest font-semibold">// Infrastructure Track Sorting</div>
+                <h2 className="text-3xl font-bold tracking-tight text-white">Cloud Segments</h2>
+                <p className="text-xs text-zinc-500 block sm:hidden">Track name-ah click panna open loops keela focus scroll aagum</p>
               </div>
 
-              {/* Dynamic Selector Buttons with mobile auto-scroll trigger hook */}
+              {/* Dynamic Selector Buttons with mobile auto-scroll handler loop */}
               <div className="space-y-2 border-l border-zinc-900 pl-4">
-                {reactInternships.map((track, index) => (
+                {awsInternships.map((track, index) => (
                   <button
                     key={index}
                     onClick={() => handleTrackSelection(index)}
@@ -240,14 +241,14 @@ const ReactInternshipsPage = () => {
             {/* Right Dynamic Column: Content Target Block with scroll margin */}
             <div id="phase-content-block" className="lg:col-span-8 text-left space-y-8 scroll-mt-28">
               <div className="pb-4 border-b border-zinc-900 flex justify-between items-center">
-                <span className="text-xs font-mono text-zinc-500">Displaying Component Array ({reactInternships[selectedTrack].phase}/03)</span>
+                <span className="text-xs font-mono text-zinc-500">Displaying Infrastructure Array ({awsInternships[selectedTrack].phase}/03)</span>
                 <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
-                  {reactInternships[selectedTrack].levelName}
+                  {awsInternships[selectedTrack].levelName}
                 </span>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {reactInternships[selectedTrack].roles.map((role, rIdx) => (
+                {awsInternships[selectedTrack].roles.map((role, rIdx) => (
                   <div
                     key={rIdx}
                     className="p-6 bg-zinc-900/20 border border-zinc-900 hover:border-orange-500/30 rounded-xl transition duration-300 flex flex-col justify-between space-y-6 group"
@@ -280,7 +281,7 @@ const ReactInternshipsPage = () => {
 
                     <div className="pt-4 border-t border-zinc-900/60 flex items-center justify-between">
                       <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Sprints Open
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Gateways Provisioned
                       </div>
                       <Link
                         to={`/apply/${role.title.toLowerCase().replace(/ /g, "-")}`}
@@ -308,10 +309,10 @@ const ReactInternshipsPage = () => {
               
               <div className="space-y-2 text-left max-w-2xl">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                  Want your frontend skills <span className="text-orange-500">vouched for by companies?</span>
+                  Want your architecture layout <span className="text-orange-500">vouched for by cloud leads?</span>
                 </h2>
                 <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
-                  Route your structural portfolio code files directly into our core review system pipelines. Selected code bases secure immediate routing options straight to technical hiring boards.
+                  Route your GitHub infrastructure repositories or automated terraform blueprints straight to our core network panels. Approved profile datasets secure immediate visibility onto top technical hiring boards.
                 </p>
               </div>
 
@@ -319,7 +320,7 @@ const ReactInternshipsPage = () => {
                 to="/apply-general"
                 className="inline-flex items-center gap-2 bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold px-6 py-4 rounded-lg transition duration-200 shadow-xl flex-shrink-0 w-full lg:w-auto justify-center"
               >
-                Launch General Registry <ArrowUpRight size={14} />
+                Access General Registry <ArrowUpRight size={14} />
               </Link>
             </div>
           </div>
@@ -330,4 +331,4 @@ const ReactInternshipsPage = () => {
   );
 };
 
-export default ReactInternshipsPage;
+export default AwsInternshipsPage;

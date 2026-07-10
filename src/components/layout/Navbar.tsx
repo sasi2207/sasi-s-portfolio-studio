@@ -10,6 +10,7 @@ import {
   Mail,
   ChevronDown,
   BookOpen,
+  LifeBuoy,
   Award,
   Globe, 
   Cpu, 
@@ -24,7 +25,7 @@ import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
+  { name: 'Home', path: '/' , icon:<Home size={18} className="text-gray-400" /> },
   { name: 'About', path: '/about', icon: <Info size={18} /> },
   { name: 'Blog', path: '/blog', icon: <Edit3 size={18} /> },
   { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
@@ -40,11 +41,11 @@ const courses = [
 ];
 
 const internships = [
-  { name: "Web Development Internship", path: "/internships/web-development" },
+  { name: "AWS Internships", path: "/internships/Aws-Internship" },
   { name: "Python Internship", path: "/internships/python" },
   { name: "React Internship", path: "/internships/react" },
   { name: "Java Internship", path: "/internships/java" },
-  { name: "Full Stack Internship", path: "/internships/full-stack" },
+  { name: "Ai Full Stack Internship", path: "/internships/full-stack" },
   { name: "Digital Marketing Internship", path: "/internships/digital-marketing" },
 ];
 
@@ -91,6 +92,12 @@ const services = [
     icon: <Megaphone size={16} className="text-rose-500" />,
     tagline: "SEO, Performance Marketing & Branding"
   },
+ {
+  name: "Maintenance & Support",
+  path: "/services/MaintenanceSupport",
+  icon: <LifeBuoy size={16} className="text-cyan-500" />,
+  tagline: "Zero downtime. Absolute application performance and proactive monitoring."
+},
   { 
     name: "Coaching Center Labs", 
     path: "/services/coaching", 
@@ -197,15 +204,22 @@ export const Navbar = () => {
             {/* DESKTOP ROUTE TIERS */}
             <div className="hidden md:flex items-center gap-5 lg:gap-8 ml-auto">
               {/* Home Base */}
-              <Link
-                to="/"
-                className={cn(
-                  'relative font-medium transition text-sm lg:text-base py-1',
-                  location.pathname === '/' ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
-                )}
-              >
-                Home
-              </Link>
+              
+            <Link
+  to="/"
+  className={cn(
+    // Added 'inline-flex items-center gap-2' to align the icon and text perfectly side-by-side
+    'relative inline-flex items-center gap-2 font-medium transition text-sm lg:text-base py-1',
+    location.pathname === '/' ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+  )}
+> 
+  <Home 
+    size={18} 
+    // Inherits the text color dynamically (orange when active, gray when inactive)
+    className={location.pathname === '/' ? 'text-orange-500' : 'text-gray-400 group-hover:text-orange-500'} 
+  />
+  <span>Home</span>
+</Link>
 
               {/* Courses Dropdown Link array mapping */}
               <div className="relative group py-1">

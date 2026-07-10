@@ -69,7 +69,7 @@ const targetedSolutions = [
 export const BusinessWebService = () => {
   return (
     <PageLayout>
-      <div id="business-web" className="min-h-screen bg-slate-950 text-slate-200 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans selection:bg-indigo-500/30">
+      <div id="business-web" className="min-h-screen bg-zinc-950 text-slate-200 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans selection:bg-indigo-500/30">
         
         {/* Elite Cybernetic Background Infrastructure */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_80%,transparent_100%)] opacity-25" />
@@ -139,7 +139,7 @@ export const BusinessWebService = () => {
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 bg-slate-950 border border-slate-900 rounded-xl shadow-inner text-slate-400 group-hover:text-indigo-500 transition-colors">
+                    <div className="p-3 bg-zinc-950 border border-slate-900 rounded-xl shadow-inner text-slate-400 group-hover:text-indigo-500 transition-colors">
                       {item.icon}
                     </div>
                     <span className="text-[10px] font-mono font-bold tracking-wider bg-slate-900 border border-slate-800/80 px-2.5 py-0.5 rounded text-slate-500">
@@ -207,7 +207,7 @@ export const BusinessWebService = () => {
 
             <div className="space-y-3">
               {operationalPipelines.map((pipeline, i) => (
-                <div key={i} className="flex items-start justify-between p-3.5 bg-slate-950/40 border border-slate-900 rounded-xl hover:border-slate-800 transition-all group">
+                <div key={i} className="flex items-start justify-between p-3.5 bg-zinc-950/40 border border-slate-900 rounded-xl hover:border-slate-800 transition-all group">
                   <div className="flex items-start gap-4">
                     <span className="text-xs font-mono font-bold text-slate-600 group-hover:text-indigo-500 transition-colors mt-0.5">
                       {pipeline.step}

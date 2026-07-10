@@ -44,18 +44,13 @@ import OfferForm from "./Offers/OfferForm";
 
 
 
-import { Aws14ConceptsHub } from "./pages/courses/AwsCourse";
-import { MernExplanationHub } from "./pages/courses/MernStackCourse";
-import { JavaFullStackMasterHub } from "./pages/courses/JavaFullStackCourse";
-import { ReactFullStackMasterHub } from "./pages/courses/React Development";
-import { PythonFullStackMasterHub } from "./pages/courses/PythonFullStackCourse";
-import { WebDevInternship } from "./pages/internships/WebDevInternship";
-import { PythonInternship } from "./pages/internships/PythonInternship";
-import { ReactInternship } from "./pages/internships/ReactInternship";
-import { JavaInternship } from "./pages/internships/JavaInternship";
-import { FullStack } from "./pages/internships/FullStackInternship";
-import { DigitalMarketingInternship15Hub } from "./pages/internships/DigitalMarketingInternship";
-import { StaticWebService } from "./pages/services/StaticWebService";
+
+
+
+import ReactInternshipsPage from "./pages/internships/ReactInternship";
+import JavaInternshipsPage from "./pages/internships/JavaInternship";
+
+
 import { DynamicWebService } from "./pages/services/DynamicWebService";
 import { BusinessWebService } from "./pages/services/BusinessWebService";
 import { EcommerceWebService } from "./pages/services/EcommerceWebService";
@@ -64,6 +59,17 @@ import { DeploymentHostingService } from "./pages/services/DeploymentHostingServ
 import { DigitalMarketingService } from "./pages/services/DigitalMarketingService";
 import { CoachingCenterLabsService } from "./pages/services/CoachingCenterLabsService";
 import { BlogPage } from "./pages/Blog";
+import MaintenanceSupport from "./pages/services/MaintenanceSupport";
+import AwsCourse from "./pages/courses/AwsCourse";
+import PythonFullStackCourse from "./pages/courses/PythonFullStackCourse";
+import JavaFullStackCourse from "./pages/courses/JavaFullStackCourse";
+import MernStackCourse from "./pages/courses/MernStackCourse";
+import ReactJsCourse from "./pages/courses/React Development";
+import UiUxCourse from "./pages/courses/UiUxCourse";
+import PythonInternshipsPage from "./pages/internships/PythonInternship";
+import AiFullStackInternshipsPage from "./pages/internships/FullStackInternship";
+import DigitalMarketingInternshipsPage from "./pages/internships/DigitalMarketingInternship";
+import AwsInternshipsPage from "./pages/internships/awsInternships";
 
 
 
@@ -138,31 +144,33 @@ const AnimatedRoutes = () => {
 
 
 {/* --- COURSES MODULE ROUTES --- */}
-            <Route path="/courses/react" element={<ReactFullStackMasterHub/>} />
-            <Route path="/courses/python-fullstack" element={<PythonFullStackMasterHub/>} />
-            <Route path="/courses/java-fullstack" element={<JavaFullStackMasterHub/>} />
-             <Route path="/courses/mern-stack" element={<MernExplanationHub/>} />
-           
-            <Route path="/courses/aws" element={<Aws14ConceptsHub/>} />
+            <Route path="/courses/react" element={<ReactJsCourse/>} />
+            <Route path="/courses/python-fullstack" element={<PythonFullStackCourse/>} />
+            <Route path="/courses/java-fullstack" element={<JavaFullStackCourse/>} />
+             <Route path="/courses/mern-stack" element={<MernStackCourse/>} />
+             <Route path="/courses/ui-ux" element={<UiUxCourse/>} />
+            <Route path="/courses/aws" element={<AwsCourse/>} />
 
             {/* --- INTERNSHIP PROGRAM MODULE ROUTES --- */}
-           <Route path="/internships/web-development" element={<WebDevInternship/>} />
-          <Route path="/internships/python" element={<PythonInternship/>} />
-              <Route path="/internships/react" element={<ReactInternship/>} />
-             <Route path="/internships/java" element={<JavaInternship/>} />
-             <Route path="/internships/full-stack" element={<FullStack/>} />
-            <Route path="/internships/digital-marketing" element={<DigitalMarketingInternship15Hub/>} /> 
+           <Route path="/internships/Aws-Internship" element={<AwsInternshipsPage/>} />
+          <Route path="/internships/python" element={<PythonInternshipsPage/>} />
+              <Route path="/internships/react" element={<ReactInternshipsPage/>} />
+             <Route path="/internships/java" element={<JavaInternshipsPage/>} />
+             <Route path="/internships/full-stack" element={<AiFullStackInternshipsPage/>} />
+            <Route path="/internships/digital-marketing" element={<DigitalMarketingInternshipsPage/>} /> 
 
 
   {/* Services */}
-                   <Route path="/services/static-web" element={<StaticWebService/>} />
+                   <Route path="/services/static-web" element={<StaticWebsite/>} />
           <Route path="/services/dynamic-web" element={<DynamicWebService/>} />
               <Route path="/services/business-web" element={<BusinessWebService/>} />
                <Route path="/services/ecommerce" element={<EcommerceWebService/>} />
             <Route path="/servicesapp-development" element={<AppDevelopmentService/>} />
           <Route path="/services/deployment-hosting" element={<DeploymentHostingService/>} /> 
  <Route path="/services/digital-marketing" element={<DigitalMarketingService/>} />
-          <Route path="/services/coaching" element={<CoachingCenterLabsService/>} />  
+  <Route path="/services/coaching" element={<CoachingCenterLabsService/>} />  
+
+          <Route path="/services/MaintenanceSupport" element={<MaintenanceSupport/>} />  
 
 
 
