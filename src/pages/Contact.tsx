@@ -3,7 +3,7 @@ import AOS from "aos";
 import { z } from "zod";
 import { Layout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
-import { Mail, Phone, MapPin, Send, Terminal, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Terminal } from "lucide-react";
 import { toast } from "sonner";
 import API_URL from "./api";
 
@@ -53,7 +53,7 @@ const Contact = () => {
   };
 
   /* ----------------------------------
-      FORM SUBMIT (Maintained)
+      FORM SUBMIT (Safeguarded)
   ----------------------------------- */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,10 +86,19 @@ const Contact = () => {
         }),
       });
 
-      const data = await response.json();
+      // 💡 SAFE DEBUG: HTML response dump varama thadukka text handle panrom
+      const rawText = await response.text();
+      let data: any = {};
+
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        console.error("Backend sent non-JSON raw HTML structure:", rawText);
+        throw new Error("Server response template error. Check browser console logs.");
+      }
 
       if (!response.ok || !data.success) {
-        throw new Error(data.message || "Failed");
+        throw new Error(data.message || "Transmission logic failed on host side.");
       }
 
       toast.success("Message packet transmitted successfully 🚀");
@@ -100,9 +109,9 @@ const Contact = () => {
         subject: "",
         message: "",
       });
-    } catch (error) {
-      console.error(error);
-      toast.error("Transmission failed. Please verify endpoint connection.");
+    } catch (error: any) {
+      console.error("System logs:", error);
+      toast.error(error.message || "Transmission failed. Verify backend configurations.");
     } finally {
       setIsSubmitting(false);
     }
