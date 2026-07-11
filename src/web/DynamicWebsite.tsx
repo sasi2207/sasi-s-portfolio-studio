@@ -1,328 +1,240 @@
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  Database,
-  ShieldAlert,
-  Sliders,
-  Sparkles,
-  Terminal,
-  Cpu,
-  RefreshCw,
-  Users,
-  CheckCircle
-} from "lucide-react";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Database, Cpu, RefreshCw, Layers, Sparkles, Terminal, ArrowRight, Server, Flame } from 'lucide-react';
 
+// Global layout template wrapper
 import { Layout as PageLayout } from "@/components/layout/Layout";
-import { ParallaxSection } from "@/components/common/ParallaxSection";
 
-/* ------------------------------------------------------------------
-   1. ANIMATION HOOK: Scroll pannumpoothu components-ah neat-ah reveal panna
---------------------------------------------------------------------- */
-const useBlurReveal = () => {
-  const refs = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            observer.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
-    );
-
-    refs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  return (el: HTMLDivElement | null) => {
-    if (el && !refs.current.includes(el)) refs.current.push(el);
-  };
-};
-
-/* ----------------------------------
-   2. DYNAMIC FEATURES DATA
------------------------------------ */
-const dynamicFeatures = [
+// Custom Mock API Response Data Model (Dynamic Data Simulation)
+const DYNAMIC_SERVICES_DATA = [
   {
-    icon: Database,
-    title: "Real-Time Data Engine",
-    text: "Live database sync call handle aagum, data update aana udane user-ku immediate-ah refresh illama theriyum.",
-    borderColor: "hover:border-indigo-500/40",
-    glowColor: "group-hover:bg-indigo-500/5",
+    id: "srv-01",
+    title: "Real-time API Hydration",
+    category: "BACKEND PIPELINE",
+    status: "Active System",
+    latency: "14ms",
+    desc: "Fetches user records and live cloud database queries instantly on component mount cycles.",
+    features: ["REST/GraphQL endpoints", "JWT Session validation", "Auto-revalidation caching"]
   },
   {
-    icon: ShieldAlert,
-    title: "Secure Identity & Auth",
-    text: "Encrypted JWT sessions, multi-factor authorization, matrum advanced roles dashboard support integrated.",
-    borderColor: "hover:border-emerald-500/40",
-    glowColor: "group-hover:bg-emerald-500/5",
+    id: "srv-02",
+    title: "Serverless Compute Nodes",
+    category: "COMPUTE ENGINES",
+    status: "Scaling Auto",
+    latency: "8ms",
+    desc: "Executes micro-services on isolated serverless platforms to handle unlimited heavy user traffic flows.",
+    features: ["Edge execution logs", "Runtime environment sandboxing", "Cold start under 20ms"]
   },
   {
-    icon: Sliders,
-    title: "Advanced CMS Control",
-    text: "Admin panel valiya content, images, orders, matrum text changes-ah system variable-ah direct-ah manage pannalaam.",
-    borderColor: "hover:border-indigo-500/40",
-    glowColor: "group-hover:bg-indigo-500/5",
-  },
-  {
-    icon: Cpu,
-    title: "Serverless Compute API",
-    text: "Heavy backend operation-lam automatic scalable Edge cloud triggers valiya fast-ah load aagum.",
-    borderColor: "hover:border-emerald-500/40",
-    glowColor: "group-hover:bg-emerald-500/5",
-  },
-  {
-    icon: RefreshCw,
-    title: "SSR & Dynamic Routing",
-    text: "Dynamic pages user interaction-ku thagapadi on-the-fly server-side render aagum, perfect for user portals.",
-    borderColor: "hover:border-indigo-500/40",
-    glowColor: "group-hover:bg-indigo-500/5",
-  },
-  {
-    icon: Users,
-    title: "Scale Infrastructure",
-    text: "Traffic evlo athigama aanaalum server auto-scale aagi application logic down-aagama continuous-ah functional-ah irukum.",
-    borderColor: "hover:border-emerald-500/40",
-    glowColor: "group-hover:bg-emerald-500/5",
-  },
+    id: "srv-03",
+    title: "Global State Management",
+    category: "APPLICATION STATE",
+    status: "Synced Global",
+    latency: "0ms",
+    desc: "Keeps client-side data variables unified across multiple route channels and local application storages.",
+    features: ["Zustand Context maps", "Real-time socket broadcasts", "Offline storage local storage syncing"]
+  }
 ];
 
-const DynamicWebsite = () => {
-  const reveal = useBlurReveal();
+export default function DynamicWebsite() {
+  // Dynamic State Managers
+  const [activeTab, setActiveTab] = useState<string>("srv-01");
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [liveCounter, setLiveCounter] = useState<number>(314);
+
+  // Simple API Simulation trigger
+  const triggerDataRefresh = () => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+      setLiveCounter(prev => prev + Math.floor(Math.random() * 5) + 1);
+    }, 800);
+  };
+
+  // Standard smooth view slide effect
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+  };
+
+  // Find currently selected live data element
+  const currentActiveService = DYNAMIC_SERVICES_DATA.find(s => s.id === activeTab) || DYNAMIC_SERVICES_DATA[0];
 
   return (
     <PageLayout>
-      {/* Premium Deep Obsidian Wrapper with Emerald & Indigo accents */}
-      <div className="bg-zinc-950 text-zinc-100 min-h-screen selection:bg-emerald-500 selection:text-black">
-        
-        {/* ================= HERO SECTION ================= */}
-        <section className="relative pt-44 pb-36 overflow-hidden border-b border-zinc-900 bg-zinc-950">
-          {/* Studio Ambient Gradient Lights behind background */}
-          <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none" />
-          <div className="absolute top-20 right-1/4 translate-x-1/2 w-[600px] h-[600px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none" />
-
-          {/* Grid Decorative Overlay Patterns */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-          <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-            
-            {/* Left Side: Advanced Headings & Typography */}
-            <div className="lg:col-span-7 text-left blur-reveal is-visible">
-              {/* Glowing Tagline Info Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-850 text-xs font-semibold text-emerald-400 mb-8 shadow-inner">
-                <Sparkles size={12} className="animate-pulse text-emerald-400" />
-                <span>Scalable Web Applications</span>
+      <div className="min-h-screen bg-black text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden">
+        <div className="max-w-6xl mx-auto px-4 py-16 space-y-24">
+          
+          {/* 1. DYNAMIC HERO SECTION WITH LIVE DATA HUD */}
+          <section className="text-center pt-10 pb-6 relative">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="space-y-6"
+            >
+              {/* Live HUD Counter Badge */}
+              <div className="inline-flex items-center gap-3 bg-neutral-950 border border-neutral-900 rounded-full py-1.5 px-4 text-xs font-mono">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                </span>
+                <span className="text-neutral-400">LIVE SERVER TRANSACTIONS:</span>
+                <span className="text-orange-500 font-bold tracking-wider">{liveCounter} req/s</span>
               </div>
               
-              <h1 className="text-5xl md:text-6xl xl:text-7xl font-heading font-black mb-6 tracking-tight text-white leading-[1.05]">
-                Highly Scalable <br />
-                <span className="bg-gradient-to-r from-indigo-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
-                  Dynamic Platforms
-                </span>
+              <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight max-w-4xl mx-auto leading-none">
+                Engineered for <span className="text-orange-500">Dynamic Cloud</span> Databases
               </h1>
-
-              <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed font-light">
-                We engineer full-stack software dashboards, interactive portals, and dynamic databases designed around real-time user engagement and high-load query processing.
+              
+              <p className="text-neutral-400 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed">
+                Connect live API gateways, fetch serverless functions instantaneously, and manage application status dynamically with raw rendering speeds.
               </p>
-
-              {/* Action Trigger Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <Link
-                  to="/proposal"
-                  className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold px-8 py-4 rounded-xl transition duration-300 shadow-xl shadow-emerald-500/10 group"
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto bg-orange-500 text-black font-bold px-8 py-4 flex items-center justify-center gap-2 tracking-wide hover:bg-orange-600 transition-colors"
                 >
-                  Start Dynamic App
-                  <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform text-zinc-950" />
-                </Link>
+                  INITIALIZE PLATFORM <ArrowRight size={16} />
+                </motion.button>
                 
-                <Link
-                  to="/portfolio"
-                  className="inline-flex items-center justify-center gap-2 bg-zinc-900/80 hover:bg-zinc-850 text-zinc-300 border border-zinc-800 px-8 py-4 rounded-xl transition duration-300 backdrop-blur-sm"
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={triggerDataRefresh}
+                  className="w-full sm:w-auto bg-neutral-950 border border-neutral-900 hover:border-neutral-800 text-neutral-300 font-medium px-8 py-4 flex items-center justify-center gap-2 transition-all"
                 >
-                  View Systems Work
-                </Link>
+                  <RefreshCw size={16} className={isRefreshing ? "animate-spin text-orange-500" : ""} />
+                  RE-FETCH API METRICS
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
+          </section>
 
-            {/* Right Side: Advanced Dark Code Window Graphic Interface */}
-            <div className="lg:col-span-5 blur-reveal is-visible">
-              <div className="relative mx-auto max-w-md lg:max-w-none rounded-2xl bg-zinc-900/40 p-4 border border-zinc-850 shadow-2xl backdrop-blur-md overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-emerald-500/5 opacity-100 group-hover:scale-105 transition duration-500 -z-10" />
-                
-                {/* Mockup Window Top Navigation Bar */}
-                <div className="flex items-center justify-between pb-4 border-b border-zinc-850 mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-3 rounded-full bg-zinc-800" />
-                    <span className="w-3 h-3 rounded-full bg-zinc-800" />
-                    <span className="w-3 h-3 rounded-full bg-zinc-800" />
-                  </div>
-                  <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-500 bg-zinc-950 px-2.5 py-1 rounded border border-zinc-900">
-                    <Terminal size={10} className="text-indigo-400" /> dynamic-api.ts
-                  </div>
+          {/* 2. LIVE DASHBOARD TABBED INTERFACE LAYOUT (Interactive Dynamic Module) */}
+          <section className="bg-neutral-950 border border-neutral-900 p-6 sm:p-8 rounded-xl relative">
+            <div className="absolute top-0 left-12 w-24 h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+            
+            <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+              
+              {/* Left Column: Interactive State Tab Selectors */}
+              <div className="w-full lg:w-2/5 flex flex-col gap-3 justify-center">
+                <div className="mb-4">
+                  <span className="text-[10px] font-mono text-orange-500 tracking-widest block uppercase">DYNAMIC CONTROLLER</span>
+                  <h3 className="text-xl font-bold uppercase tracking-tight text-white">Select System Core</h3>
                 </div>
 
-                {/* Mockup Display Box Content */}
-                <div className="space-y-3 font-mono text-xs text-left p-2 overflow-x-auto text-zinc-400 leading-relaxed select-none">
-                  <p className="text-zinc-600">// Data Compute Stream Engine</p>
-                  <p><span className="text-indigo-400">const</span> clusterSession = <span className="text-emerald-400">await Prisma</span>.connect();</p>
-                  <p>clusterSession.<span className="text-teal-400">activeQueries</span> = <span className="text-amber-400">"Streaming Live"</span>;</p>
-                  <p>clusterSession.<span className="text-teal-400">identityVerification</span> = <span className="text-emerald-400">"Secure Token Verified"</span>;</p>
-                  <p>clusterSession.<span className="text-teal-400">redisCaching</span> = <span className="text-emerald-400">true</span>;</p>
-                  <p className="pt-2 text-zinc-500">
-                    &gt; Executing live relational query across multi-region engine databases... 
-                    <span className="text-emerald-400 animate-pulse"> Running ✓</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* ================= VALUE STATEMENT ================= */}
-        <section className="py-20 bg-zinc-900/20 border-b border-zinc-900">
-          <div ref={reveal} className="container-custom max-w-6xl px-6 lg:px-12 blur-reveal text-center">
-            <p className="text-xl md:text-2xl font-normal leading-relaxed text-zinc-400">
-              We engineer functional software platforms built completely for{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent font-semibold">
-                live complex data, real-time sync operations, and absolute architectural scale.
-              </span>
-            </p>
-          </div>
-        </section>
-
-        {/* ================= FEATURES GRID ================= */}
-        <section className="py-20 bg-zinc-950">
-          <div className="container-custom max-w-7xl px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dynamicFeatures.map((f, idx) => (
-              <div
-                key={idx}
-                ref={reveal}
-                className={`blur-reveal group relative bg-zinc-900/20 border border-zinc-900 p-8 rounded-xl transition duration-300 ${f.borderColor} overflow-hidden`}
-              >
-                {/* Background Card Hover Subtle Glows */}
-                <div className={`absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl rounded-xl -z-10 ${f.glowColor}`} />
-                
-                <f.icon className="text-emerald-400 mb-6 w-7 h-7 transform group-hover:scale-110 transition duration-300" />
-                <h3 className="font-semibold text-lg mb-3 text-white tracking-tight">
-                  {f.title}
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">{f.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= PRICING PLANS ================= */}
-        <section className="py-20 bg-zinc-950 border-t border-zinc-900">
-          <div className="container-custom max-w-7xl px-6 lg:px-12">
-            <div ref={reveal} className="blur-reveal mb-20 text-center">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
-                Full-Stack Implementation Pricing
-              </h2>
-              <p className="text-base text-zinc-400 max-w-xl mx-auto">
-                Transparent structures targeted directly toward operational product design.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 items-stretch">
-              {[
-                {
-                  title: "Dynamic Portal",
-                  price: "₹24,999",
-                  description: "Full system content management setups designed for business workflow tracking.",
-                  features: ["Custom Headless CMS Engine Hook", "Complete Core CRUD Operations", "Secure Identity Login Management", "Integrated Live Webhooks & Mailers"],
-                  highlighted: false,
-                },
-                {
-                  title: "SaaS Blueprint",
-                  price: "₹45,000",
-                  description: "Complete cloud SaaS applications engineered with customized client subscription tiers.",
-                  features: ["Advanced Multi-Role Dashboards", "Payment Gateway Architecture integration", "Relational Database Management Setup", "Real-time Notifications Systems Core"],
-                  highlighted: true,
-                },
-                {
-                  title: "Custom Complex Core",
-                  price: "₹75,000+",
-                  description: "Large scale enterprise-grade processing systems containing real-time stream layers.",
-                  features: ["Advanced Websocket Engine Configurations", "Automated Background Workers Pipelines", "Third-party Enterprise REST/GraphQL Integrations", "Direct Infrastructure Priority Tech Hours"],
-                  highlighted: false,
-                },
-              ].map((plan, index) => (
-                <div
-                  key={index}
-                  ref={reveal}
-                  className={`blur-reveal flex flex-col justify-between p-8 rounded-2xl transition duration-300 relative ${
-                    plan.highlighted
-                      ? "bg-zinc-900 border-2 border-emerald-500 shadow-2xl shadow-emerald-500/5 scale-105 z-10"
-                      : "bg-zinc-900/30 border border-zinc-850 hover:border-zinc-800"
-                  }`}
-                >
-                  {plan.highlighted && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-zinc-950 text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full">
-                      Most Selected
-                    </span>
-                  )}
-                  <div>
-                    <h3 className="font-semibold text-xl mb-1 text-white">{plan.title}</h3>
-                    <p className="text-zinc-400 text-xs mb-6 leading-relaxed">{plan.description}</p>
-                    <div className="text-4xl font-bold text-emerald-400 mb-6">{plan.price}</div>
-                    <ul className="space-y-4 mb-8">
-                      {plan.features.map((f, fIdx) => (
-                        <li key={fIdx} className="flex gap-3 text-zinc-300 text-sm items-start">
-                          <CheckCircle className="text-indigo-400 mt-0.5 flex-shrink-0" size={16} />
-                          <span className="leading-snug">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Link
-                    to="/proposal"
-                    className={`w-full text-center font-bold py-3.5 rounded-xl transition duration-200 text-sm ${
-                      plan.highlighted
-                        ? "bg-emerald-500 text-zinc-950 hover:bg-emerald-400 shadow-lg shadow-emerald-500/10"
-                        : "bg-zinc-800 text-zinc-200 hover:bg-zinc-700"
+                {DYNAMIC_SERVICES_DATA.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`w-full text-left p-4 rounded-lg border transition-all duration-300 relative group overflow-hidden ${
+                      activeTab === tab.id 
+                        ? 'bg-neutral-900/60 border-orange-500/40 text-white' 
+                        : 'bg-black/40 border-neutral-900 text-neutral-500 hover:border-neutral-800 hover:text-neutral-300'
                     }`}
                   >
-                    Select Strategy
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                    {/* Active tab structural border layout marker using Framer Motion layoutId */}
+                    {activeTab === tab.id && (
+                      <motion.div 
+                        layoutId="activeTabMarker" 
+                        className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono tracking-wider">{tab.category}</span>
+                      <span className={`text-[10px] px-2 py-0.5 font-mono ${activeTab === tab.id ? 'text-orange-400 bg-orange-500/10' : 'text-neutral-600'}`}>{tab.latency}</span>
+                    </div>
+                    <h4 className="text-sm font-bold uppercase mt-1 tracking-wide group-hover:text-white transition-colors">{tab.title}</h4>
+                  </button>
+                ))}
+              </div>
 
-        {/* ================= CALL TO ACTION ================= */}
-        <section className="py-18 bg-zinc-950 relative">
-          <div className="container-custom max-w-7xl px-6 lg:px-12">
-            <div
-              ref={reveal}
-              className="blur-reveal bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-850 rounded-2xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
-            >
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white tracking-tight">
-                Let's Build Something Exceptional
-              </h2>
-              <p className="mb-10 text-zinc-400 max-w-xl mx-auto text-sm leading-relaxed">
-                Connect with our full-stack engineers to map your operational data requirements.
-              </p>
-              <Link
-                to="/proposal"
-                className="inline-flex items-center gap-3 bg-white text-zinc-950 font-bold px-8 py-4 rounded-xl hover:bg-zinc-200 transition duration-200 shadow-xl"
-              >
-                Get Started <ArrowRight size={18} />
-              </Link>
+              {/* Right Column: Dynamic Content Box mapping AnimatePresence for content transitions */}
+              <div className="w-full lg:w-3/5 bg-black border border-neutral-900 p-6 rounded-lg flex flex-col justify-between min-h-[300px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentActiveService.id}
+                    initial={{ opacity: 0, x: 15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -15 }}
+                    transition={{ duration: 0.2 }}
+                    className="space-y-6"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-900 pb-4">
+                      <div>
+                        <span className="text-orange-500 text-[10px] font-mono tracking-widest uppercase block">{currentActiveService.id} // CONFIG</span>
+                        <h3 className="text-lg font-black uppercase tracking-wide mt-0.5">{currentActiveService.title}</h3>
+                      </div>
+                      <div className="bg-neutral-950 border border-neutral-800 text-neutral-400 text-xs px-3 py-1 font-mono rounded">
+                        STATUS: <span className="text-green-400 font-bold">{currentActiveService.status}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed font-light">
+                      {currentActiveService.desc}
+                    </p>
+
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-300 mb-3 flex items-center gap-2">
+                        <Terminal size={14} className="text-orange-500" /> Environment Capabilities:
+                      </h4>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-400 font-mono">
+                        {currentActiveService.features.map((feat, i) => (
+                          <li key={i} className="flex items-center gap-2 bg-neutral-950 p-2 border border-neutral-900/60 rounded">
+                            <span className="text-orange-500">⚡</span> {feat}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="mt-6 pt-4 border-t border-neutral-900 flex items-center justify-between text-xs font-mono text-neutral-500">
+                  <span>Server execution: Node.js 20.x</span>
+                  <span className="text-orange-500/70 hover:text-orange-500 cursor-pointer transition-colors">Access Console log →</span>
+                </div>
+              </div>
+
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* 3. CORE DYNAMIC PROPERTIES LAYER (Interactive Scale Cards) */}
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: <Database size={22} />, title: "Relational Mapping", desc: "Instantly links with PostgreSQL or MongoDB databases with clean schema protocols." },
+              { icon: <Server size={22} />, title: "Serverless Deployment", desc: "No manual clusters setup. Application endpoints scale instantly to load pressure points." },
+              { icon: <Flame size={22} />, title: "Isomorphic Caching", desc: "Blends lightning static pages with dynamic state hydration rules perfectly." }
+            ].map((feature, idx) => (
+              <motion.div 
+                key={idx}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.03, borderColor: 'rgba(249,115,22,0.4)' }}
+                className="bg-neutral-950 border border-neutral-900 p-6 flex flex-col justify-between group rounded-lg transition-all duration-300"
+              >
+                <div>
+                  <div className="mb-4 text-orange-500 bg-neutral-900 w-11 h-11 flex items-center justify-center rounded-md border border-neutral-800 group-hover:border-orange-500/40 transition-colors">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-base font-bold uppercase tracking-wide mb-2 group-hover:text-orange-500 transition-colors">{feature.title}</h3>
+                  <p className="text-xs text-neutral-400 leading-relaxed font-light">{feature.desc}</p>
+                </div>
+                <div className="mt-6 text-[11px] font-mono text-neutral-600 group-hover:text-orange-500 transition-colors flex items-center gap-1">
+                  View API Blueprint <span>→</span>
+                </div>
+              </motion.div>
+            ))}
+          </section>
+
+        </div>
       </div>
     </PageLayout>
   );
-};
-
-export default DynamicWebsite;
+}

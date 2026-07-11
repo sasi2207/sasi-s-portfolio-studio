@@ -51,13 +51,8 @@ import ReactInternshipsPage from "./pages/internships/ReactInternship";
 import JavaInternshipsPage from "./pages/internships/JavaInternship";
 
 
-import { DynamicWebService } from "./pages/services/DynamicWebService";
-import { BusinessWebService } from "./pages/services/BusinessWebService";
-import { EcommerceWebService } from "./pages/services/EcommerceWebService";
-import { AppDevelopmentService } from "./pages/services/AppDevelopmentService";
-import { DeploymentHostingService } from "./pages/services/DeploymentHostingService";
-import { DigitalMarketingService } from "./pages/services/DigitalMarketingService";
-import { CoachingCenterLabsService } from "./pages/services/CoachingCenterLabsService";
+
+
 import { BlogPage } from "./pages/Blog";
 import MaintenanceSupport from "./pages/services/MaintenanceSupport";
 import AwsCourse from "./pages/courses/AwsCourse";
@@ -70,6 +65,13 @@ import PythonInternshipsPage from "./pages/internships/PythonInternship";
 import AiFullStackInternshipsPage from "./pages/internships/FullStackInternship";
 import DigitalMarketingInternshipsPage from "./pages/internships/DigitalMarketingInternship";
 import AwsInternshipsPage from "./pages/internships/awsInternships";
+import DynamicWebServices from "./pages/services/DynamicWebService";
+import BusinessWebServices from "./pages/services/BusinessWebService";
+import EcommerceWebService from "./pages/services/EcommerceWebService";
+import AppDevelopmentService from "./pages/services/AppDevelopmentService";
+import DeploymentHostingService from "./pages/services/DeploymentHostingService";
+import DigitalMarketingService from "./pages/services/DigitalMarketingService";
+import ComputerCoachingServices from "./pages/services/ComputerCoachingServices";
 
 
 
@@ -162,13 +164,13 @@ const AnimatedRoutes = () => {
 
   {/* Services */}
                    <Route path="/services/static-web" element={<StaticWebsite/>} />
-          <Route path="/services/dynamic-web" element={<DynamicWebService/>} />
-              <Route path="/services/business-web" element={<BusinessWebService/>} />
+          <Route path="/services/dynamic-web" element={<DynamicWebServices/>} />
+              <Route path="/services/business-web" element={<BusinessWebServices/>} />
                <Route path="/services/ecommerce" element={<EcommerceWebService/>} />
             <Route path="/servicesapp-development" element={<AppDevelopmentService/>} />
           <Route path="/services/deployment-hosting" element={<DeploymentHostingService/>} /> 
  <Route path="/services/digital-marketing" element={<DigitalMarketingService/>} />
-  <Route path="/services/coaching" element={<CoachingCenterLabsService/>} />  
+  <Route path="/services/coaching" element={<ComputerCoachingServices/>} />  
 
           <Route path="/services/MaintenanceSupport" element={<MaintenanceSupport/>} />  
 

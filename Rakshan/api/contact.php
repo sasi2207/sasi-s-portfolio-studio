@@ -3,33 +3,19 @@
 // CORS Configuration
 // ===============================
 
-$allowedOrigins = [
-    "https://techsasi.com",
-    "https://www.techsasi.com"
-];
 
-if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
-    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
-}
 
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Origin: *"); 
+
+// Allow specific HTTP methods (like POST, GET, OPTIONS for preflight)
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
+// Allow the specific headers your React app is sending (like Content-Type)
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-header("Access-Control-Allow-Credentials: true");
-header("Content-Type: application/json; charset=UTF-8");
 
-// Handle Preflight Request
-if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+// Handle browser preflight "OPTIONS" request instantly
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
-    exit();
-}
-
-// Allow POST Only
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    http_response_code(405);
-    echo json_encode([
-        "success" => false,
-        "error" => "Method Not Allowed"
-    ]);
     exit();
 }
 

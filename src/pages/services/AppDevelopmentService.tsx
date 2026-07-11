@@ -2,244 +2,166 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Smartphone, 
-  ShieldCheck, 
-  ArrowRight, 
-  Terminal, 
-  Sparkles,
-  Layers,
-  Cpu,
-  Infinity,
-  WifiOff,
+  Cpu, 
+  Layers, 
+  Zap, 
+  Infinity, 
+  Sparkles, 
+  ArrowRight,
+  CloudLightning,
   Fingerprint
 } from 'lucide-react';
 
+// Neenga sonna dynamic system layout component import
 import { Layout as PageLayout } from "@/components/layout/Layout";
 
-// Multi-tier mobile operational performance benchmarks
-const enterpriseMetrics = [
-  { value: "60 FPS", label: "Fluid Interface Rendering", desc: "Native thread management ensuring stutter-free UI layouts." },
-  { value: "Offline", label: "First Architecture Sync", desc: "Local SQLite cache layers that seamlessly sync records when connection returns." },
-  { value: "Universal", label: "Cross-Platform Framework", desc: "Single code deployment running smoothly on iOS and Android." }
-];
+export default function AppDevelopmentService() {
+  
+  // Elements structural animation (Simple AOS scroll-view effect)
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+  };
 
-const technicalPillars = [
-  {
-    title: "Native Performance Layers",
-    desc: "Engineered cleanly on advanced mobile frameworks (React Native/Flutter), bypassing heavy emulation delays for immediate user responses.",
-    icon: <Smartphone className="w-5 h-5 text-pink-500" />,
-    tag: "iOS & Android"
-  },
-  {
-    title: "Hardware & Sensor Hooks",
-    desc: "Direct integration with native system operations, support for secure biometrics, camera layouts, and geographical location tracking.",
-    icon: <Fingerprint className="w-5 h-5 text-cyan-400" />,
-    tag: "Device Native"
-  },
-  {
-    title: "Resilient Offline Storage",
-    desc: "Embedded relational data containers configured to process customer updates locally without internet connectivity.",
-    icon: <WifiOff className="w-5 h-5 text-rose-400" />,
-    tag: "Data Isolation"
-  }
-];
-
-const operationalPipelines = [
-  { step: "01", phase: "Mobile Wireframe Prototyping", detail: "Mapping precise thumb zones, physical view bounds, and screen navigation mechanics." },
-  { step: "02", phase: "Cross-Platform Source Coding", detail: "Assembling reactive view hooks, unified app state states, and background network logic." },
-  { step: "03", phase: "Rigorous Sandbox Device Audits", detail: "Testing build outputs against diverse screen safe-areas, hardware variations, and memory loads." },
-  { step: "04", phase: "App Store Distribution Engine", detail: "Configuring provisioning profiles, signing security certificates, and staging Apple TestFlight or Google tracks." }
-];
-
-const targetedSolutions = [
-  { 
-    title: "SaaS Mobile Frontends", 
-    useCase: "Fast, application dashboards designed to extend web platform services straight to your client's device screen." 
-  },
-  { 
-    title: "On-Demand Resource Apps", 
-    useCase: "Tailored for heavy geo-location usage, background data streams, and rapid notification updates." 
-  },
-  { 
-    title: "Enterprise Internal Device Tools", 
-    useCase: "Secure native utility packages engineered to optimize data collection and sync with team operations seamlessly." 
-  }
-];
-
-export const AppDevelopmentService = () => {
   return (
     <PageLayout>
-      <div id="app-development" className="min-h-screen bg-zinc-950 text-slate-200 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans selection:bg-pink-500/30">
-        
-        {/* Elite Cybernetic Background Infrastructure */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_80%,transparent_100%)] opacity-25" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-pink-500/10 to-transparent rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-20 w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
-
-        {/* SECTION HEADER */}
-        <div className="max-w-6xl mx-auto text-center mb-24 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-1.5 rounded-full backdrop-blur-md">
-              <Sparkles size={12} className="text-pink-500" />
-              <span className="text-slate-400 text-xs font-semibold tracking-wider uppercase font-mono">
-                Native Execution Layer
+      <div className="min-h-screen bg-black text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden">
+        <div className="max-w-6xl mx-auto px-4 py-16 space-y-24">
+          
+          {/* 1. HERO SECTION */}
+          <section className="text-center pt-10 pb-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <span className="inline-block text-orange-500 text-xs font-bold uppercase tracking-wider bg-orange-500/10 px-4 py-1.5 rounded-full mb-6 border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300">
+                Native & Cross-Platform Mobility
               </span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-white leading-none">
-              App <span className="bg-gradient-to-r from-pink-400 via-rose-500 to-amber-500 bg-clip-text text-transparent">Development</span>
-            </h1>
-            
-            <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed font-normal">
-              Bypass basic responsive web shells. We design high-performance, native and cross-platform mobile apps built from the ground up for smooth gestures, device compatibility, and offline functionality.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* ENTERPRISE METRIC HUB */}
-        <div className="max-w-6xl mx-auto mb-28 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {enterpriseMetrics.map((metric, i) => (
-              <div key={i} className="bg-slate-900/40 backdrop-blur-sm p-8 rounded-2xl border border-slate-900/80 shadow-2xl relative group hover:border-slate-800/40 transition-all">
-                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <p className="text-4xl md:text-5xl font-extrabold text-pink-500 tracking-tight mb-2 font-mono">{metric.value}</p>
-                <p className="text-xs font-bold text-slate-200 mb-1.5 uppercase font-mono tracking-wide">{metric.label}</p>
-                <p className="text-xs text-slate-500 leading-relaxed">{metric.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* TECHNICAL PILLARS GRID */}
-        <div className="max-w-6xl mx-auto mb-32 relative z-10">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 border-b border-slate-900 pb-6">
-            <div>
-              <h2 className="text-xl md:text-3xl font-extrabold text-white tracking-tight">Mobile Engineering Standards</h2>
-              <p className="text-xs md:text-sm text-slate-500 mt-1">Replacing buggy web wrappers with compiled machine-level performance.</p>
-            </div>
-            <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-widest hidden md:inline-block">
-              Runtime_Node: Compiled
-            </span>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {technicalPillars.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="bg-slate-900/20 border border-slate-900/60 p-8 rounded-2xl flex flex-col justify-between hover:border-slate-800/60 transition-all group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 bg-zinc-950 border border-slate-800 rounded-xl shadow-inner text-slate-400 group-hover:text-pink-500 transition-colors">
-                      {item.icon}
-                    </div>
-                    <span className="text-[10px] font-mono font-bold tracking-wider bg-slate-900 border border-slate-800/80 px-2.5 py-0.5 rounded text-slate-500">
-                      {item.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-100 mb-2.5 tracking-tight group-hover:text-white transition-colors">{item.title}</h3>
-                  <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-normal">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* WORKFLOW MATRIX PANEL */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32 relative z-10">
-          
-          {/* TARGET SYSTEM ENVIRONMENTS */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 space-y-8"
-          >
-            <div className="space-y-3">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
-                Mobile Solutions Engineered to Deploy Globally
-              </h3>
-              <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-                We organize secure native layouts carefully tailored around strict hardware criteria, modern design system guides, and lightning-fast background sync nodes.
+              
+              <h1 className="text-4xl sm:text-6xl font-black uppercase mb-4 tracking-tight">
+                We Engineer Fluid <span className="text-orange-500">Mobile Applications</span>
+              </h1>
+              
+              <p className="text-neutral-400 text-base sm:text-lg max-w-xl mx-auto mb-8 font-light">
+                Ungaloda ideas-ai premium iOS and Android applications-ah code panrom. From custom interactions to heavy background sync processing.
               </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto bg-orange-500 text-black font-bold px-8 py-4 flex items-center justify-center gap-2 group transition-colors hover:bg-orange-600"
+                >
+                  START APP DISCOVERY <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+                
+                <motion.button 
+                  whileHover={{ scale: 1.05, borderColor: '#ffffff' }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto bg-transparent border border-neutral-800 text-neutral-400 hover:text-white px-8 py-4 transition-all"
+                >
+                  EXPLORE BLUEPRINTS
+                </motion.button>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 2. APP METRICS & BENCHMARKS (With Orange Border Hover Glow) */}
+          <section>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold uppercase">
+                Application <span className="text-orange-500">Standards</span>
+              </h2>
             </div>
 
-            <div className="space-y-4">
-              {targetedSolutions.map((sol, i) => (
-                <div key={i} className="p-4 bg-slate-900/10 border border-slate-900/50 rounded-xl flex flex-col space-y-1 hover:border-slate-800/80 transition-all">
-                  <h4 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-pink-500" />
-                    {sol.title}
-                  </h4>
-                  <p className="text-xs text-slate-500 leading-relaxed pl-3.5">{sol.useCase}</p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { number: "60 FPS", title: "Fluid UI Performance", desc: "Heavy thread rendering process optimized to maintain smooth layout gestures layout constraints." },
+                { number: "Offline", title: "First Architecture", desc: "Local database engines caching data safely, syncing up automatically when internet reconnects." },
+                { number: "Universal", title: "Single Base Code", desc: "React Native and Flutter architectures moolama single code base-la dual distribution reach tharom." }
+              ].map((prop, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, borderColor: '#f97316' }}
+                  className="bg-neutral-950 border border-neutral-900 p-8 text-center transition-all duration-300 rounded-lg shadow-xl"
+                >
+                  <div className="text-4xl font-black text-orange-500 mb-2">{prop.number}</div>
+                  <h3 className="text-sm font-bold uppercase text-white mb-2 tracking-wide">{prop.title}</h3>
+                  <p className="text-xs text-neutral-400 leading-relaxed">{prop.desc}</p>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </section>
 
-          {/* CODE TERMINAL SIMULATION GRAPHIC */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 bg-slate-900/50 border border-slate-900/80 rounded-2xl p-6 text-white shadow-2xl relative"
-          >
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-900/80">
-              <div className="flex items-center gap-2">
-                <Terminal size={14} className="text-pink-500" />
-                <span className="text-xs font-mono tracking-wider text-slate-500">mobile_compilation.sh</span>
-              </div>
-              <div className="flex gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-              </div>
+          {/* 3. APP DEVELOPMENT MATRIX (With Card Hover Scale & Icon Rotations) */}
+          <section>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold uppercase">
+                Yenna Yenna <span className="text-orange-500">Develop Panrom?</span>
+              </h2>
             </div>
 
-            <div className="space-y-3">
-              {operationalPipelines.map((pipeline, i) => (
-                <div key={i} className="flex items-start justify-between p-3.5 bg-zinc-950/40 border border-slate-900 rounded-xl hover:border-slate-800 transition-all group">
-                  <div className="flex items-start gap-4">
-                    <span className="text-xs font-mono font-bold text-slate-600 group-hover:text-pink-500 transition-colors mt-0.5">
-                      {pipeline.step}
-                    </span>
-                    <div>
-                      <p className="text-xs md:text-sm font-bold text-slate-300 group-hover:text-slate-100 transition-colors">{pipeline.phase}</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5 leading-normal">{pipeline.detail}</p>
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { icon: <Smartphone size={24} />, title: "Native iOS & Android Apps", desc: "Swift, Kotlin, and high-performance layout frameworks use panni customized luxury user interface build panrom." },
+                { icon: <Layers size={24} />, title: "Cross-Platform Engines", desc: "Time and cost effect-ai maximize panna unified mobile layout parameters deploy panrom for dual platforms." },
+                { icon: <CloudLightning size={24} />, title: "Real-time Cloud Sync", desc: "GraphQL subscriptions layered with real-time socket channels backend databases dashboard connection sync tharom." },
+                { icon: <Fingerprint size={24} />, title: "Biometric & Hardware Core", desc: "FaceID, biometric security loops, camera hardware layers, and Bluetooth mesh integration protocols control panrom." },
+                { icon: <Zap size={24} />, title: "Micro-Interaction Layouts", desc: "Framer and spring properties combine panni touch feedbacks dynamic gestures and visual hooks code panrom." },
+                { icon: <Infinity size={24} />, title: "App Store Pipeline Support", desc: "Continuous internal TestFlight workflows staging deployments, validation audits up to App Store submission handle panrom." }
+              ].map((service, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.03, backgroundColor: '#0a0a0a', borderColor: 'rgba(249,115,22,0.3)' }}
+                  className="bg-neutral-950 border border-neutral-900 p-6 flex flex-col items-center text-center rounded-lg transition-colors group duration-300"
+                >
+                  <div className="mb-4 bg-neutral-900 p-4 rounded-md group-hover:bg-orange-500 group-hover:text-black text-orange-500 transition-all duration-300 group-hover:rotate-6">
+                    {service.icon}
                   </div>
-                  <ArrowRight size={12} className="text-slate-800 group-hover:translate-x-1 transition-all group-hover:text-slate-500 mt-1 flex-shrink-0" />
-                </div>
+                  <h3 className="text-base font-bold mb-2 group-hover:text-orange-500 transition-colors">{service.title}</h3>
+                  <p className="text-xs text-neutral-400 leading-relaxed">{service.desc}</p>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
-        </div>
+          </section>
 
-        {/* CALL TO ACTION */}
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="bg-gradient-to-b from-slate-900/80 to-slate-950/40 p-8 md:p-14 rounded-2xl text-center border border-slate-900 shadow-2xl relative overflow-hidden">
-            <h3 className="text-xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
-              Transform Your Mobile Vision into Reality
-            </h3>
-            <p className="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
-              Connect with our core mobile development strategists to sketch your responsive layout views, coordinate API hooks, and streamline your application storefront distribution setup.
-            </p>
-            <button className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-600 hover:opacity-95 text-slate-950 font-bold text-xs md:text-sm px-6 py-3 rounded-lg transition-all shadow-xl shadow-pink-500/5 group">
-              <span className="text-white">Launch Device Engineering Session</span>
-              <ArrowRight size={14} className="transform group-hover:translate-x-0.5 transition-transform text-white" />
-            </button>
-          </div>
-        </div>
+          {/* 4. CALL TO ACTION (CTA BOX) */}
+          <section>
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              whileHover={{ scale: 1.01 }}
+              className="bg-neutral-950 border border-neutral-900 p-10 text-center max-w-3xl mx-auto rounded-xl relative overflow-hidden group hover:border-orange-500/40 transition-colors"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 blur-3xl group-hover:bg-orange-500/10 transition-colors pointer-events-none" />
+              
+              <h2 className="text-xl sm:text-2xl font-bold uppercase mb-2">Ready to ship your application to production?</h2>
+              <p className="text-xs text-neutral-400 mb-6">Let's blueprint your custom multi-tenant dynamic app pipeline architecture together.</p>
+              
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-black font-extrabold px-8 py-3.5 text-xs uppercase tracking-wider hover:bg-orange-500 hover:text-black transition-colors"
+              >
+                Initiate App Blueprint Sprint
+              </motion.button>
+            </motion.div>
+          </section>
 
+        </div>
       </div>
     </PageLayout>
   );
-};
+}
