@@ -1,19 +1,16 @@
 <IfModule mod_headers.c>
+  SetEnvIf Origin "^https?://(localhost:8080|techsasi\.com|www\.techsasi\.com)$" ORIGIN_OK=$0
 
-    SetEnvIf Origin "^https://(www\.)?techsasi\.com$" AccessControlAllowOrigin=$0
-    SetEnvIf Origin "^http://localhost:8080$" AccessControlAllowOrigin=$0
-
-    Header always set Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
-    Header always set Access-Control-Allow-Credentials "true"
-    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
-
+  Header always set Access-Control-Allow-Origin "%{ORIGIN_OK}e" env=ORIGIN_OK
+  Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+  Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+  Header always set Access-Control-Allow-Credentials "true"
 </IfModule>
 
 <IfModule mod_rewrite.c>
-RewriteEngine On
+  RewriteEngine On
 
-RewriteCond %{REQUEST_METHOD} OPTIONS
-RewriteRule ^(.*)$ - [R=204,L]
-
+  # Handle preflight OPTIONS request
+  RewriteCond %{REQUEST_METHOD} OPTIONS
+  RewriteRule ^(.*)$ $1 [R=200,L]
 </IfModule>
