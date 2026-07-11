@@ -180,7 +180,7 @@ const AnimatedRoutes = () => {
 
 
             {/* Fallback Route Error Handling */}
-            {/* <Route path="*" element={<NotFound />} /> */}
+            <Route path="*" element={<NotFound />} />
 
 
         
