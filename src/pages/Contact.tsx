@@ -55,67 +55,68 @@ const Contact = () => {
   /* ----------------------------------
       FORM SUBMIT (Safeguarded)
   ----------------------------------- */
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+/* ----------------------------------
+    FORM SUBMIT (DEBUG MODE)
+----------------------------------- */
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    const result = contactSchema.safeParse(formData);
+  const result = contactSchema.safeParse(formData);
+  if (!result.success) {
+    const fieldErrors: Record<string, string> = {};
+    result.error.errors.forEach((err) => {
+      const field = err.path[0] as string;
+      fieldErrors[field] = err.message;
+    });
+    setErrors(fieldErrors);
+    return;
+  }
 
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        const field = err.path[0] as string;
-        fieldErrors[field] = err.message;
-      });
-      setErrors(fieldErrors);
-      return;
-    }
+  try {
+    setIsSubmitting(true);
 
+    const response = await fetch(`${API_URL}/contact.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+      }),
+    });
+
+    // 💡 LIVE INSPECTOR LOGS
+    const rawText = await response.text();
+    
+    console.log("=============== RAW BACKEND RESPONSE ===============");
+    console.log(rawText);
+    console.log("====================================================");
+
+    let data: any = {};
     try {
-      setIsSubmitting(true);
-
-      const response = await fetch(`${API_URL}/contact.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-
-      // 💡 SAFE DEBUG: HTML response dump varama thadukka text handle panrom
-      const rawText = await response.text();
-      let data: any = {};
-
-      try {
-        data = JSON.parse(rawText);
-      } catch (parseError) {
-        console.error("Backend sent non-JSON raw HTML structure:", rawText);
-        throw new Error("Server response template error. Check browser console logs.");
-      }
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Transmission logic failed on host side.");
-      }
-
-      toast.success("Message packet transmitted successfully 🚀");
-
-      setFormData({
-        name: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-    } catch (error: any) {
-      console.error("System logs:", error);
-      toast.error(error.message || "Transmission failed. Verify backend configurations.");
-    } finally {
-      setIsSubmitting(false);
+      data = JSON.parse(rawText);
+    } catch (parseError) {
+      // Direct notification showing the actual HTML text to the user
+      toast.error(`HTML Output Detected: ${rawText.substring(0, 60)}...`);
+      throw new Error("Server sent text/HTML instead of JSON object.");
     }
-  };
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Transmission logic failed.");
+    }
+
+    toast.success("Message packet transmitted successfully 🚀");
+    setFormData({ name: "", phone: "", subject: "", message: "" });
+
+  } catch (error: any) {
+    console.error("System logs:", error);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <Layout>
