@@ -11,7 +11,7 @@ export const ContactFab = () => {
     <div className="fixed bottom-6 right-6 z-[999] flex flex-col gap-3">
 
       {/* GET PROPOSAL BUTTON */}
-      <Link
+      {/* <Link
         to="/proposal"
         aria-label="Get a Proposal"
         className="
@@ -44,7 +44,7 @@ export const ContactFab = () => {
         >
           Get a Proposal
         </span>
-      </Link>
+      </Link> */}
 
       {/* CALL BUTTON */}
       <a

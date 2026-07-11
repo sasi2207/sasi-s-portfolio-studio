@@ -1,122 +1,61 @@
 import { useEffect, useState } from "react";
 import AOS from "aos";
-import { z } from "zod";
 import { Layout } from "@/components/layout/Layout";
 import { ParallaxSection } from "@/components/common/ParallaxSection";
-import { Mail, Phone, MapPin, Send, Terminal } from "lucide-react";
-import { toast } from "sonner";
-import API_URL from "./api";
+import { Mail, Phone, MapPin, Terminal, Cpu, ShieldCheck, ChevronDown, CheckCircle } from "lucide-react";
 
 /* ----------------------------------
-   VALIDATION SCHEMA (Maintained)
+   MOCK DATA TYPES & SOURCE
 ----------------------------------- */
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  phone: z
-    .string()
-    .trim()
-    .min(10, "Phone number is required")
-    .max(15, "Invalid phone number"),
-  subject: z.string().trim().min(1, "Subject is required").max(200),
-  message: z.string().trim().min(1, "Message is required").max(2000),
-});
+const FAQ_DATA = [
+  {
+    id: "faq-1",
+    question: "What is your target engineering stack?",
+    answer: "We develop ultra-scalable interfaces using React, TypeScript, Next.js, and Tailwind CSS. The core backend relies on robust PHP/PDO database layers and Node architectures built for absolute telemetry speed."
+  },
+  {
+    id: "faq-2",
+    question: "How do we initialize a critical project lifecycle?",
+    answer: "Simply use one of our gateway communication parameters below (Email/Phone). We establish a direct link within 12 standard runtime hours to map the functional requirements of your node infrastructure."
+  },
+  {
+    id: "faq-3",
+    question: "Do you offer remote infrastructural support?",
+    answer: "Yes, all systems are monitored and deployment matrix pipelines are built natively to handle distributed remote networks globally with encrypted continuous integration."
+  }
+];
 
-type ContactFormData = z.infer<typeof contactSchema>;
+const SYSTEM_LOGS = [
+  "Initializing link handshake...",
+  "Core engine version 2.4.0 status: OK",
+  "Checking database replication array... Connected",
+  "Establishing secure telemetry matrix...",
+  "System fully loaded. Awaiting client connection data."
+];
 
 const Contact = () => {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<string | null>(null);
+  const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
+  const [logIndex, setLogIndex] = useState(0);
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true, easing: "ease-out-cubic" });
   }, []);
 
-  /* ----------------------------------
-      INPUT CHANGE (Maintained)
-  ----------------------------------- */
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
+  // Simulating live terminal boot sequence
+  useEffect(() => {
+    if (logIndex < SYSTEM_LOGS.length) {
+      const timeout = setTimeout(() => {
+        setTerminalLogs((prev) => [...prev, SYSTEM_LOGS[logIndex]]);
+        setLogIndex((prev) => prev + 1);
+      }, 600);
+      return () => clearTimeout(timeout);
     }
+  }, [logIndex]);
+
+  const toggleFaq = (id: string) => {
+    setActiveFaq(activeFaq === id ? null : id);
   };
-
-  /* ----------------------------------
-      FORM SUBMIT (Safeguarded)
-  ----------------------------------- */
-/* ----------------------------------
-    FORM SUBMIT (DEBUG MODE)
------------------------------------ */
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-  const result = contactSchema.safeParse(formData);
-  if (!result.success) {
-    const fieldErrors: Record<string, string> = {};
-    result.error.errors.forEach((err) => {
-      const field = err.path[0] as string;
-      fieldErrors[field] = err.message;
-    });
-    setErrors(fieldErrors);
-    return;
-  }
-
-  try {
-    setIsSubmitting(true);
-
-    const response = await fetch(`${API_URL}/contact.php`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        phone: formData.phone,
-        subject: formData.subject,
-        message: formData.message,
-      }),
-    });
-
-    // 💡 LIVE INSPECTOR LOGS
-    const rawText = await response.text();
-    
-    console.log("=============== RAW BACKEND RESPONSE ===============");
-    console.log(rawText);
-    console.log("====================================================");
-
-    let data: any = {};
-    try {
-      data = JSON.parse(rawText);
-    } catch (parseError) {
-      // Direct notification showing the actual HTML text to the user
-      toast.error(`HTML Output Detected: ${rawText.substring(0, 60)}...`);
-      throw new Error("Server sent text/HTML instead of JSON object.");
-    }
-
-    if (!response.ok || !data.success) {
-      throw new Error(data.message || "Transmission logic failed.");
-    }
-
-    toast.success("Message packet transmitted successfully 🚀");
-    setFormData({ name: "", phone: "", subject: "", message: "" });
-
-  } catch (error: any) {
-    console.error("System logs:", error);
-  } finally {
-    setIsSubmitting(false);
-  }
-};
 
   return (
     <Layout>
@@ -127,49 +66,39 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         <div className="absolute top-0 left-1/3 w-[600px] h-[300px] bg-amber-400/[0.02] rounded-full blur-[120px] pointer-events-none" />
 
         {/* HERO HEADER */}
-        <ParallaxSection
-          className="pt-36 pb-12 relative z-10"
-          bgClassName="bg-transparent"
-        >
+        <ParallaxSection className="pt-36 pb-12 relative z-10" bgClassName="bg-transparent">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl space-y-4">
               <div className="inline-flex items-center gap-2 bg-zinc-950 border border-zinc-900 px-3 py-1 rounded-sm">
                 <Terminal size={11} className="text-amber-400 animate-pulse" />
                 <span className="text-zinc-500 text-[10px] uppercase tracking-widest">
-                  SECURE_COMMS // ESTABLISH_LINK
+                  SECURE_COMMS // NETWORK_OVERVIEW
                 </span>
               </div>
               
-              <h1
-                className="text-4xl md:text-6xl font-light tracking-tight text-white uppercase"
-                data-aos="fade-up"
-              >
-                Get In <span className="font-bold text-amber-400">Touch</span>
+              <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white uppercase" data-aos="fade-up">
+                System <span className="font-bold text-amber-400">Node Hub</span>
               </h1>
-              <p
-                className="text-xs md:text-sm text-zinc-500 font-sans max-w-xl leading-relaxed"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                Have a project in mind? Initialize a direct socket transmission. Let's engineer something unyielding together.
+              <p className="text-xs md:text-sm text-zinc-500 font-sans max-w-xl leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                Explore infrastructure parameters, verify system security clearances, or bypass legacy loops through direct endpoint access.
               </p>
             </div>
           </div>
         </ParallaxSection>
 
-        {/* INTERACTION SECTION */}
+        {/* MAIN STRUCTURAL LAYOUT */}
         <section className="pb-24 relative z-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-12 gap-12 items-start">
               
-              {/* TELEMETRY INFO BLOCKS */}
+              {/* LEFT COLUMN: TELEMETRY INFO BLOCKS */}
               <div data-aos="fade-right" className="lg:col-span-5 space-y-8">
                 <div className="space-y-2 border-b border-zinc-900 pb-4">
                   <h2 className="text-lg font-bold text-white uppercase tracking-wider">
                     Node Infrastructure
                   </h2>
                   <p className="text-xs text-zinc-500 font-sans">
-                    System messages are validated and queued instantly into high-availability communication parameters.
+                    Physical routing anchors for cross-border data packet handling and architectural coordination.
                   </p>
                 </div>
 
@@ -209,72 +138,78 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 </div>
               </div>
 
-              {/* INDUSTRIAL INPUT FORM */}
-              <div data-aos="fade-left" className="lg:col-span-7">
-                <div className="p-6 sm:p-8 rounded-sm bg-zinc-950 border border-zinc-900 shadow-2xl relative">
-                  
-                  <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-900">
-                    <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-                      Transmission_Payload
-                    </h2>
-                    <span className="text-[10px] text-zinc-600 font-mono uppercase">fields with * are required</span>
+              {/* RIGHT COLUMN: TERMINAL & FAQ ACCORDION (REPLACED FORM) */}
+              <div data-aos="fade-left" className="lg:col-span-7 space-y-8">
+                
+                {/* 1. INTERACTIVE TERMINAL WIDGET */}
+                <div className="rounded-sm bg-zinc-950 border border-zinc-900 shadow-2xl p-4 overflow-hidden relative">
+                  <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Cpu size={14} className="text-amber-400" />
+                      <span className="text-xs font-bold text-white uppercase tracking-wider">System_Live_Console</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-red-500/40" />
+                      <span className="w-2 h-2 rounded-full bg-amber-500/40" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    </div>
                   </div>
-
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {["name", "phone", "subject"].map((field) => (
-                      <div key={field} className="relative">
-                        <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">
-                          {field} <span className="text-amber-400">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name={field}
-                          value={(formData as any)[field]}
-                          onChange={handleChange}
-                          autoComplete="off"
-                          className={`w-full bg-black rounded-sm border px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-400/60 transition-all ${
-                            errors[field] ? "border-red-500/60" : "border-zinc-900"
-                          }`}
-                        />
-                        {errors[field] && (
-                          <p className="text-red-500 text-[11px] mt-1.5 font-sans">
-                            ⚠️ {errors[field]}
-                          </p>
-                        )}
+                  
+                  <div className="space-y-2 min-h-[140px] text-[11px] font-mono text-zinc-400 leading-relaxed">
+                    {terminalLogs.map((log, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <span className="text-amber-400/70 select-none">&gt;&gt;</span>
+                        <p>{log}</p>
                       </div>
                     ))}
-
-                    <div className="relative">
-                      <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">
-                        Message <span className="text-amber-400">*</span>
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={5}
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={`w-full bg-black rounded-sm border px-4 py-3 text-xs text-white resize-none focus:outline-none focus:border-amber-400/60 transition-all ${
-                          errors.message ? "border-red-500/60" : "border-zinc-900"
-                        }`}
-                      />
-                      {errors.message && (
-                        <p className="text-red-500 text-[11px] mt-1.5 font-sans">
-                          ⚠️ {errors.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full flex items-center justify-center gap-2 rounded-sm bg-amber-400 hover:bg-amber-500 disabled:bg-zinc-900 disabled:text-zinc-600 text-black font-bold text-xs uppercase tracking-widest py-3.5 transition-all shadow-lg disabled:opacity-50"
-                    >
-                      <Send size={13} className={isSubmitting ? "animate-bounce" : ""} />
-                      {isSubmitting ? "Transmitting..." : "Execute Post Loop"}
-                    </button>
-                  </form>
+                    {logIndex < SYSTEM_LOGS.length && (
+                      <div className="w-2 h-4 bg-amber-400 animate-pulse inline-block mt-0.5" />
+                    )}
+                  </div>
                 </div>
+
+                {/* 2. FREQUENTLY ASKED PROTOCOLS (FAQ Accordion) */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 pb-2 border-b border-zinc-900">
+                    <ShieldCheck size={16} className="text-amber-400" />
+                    <h2 className="text-xs font-bold text-white uppercase tracking-wider">System_FAQ_Protocols</h2>
+                  </div>
+
+                  <div className="space-y-3">
+                    {FAQ_DATA.map((faq) => {
+                      const isOpen = activeFaq === faq.id;
+                      return (
+                        <div key={faq.id} className="border border-zinc-900 rounded-sm bg-zinc-950/40 overflow-hidden transition-colors duration-200">
+                          <button
+                            onClick={() => toggleFaq(faq.id)}
+                            className="w-full text-left px-4 py-3.5 flex items-center justify-between gap-4 group"
+                          >
+                            <span className="text-xs text-white uppercase font-bold tracking-wide group-hover:text-amber-400 transition-colors">
+                              {faq.heading || faq.question}
+                            </span>
+                            <ChevronDown
+                              size={14}
+                              className={`text-zinc-500 group-hover:text-amber-400 transition-transform duration-300 ${
+                                isOpen ? "rotate-180 text-amber-400" : ""
+                              }`}
+                            />
+                          </button>
+                          
+                          <div
+                            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                              isOpen ? "max-h-40 border-t border-zinc-900/60" : "max-h-0"
+                            }`}
+                          >
+                            <div className="p-4 text-xs font-sans text-zinc-400 leading-relaxed bg-zinc-950">
+                              {faq.answer}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
 
             </div>
