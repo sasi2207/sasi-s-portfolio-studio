@@ -1,3 +1,11 @@
+# robots.txt for https://techsasi.com
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +20,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://techsasi.com/sitemap.xml
