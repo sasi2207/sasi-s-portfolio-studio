@@ -175,6 +175,13 @@ export const Footer = () => {
                   <span>+91 7448788879</span>
                 </a>
               </li>
+                 <li>
+                <a href="tel:+917448788897" className={`flex items-center gap-3 ${linkStyles}`}>
+                  <Phone size={16} className="shrink-0" />
+                  <span>+91 7448788897</span>
+                </a>
+              </li>
+
 
               <li>
                 <a href="mailto:techsasi22@gmail.com" className={`flex items-center gap-3 ${linkStyles}`}>
