@@ -24,7 +24,7 @@ export default function AdminControlCenter({ onLogout }: AdminControlCenterProps
     try {
       const [enqRes, serviceEnqRes, courseRes] = await Promise.all([
         adminApi.getEnquiries(), 
-        fetch("http://localhost/Rakshan/api/admin_api.php?action=get_service_enquiries").then(res => res.json()),
+        fetch("https://techsasi.com/Rakshan/api/admin_api.php?action=get_service_enquiries").then(res => res.json()),
         adminApi.getCourses()
       ]);
       

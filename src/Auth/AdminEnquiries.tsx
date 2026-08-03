@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { adminApi } from "@/services/api"; // Make sure path matches your api file
+import { adminApi } from "@/services/adminApi"; // Make sure path matches your api file
 import { Loader2, RefreshCw, AlertCircle, Phone, Mail, BookOpen, Calendar, Briefcase, CheckCircle2, XCircle, Trash2 } from "lucide-react";
 
 interface CourseEnquiry {
