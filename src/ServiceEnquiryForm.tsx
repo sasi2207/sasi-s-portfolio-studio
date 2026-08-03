@@ -21,7 +21,7 @@ export default function ServiceEnquiryForm() {
     setErrorMsg("");
 
     try {
-      const response = await fetch("http://localhost/Rakshan/api/admin_api.php?action=create_service_enquiry", {
+      const response = await fetch("https://techsasi.com/Rakshan/api/admin_api.php?action=create_service_enquiry", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

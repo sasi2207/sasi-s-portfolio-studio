@@ -38,7 +38,7 @@ export default function CourseEnquiryModal({ open, onClose, onSuccessSubmit }: P
     setStatusMessage(null);
 
     try {
-      const response = await fetch("http://localhost/Rakshan/api/enquiry.php", {
+      const response = await fetch("https://techsasi.com/Rakshan/api/enquiry.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
