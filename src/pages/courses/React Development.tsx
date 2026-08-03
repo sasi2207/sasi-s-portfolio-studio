@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowUpRight,
-  Terminal,
   Code,
   Layers,
-  Cpu,
   Globe,
   Settings,
   ShieldCheck,
   Layout,
-  Check,
   Zap,
   Boxes
 } from "lucide-react";
@@ -46,7 +43,7 @@ const useBlurReveal = () => {
 };
 
 /* ------------------------------------------------------------------
-   2. REACT.JS ARCHITECTURE SYLLABUS DATA ARRAY
+   2. REACT.JS ARCHITECTURE SYLLABUS DATA ARRAY (Updated Content)
 --------------------------------------------------------------------- */
 const reactSyllabus = [
   {
@@ -56,13 +53,13 @@ const reactSyllabus = [
       {
         icon: Layout,
         title: "Modern JSX, Props & Core Rendering",
-        details: "Understanding the Virtual DOM, declarative UI patterns, conditional rendering structures, props destructuring, and list keys optimization rules.",
+        details: "Demystifying the Virtual DOM vs Real DOM lifecycle, writing declarative JSX layouts, handling component trees, implementing clean conditional rendering patterns, structured prop destructuring, and optimizing list keys for high-performance DOM re-renders.",
         tag: "React Core"
       },
       {
         icon: Code,
         title: "State Mechanics & Component Lifecycle",
-        details: "Deep dive into useState hooks, managing local execution arrays, processing event handlers, and structural state batching updates.",
+        details: "Deep dive into the useState hook execution pipeline, handling asynchronous state queue updates, managing local component memory arrays, processing native and synthetic event handlers, and understanding React's automatic state batching behavior.",
         tag: "State Management"
       }
     ]
@@ -74,13 +71,13 @@ const reactSyllabus = [
       {
         icon: Zap,
         title: "Side Effects via useEffect Ecosystem",
-        details: "Managing continuous side-effects, handling synchronization loops, cleanup execution calls, api fetch structures, and dependency array rules.",
+        details: "Mastering the useEffect dependency array rules, synchronizing component states with external data systems, handling API data fetching structures cleanly, avoiding infinite loops, and executing component unmount cleanup functions properly.",
         tag: "Hooks Core"
       },
       {
         icon: Settings,
         title: "Performance Hooks & Custom Logic Hooks",
-        details: "Optimizing render tree pipelines using useMemo, useCallback memory locks, and bundling modular business logic inside custom reusable hooks.",
+        details: "Mitigating unnecessary re-renders using useMemo and useCallback memory reference locks, along with abstracting complex, reusable business logic out of UI components and into modular custom hooks (useLocalStorage, useFetch, useDebounce).",
         tag: "Performance Optimization"
       }
     ]
@@ -92,13 +89,13 @@ const reactSyllabus = [
       {
         icon: Boxes,
         title: "Global State Spaces (Context API & Redux Toolkit)",
-        details: "Eliminating prop-drilling patterns completely. Crafting unified data providers with Context API, slices management, and Redux data store structures.",
+        details: "Eliminating messy prop-drilling patterns completely. Designing scalable Context API data providers, structuring Redux Toolkit slices, managing immutable application states, and handling asynchronous actions through createAsyncThunk.",
         tag: "Global State"
       },
       {
         icon: Globe,
         title: "Dynamic Single Page Routing (React Router v6)",
-        details: "Building client-side single-page routing paths, nested layout structures, route loaders parameters, dynamic path params, and protected route wrappers.",
+        details: "Implementing client-side multi-page routing mechanics, configuring nested layouts and outlet structures, passing dynamic path parameters (useParams), capturing query strings (useSearchParams), and building secure protected route wrappers.",
         tag: "SPA Routing"
       }
     ]
@@ -110,13 +107,13 @@ const reactSyllabus = [
       {
         icon: ShieldCheck,
         title: "Component Testing & Form Validation",
-        details: "Writing structured unit testing layouts using React Testing Library and Jest, alongside high-performance client forms powered by React Hook Form & Yup.",
+        details: "Writing robust unit and integration tests for UI components using React Testing Library and Jest. Building high-performance, validated enterprise forms using React Hook Form combined with Yup or Zod schema validation.",
         tag: "Testing & Validation"
       },
       {
         icon: Layers,
         title: "Next-Gen Tooling (Vite, TypeScript & Hosting)",
-        details: "Typing component properties via TypeScript interfaces, configuring Vite multi-build setups, and deploying bundles onto Vercel or Netlify cloud meshes.",
+        details: "Elevating component safety by typing props, states, and hooks using TypeScript interfaces. Configuring high-speed Vite multi-build environments, managing environment variables securely, and deploying production bundles seamlessly onto cloud meshes like Vercel or Netlify.",
         tag: "DevOps Frontend"
       }
     ]
@@ -133,7 +130,6 @@ const ReactJsCourse = () => {
   const handlePhaseSelection = (index: number) => {
     setSelectedPhase(index);
     
-    // Mobile screen-la auto-scroll panni target frontend view points block identity kaatum
     setTimeout(() => {
       const element = document.getElementById(`phase-content-block`);
       if (element) {
@@ -226,7 +222,7 @@ const ReactJsCourse = () => {
                     onClick={() => handlePhaseSelection(index)}
                     className={`w-full text-left py-2.5 px-3 rounded-lg text-xs font-mono transition duration-200 block ${
                       selectedPhase === index
-                        ? "text-orange-400 bg-zinc-900/60 border border-zinc-850 font-semibold"
+                        ? "text-orange-400 bg-zinc-900/60 border border-zinc-800 font-semibold"
                         : "text-zinc-500 bg-transparent border-transparent hover:text-zinc-300"
                     }`}
                   >
@@ -240,7 +236,7 @@ const ReactJsCourse = () => {
             <div id="phase-content-block" className="lg:col-span-8 text-left space-y-8 scroll-mt-28">
               <div className="pb-4 border-b border-zinc-900 flex justify-between items-center">
                 <span className="text-xs font-mono text-zinc-500">Displaying Phase Array ({reactSyllabus[selectedPhase].phase}/04)</span>
-                <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
+                <span className="text-xs font-semibold text-orange-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded max-w-[220px] sm:max-w-none truncate">
                   {reactSyllabus[selectedPhase].levelName}
                 </span>
               </div>
@@ -253,7 +249,7 @@ const ReactJsCourse = () => {
                   >
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <div className="text-orange-400 bg-zinc-900 p-2.5 rounded-lg border border-zinc-850 group-hover:border-orange-500/20 transition duration-300">
+                        <div className="text-orange-400 bg-zinc-900 p-2.5 rounded-lg border border-zinc-800 group-hover:border-orange-500/20 transition duration-300">
                           <mod.icon size={16} className="stroke-[1.5]" />
                         </div>
                         <span className="text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-900 px-2 py-0.5 rounded text-zinc-400">

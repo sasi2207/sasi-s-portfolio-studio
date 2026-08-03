@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,11 +17,10 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import CaseStudy from "./pages/CaseStudy";
 import Proposal from "./pages/Proposal";
-
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-// Utils
+// Utils & Modals
 import { ScrollToTop } from "./ScrollToTop";
 import { PageLoader } from "./PageLoader";
 import StaticWebsite from "./web/StaticWebsite";
@@ -41,18 +39,8 @@ import ContactList from "./pages/Get/ContactList";
 import ContactDetails from "./pages/Get/ContactDetails";
 import OfferForm from "./Offers/OfferForm";
 
-
-
-
-
-
-
 import ReactInternshipsPage from "./pages/internships/ReactInternship";
 import JavaInternshipsPage from "./pages/internships/JavaInternship";
-
-
-
-
 import { BlogPage } from "./pages/Blog";
 import MaintenanceSupport from "./pages/services/MaintenanceSupport";
 import AwsCourse from "./pages/courses/AwsCourse";
@@ -73,33 +61,18 @@ import DeploymentHostingService from "./pages/services/DeploymentHostingService"
 import DigitalMarketingService from "./pages/services/DigitalMarketingService";
 import ComputerCoachingServices from "./pages/services/ComputerCoachingServices";
 
+// Modals
+import CourseEnquiryModal from "./CourseEnquiry";
+import ServiceEnquiryForm from "./ServiceEnquiryForm"; 
 
-
-
-
-// Course Page Components
-// import ReactCourse from './pages/courses/ReactCourse';
-// import PythonFullStackCourse from './pages/courses/PythonFullStackCourse';
-// import JavaFullStackCourse from './pages/courses/JavaFullStackCourse';
-// import MernStackCourse from './pages/courses/MernStackCourse';
-// import UiUxCourse from './pages/courses/UiUxCourse';
-// import AwsCourse from './pages/courses/AwsCourse';
-
-// Internship Page Components
-// import WebDevInternship from './pages/internships/WebDevInternship';
-// import PythonInternship from './pages/internships/PythonInternship';
-// import ReactInternship from './pages/internships/ReactInternship';
-// import JavaInternship from './pages/internships/JavaInternship';
-// import FullStackInternship from './pages/internships/FullStackInternship';
-// import DigitalMarketingInternship from './pages/internships/DigitalMarketingInternship';
-
-// 404 Component
-// import NotFound from './pages/NotFound';
+// --- NEW ADMIN MODULE IMPORTS ---
+import AdminLogin from "@/Auth/AdminLogin";
+import AdminControlCenter from "@/Auth/AdminControlCenter";
 
 const queryClient = new QueryClient();
 
 /* -------------------------------------------
-   ROUTE HANDLER WITH LOADER
+   ROUTE HANDLER WITH LOADER & TIMERS
 -------------------------------------------- */
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -111,15 +84,85 @@ const AnimatedRoutes = () => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
+  // Modal States
+  const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [hasSubmittedCourse, setHasSubmittedCourse] = useState(false);
+
+  // 1. First Timer: Open Course Enquiry Modal automatically after 3 seconds on load
+  useEffect(() => {
+    const courseTimer = setTimeout(() => {
+      setIsCourseModalOpen(true);
+    }, 3000); // 3000ms = 3 seconds
+
+    return () => clearTimeout(courseTimer);
+  }, []);
+
+  // 2. Second Timer: Open Service Enquiry Modal exactly 6 seconds AFTER Course form is submitted or closed
+  useEffect(() => {
+    if (hasSubmittedCourse) {
+      const serviceTimer = setTimeout(() => {
+        setIsServiceModalOpen(true);
+      }, 6000); // 6000ms = 6 seconds delay
+
+      return () => clearTimeout(serviceTimer);
+    }
+  }, [hasSubmittedCourse]);
+
+  // Admin authentication state helper
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(
+    localStorage.getItem("techsasi_admin_auth") === "true"
+  );
+
+  const handleAdminLoginSuccess = () => {
+    localStorage.setItem("techsasi_admin_auth", "true");
+    setIsAdminAuthenticated(true);
+  };
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem("techsasi_admin_auth");
+    setIsAdminAuthenticated(false);
+  };
+
   return (
     <>
-      {/* Scroll to top on route change */}
       <ScrollToTop />
 
-      {/* Page Loader */}
       <AnimatePresence mode="wait">
         {loading && <PageLoader />}
       </AnimatePresence>
+
+      {/* 1. Course Enquiry Modal (Triggered after 3 seconds) */}
+      <CourseEnquiryModal
+        open={isCourseModalOpen}
+        onClose={() => {
+          setIsCourseModalOpen(false);
+          setHasSubmittedCourse(true); // Triggers the 6s countdown even if closed manually
+        }}
+        onSuccessSubmit={() => {
+          setHasSubmittedCourse(true); // Triggers the 6s countdown on successful submit
+        }}
+      />
+
+      {/* 2. Service Enquiry Popup Modal (Triggered 6 seconds after course modal interaction) */}
+    {isServiceModalOpen && (
+  <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
+    <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+      
+      {/* Close Button */}
+      <button 
+        onClick={() => setIsServiceModalOpen(false)}
+        className="absolute top-4 right-4 z-20 bg-zinc-900 text-zinc-400 hover:bg-orange-500 hover:text-zinc-950 rounded-full p-2 transition duration-200 cursor-pointer"
+      >
+        ✕
+      </button>
+
+      {/* Service Enquiry Landscape Form Component */}
+      <ServiceEnquiryForm />
+      
+    </div>
+  </div>
+)}
 
       {/* Routes */}
       <Routes location={location} key={location.pathname}>
@@ -143,64 +186,60 @@ const AnimatedRoutes = () => {
 
         <Route path="Offers" element={<OfferForm/>} />
 
+        {/* --- COURSES MODULE ROUTES --- */}
+        <Route path="/courses/react" element={<ReactJsCourse/>} />
+        <Route path="/courses/python-fullstack" element={<PythonFullStackCourse/>} />
+        <Route path="/courses/java-fullstack" element={<JavaFullStackCourse/>} />
+        <Route path="/courses/mern-stack" element={<MernStackCourse/>} />
+        <Route path="/courses/ui-ux" element={<UiUxCourse/>} />
+        <Route path="/courses/aws" element={<AwsCourse/>} />
 
+        {/* --- INTERNSHIP PROGRAM MODULE ROUTES --- */}
+        <Route path="/internships/Aws-Internship" element={<AwsInternshipsPage/>} />
+        <Route path="/internships/python" element={<PythonInternshipsPage/>} />
+        <Route path="/internships/react" element={<ReactInternshipsPage/>} />
+        <Route path="/internships/java" element={<JavaInternshipsPage/>} />
+        <Route path="/internships/full-stack" element={<AiFullStackInternshipsPage/>} />
+        <Route path="/internships/digital-marketing" element={<DigitalMarketingInternshipsPage/>} /> 
 
-{/* --- COURSES MODULE ROUTES --- */}
-            <Route path="/courses/react" element={<ReactJsCourse/>} />
-            <Route path="/courses/python-fullstack" element={<PythonFullStackCourse/>} />
-            <Route path="/courses/java-fullstack" element={<JavaFullStackCourse/>} />
-             <Route path="/courses/mern-stack" element={<MernStackCourse/>} />
-             <Route path="/courses/ui-ux" element={<UiUxCourse/>} />
-            <Route path="/courses/aws" element={<AwsCourse/>} />
+        {/* Services */}
+        <Route path="/services/static-web" element={<StaticWebsite/>} />
+        <Route path="/services/dynamic-web" element={<DynamicWebServices/>} />
+        <Route path="/services/business-web" element={<BusinessWebServices/>} />
+        <Route path="/services/ecommerce" element={<EcommerceWebService/>} />
+        <Route path="/servicesapp-development" element={<AppDevelopmentService/>} />
+        <Route path="/services/deployment-hosting" element={<DeploymentHostingService/>} /> 
+        <Route path="/services/digital-marketing" element={<DigitalMarketingService/>} />
+        <Route path="/services/coaching" element={<ComputerCoachingServices/>} />   
+        <Route path="/services/MaintenanceSupport" element={<MaintenanceSupport/>} />   
 
-            {/* --- INTERNSHIP PROGRAM MODULE ROUTES --- */}
-           <Route path="/internships/Aws-Internship" element={<AwsInternshipsPage/>} />
-          <Route path="/internships/python" element={<PythonInternshipsPage/>} />
-              <Route path="/internships/react" element={<ReactInternshipsPage/>} />
-             <Route path="/internships/java" element={<JavaInternshipsPage/>} />
-             <Route path="/internships/full-stack" element={<AiFullStackInternshipsPage/>} />
-            <Route path="/internships/digital-marketing" element={<DigitalMarketingInternshipsPage/>} /> 
-
-
-  {/* Services */}
-                   <Route path="/services/static-web" element={<StaticWebsite/>} />
-          <Route path="/services/dynamic-web" element={<DynamicWebServices/>} />
-              <Route path="/services/business-web" element={<BusinessWebServices/>} />
-               <Route path="/services/ecommerce" element={<EcommerceWebService/>} />
-            <Route path="/servicesapp-development" element={<AppDevelopmentService/>} />
-          <Route path="/services/deployment-hosting" element={<DeploymentHostingService/>} /> 
- <Route path="/services/digital-marketing" element={<DigitalMarketingService/>} />
-  <Route path="/services/coaching" element={<ComputerCoachingServices/>} />  
-
-          <Route path="/services/MaintenanceSupport" element={<MaintenanceSupport/>} />  
-
-
-
-
-
-
-            {/* Fallback Route Error Handling */}
-            <Route path="*" element={<NotFound />} />
-
-
-        
+        {/* --- ADMIN DASHBOARD & LOGIN ROUTE --- */}
+        <Route 
+          path="/admin" 
+          element={
+            !isAdminAuthenticated ? (
+              <AdminLogin onLoginSuccess={handleAdminLoginSuccess} />
+            ) : (
+              <AdminControlCenter onLogout={handleAdminLogout} />
+            )
+          } 
+        />
 
         <Route path="Register-2207" element={<Register/>}/>
-        <Route path="Login"element={<Login/>}/>
-    
-<Route
-  path="dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>
+        <Route path="Login" element={<Login/>}/>
 
-<Route path="dashboard/proposals"element={<ProtectedRoute><ProposalDetails /></ProtectedRoute>}/>
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-  <Route path="dashboard/contacts" element={<ProtectedRoute><ContactList /></ProtectedRoute>} />
-    {/* <Route path="dashboard/contact/:id" element={<ContactDetails />} /> */}
+        <Route path="dashboard/proposals" element={<ProtectedRoute><ProposalDetails /></ProtectedRoute>}/>
+        <Route path="dashboard/contacts" element={<ProtectedRoute><ContactList /></ProtectedRoute>} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -215,49 +254,17 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <TooltipProvider>
-          {/* 🔥 GLOBAL SEO */}
           <Helmet>
-           
-
-          
-    <title>TechSasi — Website & Mobile App Development</title>
-
-
-   <meta
-  name="description"
-  content="TechSasi by SasiKumar offers professional website development, mobile app development, and custom software solutions. Expert in React, full-stack development, admin dashboards, and scalable SaaS platforms."
-/>
-
+            <title>TechSasi — Website & Mobile App Development</title>
             <meta
-              name="keywords"
-              content="TechSasi,SasiTech, website development Mettur, app development mettur, full stack course, React training mettur, Java training, software company Mettur, IT institute Mettur, web design services mettur, mobile app development mettur, real time projects"
-            />
-
-            <meta name="author" content="TechSasi / SasiTech" />
-            <meta name="robots" content="index, follow" />
-
-            {/* Open Graph */}
-            <meta property="og:type" content="website" />
-            <meta
-              property="og:title"
-              content="TechSasi | SasiTech – Website & App Development  in Mettur"
-            />
-            <meta
-              property="og:description"
-              content="Learn website and app development with real-time projects at TechSasi (SasiTech), Mettur."
-            />
-            <meta property="og:url" content="https://www.techsasi.com" />
-            <meta
-              property="og:image"
-              content="https://www.techsasi.com/assets/techsasi-og.jpg"
+              name="description"
+              content="TechSasi by SasiKumar offers professional website development, mobile app development, and custom software solutions."
             />
           </Helmet>
 
-          {/* UI Providers */}
           <Toaster />
           <Sonner />
 
-          {/* Router */}
           <BrowserRouter>
             <AnimatedRoutes />
           </BrowserRouter>
