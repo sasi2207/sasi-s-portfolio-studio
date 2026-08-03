@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { AnimatePresence } from "framer-motion";
@@ -76,6 +76,7 @@ const queryClient = new QueryClient();
 -------------------------------------------- */
 const AnimatedRoutes = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -89,14 +90,27 @@ const AnimatedRoutes = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
   const [hasSubmittedCourse, setHasSubmittedCourse] = useState(false);
 
-  // 1. First Timer: Open Course Enquiry Modal automatically after 3 seconds on load
+  // --- URL PATH MAPPING FOR DIRECT SEARCH/HIT ---
   useEffect(() => {
-    const courseTimer = setTimeout(() => {
+    if (location.pathname === "/courses") {
       setIsCourseModalOpen(true);
-    }, 3000); // 3000ms = 3 seconds
+      setIsServiceModalOpen(false);
+    } else if (location.pathname === "/development-services") {
+      setIsServiceModalOpen(true);
+      setIsCourseModalOpen(false);
+    }
+  }, [location.pathname]);
 
-    return () => clearTimeout(courseTimer);
-  }, []);
+  // 1. First Timer: Open Course Enquiry Modal automatically after 3 seconds on homepage load
+  useEffect(() => {
+    if (location.pathname === "/") {
+      const courseTimer = setTimeout(() => {
+        setIsCourseModalOpen(true);
+      }, 3000); // 3000ms = 3 seconds
+
+      return () => clearTimeout(courseTimer);
+    }
+  }, [location.pathname]);
 
   // 2. Second Timer: Open Service Enquiry Modal exactly 6 seconds AFTER Course form is submitted or closed
   useEffect(() => {
@@ -108,6 +122,13 @@ const AnimatedRoutes = () => {
       return () => clearTimeout(serviceTimer);
     }
   }, [hasSubmittedCourse]);
+
+  // Safe close handler to clean URL back to home when closing modal
+  const handleCloseModal = () => {
+    setIsCourseModalOpen(false);
+    setIsServiceModalOpen(false);
+    navigate("/");
+  };
 
   // Admin authentication state helper
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(
@@ -132,44 +153,44 @@ const AnimatedRoutes = () => {
         {loading && <PageLoader />}
       </AnimatePresence>
 
-      {/* 1. Course Enquiry Modal (Triggered after 3 seconds) */}
+      {/* 1. Course Enquiry Modal */}
       <CourseEnquiryModal
         open={isCourseModalOpen}
-        onClose={() => {
-          setIsCourseModalOpen(false);
-          setHasSubmittedCourse(true); // Triggers the 6s countdown even if closed manually
-        }}
+        onClose={handleCloseModal}
         onSuccessSubmit={() => {
           setHasSubmittedCourse(true); // Triggers the 6s countdown on successful submit
+          handleCloseModal();
         }}
       />
 
-      {/* 2. Service Enquiry Popup Modal (Triggered 6 seconds after course modal interaction) */}
-    {isServiceModalOpen && (
-  <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
-    <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-      
-      {/* Close Button */}
-      <button 
-        onClick={() => setIsServiceModalOpen(false)}
-        className="absolute top-4 right-4 z-20 bg-zinc-900 text-zinc-400 hover:bg-orange-500 hover:text-zinc-950 rounded-full p-2 transition duration-200 cursor-pointer"
-      >
-        ✕
-      </button>
+      {/* 2. Service Enquiry Popup Modal */}
+      {isServiceModalOpen && (
+        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
+          <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+            
+            {/* Close Button */}
+            <button 
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 z-20 bg-zinc-900 text-zinc-400 hover:bg-orange-500 hover:text-zinc-950 rounded-full p-2 transition duration-200 cursor-pointer"
+            >
+              ✕
+            </button>
 
-      {/* Service Enquiry Landscape Form Component */}
-      <ServiceEnquiryForm />
-      
-    </div>
-  </div>
-)}
+            {/* Service Enquiry Landscape Form Component */}
+            <ServiceEnquiryForm />
+            
+          </div>
+        </div>
+      )}
 
       {/* Routes */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
-         {/* <Route path="/courses" element={<CourseEnquiryModal/>} /> */}
-         {/* <Route path="/development-services" element={<CourseEnquiryModal/>} /> */}
+        
+        {/* Active Route Support without 404 or TS errors */}
+        <Route path="/courses" element={<Index />} />
+        <Route path="/development-services" element={<Index />} />
 
         <Route path="/services" element={<Services />} />
         <Route path="/projects" element={<Projects />} />

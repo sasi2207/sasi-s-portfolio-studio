@@ -190,9 +190,9 @@ export const Footer = () => {
 
 
               <li>
-                <a href="mailto:techsasi22@gmail.com" className={`flex items-center gap-3 ${linkStyles}`}>
+                <a href="mailto:info@techsasi.com" className={`flex items-center gap-3 ${linkStyles}`}>
                   <Mail size={16} className="shrink-0" />
-                  <span className="break-all">techsasi22@gmail.com</span>
+                  <span className="break-all">info@techsasi.com</span>
                 </a>
               </li>
 
