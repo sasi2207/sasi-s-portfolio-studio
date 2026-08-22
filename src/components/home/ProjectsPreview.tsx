@@ -39,16 +39,25 @@ export const ProjectsPreview = () => {
   };
 
   return (
-    <section className="py-24 bg-zinc-950 border-t border-slate-900 relative overflow-hidden">
+    <section className="py-24 bg-black border-t border-slate-900 relative overflow-hidden tech-grid-pattern">
+      {/* Custom Grid Pattern Styles */}
+      <style>{`
+        .tech-grid-pattern {
+          background-size: 40px 40px;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      `}</style>
+
       {/* Structural Ambient Glow System */}
-      <div className="absolute inset-0 grid-pattern opacity-5 pointer-events-none" />
       <div className="absolute -bottom-40 right-1/4 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         
         {/* Modern Section Header */}
         <div className="text-center mb-20 space-y-3">
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full inline-flex items-center gap-2">
+          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full inline-flex items-center gap-2 border border-amber-400/20">
             <LayoutGrid className="w-3.5 h-3.5" /> Selected Works
           </span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
@@ -75,10 +84,10 @@ export const ProjectsPreview = () => {
                 key={project.id}
                 variants={cardVariants}
                 whileHover="hover"
-                className="rounded-2xl bg-slate-900/30 border border-slate-900 hover:border-amber-500/20 shadow-2xl overflow-hidden backdrop-blur-md group flex flex-col justify-between transition-all duration-300 relative"
+                className="rounded-2xl bg-black/80 backdrop-blur-sm border border-slate-800 hover:border-amber-500/30 shadow-2xl overflow-hidden group flex flex-col justify-between transition-all duration-300 relative"
               >
                 {/* BRAND NAME ANIMATION WRAPPER */}
-                <div className="relative h-44 bg-zinc-950 flex flex-col items-center justify-center border-b border-slate-900/60 overflow-hidden px-6">
+                <div className="relative h-44 bg-zinc-950/80 flex flex-col items-center justify-center border-b border-slate-800/80 overflow-hidden px-6">
                   {/* Inner abstract geometric grid texture */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60 pointer-events-none" />
                   
@@ -93,18 +102,52 @@ export const ProjectsPreview = () => {
                     <h3 className="text-3xl font-black tracking-tight text-slate-300 group-hover:bg-gradient-to-r group-hover:from-amber-400 group-hover:to-orange-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-600 group-hover:text-amber-500/60 transition-colors duration-300 mt-1.5">
+                    <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500 group-hover:text-amber-400/80 transition-colors duration-300 mt-1.5">
                       Verified Deployment
                     </p>
                   </motion.div>
 
                   {/* Micro Tech Label Watermark */}
-                  <div className="absolute top-4 left-5 font-mono text-[10px] text-slate-700 select-none">
+                  <div className="absolute top-4 left-5 font-mono text-[10px] text-slate-600 select-none">
                     SYS_ID // {project.id.toUpperCase()}
+                  </div>
+                  
+                  {/* Category Indicator Icon */}
+                  <div className="absolute top-4 right-5 text-slate-500">
+                    {isAcademic ? <GraduationCap size={16} /> : <Code2 size={16} />}
                   </div>
                 </div>
 
-               
+                {/* CARD CONTENT BODY */}
+                <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-semibold text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2.5 py-0.5 rounded-md border border-amber-400/20 inline-block">
+                      {project.category}
+                    </span>
+                    <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Technologies Tags & Link */}
+                  <div className="pt-4 border-t border-slate-900 space-y-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <span key={tech} className="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link
+                      to={`/projects`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors group/link"
+                    >
+                      <span>Explore Case Study</span>
+                      <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
               </motion.div>
             );
           })}
@@ -133,3 +176,5 @@ export const ProjectsPreview = () => {
     </section>
   );
 };
+
+export default ProjectsPreview;

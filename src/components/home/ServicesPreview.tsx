@@ -18,7 +18,6 @@ import {
   Code2,
 } from "lucide-react";
 
-import { SectionHeader } from "../common/SectionHeader";
 import servicesData from "@/data/services.json";
 
 /* ----------------------------------
@@ -59,15 +58,24 @@ export const ServicesPreview = () => {
   };
 
   return (
-    <section className="py-24 bg-zinc-950 border-t border-slate-900 overflow-hidden relative">
+    <section className="py-24 bg-black border-t border-slate-900 overflow-hidden relative tech-grid-pattern">
+      {/* Custom Grid Pattern Styles */}
+      <style>{`
+        .tech-grid-pattern {
+          background-size: 40px 40px;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      `}</style>
+
       {/* Background Micro Details */}
-      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Customized Header Wrapper for Dark Theme support */}
+        {/* Customized Header Wrapper */}
         <div className="text-center mb-16 space-y-3">
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full">
+          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 inline-block">
             Our Ecosystem
           </span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
@@ -86,7 +94,7 @@ export const ServicesPreview = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {servicesData.services.map((service, index) => {
+          {servicesData.services.map((service) => {
             const Icon = iconMap[service.icon];
             
             // Dynamic check to determine if the item is training or client agency services
@@ -97,7 +105,7 @@ export const ServicesPreview = () => {
                 key={service.id}
                 variants={cardVariants}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="relative group rounded-2xl bg-slate-900/40 border border-slate-800/60 p-6 pb-16 backdrop-blur-md shadow-xl overflow-hidden flex flex-col justify-between"
+                className="relative group rounded-2xl bg-black/80 backdrop-blur-sm border border-slate-800 hover:border-amber-500/30 p-6 pb-16 shadow-xl overflow-hidden flex flex-col justify-between transition-colors"
               >
                 {/* Neon Aura Glow on Hover */}
                 <div
@@ -177,3 +185,5 @@ export const ServicesPreview = () => {
     </section>
   );
 };
+
+export default ServicesPreview;

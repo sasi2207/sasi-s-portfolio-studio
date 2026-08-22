@@ -68,6 +68,9 @@ import ServiceEnquiryForm from "./ServiceEnquiryForm";
 // --- NEW ADMIN MODULE IMPORTS ---
 import AdminLogin from "@/Auth/AdminLogin";
 import AdminControlCenter from "@/Auth/AdminControlCenter";
+import { Careers } from "./pages/Careers";
+import { AdminPostJob } from "./pages/AdminPostJob";
+import { JobApply } from "./pages/JobApply";
 
 const queryClient = new QueryClient();
 
@@ -187,6 +190,15 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
+
+        <Route path="/Careers" element={<Careers/>} />
+
+<Route path="/Careers/apply/:jobId" element={<JobApply/>} /> Correct Route
+  {/* <Route path="/careers/:jobId" element={<JobApply />} /> */}
+
+        <Route path="/AdminPostJob" element={<AdminPostJob/>} />
+
+
         
         {/* Active Route Support without 404 or TS errors */}
         <Route path="/courses" element={<Index />} />

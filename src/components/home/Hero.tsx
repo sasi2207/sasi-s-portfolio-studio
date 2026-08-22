@@ -20,12 +20,21 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950 py-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black py-24 tech-grid-pattern">
+      {/* Custom Grid Pattern Styles */}
+      <style>{`
+        .tech-grid-pattern {
+          background-size: 40px 40px;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      `}</style>
+
       <BubbleBackground />
       
       {/* Background Grids and Accents */}
-      <div className="absolute inset-0 grid-pattern opacity-15 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/0 via-slate-900/40 to-slate-950 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black pointer-events-none" />
       
       {/* Ambient Lighting Glows */}
       <motion.div
@@ -48,11 +57,11 @@ const Hero = () => {
         >
           {/* Dual Category Badge */}
           <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs md:text-sm text-slate-300 mb-8 backdrop-blur-md shadow-2xl">
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 font-medium">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black text-amber-400 font-medium">
               <GraduationCap className="w-4 h-4" /> Tech Institute
             </span>
             <span className="w-1 h-1 bg-slate-700 rounded-full hidden sm:inline-block" />
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 font-mediumNAV">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 font-medium">
               <Code2 className="w-4 h-4" /> Dev Agency
             </span>
           </motion.div>

@@ -20,8 +20,8 @@ const Index = () => {
   return (
     <Layout>
       <Hero/>
-      <TechStackScroller
-      />
+      {/* <TechStackScroller
+      /> */}
       <ServicesPreview />
       <ProjectsPreview />
       <CtaSection />

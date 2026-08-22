@@ -19,7 +19,8 @@ import {
   Smartphone,
   CloudLightning,
   Megaphone,
-  GraduationCap
+  GraduationCap,
+  Briefcase
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -28,80 +29,81 @@ const navLinks = [
   { name: 'Home', path: '/' , icon:<Home size={18} className="text-gray-400" /> },
   { name: 'About', path: '/about', icon: <Info size={18} /> },
   { name: 'Blog', path: '/blog', icon: <Edit3 size={18} /> },
+  { name: 'Careers', path: '/careers', icon: <Briefcase size={18} /> },
   { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
 ];
 
 const courses = [
-  { name: "React.js Development", path: "/courses/react" },
-  { name: "Python Full Stack", path: "/courses/python-fullstack" },
-  { name: "Java Full Stack", path: "/courses/java-fullstack" },
-  { name: "MERN Stack", path: "/courses/mern-stack" },
-  { name: "UI/UX Design", path: "/courses/ui-ux" },
-  { name: "AWS Cloud", path: "/courses/aws" },
+  { name: "React.js Development", path: "/courses/react", desc: "Master modern front-end engineering" },
+  { name: "Python Full Stack", path: "/courses/python-fullstack", desc: "Build scalable web apps with Django & Flask" },
+  { name: "Java Full Stack", path: "/courses/java-fullstack", desc: "Enterprise applications & Spring Boot" },
+  { name: "MERN Stack", path: "/courses/mern-stack", desc: "End-to-end JavaScript mastery" },
+  { name: "UI/UX Design", path: "/courses/ui-ux", desc: "Design intuitive user-centered products" },
+  { name: "AWS Cloud", path: "/courses/aws", desc: "Cloud computing & deployment pipelines" },
 ];
 
 const internships = [
-  { name: "AWS Internships", path: "/internships/Aws-Internship" },
-  { name: "Python Internship", path: "/internships/python" },
-  { name: "React Internship", path: "/internships/react" },
-  { name: "Java Internship", path: "/internships/java" },
-  { name: "Ai Full Stack Internship", path: "/internships/full-stack" },
-  { name: "Digital Marketing Internship", path: "/internships/digital-marketing" },
+  { name: "AWS Internships", path: "/internships/Aws-Internship", desc: "Cloud architecture & server operations" },
+  { name: "Python Internship", path: "/internships/python", desc: "Real-world backend projects" },
+  { name: "React Internship", path: "/internships/react", desc: "Dynamic UI building experience" },
+  { name: "Java Internship", path: "/internships/java", desc: "Enterprise software development" },
+  { name: "Ai Full Stack Internship", path: "/internships/full-stack", desc: "Cutting-edge AI-integrated apps" },
+  { name: "Digital Marketing Internship", path: "/internships/digital-marketing", desc: "SEO, campaigns & brand growth" },
 ];
 
 const services = [
   { 
     name: "Static Web Development", 
     path: "/services/static-web", 
-    icon: <Globe size={16} className="text-blue-500" />,
+    icon: <Globe size={18} className="text-blue-400" />,
     tagline: "Ultra-Fast Portfolio & Landing Pages"
   },
   { 
     name: "Dynamic Web Development", 
     path: "/services/dynamic-web", 
-    icon: <Cpu size={16} className="text-purple-500" />,
+    icon: <Cpu size={18} className="text-purple-400" />,
     tagline: "Interactive & Database Driven Apps"
   },
   { 
     name: "Business Websites", 
     path: "/services/business-web", 
-    icon: <Building2 size={16} className="text-indigo-500" />,
+    icon: <Building2 size={18} className="text-indigo-400" />,
     tagline: "Corporate & Enterprise Solutions"
   },
   { 
     name: "E-Commerce Applications", 
     path: "/services/ecommerce", 
-    icon: <ShoppingCart size={16} className="text-emerald-500" />,
+    icon: <ShoppingCart size={18} className="text-emerald-400" />,
     tagline: "High-Conversion Online Stores"
   },
   { 
     name: "App Development", 
-    path: "/servicesapp-development", 
-    icon: <Smartphone size={16} className="text-pink-500" />,
+    path: "/services/app-development", 
+    icon: <Smartphone size={18} className="text-pink-400" />,
     tagline: "Native & Cross-Platform Mobile Apps"
   },
   { 
     name: "Deployment & Hosting", 
     path: "/services/deployment-hosting", 
-    icon: <CloudLightning size={16} className="text-amber-500" />,
-    tagline: "Cloud Infrastructure & Server Operations"
+    icon: <CloudLightning size={18} className="text-amber-400" />,
+    tagline: "Cloud Infrastructure & Servers"
   },
   { 
     name: "Digital Marketing", 
     path: "/services/digital-marketing", 
-    icon: <Megaphone size={16} className="text-rose-500" />,
+    icon: <Megaphone size={18} className="text-rose-400" />,
     tagline: "SEO, Performance Marketing & Branding"
   },
- {
-  name: "Maintenance & Support",
-  path: "/services/MaintenanceSupport",
-  icon: <LifeBuoy size={16} className="text-cyan-500" />,
-  tagline: "Zero downtime. Absolute application performance and proactive monitoring."
-},
+  {
+    name: "Maintenance & Support",
+    path: "/services/MaintenanceSupport",
+    icon: <LifeBuoy size={18} className="text-cyan-400" />,
+    tagline: "Zero downtime & proactive monitoring"
+  },
   { 
     name: "Coaching Center Labs", 
     path: "/services/coaching", 
-    icon: <GraduationCap size={16} className="text-cyan-500" />,
+    icon: <GraduationCap size={18} className="text-teal-400" />,
     tagline: "1-on-1 Placement Coaching"
   }
 ];
@@ -110,7 +112,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   
-  // Mobile accordion layout states
+  // Mobile accordion states
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileInternshipsOpen, setMobileInternshipsOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -132,7 +134,7 @@ export const Navbar = () => {
     setMobileServicesOpen(false);
   }, [location]);
 
-  /* Disable body scroll (mobile layers overlay setup) */
+  /* Disable body scroll on mobile menu open */
   useEffect(() => {
     if (isOpen && window.innerWidth < 1024) {
       document.body.style.overflow = 'hidden';
@@ -202,95 +204,104 @@ export const Navbar = () => {
             </div>
 
             {/* DESKTOP ROUTE TIERS */}
-            <div className="hidden md:flex items-center gap-5 lg:gap-8 ml-auto">
-              {/* Home Base */}
+            <div className="hidden md:flex items-center gap-4 lg:gap-6 ml-auto">
               
-            <Link
-  to="/"
-  className={cn(
-    // Added 'inline-flex items-center gap-2' to align the icon and text perfectly side-by-side
-    'relative inline-flex items-center gap-2 font-medium transition text-sm lg:text-base py-1',
-    location.pathname === '/' ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
-  )}
-> 
-  <Home 
-    size={18} 
-    // Inherits the text color dynamically (orange when active, gray when inactive)
-    className={location.pathname === '/' ? 'text-orange-500' : 'text-gray-400 group-hover:text-orange-500'} 
-  />
-  <span>Home</span>
-</Link>
+              {/* Home Base Link */}
+              <Link
+                to="/"
+                className={cn(
+                  'relative inline-flex items-center gap-2 font-medium transition text-sm lg:text-base py-1',
+                  location.pathname === '/' ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+                )}
+              > 
+                <Home 
+                  size={18} 
+                  className={location.pathname === '/' ? 'text-orange-500' : 'text-gray-400'} 
+                />
+                <span>Home</span>
+              </Link>
 
-              {/* Courses Dropdown Link array mapping */}
+              {/* Courses Card Modal Dropdown (Dark Background Style) */}
               <div className="relative group py-1">
                 <button className="flex items-center gap-1 font-medium text-gray-700 group-hover:text-orange-500 transition text-sm lg:text-base">
                   Courses
                   <ChevronDown size={14} className="transform group-hover:rotate-180 transition-transform duration-200" />
                 </button>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 before:absolute before:-top-2 before:h-2 before:left-0 before:right-0 before:content-['']">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[520px] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-4 grid grid-cols-2 gap-2 before:absolute before:-top-3 before:h-3 before:left-0 before:right-0 before:content-['']">
                   {courses.map((course) => (
                     <Link
                       key={course.path}
                       to={course.path}
                       className={cn(
-                        "flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition",
-                        location.pathname === course.path && "bg-orange-50 text-orange-600 font-medium"
+                        "flex flex-col p-3 rounded-xl transition border border-transparent hover:border-orange-500/30 hover:bg-gray-800/80 group/item",
+                        location.pathname === course.path && "bg-gray-800 border-orange-500/50"
                       )}
                     >
-                      <BookOpen size={14} className="text-orange-400" />
-                      <span>{course.name}</span>
+                      <div className="flex items-center gap-2 text-sm font-semibold text-white group-hover/item:text-orange-400">
+                        <BookOpen size={15} className="text-orange-400 flex-shrink-0" />
+                        <span>{course.name}</span>
+                      </div>
+                      <span className="text-xs text-gray-400 mt-0.5 line-clamp-1">{course.desc}</span>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Internships Dropdown Link array mapping */}
+              {/* Internships Card Modal Dropdown (Dark Background Style) */}
               <div className="relative group py-1">
                 <button className="flex items-center gap-1 font-medium text-gray-700 group-hover:text-orange-500 transition text-sm lg:text-base">
                   Internships
                   <ChevronDown size={14} className="transform group-hover:rotate-180 transition-transform duration-200" />
                 </button>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 before:absolute before:-top-2 before:h-2 before:left-0 before:right-0 before:content-['']">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[520px] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-4 grid grid-cols-2 gap-2 before:absolute before:-top-3 before:h-3 before:left-0 before:right-0 before:content-['']">
                   {internships.map((internship) => (
                     <Link
                       key={internship.path}
                       to={internship.path}
                       className={cn(
-                        "flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition",
-                        location.pathname === internship.path && "bg-orange-50 text-orange-600 font-medium"
+                        "flex flex-col p-3 rounded-xl transition border border-transparent hover:border-orange-500/30 hover:bg-gray-800/80 group/item",
+                        location.pathname === internship.path && "bg-gray-800 border-orange-500/50"
                       )}
                     >
-                      <Award size={14} className="text-orange-500" />
-                      <span>{internship.name}</span>
+                      <div className="flex items-center gap-2 text-sm font-semibold text-white group-hover/item:text-orange-400">
+                        <Award size={15} className="text-orange-400 flex-shrink-0" />
+                        <span>{internship.name}</span>
+                      </div>
+                      <span className="text-xs text-gray-400 mt-0.5 line-clamp-1">{internship.desc}</span>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Services Professional Dropdown with Customized Thematic Accent Color Palette */}
+              {/* Services Wide Card Modal Dropdown (Dark Background Style) */}
               <div className="relative group py-1">
                 <button className="flex items-center gap-1 font-medium text-gray-700 group-hover:text-orange-500 transition text-sm lg:text-base">
                   Services
                   <ChevronDown size={14} className="transform group-hover:rotate-180 transition-transform duration-200" />
                 </button>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 before:absolute before:-top-2 before:h-2 before:left-0 before:right-0 before:content-['']">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[640px] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-4 grid grid-cols-2 gap-2 before:absolute before:-top-3 before:h-3 before:left-0 before:right-0 before:content-['']">
                   {services.map((service) => (
                     <Link
                       key={service.path}
                       to={service.path}
                       className={cn(
-                        "flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition",
-                        location.pathname + location.hash === service.path && "bg-orange-50 text-orange-600 font-medium"
+                        "flex items-start gap-3 p-2.5 rounded-xl transition border border-transparent hover:border-orange-500/30 hover:bg-gray-800/80 group/item",
+                        location.pathname + location.hash === service.path && "bg-gray-800 border-orange-500/50"
                       )}
                     >
-                      <span className="flex-shrink-0 transition-transform group-hover:scale-110">{service.icon}</span>
-                      <span>{service.name}</span>
+                      <div className="p-2 rounded-lg bg-gray-800 group-hover/item:bg-gray-700 shadow-xs transition-transform group-hover/item:scale-110 flex-shrink-0">
+                        {service.icon}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold text-white group-hover/item:text-orange-400">{service.name}</span>
+                        <span className="text-xs text-gray-400 mt-0.5 leading-tight">{service.tagline}</span>
+                      </div>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Remaining Content Base Links */}
+              {/* Remaining Content Base Links (About, Blog, Careers, Contact) */}
               {navLinks.slice(1).map((link) => (
                 <Link
                   key={link.path}
@@ -378,65 +389,65 @@ export const Navbar = () => {
                   Home
                 </Link>
 
-                {/* Courses Accordion Mobile Stack setup */}
- <div>
-  <button
-    onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
-    className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
-  >
-    <div className="flex items-center gap-4">
-      <BookOpen size={14} className="text-gray-400" />
-      <span>Courses</span>
-    </div>
-    <ChevronDown size={16} className={cn("text-orange-400 transition-transform", mobileCoursesOpen && "rotate-180")} />
-  </button>
-  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileCoursesOpen && "max-h-[400px] py-1 space-y-1")}>
-    {courses.map((course) => (
-      <Link
-        key={course.path}
-        to={course.path}
-        className={cn(
-          "flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-orange-500 transition",
-          location.pathname === course.path && "text-orange-500 font-medium"
-        )}
-      >
-        <BookOpen size={14} className="text-orange-400 flex-shrink-0" />
-        <span>{course.name}</span>
-      </Link>
-    ))}
-  </div>
-</div>
+                {/* Courses Accordion Mobile Stack */}
+                <div>
+                  <button
+                    onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
+                    className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                  >
+                    <div className="flex items-center gap-4">
+                      <BookOpen size={18} className="text-gray-400" />
+                      <span>Courses</span>
+                    </div>
+                    <ChevronDown size={16} className={cn("text-gray-400 transition-transform", mobileCoursesOpen && "rotate-180")} />
+                  </button>
+                  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileCoursesOpen && "max-h-[500px] py-1 space-y-1")}>
+                    {courses.map((course) => (
+                      <Link
+                        key={course.path}
+                        to={course.path}
+                        className={cn(
+                          "flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-orange-500 transition",
+                          location.pathname === course.path && "text-orange-500 font-medium"
+                        )}
+                      >
+                        <BookOpen size={14} className="text-orange-400 flex-shrink-0" />
+                        <span>{course.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-{/* Internships Accordion Mobile Stack setup */}
-<div>
-  <button
-    onClick={() => setMobileInternshipsOpen(!mobileInternshipsOpen)}
-    className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
-  >
-    <div className="flex items-center gap-4">
-      <Award size={18} className="text-gray-400" />
-      <span>Internships</span>
-    </div>
-    <ChevronDown size={16} className={cn("text-gray-400 transition-transform", mobileInternshipsOpen && "rotate-180")} />
-  </button>
-  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileInternshipsOpen && "max-h-[400px] py-1 space-y-1")}>
-    {internships.map((internship) => (
-      <Link
-        key={internship.path}
-        to={internship.path}
-        className={cn(
-          "flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-orange-500 transition",
-          location.pathname === internship.path && "text-orange-500 font-medium"
-        )}
-      >
-        <Award size={14} className="text-orange-400 flex-shrink-0" />
-        <span>{internship.name}</span>
-      </Link>
-    ))}
-  </div>
-</div>
+                {/* Internships Accordion Mobile Stack */}
+                <div>
+                  <button
+                    onClick={() => setMobileInternshipsOpen(!mobileInternshipsOpen)}
+                    className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Award size={18} className="text-gray-400" />
+                      <span>Internships</span>
+                    </div>
+                    <ChevronDown size={16} className={cn("text-gray-400 transition-transform", mobileInternshipsOpen && "rotate-180")} />
+                  </button>
+                  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileInternshipsOpen && "max-h-[500px] py-1 space-y-1")}>
+                    {internships.map((internship) => (
+                      <Link
+                        key={internship.path}
+                        to={internship.path}
+                        className={cn(
+                          "flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-orange-500 transition",
+                          location.pathname === internship.path && "text-orange-500 font-medium"
+                        )}
+                      >
+                        <Award size={14} className="text-orange-400 flex-shrink-0" />
+                        <span>{internship.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-                {/* Services Accordion Mobile Stack setup */}
+                {/* Services Accordion Mobile Stack */}
                 <div>
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
@@ -448,7 +459,7 @@ export const Navbar = () => {
                     </div>
                     <ChevronDown size={16} className={cn("text-gray-400 transition-transform", mobileServicesOpen && "rotate-180")} />
                   </button>
-                  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileServicesOpen && "max-h-[400px] py-1 space-y-1")}>
+                  <div className={cn("pl-12 pr-4 overflow-hidden transition-all duration-300 max-h-0", mobileServicesOpen && "max-h-[600px] py-1 space-y-1")}>
                     {services.map((service) => (
                       <Link
                         key={service.path}
@@ -483,7 +494,7 @@ export const Navbar = () => {
                 ))}
               </nav>
 
-              {/* Bottom Copyright Meta Data panel panel */}
+              {/* Bottom Copyright Meta Data panel */}
               <div className="px-5 py-4 border-t text-xs text-gray-400 bg-gray-50/50">
                 &copy; {new Date().getFullYear()} TechSasi. All rights reserved.
               </div>
@@ -492,5 +503,5 @@ export const Navbar = () => {
         )}
       </AnimatePresence>
     </>
-  ); 
+  );
 };

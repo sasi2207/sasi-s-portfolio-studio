@@ -12,7 +12,6 @@ import {
   Target,
   Compass,
   HeartHandshake,
-  CheckCircle2,
   Layers
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -25,64 +24,78 @@ export const About = () => {
 
   return (
     <Layout>
+      {/* Custom Inline Grid Pattern Styles */}
+      <style>{`
+        .tech-grid-pattern {
+          background-size: 40px 40px;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      `}</style>
+
       {/* ==============================
           HERO SECTION
       =============================== */}
-      <section className="pt-36 pb-20 relative overflow-hidden bg-slate-950 border-b border-slate-900">
-        <div className="absolute inset-0 grid-pattern opacity-5 pointer-events-none" />
+      <section className="pt-36 pb-24 relative overflow-hidden bg-black border-b border-slate-900 tech-grid-pattern">
+        {/* Subtle Ambient Glows */}
         <div className="absolute top-1/4 -left-24 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-1/3 -right-24 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl space-y-6">
           <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-4 py-1.5 rounded-full inline-flex items-center gap-2 border border-amber-400/20">
-            <Sparkles className="w-3.5 h-3.5" /> The TechSasi Journey
+            <Sparkles className="w-3.5 h-3.5" /> The TechSasi Narrative
           </span>
           <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">
-            Not a Big Corporate. <br />
+            Engineering Digital Ecosystems <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 bg-clip-text text-transparent">
-              Built on Passion, Purpose & Practical Value.
+              with Practical Intelligence.
             </span>
           </h1>
           <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            TechSasi started with a simple idea: to build useful software solutions and help businesses use technology in a simple and practical way.
+            TechSasi wasn’t started as a big company. It began with a single, powerful idea: to build useful software solutions and help businesses leverage technology in a simple, practical way.
           </p>
         </div>
       </section>
 
       {/* ==============================
-          VISION & MISSION CARDS
+          VISION & MISSION STATEMENTS
       =============================== */}
-      <section className="py-20 bg-slate-950 relative overflow-hidden">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <section className="py-24 bg-black relative overflow-hidden tech-grid-pattern">
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="grid md:grid-cols-2 gap-8">
-            
+
             {/* Vision Card */}
             <div 
               data-aos="fade-right"
-              className="bg-gradient-to-br from-slate-900/80 to-slate-950 border border-slate-800/80 hover:border-amber-500/30 rounded-3xl p-8 relative overflow-hidden transition-all duration-300 shadow-xl"
+              className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 relative overflow-hidden transition-all hover:border-amber-500/30"
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 mb-6">
-                <Compass size={24} />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-amber-400 border border-slate-800">
+                  <Compass size={28} />
+                </div>
+                <h3 className="text-2xl font-black text-white tracking-tight">Our Vision</h3>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-                To simplify how businesses interact with technology and empower the next generation of developers through hands-on, practical learning experiences that create absolute real-world value.
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed pl-1">
+                To simplify the digital landscape for businesses and cultivate the next wave of engineering talent through mentorship built on real-world execution and unwavering practical value.
               </p>
             </div>
 
             {/* Mission Card */}
             <div 
               data-aos="fade-left"
-              className="bg-gradient-to-br from-slate-900/80 to-slate-950 border border-slate-800/80 hover:border-orange-500/30 rounded-3xl p-8 relative overflow-hidden transition-all duration-300 shadow-xl"
+              className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 relative overflow-hidden transition-all hover:border-orange-500/30"
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="w-12 h-12 rounded-2xl bg-orange-400/10 border border-orange-400/20 flex items-center justify-center text-orange-400 mb-6">
-                <Target size={24} />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-orange-400 border border-slate-800">
+                  <Target size={28} />
+                </div>
+                <h3 className="text-2xl font-black text-white tracking-tight">Our Mission</h3>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Our Mission</h3>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-                To engineer reliable websites, applications, and custom software systems while bridging the skill gap for students by merging core software engineering workflows with real project execution.
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed pl-1">
+                To deliver resilient, custom software solutions—from high-performance web applications to complex ERP and AI automation systems—while empowering beginners with the practical experience needed to thrive in technology.
               </p>
             </div>
 
@@ -91,56 +104,59 @@ export const About = () => {
       </section>
 
       {/* ==============================
-          THE STORY / EVOLUTION TIMELINE SECTION
+          THE EVOLUTION TIMELINE SECTION
       =============================== */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900 relative">
-        <div className="container mx-auto px-4 max-w-5xl">
+      <section className="py-24 bg-black border-t border-slate-900 relative tech-grid-pattern">
+        <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="text-center mb-16 space-y-3" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              How The Journey Evolved
+              Our Growth Story
             </h2>
             <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-medium">
-              Every challenge, milestone, and project shaped TechSasi into what it is today.
+              From humble beginnings to a multifaceted development and training hub.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            
+
             {/* Phase 1 */}
-            <div data-aos="fade-up" data-aos-delay="100" className="bg-slate-900/30 border border-slate-900 rounded-2xl p-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <span className="text-amber-400 text-xs font-bold uppercase tracking-wider bg-amber-400/10 px-3 py-1 rounded-full">
-                  Phase 01
+            <div data-aos="fade-up" data-aos-delay="100" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
+              <Layers className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
+              <div className="space-y-4 relative z-10">
+                <span className="text-amber-400 text-xs font-bold uppercase tracking-wider bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+                  Foundation
                 </span>
-                <h3 className="text-lg font-bold text-white">Roots & Basics</h3>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                  Started by learning coding and website development. Worked on small projects, explored technologies, and transformed every challenge into a stepping stone to improve.
+                <h3 className="text-xl font-bold text-white">The Beginning</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  I started by learning coding and website development. Working on small projects allowed me to explore different technologies, learning crucial lessons from every single line of code. Every challenge provided an opportunity to improve and try something better.
                 </p>
               </div>
             </div>
 
             {/* Phase 2 */}
-            <div data-aos="fade-up" data-aos-delay="200" className="bg-slate-900/30 border border-slate-900 rounded-2xl p-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <span className="text-orange-400 text-xs font-bold uppercase tracking-wider bg-orange-400/10 px-3 py-1 rounded-full">
-                  Phase 02
+            <div data-aos="fade-up" data-aos-delay="200" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
+              <Code2 className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
+              <div className="space-y-4 relative z-10">
+                <span className="text-orange-400 text-xs font-bold uppercase tracking-wider bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
+                  Expansion
                 </span>
-                <h3 className="text-lg font-bold text-white">Expansion & Solutions</h3>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                  Interest grew beyond standard websites into robust web apps, ERP & CRM systems, e-commerce networks, mobile apps, automation, and AI-driven solutions.
+                <h3 className="text-xl font-bold text-white">Beyond Websites</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  As the journey continued, my interest expanded far beyond basic web development. I began working with complex web applications, business software, ERP and CRM systems, e-commerce platforms, mobile applications, automation, and sophisticated AI-based solutions.
                 </p>
               </div>
             </div>
 
             {/* Phase 3 */}
-            <div data-aos="fade-up" data-aos-delay="300" className="bg-slate-900/30 border border-slate-900 rounded-2xl p-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <span className="text-rose-400 text-xs font-bold uppercase tracking-wider bg-rose-400/10 px-3 py-1 rounded-full">
-                  Phase 03
+            <div data-aos="fade-up" data-aos-delay="300" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
+              <GraduationCap className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
+              <div className="space-y-4 relative z-10">
+                <span className="text-rose-400 text-xs font-bold uppercase tracking-wider bg-rose-400/10 px-3 py-1 rounded-full border border-rose-400/20">
+                  Giving Back
                 </span>
-                <h3 className="text-lg font-bold text-white">Training & Growth</h3>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                  Expanded focus toward software development training to guide students and beginners through practical, industry-standard project environments.
+                <h3 className="text-xl font-bold text-white">Training & Mentorship</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Alongside development, I wanted to help students and beginners learn technology through practical experience. This led to the launch of TechSasi Software Development and Training, with the goal of helping learners understand real-world technologies and project lifecycles.
                 </p>
               </div>
             </div>
@@ -152,75 +168,83 @@ export const About = () => {
       {/* ==============================
           CORE PHILOSOPHY HIGHLIGHT
       =============================== */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900 relative">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <section className="py-24 bg-black border-t border-slate-900 relative tech-grid-pattern">
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <div 
             data-aos="zoom-in"
-            className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-rose-500/10 border border-amber-500/20 rounded-3xl p-8 md:p-12 text-center space-y-6 relative overflow-hidden"
+            className="bg-black/90 backdrop-blur-sm border border-slate-800 rounded-3xl p-10 md:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl"
           >
-            <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm pointer-events-none" />
-            <div className="relative z-10 space-y-4">
-              <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
-                Core Philosophy
-              </span>
-              <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight leading-snug">
-                "Technology is not just about writing code. It is about understanding a real problem and finding a simple solution for it."
-              </h2>
-              <p className="text-slate-300 text-sm md:text-base font-medium max-w-2xl mx-auto pt-2">
-                Technology should not make things complicated. It should make business easier, learning practical, and above all, create real value.
-              </p>
-            </div>
+            <div className="absolute -top-20 -left-20 w-60 h-60 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+
+            <Sparkles size={40} className="mx-auto text-amber-400 opacity-70" />
+
+            <blockquote className="text-xl md:text-3xl font-medium text-white leading-tight italic tracking-tight">
+              "For me, technology is not just about writing code. It is about understanding a real problem and finding a simple technology-based solution for it."
+            </blockquote>
+
+            <p className="text-slate-500 text-sm max-w-xl mx-auto font-medium pt-4">
+              Our goal is simple: Technology should not make things complicated. It should make business easier, learning practical, and most importantly, it should create real value.
+            </p>
           </div>
         </div>
       </section>
 
       {/* ==============================
-          WHAT TECHSASI DOES TODAY (SERVICES & TRAINING)
+          WHAT WE DO TODAY (SERVICES GRID)
       =============================== */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900 relative">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <section className="py-24 bg-black border-t border-slate-900 relative overflow-hidden tech-grid-pattern">
+        <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-rose-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 space-y-3" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              What TechSasi Focuses On Today
+              TechSasi Capabilities Today
             </h2>
             <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-medium">
-              Delivering specialized development services alongside practical software mentorship.
+              Leveraging deep technical expertise to solve complex business challenges and mentor new developers.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {[
               {
                 icon: Globe2,
-                title: "Web & Mobile Platforms",
-                desc: "High-performance websites, dynamic web apps, custom e-commerce engines, and cross-platform mobile solutions.",
+                title: "Web & E-commerce",
+                desc: "Custom websites, dynamic web applications, and secure e-commerce platforms built for growth.",
+              },
+              {
+                icon: Smartphone,
+                title: "Mobile Applications",
+                desc: "Cross-platform mobile solutions designed for performance and intuitive user experiences.",
               },
               {
                 icon: Cpu,
                 title: "Business Software & AI",
-                desc: "Enterprise ERP & CRM systems, workflow automation layers, and cutting-edge AI-based software solutions.",
+                desc: "Scalable ERP/CRM systems, workflow automation, and intelligent AI-driven software implementations.",
               },
               {
                 icon: GraduationCap,
-                title: "Development & Training",
-                desc: "Structured training programs designed to help students and aspiring developers understand real-world code and project workflows.",
+                title: "Practical Training",
+                desc: "Mentorship programs focused on real-world technologies, agile workflows, and project delivery.",
               },
             ].map((item, index) => (
               <div
                 key={item.title}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="bg-slate-900/40 border border-slate-900 hover:border-slate-800 rounded-2xl p-6 transition-all duration-300 space-y-4"
+                className="bg-black/80 backdrop-blur-sm border border-slate-800 hover:border-slate-700 rounded-2xl p-6 transition-all duration-300 space-y-4 flex flex-col justify-between group"
               >
-                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center border border-slate-800">
-                  <item.icon className="text-amber-400" size={20} />
+                <div>
+                    <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                      <item.icon className="text-amber-400" size={22} />
+                    </div>
+                    <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed pt-1">
+                      {item.desc}
+                    </p>
                 </div>
-                <h3 className="text-base font-bold text-white">
-                  {item.title}
-                </h3>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                  {item.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -230,27 +254,27 @@ export const About = () => {
       {/* ==============================
           GROWING TOGETHER & CTA SECTION
       =============================== */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900">
-        <div className="container mx-auto px-4 max-w-4xl text-center space-y-8" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 bg-slate-900 border border-slate-800 text-slate-300 px-4 py-1.5 rounded-full text-xs font-semibold">
+      <section className="py-24 bg-black border-t border-slate-900 tech-grid-pattern relative">
+        <div className="container mx-auto px-4 max-w-4xl text-center space-y-8 relative z-10" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 bg-black/80 border border-slate-800 text-slate-300 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide">
             <HeartHandshake size={14} className="text-amber-400" /> Growing Together
           </div>
 
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-            Ready to Build or Learn With Us?
+            Let's Build Your Future.
           </h2>
 
-          <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-            Every project, client requirement, challenge, and mistake gives us another opportunity to improve. TechSasi is about learning, building, and solving problems together.
+          <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+            The TechSasi journey is still growing. There is a lot more to learn, build, and explore together. Every project, client requirement, challenge, mistake, and new technology gives us another opportunity to improve.
           </p>
 
-          <div className="pt-4 flex flex-wrap justify-center gap-4">
+          <div className="pt-4">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition shadow-lg"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition shadow-lg hover:shadow-amber-500/20"
             >
-              <span>Get in Touch</span>
-              <ArrowRight size={14} />
+              <span>Initiate Project</span>
+              <ArrowRight size={16} />
             </Link>
           </div>
         </div>
