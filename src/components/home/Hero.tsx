@@ -58,11 +58,11 @@ const Hero = () => {
           {/* Dual Category Badge */}
           <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs md:text-sm text-slate-300 mb-8 backdrop-blur-md shadow-2xl">
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black text-amber-400 font-medium">
-              <GraduationCap className="w-4 h-4" /> Tech Institute
+              <GraduationCap className="w-4 h-4" /> Software Training
             </span>
             <span className="w-1 h-1 bg-slate-700 rounded-full hidden sm:inline-block" />
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 font-medium">
-              <Code2 className="w-4 h-4" /> Dev Agency
+              <Code2 className="w-4 h-4" /> Web & App Development
             </span>
           </motion.div>
 
@@ -71,9 +71,9 @@ const Hero = () => {
             variants={itemVariants}
             className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-[1.15]"
           >
-            Master Code. <br />
+            Have an Idea? <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">
-              Build the Digital Future.
+              Let’s Build It Together.
             </span>
           </motion.h1>
 
@@ -82,29 +82,29 @@ const Hero = () => {
             variants={itemVariants}
             className="text-base sm:text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed"
           >
-            Whether you want to launch a tech career with our premium software coaching or need an expert engineering team to develop elite web & mobile applications—we deliver excellence.
+            At <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">TechSasi</span>, we build modern  <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Websites</span>  and  <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent"> Mobile Apps</span> that are simple, fast, and designed around your business needs. We also provide practical  <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Software Training</span> to help students, beginners, and professionals learn real-world technology skills.
           </motion.p>
 
           {/* Targeted Call-To-Actions */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 max-w-lg mx-auto sm:max-w-none">
-            {/* Action 1: Training Enrollment */}
-            <Link to="/courses" className="w-full sm:w-auto">
+            {/* Action 1: Start Project */}
+            <Link to="/proposal" className="w-full sm:w-auto">
               <Button
                 className="w-full sm:w-auto group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold shadow-[0_0_25px_rgba(245,158,11,0.25)] rounded-xl px-8 py-6 text-base transition-all duration-300"
               >
-                Join Coaching Classes
-                <MonitorPlay className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
+                Start Your Project
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
               </Button>
             </Link>
 
-            {/* Action 2: Dev Services */}
-            <Link to="/proposal" className="w-full sm:w-auto">
+            {/* Action 2: Explore Training */}
+            <Link to="/courses" className="w-full sm:w-auto">
               <Button
                 variant="outline"
                 className="w-full sm:w-auto border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-slate-200 hover:text-white rounded-xl px-8 py-6 text-base backdrop-blur-sm transition-all duration-300"
               >
-                Hire Us for Development
-                <ArrowRight className="w-4 h-4 ml-2" />
+                Explore Training
+                <MonitorPlay className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </motion.div>
@@ -117,24 +117,24 @@ const Hero = () => {
             <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-900/40 border border-slate-900/60 text-left">
               <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-white font-semibold text-sm">100% Practical Training</p>
-                <p className="text-xs text-slate-400">Live projects & career placement coaching</p>
+                <p className="text-white font-semibold text-sm">Build Your Business</p>
+                <p className="text-xs text-slate-400">Custom web & app solutions</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-900/40 border border-slate-900/60 text-left">
               <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-white font-semibold text-sm">Expert Web Development</p>
-                <p className="text-xs text-slate-400">React, Next.js, Node, & E-Commerce systems</p>
+                <p className="text-white font-semibold text-sm">Learn New Skills</p>
+                <p className="text-xs text-slate-400">Practical, real-world software coaching</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-900/40 border border-slate-900/60 text-left sm:col-span-2 md:col-span-1">
               <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-white font-semibold text-sm">ISO Certified & NDA Secure</p>
-                <p className="text-xs text-slate-400">Trusted standard code quality and security</p>
+                <p className="text-white font-semibold text-sm">Grow with Technology</p>
+                <p className="text-xs text-slate-400">Web Development • App Development</p>
               </div>
             </div>
           </motion.div>
