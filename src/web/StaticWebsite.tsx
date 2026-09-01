@@ -582,42 +582,7 @@ const StaticWebsite = () => {
         </section>
 
         {/* ================= CTA INTERACTIVE CARD ================= */}
-        <section className="py-20 bg-black/95 relative backdrop-blur-md">
-          <div className="container-custom max-w-7xl px-6 lg:px-12">
-            <div
-              ref={reveal}
-              className="blur-reveal bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border border-orange-500/30 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
-            >
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-orange-500/15 rounded-full blur-[100px] pointer-events-none" />
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
-                Ready to Take Your Business Online?
-              </h2>
-              <p className="mb-10 text-zinc-300 max-w-xl mx-auto leading-relaxed">
-                Let’s create a website that represents your business professionally and makes it easy for people to find and contact you. Let’s Build Your Website with <span className="text-orange-400 font-bold">TechSasi</span>.
-              </p>
-              
-              <div className="flex flex-wrap justify-center gap-4">
-                <button
-                  onClick={() => {
-                    const dmSection = document.getElementById("direct-message-section");
-                    dmSection?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-bold px-8 py-4 rounded-xl transition duration-200 shadow-xl shadow-orange-500/20 cursor-pointer"
-                >
-                  Send Direct Message <MessageCircle size={18} />
-                </button>
-
-                <button
-                  onClick={() => handleWhatsAppClick()}
-                  className="inline-flex items-center gap-3 bg-zinc-900 border border-emerald-500/40 hover:border-emerald-500 text-emerald-400 hover:text-white hover:bg-emerald-600 font-bold px-8 py-4 rounded-xl transition duration-300 shadow-xl cursor-pointer"
-                >
-                  <MessageCircle size={20} />
-                  Chat on WhatsApp: 7448788897
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+      
 
         {/* ================= PLAN DETAILS & WHATSAPP MODAL (LANDSCAPE ORIENTATION) ================= */}
         {selectedPlan && (

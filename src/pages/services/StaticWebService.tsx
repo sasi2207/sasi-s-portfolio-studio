@@ -234,34 +234,33 @@ const StaticWebsite = () => {
       {/* Main Wrapper with Full-Page Box Grid Background */}
       <div className="bg-black text-white min-h-screen selection:bg-orange-500 selection:text-white bg-grid-box-full relative">
         
-        {/* ================= HERO SECTION (Top Entry) ================= */}
+        {/* ================= HERO SECTION (Centered Design) ================= */}
         <ParallaxSection
           className="pt-40 pb-32 overflow-hidden relative"
           bgClassName="bg-black/85 border-b border-zinc-900 backdrop-blur-sm"
         >
           {/* Vibrant Orange Ambient Glows */}
-          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-600/15 rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-600/15 rounded-full blur-[160px] pointer-events-none" />
 
-          <div className="container-custom max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-            {/* Left Column: Heading, CTAs, and WhatsApp Direct Button */}
-            <div className="blur-reveal is-visible">
+          <div className="container-custom max-w-5xl px-6 lg:px-12 text-center relative z-10 mx-auto">
+            <div className="blur-reveal is-visible flex flex-col items-center">
+              
               <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-semibold text-xs tracking-wider uppercase mb-6 shadow-sm">
                 Professional Static Solutions
               </span>
               
-              <h1 className="text-5xl xl:text-6xl font-heading font-extrabold mb-6 tracking-tight text-white leading-tight">
+              <h1 className="text-4xl sm:text-5xl xl:text-7xl font-heading font-extrabold mb-6 tracking-tight text-white leading-tight">
                 Static Website{" "}
                 <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
                   Development
                 </span>
               </h1>
 
-              <p className="text-xl text-zinc-300 mb-10 max-w-xl leading-relaxed">
+              <p className="text-lg sm:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">
                 Not every business needs a complicated website. If you’re looking for a clean, professional website to showcase your business, services, portfolio, or contact details, a static website can be a great choice.
               </p>
 
-              <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex flex-wrap justify-center gap-4 items-center">
                 <button
                   onClick={() => {
                     const dmSection = document.getElementById("direct-message-section");
@@ -281,42 +280,7 @@ const StaticWebsite = () => {
                   WhatsApp: 7448788897
                 </button>
               </div>
-            </div>
 
-            {/* Right Column: Mini Simulated UI Mockup Preview */}
-            <div ref={reveal} className="hidden lg:block blur-reveal">
-              <div className="rounded-3xl bg-gradient-to-br from-zinc-900 to-black p-[2px] border border-orange-500/40 shadow-2xl relative group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/5 opacity-60 group-hover:opacity-100 transition duration-500" />
-                
-                {/* Browser Simulation Header */}
-                <div className="bg-zinc-950 rounded-t-[22px] px-4 py-3 border-b border-zinc-800 flex items-center justify-between relative z-10">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  </div>
-                  <div className="bg-zinc-900 text-zinc-400 text-xs px-4 py-1 rounded-md border border-zinc-800 flex items-center gap-1.5 font-mono">
-                    <Globe size={12} className="text-orange-400" /> https://techsasi.com
-                  </div>
-                  <div className="flex gap-1 text-zinc-500">
-                    <Smartphone size={14} />
-                    <Tablet size={14} />
-                    <Monitor size={14} className="text-orange-400" />
-                  </div>
-                </div>
-
-                {/* Simulated Content Card Inside Mockup */}
-                <div className="bg-black p-8 rounded-b-[22px] relative z-10 flex flex-col items-center text-center">
-                  <span className="text-xs uppercase tracking-widest text-orange-400 font-bold mb-2">Live UI Preview Model</span>
-                  <h4 className="text-2xl font-bold text-white mb-3">Your Brand, Digitally Elevated</h4>
-                  <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-                    At <span className="text-orange-400 font-bold">TechSasi</span>, we create responsive and user-friendly static websites that look good on mobile, tablet, and desktop.
-                  </p>
-                  <div className="w-full bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 py-3 rounded-xl text-orange-300 text-sm font-semibold">
-                    ✨ 100% User-Friendly Interface Design
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </ParallaxSection>
@@ -582,42 +546,7 @@ const StaticWebsite = () => {
         </section>
 
         {/* ================= CTA INTERACTIVE CARD ================= */}
-        <section className="py-20 bg-black/95 relative backdrop-blur-md">
-          <div className="container-custom max-w-7xl px-6 lg:px-12">
-            <div
-              ref={reveal}
-              className="blur-reveal bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border border-orange-500/30 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
-            >
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-orange-500/15 rounded-full blur-[100px] pointer-events-none" />
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
-                Ready to Take Your Business Online?
-              </h2>
-              <p className="mb-10 text-zinc-300 max-w-xl mx-auto leading-relaxed">
-                Let’s create a website that represents your business professionally and makes it easy for people to find and contact you. Let’s Build Your Website with <span className="text-orange-400 font-bold">TechSasi</span>.
-              </p>
-              
-              <div className="flex flex-wrap justify-center gap-4">
-                <button
-                  onClick={() => {
-                    const dmSection = document.getElementById("direct-message-section");
-                    dmSection?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-bold px-8 py-4 rounded-xl transition duration-200 shadow-xl shadow-orange-500/20 cursor-pointer"
-                >
-                  Send Direct Message <MessageCircle size={18} />
-                </button>
-
-                <button
-                  onClick={() => handleWhatsAppClick()}
-                  className="inline-flex items-center gap-3 bg-zinc-900 border border-emerald-500/40 hover:border-emerald-500 text-emerald-400 hover:text-white hover:bg-emerald-600 font-bold px-8 py-4 rounded-xl transition duration-300 shadow-xl cursor-pointer"
-                >
-                  <MessageCircle size={20} />
-                  Chat on WhatsApp: 7448788897
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* ================= PLAN DETAILS & WHATSAPP MODAL (FULLY MOBILE RESPONSIVE LANDSCAPE FORMAT) ================= */}
         {selectedPlan && (

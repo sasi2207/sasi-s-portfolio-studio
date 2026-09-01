@@ -1,286 +1,489 @@
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import {
-  Code2,
-  Globe2,
-  Smartphone,
+  Code,
+  Terminal,
   Cpu,
-  GraduationCap,
-  Sparkles,
+  CheckCircle,
   ArrowRight,
-  Target,
+  MessageCircle,
+  Sparkles,
+  Layers,
+  BookOpen,
+  Award,
+  Send,
   Compass,
-  HeartHandshake,
-  Layers
+  Briefcase,
+  Lightbulb,
+  CpuIcon,
+  Flame,
+  Globe
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Layout } from "@/components/layout/Layout";
 
-export const About = () => {
+import { Layout as PageLayout } from "@/components/layout/Layout";
+import { ParallaxSection } from "@/components/common/ParallaxSection";
+
+/* ------------------------------------------------------------------
+   1. ANIMATION HOOK: Smooth scroll reveal
+--------------------------------------------------------------------- */
+const useBlurReveal = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
   useEffect(() => {
-    AOS.init({ duration: 800, once: true, easing: "ease-out-cubic" });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
+  return (el: HTMLDivElement | null) => {
+    if (el && !refs.current.includes(el)) refs.current.push(el);
+  };
+};
+
+/* ------------------------------------------------------------------
+   2. MORPHISM & GLASS HUD JOURNEY CARDS (VERAMATHIRI 2.0)
+--------------------------------------------------------------------- */
+const morphismStoryCards = [
+  {
+    phase: "01",
+    title: "Oru Simple Start",
+    subtitle: "School Days & Curiosity",
+    desc: "10th standard (82%) & 12th standard (61%) with Computer Science. Appove computer use panradhu, technology eppadi work aagudhu nu therinjukka oru curiosity vandhuchu.",
+    highlight: "Computer Science Foundation",
+  },
+  {
+    phase: "02",
+    title: "Logical Thinking",
+    subtitle: "B.Sc. Mathematics (74%)",
+    desc: "Degree Mathematics-a irundhalum, problem solving and logical thinking develop panna romba useful-a irundhuchu. Software mela irundha interest continue aayichu.",
+    highlight: "Analytical Mindset",
+  },
+  {
+    phase: "03",
+    title: "First Code & Reality",
+    subtitle: "MERN Stack Learning",
+    desc: "Frontend, Backend, Database, API. Starting-la neraya concepts difficult-a irundhuchu. Code work aagala, error puriyala. Coding-na code write panradhu illa, problem solve panradhu nu purinjadhu.",
+    highlight: "Problem Solving Mastery",
+  },
+  {
+    phase: "04",
+    title: "Job Search Hurdles",
+    subtitle: "Rejections & Barriers",
+    desc: "2022-la job search-la freshers face panra real challenges: 'Experience irukka?', 'Reference irukka?', non-IT degree barriers. But naan stop pannala, innum learn pannanum nu decide pannen.",
+    highlight: "Resilience & Growth",
+  },
+  {
+    phase: "05",
+    title: "Skill Expansion",
+    subtitle: "Java, Python, PHP, AWS",
+    desc: "Different technologies explore pannen. Java moolama programming, Python moolama possibilities, PHP moolama web dev, AWS moolama cloud computing understand pannen.",
+    highlight: "Multi-Stack Versatility",
+  },
+  {
+    phase: "06",
+    title: "TechSasi Born",
+    subtitle: "Learning + Development Platform",
+    desc: "Practical training for students + digital solutions for businesses. TechSasi oru training institute mattum illa — idhu enoda learning journey-oda next step.",
+    highlight: "The Vision Realized",
+  },
+];
+
+const TechSasiMorphismAbout = () => {
+  const reveal = useBlurReveal();
+  const [dmMessage, setDmMessage] = useState("");
+  const [isSent, setIsSent] = useState(false);
+
+  const handleWhatsAppClick = (topic?: string) => {
+    const phoneNumber = "7448788897";
+    const messageText = topic 
+      ? `Hello TechSasi, I want to explore ${topic}. Let's discuss details! 🚀`
+      : `Hello TechSasi, I read your morphi-styled story and want to connect with your training or software development services. Let's talk!`;
+    
+    const message = encodeURIComponent(messageText);
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  };
+
+  const handleDmSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!dmMessage.trim()) return;
+
+    const phoneNumber = "7448788897";
+    const encodedMsg = encodeURIComponent(`Hello TechSasi, here is my inquiry:\n\n"${dmMessage}"`);
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMsg}`, "_blank");
+    
+    setIsSent(true);
+    setTimeout(() => {
+      setIsSent(false);
+      setDmMessage("");
+    }, 4000);
+  };
+
   return (
-    <Layout>
-      {/* Custom Inline Grid Pattern Styles */}
+    <PageLayout>
+      {/* CSS for Full Page Box Grid Background Lines with Orange Accent */}
       <style>{`
-        .tech-grid-pattern {
-          background-size: 40px 40px;
+        .bg-grid-box-full-morphism {
+          background-size: 60px 60px;
           background-image: 
-            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            linear-gradient(to right, rgba(249, 115, 22, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(249, 115, 22, 0.08) 1px, transparent 1px);
+        }
+        .glass-morphism-card {
+          background: rgba(18, 18, 20, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(249, 115, 22, 0.2);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .glass-morphism-card:hover {
+          border-color: rgba(249, 115, 22, 0.6);
+          box-shadow: 0 25px 60px rgba(249, 115, 22, 0.15), inset 0 1px 0 rgba(249, 115, 22, 0.3);
         }
       `}</style>
 
-      {/* ==============================
-          HERO SECTION
-      =============================== */}
-      <section className="pt-36 pb-24 relative overflow-hidden bg-black border-b border-slate-900 tech-grid-pattern">
-        {/* Subtle Ambient Glows */}
-        <div className="absolute top-1/4 -left-24 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/3 -right-24 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
+      {/* Main Wrapper with Black Background, Orange Accents & White Text */}
+      <div className="bg-black text-white min-h-screen selection:bg-orange-500 selection:text-black bg-grid-box-full-morphism relative overflow-x-hidden">
+        
+        {/* ================= HERO SECTION (GLASS MORPHISM HUD STYLE) ================= */}
+        <ParallaxSection
+          className="pt-40 pb-28 relative overflow-hidden"
+          bgClassName="bg-black/95 border-b border-zinc-900 backdrop-blur-md"
+        >
+          {/* Dynamic Glowing Backdrop Elements */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-orange-600/25 via-amber-500/10 to-transparent rounded-full blur-[150px] pointer-events-none" />
 
-        <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl space-y-6">
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-4 py-1.5 rounded-full inline-flex items-center gap-2 border border-amber-400/20">
-            <Sparkles className="w-3.5 h-3.5" /> The TechSasi Narrative
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">
-            Engineering Digital Ecosystems <br />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 bg-clip-text text-transparent">
-              with Practical Intelligence.
-            </span>
-          </h1>
-          <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            TechSasi wasn’t started as a big company. It began with a single, powerful idea: to build useful software solutions and help businesses leverage technology in a simple, practical way.
-          </p>
-        </div>
-      </section>
-
-      {/* ==============================
-          VISION & MISSION STATEMENTS
-      =============================== */}
-      <section className="py-24 bg-black relative overflow-hidden tech-grid-pattern">
-        <div className="container mx-auto px-4 max-w-6xl relative z-10">
-          <div className="grid md:grid-cols-2 gap-8">
-
-            {/* Vision Card */}
-            <div 
-              data-aos="fade-right"
-              className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 relative overflow-hidden transition-all hover:border-amber-500/30"
+          <div className="container-custom max-w-7xl px-6 lg:px-12 relative z-10 mx-auto text-center">
+            
+            {/* Top Pill Tag */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-semibold text-xs tracking-wider uppercase mb-8 shadow-sm"
             >
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-amber-400 border border-slate-800">
-                  <Compass size={28} />
-                </div>
-                <h3 className="text-2xl font-black text-white tracking-tight">Our Vision</h3>
-              </div>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed pl-1">
-                To simplify the digital landscape for businesses and cultivate the next wave of engineering talent through mentorship built on real-world execution and unwavering practical value.
-              </p>
-            </div>
+              <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+              Oru Small Idea... Oru Big Journey
+            </motion.div>
 
-            {/* Mission Card */}
-            <div 
-              data-aos="fade-left"
-              className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 relative overflow-hidden transition-all hover:border-orange-500/30"
+            {/* Main Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-orange-400 border border-slate-800">
-                  <Target size={28} />
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-black uppercase mb-6 tracking-tight leading-[1.08] text-white">
+                Morphing Skills Into Reality <br />
+                <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent">
+                  This Is TechSasi
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg text-zinc-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light"
+            >
+              TechSasi oru naal-la create aana company illa. School computer science curiosity, B.Sc Mathematics logic, job search rejections, and continuous technology learning mela irundha passion-oda result dhaan.
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4 items-center mb-16"
+            >
+              <button
+                onClick={() => {
+                  const journeySection = document.getElementById("morphism-story-grid");
+                  journeySection?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-bold px-8 py-4 rounded-xl transition duration-300 shadow-xl shadow-orange-500/25 cursor-pointer group"
+              >
+                Explore Morphi Journey <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <button
+                onClick={() => handleWhatsAppClick("TechSasi Training & Services")}
+                className="inline-flex items-center gap-3 bg-zinc-900 border border-orange-500/40 hover:border-orange-500 text-orange-400 hover:text-white hover:bg-orange-600 font-bold px-7 py-4 rounded-xl transition duration-300 shadow-xl group cursor-pointer"
+              >
+                <MessageCircle size={20} className="text-orange-400 group-hover:text-white transition-colors" />
+                Talk to Founder: 7448788897
+              </button>
+            </motion.div>
+
+            {/* Glass HUD Feature Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto text-left"
+            >
+              {[
+                { title: "Software Solutions", desc: "Custom web & app building" },
+                { title: "Practical Training", desc: "Learn by building projects" },
+                { title: "Non-IT to Tech", desc: "Zero barrier entry for coding" },
+                { title: "Continuous Growth", desc: "Adapt, practice & evolve daily" },
+              ].map((badge, idx) => (
+                <div key={idx} className="glass-morphism-card p-4 rounded-2xl">
+                  <div className="flex items-center gap-2 mb-1">
+                    <CheckCircle className="text-orange-400 flex-shrink-0" size={16} />
+                    <h4 className="text-xs font-bold text-white">{badge.title}</h4>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 leading-snug">{badge.desc}</p>
                 </div>
-                <h3 className="text-2xl font-black text-white tracking-tight">Our Mission</h3>
-              </div>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed pl-1">
-                To deliver resilient, custom software solutions—from high-performance web applications to complex ERP and AI automation systems—while empowering beginners with the practical experience needed to thrive in technology.
-              </p>
-            </div>
+              ))}
+            </motion.div>
 
           </div>
-        </div>
-      </section>
+        </ParallaxSection>
 
-      {/* ==============================
-          THE EVOLUTION TIMELINE SECTION
-      =============================== */}
-      <section className="py-24 bg-black border-t border-slate-900 relative tech-grid-pattern">
-        <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          <div className="text-center mb-16 space-y-3" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              Our Growth Story
-            </h2>
-            <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-medium">
-              From humble beginnings to a multifaceted development and training hub.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-
-            {/* Phase 1 */}
-            <div data-aos="fade-up" data-aos-delay="100" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
-              <Layers className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
-              <div className="space-y-4 relative z-10">
-                <span className="text-amber-400 text-xs font-bold uppercase tracking-wider bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-                  Foundation
-                </span>
-                <h3 className="text-xl font-bold text-white">The Beginning</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  I started by learning coding and website development. Working on small projects allowed me to explore different technologies, learning crucial lessons from every single line of code. Every challenge provided an opportunity to improve and try something better.
-                </p>
-              </div>
-            </div>
-
-            {/* Phase 2 */}
-            <div data-aos="fade-up" data-aos-delay="200" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
-              <Code2 className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
-              <div className="space-y-4 relative z-10">
-                <span className="text-orange-400 text-xs font-bold uppercase tracking-wider bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
-                  Expansion
-                </span>
-                <h3 className="text-xl font-bold text-white">Beyond Websites</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  As the journey continued, my interest expanded far beyond basic web development. I began working with complex web applications, business software, ERP and CRM systems, e-commerce platforms, mobile applications, automation, and sophisticated AI-based solutions.
-                </p>
-              </div>
-            </div>
-
-            {/* Phase 3 */}
-            <div data-aos="fade-up" data-aos-delay="300" className="bg-black/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:border-slate-700 transition">
-              <GraduationCap className="absolute -bottom-6 -right-6 w-24 h-24 text-slate-800/30" />
-              <div className="space-y-4 relative z-10">
-                <span className="text-rose-400 text-xs font-bold uppercase tracking-wider bg-rose-400/10 px-3 py-1 rounded-full border border-rose-400/20">
-                  Giving Back
-                </span>
-                <h3 className="text-xl font-bold text-white">Training & Mentorship</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Alongside development, I wanted to help students and beginners learn technology through practical experience. This led to the launch of TechSasi Software Development and Training, with the goal of helping learners understand real-world technologies and project lifecycles.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ==============================
-          CORE PHILOSOPHY HIGHLIGHT
-      =============================== */}
-      <section className="py-24 bg-black border-t border-slate-900 relative tech-grid-pattern">
-        <div className="container mx-auto px-4 max-w-4xl relative z-10">
-          <div 
-            data-aos="zoom-in"
-            className="bg-black/90 backdrop-blur-sm border border-slate-800 rounded-3xl p-10 md:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl"
+        {/* ================= THE REALIZATION QUOTE (GLASS HUD) ================= */}
+        <section className="py-24 bg-zinc-950/95 border-b border-zinc-900 relative backdrop-blur-md">
+          <div
+            ref={reveal}
+            className="container-custom max-w-5xl px-6 lg:px-12 blur-reveal text-center"
           >
-            <div className="absolute -top-20 -left-20 w-60 h-60 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-
-            <Sparkles size={40} className="mx-auto text-amber-400 opacity-70" />
-
-            <blockquote className="text-xl md:text-3xl font-medium text-white leading-tight italic tracking-tight">
-              "For me, technology is not just about writing code. It is about understanding a real problem and finding a simple technology-based solution for it."
-            </blockquote>
-
-            <p className="text-slate-500 text-sm max-w-xl mx-auto font-medium pt-4">
-              Our goal is simple: Technology should not make things complicated. It should make business easier, learning practical, and most importantly, it should create real value.
-            </p>
+            <div className="glass-morphism-card p-10 md:p-14 rounded-3xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-[50px] pointer-events-none" />
+              <p className="text-xl md:text-2xl font-medium leading-relaxed text-zinc-200">
+                "Certificate mattum oru career build aana pothathu. Technology learn pannanum, adha practice pannanum, projects build pannanum, problems solve pannanum."{" "}
+                <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent font-bold block mt-3">
+                  Most importantly: Continuous-a learn pannite irukkanum. Idhu dhaan enoda biggest learning.
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ==============================
-          WHAT WE DO TODAY (SERVICES GRID)
-      =============================== */}
-      <section className="py-24 bg-black border-t border-slate-900 relative overflow-hidden tech-grid-pattern">
-        <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-rose-500/5 rounded-full blur-[140px] pointer-events-none" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 space-y-3" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              TechSasi Capabilities Today
+        {/* ================= MORPHISM JOURNEY TIMELINE GRID ================= */}
+        <section id="morphism-story-grid" className="py-32 bg-black/90 border-b border-zinc-900 backdrop-blur-md">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mb-16 text-center">
+            <span className="text-orange-400 font-bold text-xs uppercase tracking-widest bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-full inline-block mb-4">
+              Glass Morphism Evolution
+            </span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-4 uppercase tracking-tight">
+              The <span className="text-orange-400">TechSasi</span> Story Chapters
             </h2>
-            <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-medium">
-              Leveraging deep technical expertise to solve complex business challenges and mentor new developers.
+            <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
+              From school computer lab curiosity to building a full-fledged software and training institute.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {[
-              {
-                icon: Globe2,
-                title: "Web & E-commerce",
-                desc: "Custom websites, dynamic web applications, and secure e-commerce platforms built for growth.",
-              },
-              {
-                icon: Smartphone,
-                title: "Mobile Applications",
-                desc: "Cross-platform mobile solutions designed for performance and intuitive user experiences.",
-              },
-              {
-                icon: Cpu,
-                title: "Business Software & AI",
-                desc: "Scalable ERP/CRM systems, workflow automation, and intelligent AI-driven software implementations.",
-              },
-              {
-                icon: GraduationCap,
-                title: "Practical Training",
-                desc: "Mentorship programs focused on real-world technologies, agile workflows, and project delivery.",
-              },
-            ].map((item, index) => (
+          <div className="container-custom max-w-7xl px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {morphismStoryCards.map((item, idx) => (
               <div
-                key={item.title}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-                className="bg-black/80 backdrop-blur-sm border border-slate-800 hover:border-slate-700 rounded-2xl p-6 transition-all duration-300 space-y-4 flex flex-col justify-between group"
+                key={idx}
+                ref={reveal}
+                className="blur-reveal glass-morphism-card p-8 rounded-3xl transition duration-300 flex flex-col justify-between group"
               >
                 <div>
-                    <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                      <item.icon className="text-amber-400" size={22} />
-                    </div>
-                    <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed pt-1">
-                      {item.desc}
-                    </p>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-3xl font-black font-mono text-orange-400">{item.phase}</span>
+                    <span className="text-[11px] font-bold uppercase tracking-wider bg-orange-500/10 border border-orange-500/30 text-orange-300 px-3 py-1 rounded-full">
+                      {item.highlight}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
+                  <h4 className="text-xs font-mono text-orange-400 mb-4">{item.subtitle}</h4>
+                  <p className="text-zinc-300 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-500 font-mono">
+                  <span>TechSasi Origin</span>
+                  <span className="text-orange-400">Phase {item.phase}</span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ==============================
-          GROWING TOGETHER & CTA SECTION
-      =============================== */}
-      <section className="py-24 bg-black border-t border-slate-900 tech-grid-pattern relative">
-        <div className="container mx-auto px-4 max-w-4xl text-center space-y-8 relative z-10" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 bg-black/80 border border-slate-800 text-slate-300 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide">
-            <HeartHandshake size={14} className="text-amber-400" /> Growing Together
+        {/* ================= WHAT WE DO AT TECHSASI (GLASS CARDS) ================= */}
+        <section className="py-32 bg-zinc-950/95 border-b border-zinc-900 backdrop-blur-md">
+          <div className="container-custom max-w-7xl px-6 lg:px-12 mb-16 text-center">
+            <span className="text-orange-400 font-bold text-xs uppercase tracking-widest bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-full inline-block mb-4">
+              Dual Mission
+            </span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-4 uppercase tracking-tight">
+              What We Do at <span className="text-orange-400">TechSasi</span>
+            </h2>
+            <p className="text-lg text-zinc-300 max-w-xl mx-auto">
+              Bridging real software solutions for businesses and practical training for aspiring developers.
+            </p>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-            Let's Build Your Future.
-          </h2>
+          <div className="container-custom max-w-7xl px-6 lg:px-12 grid md:grid-cols-2 gap-8 items-stretch">
+            
+            <div ref={reveal} className="blur-reveal glass-morphism-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 mb-6">
+                  <Briefcase size={24} />
+                </div>
+                <span className="text-xs uppercase font-mono text-orange-400 tracking-wider">For Businesses</span>
+                <h3 className="text-2xl font-bold text-white mb-4 mt-1">Software Development</h3>
+                <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                  Businesses-ku their ideas-ai real digital products-a convert panna help panrom. We build business websites, dynamic web applications, e-commerce stores, mobile apps, custom software, and CRM solutions.
+                </p>
+              </div>
+              <div className="bg-black/60 p-4 rounded-xl border border-orange-500/20 text-xs text-orange-300 font-mono text-center">
+                Technology should fit the business — not vice versa.
+              </div>
+            </div>
 
-          <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            The TechSasi journey is still growing. There is a lot more to learn, build, and explore together. Every project, client requirement, challenge, mistake, and new technology gives us another opportunity to improve.
-          </p>
+            <div ref={reveal} className="blur-reveal glass-morphism-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 mb-6">
+                  <BookOpen size={24} />
+                </div>
+                <span className="text-xs uppercase font-mono text-orange-400 tracking-wider">For Students & Beginners</span>
+                <h3 className="text-2xl font-bold text-white mb-4 mt-1">Practical Technology Training</h3>
+                <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                  Students, freshers, and professionals-ku practical technology training in Python, Java, React, MERN Stack, AWS, UI/UX, and AI development. Learn → Practice → Build → Improve.
+                </p>
+              </div>
+              <div className="bg-black/60 p-4 rounded-xl border border-orange-500/20 text-xs text-zinc-300 font-mono text-center">
+                Real confidence comes from building projects yourself.
+              </div>
+            </div>
 
-          <div className="pt-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition shadow-lg hover:shadow-amber-500/20"
+          </div>
+        </section>
+
+        {/* ================= FOUNDER'S PROMISE GLASS BANNER ================= */}
+        <section className="py-24 bg-black/90 border-b border-zinc-900 backdrop-blur-md">
+          <div className="container-custom max-w-5xl px-6 lg:px-12 text-center">
+            <div ref={reveal} className="blur-reveal glass-morphism-card p-10 md:p-14 rounded-3xl">
+              <span className="text-orange-400 font-bold text-xs uppercase tracking-widest bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-full inline-block mb-4">
+                Founder's Promise
+              </span>
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-6">
+                Oru student-ku starting point important illa.
+              </h2>
+              <p className="text-zinc-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-8">
+                Even if you feel "enakku coding theriyadhu", "experience illa", or "degree non-IT-ah irukku", at TechSasi you will gain the confidence to learn, build, and grow continuously.
+              </p>
+              <div className="inline-flex flex-wrap justify-center gap-4 text-xs font-mono text-orange-300">
+                <span className="bg-black/60 px-4 py-2 rounded-xl border border-orange-500/20">Learn Today</span>
+                <span className="bg-black/60 px-4 py-2 rounded-xl border border-orange-500/20">Build Tomorrow</span>
+                <span className="bg-black/60 px-4 py-2 rounded-xl border border-orange-500/20">Grow Continuously</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= DIRECT MESSAGE (DM) SECTION ================= */}
+        <section id="direct-message-section" className="py-24 bg-zinc-950/95 relative backdrop-blur-md">
+          <div className="container-custom max-w-4xl px-6 lg:px-12">
+            <div
+              ref={reveal}
+              className="blur-reveal glass-morphism-card p-8 md:p-12 rounded-3xl relative overflow-hidden"
             >
-              <span>Initiate Project</span>
-              <ArrowRight size={16} />
-            </Link>
+              <div className="absolute -bottom-10 right-0 w-72 h-72 bg-orange-500/15 rounded-full blur-[100px] pointer-events-none" />
+
+              <div className="text-center mb-8">
+                <span className="text-xs uppercase tracking-widest text-orange-400 font-bold bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full inline-block mb-3">
+                  Direct Messenger (DM)
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3 text-white">
+                  Let's Build Something <span className="text-orange-400">Together</span>
+                </h2>
+                <p className="text-zinc-300 text-sm max-w-lg mx-auto">
+                  Want to learn technology or turn your business idea into a digital solution? Send us a message via WhatsApp DM (+91 7448788897).
+                </p>
+              </div>
+
+              {isSent ? (
+                <div className="bg-orange-500/10 border border-orange-500/40 text-orange-400 p-6 rounded-2xl text-center font-semibold animate-pulse">
+                  ✅ Message formatted successfully! Redirecting directly to WhatsApp Founder...
+                </div>
+              ) : (
+                <form onSubmit={handleDmSubmit} className="space-y-4">
+                  <div className="relative">
+                    <textarea
+                      rows={4}
+                      value={dmMessage}
+                      onChange={(e) => setDmMessage(e.target.value)}
+                      placeholder="Share your learning goals or business idea / project requirement..."
+                      className="w-full bg-black/80 border border-orange-500/30 focus:border-orange-500 rounded-2xl p-4 text-white text-sm placeholder-zinc-500 focus:outline-none transition resize-none shadow-inner"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="text-xs text-zinc-400 flex items-center gap-1.5 font-mono">
+                      <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+                      Direct WhatsApp Line: 7448788897
+                    </div>
+
+                    <div className="flex items-center gap-3 w-full sm:w-auto">
+                      <button
+                        type="submit"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-bold px-8 py-3.5 rounded-xl transition duration-300 shadow-xl shadow-orange-500/20 cursor-pointer"
+                      >
+                        <Send size={16} /> Send WhatsApp DM
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
-    </Layout>
+        </section>
+
+        {/* ================= CTA FINAL SECTION ================= */}
+        <section className="py-20 bg-black/95 relative backdrop-blur-md">
+          <div className="container-custom max-w-7xl px-6 lg:px-12">
+            <div
+              ref={reveal}
+              className="blur-reveal glass-morphism-card p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-orange-500/20 rounded-full blur-[100px] pointer-events-none" />
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
+                From Learning to Building. From Ideas to Technology.
+              </h2>
+              <p className="mb-10 text-zinc-300 max-w-xl mx-auto leading-relaxed">
+                This Is Just the Beginning. <span className="text-orange-400 font-bold">Learn. Build. Grow with TechSasi.</span>
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => handleWhatsAppClick("TechSasi Courses & Services")}
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-bold px-8 py-4 rounded-xl transition duration-200 shadow-xl shadow-orange-500/20 cursor-pointer"
+                >
+                  Explore Courses & Services <ArrowRight size={18} />
+                </button>
+
+                <button
+                  onClick={() => handleWhatsAppClick()}
+                  className="inline-flex items-center gap-3 bg-zinc-900 border border-orange-500/40 hover:border-orange-500 text-orange-400 hover:text-white hover:bg-orange-600 font-bold px-8 py-4 rounded-xl transition duration-300 shadow-xl cursor-pointer"
+                >
+                  <MessageCircle size={20} />
+                  Talk to TechSasi: 7448788897
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </PageLayout>
   );
 };
 
-export default About;
+export default TechSasiMorphismAbout;

@@ -78,7 +78,7 @@ const services = [
   },
   { 
     name: "App Development", 
-    path: "/services/app-development", 
+    path: "/service/MobileApplication-Development", 
     icon: <Smartphone size={18} className="text-pink-400" />,
     tagline: "Native & Cross-Platform Mobile Apps"
   },
