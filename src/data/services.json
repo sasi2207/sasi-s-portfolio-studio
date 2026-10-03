@@ -1,0 +1,128 @@
+{
+  "services": [
+    {
+      "id": "static-website",
+      "title": "Static Website Development",
+      "description": "Fast, lightweight, and responsive websites ideal for startups, portfolios, and landing pages.",
+      "icon": "FileCode",
+      "iconColor": "#f97316",
+      "path": "/services/static-web",
+      "features": [
+        "Responsive Design",
+        "SEO Friendly",
+        "Fast Performance",
+        "Modern UI",
+        "Low Maintenance"
+      ]
+    },
+    {
+      "id": "dynamic-website",
+      "title": "Dynamic Website Development",
+      "description": "Interactive websites with database integration and powerful admin panels.",
+      "icon": "RefreshCw",
+      "iconColor": "#0ea5e9",
+      "path": "/services/dynamic-web",
+      "features": [
+        "Admin Dashboard",
+        "Database Integration",
+        "User Authentication",
+        "Scalable Architecture",
+        "Content Management"
+      ]
+    },
+    {
+      "id": "ecommerce-website",
+      "title": "E-Commerce Website Development",
+      "description": "Complete online shopping platforms with secure payment integration.",
+      "icon": "ShoppingCart",
+      "iconColor": "#22c55e",
+      "path": "/services/ecommerce",
+      "features": [
+        "Product Management",
+        "Payment Gateway",
+        "Order Tracking",
+        "Inventory Management",
+        "Invoice Support"
+      ]
+    },
+    
+    {
+      "id": "business-website",
+      "title": "Business Website Development",
+      "description": "Professional corporate websites that build trust and generate leads.",
+      "icon": "Briefcase",
+      "iconColor": "#f59e0b",
+      "path": "/services/business-web",
+      "features": [
+        "Corporate Design",
+        "Service Pages",
+        "Lead Forms",
+        "Brand Consistency",
+        "Performance Optimization"
+      ]
+    },
+    {
+      "id": "mobile-app-development",
+      "title": "Mobile Application Development",
+      "description": "Cross-platform Android and iOS applications with modern user experiences.",
+      "icon": "Smartphone",
+      "iconColor": "#ef4444",
+      "path": "/servicesapp-development",
+      "features": [
+        "Android & iOS",
+        "React Native / Flutter",
+        "API Integration",
+        "Push Notifications",
+        "App Deployment"
+      ]
+    },
+    {
+      "id": "seo-services",
+      "title": "SEO Optimization Services",
+      "description": "Improve your website visibility and rankings with advanced SEO strategies.",
+      "icon": "TrendingUp",
+      "iconColor": "#06b6d4",
+      "path": "/services/digital-marketing",
+      "features": [
+        "On-Page SEO",
+        "Technical SEO",
+        "Keyword Research",
+        "Speed Optimization",
+        "Google Search Console"
+      ]
+    },
+    {
+      "id": "deployment-hosting",
+      "title": "Deployment & Hosting Services",
+      "description": "Reliable cloud hosting and deployment solutions for modern applications.",
+      "icon": "Cloud",
+      "iconColor": "#6366f1",
+      "path": "/services/deployment-hosting",
+      "features": [
+        "AWS & Azure",
+        "VPS Setup",
+        "SSL Configuration",
+        "DNS Management",
+        "CI/CD Pipeline"
+      ]
+    },
+    
+ 
+   
+    {
+      "id": "maintenance-support",
+      "title": "Website Maintenance & Support",
+      "description": "Keep your website secure, updated, and running smoothly with ongoing support.",
+      "icon": "Globe",
+      "iconColor": "#10b981",
+      "path": "/services/MaintenanceSupport",
+      "features": [
+        "Bug Fixes",
+        "Security Updates",
+        "Backup Management",
+        "Performance Monitoring",
+        "Technical Support"
+      ]
+    }
+  ]
+}
