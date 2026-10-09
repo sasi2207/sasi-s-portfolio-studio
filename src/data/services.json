@@ -1,0 +1,172 @@
+{
+  "services": [
+    {
+      "id": "static-website",
+      "iconType": "static-web",
+      "serviceNumber": "01",
+      "title": "Static Website Development",
+      "headline": "Blazing-Fast Static Websites",
+      "description": "Perfect for portfolios, landing pages, and small businesses needing secure, ultra-fast, and cost-effective web presence.",
+      "actionableCta": "Build Your Site Today",
+      "path": "/services/static-web",
+      "proposalType": "static-web",
+      "category": "web",
+      "timeline": "1–2 Weeks",
+      "features": [
+        "Sub-second page load speeds (98+ Core Web Vitals)",
+        "Mobile-first responsive architecture",
+        "Technical SEO & OpenGraph social cards",
+        "Interactive lead capture forms",
+        "Zero-maintenance secure static hosting"
+      ],
+      "techStack": ["React", "Next.js", "Tailwind CSS", "Vercel"]
+    },
+    {
+      "id": "dynamic-website",
+      "iconType": "dynamic-web",
+      "serviceNumber": "02",
+      "title": "Dynamic Web Development",
+      "headline": "Scalable Dynamic Web Apps",
+      "description": "Feature-rich, database-driven web applications customized with robust backend logic and interactive user interfaces.",
+      "actionableCta": "Explore Dynamic Solutions",
+      "path": "/services/dynamic-web",
+      "proposalType": "dynamic-web",
+      "category": "web",
+      "timeline": "3–6 Weeks",
+      "features": [
+        "Role-based access control (Admin, Staff, Customer)",
+        "Dynamic CRUD management interfaces",
+        "Secure JWT authentication & session handling",
+        "Optimized database schema & caching",
+        "Automated reporting & dashboard analytics"
+      ],
+      "techStack": ["React", "Node.js", "PostgreSQL", "Express", "REST APIs"]
+    },
+    {
+      "id": "ecommerce-website",
+      "iconType": "ecommerce",
+      "serviceNumber": "03",
+      "title": "E-Commerce Development",
+      "headline": "High-Converting E-Commerce Stores",
+      "description": "Turn visitors into loyal customers with secure payment gateways, smooth checkout flows, and inventory management.",
+      "actionableCta": "Launch Your Store",
+      "path": "/services/ecommerce",
+      "proposalType": "ecommerce",
+      "category": "enterprise",
+      "timeline": "3–5 Weeks",
+      "features": [
+        "Zero-friction checkout flow with UPI, Razorpay & Stripe",
+        "Real-time inventory stock synchronization",
+        "Automated GST invoice generation",
+        "WhatsApp & SMS order status alerts",
+        "Executive store admin & sales telemetry"
+      ],
+      "techStack": ["React", "Node.js", "PostgreSQL", "Razorpay", "Stripe"]
+    },
+    {
+      "id": "mobile-app-development",
+      "iconType": "mobile-apps",
+      "serviceNumber": "04",
+      "title": "Mobile Application Development",
+      "headline": "Cross-Platform Mobile Apps",
+      "description": "Deliver seamless, native-feeling mobile experiences for iOS and Android built with modern frameworks.",
+      "actionableCta": "Develop Your App",
+      "path": "/services/mobile-app",
+      "proposalType": "mobile-app",
+      "category": "mobile",
+      "timeline": "4–8 Weeks",
+      "features": [
+        "Unified Flutter & React Native codebases",
+        "60fps smooth animations & native device APIs",
+        "Push notification engines & background workers",
+        "Offline caching & local SQLite sync",
+        "Complete Google Play & Apple App Store release"
+      ],
+      "techStack": ["Flutter", "React Native", "Firebase", "iOS", "Android"]
+    },
+    {
+      "id": "custom-erp",
+      "iconType": "custom-erp",
+      "serviceNumber": "05",
+      "title": "Custom ERP, CRM & Business Automation",
+      "headline": "Custom ERP & Business Automation",
+      "description": "Streamline your operations, manage customer relationships, and automate repetitive workflows tailored to your business model.",
+      "actionableCta": "Automate Your Business",
+      "path": "/services/business-web",
+      "proposalType": "custom-erp",
+      "category": "enterprise",
+      "timeline": "4–10 Weeks",
+      "features": [
+        "Elimination of manual spreadsheet bottlenecks",
+        "Purchase order, vendor & inventory tracking",
+        "Staff permissions, attendance & audit trails",
+        "Automated PDF billing & GST reporting",
+        "Daily encrypted automated cloud backups"
+      ],
+      "techStack": ["React", "Python / Node", "PostgreSQL", "Docker", "Tailwind"]
+    },
+    {
+      "id": "cloud-devops",
+      "iconType": "cloud-devops",
+      "serviceNumber": "06",
+      "title": "Cloud Infrastructure & DevOps",
+      "headline": "Secure Cloud & DevOps",
+      "description": "Ensure 99.9% uptime, automated deployments, and scalable cloud architecture on AWS, GCP, or Azure.",
+      "actionableCta": "Optimize Your Infrastructure",
+      "path": "/services/deployment-hosting",
+      "proposalType": "devops",
+      "category": "cloud",
+      "timeline": "1–3 Weeks",
+      "features": [
+        "99.9% guaranteed uptime SLA architecture",
+        "Docker containerization & Kubernetes clusters",
+        "Automated GitHub Actions CI/CD pipelines",
+        "Cloudflare CDN caching & DDoS defense",
+        "SSL provisioning, DNS management & 24/7 telemetry"
+      ],
+      "techStack": ["AWS", "Google Cloud", "Docker", "Linux Nginx", "Cloudflare"]
+    },
+    {
+      "id": "digital-marketing",
+      "iconType": "digital-marketing",
+      "serviceNumber": "07",
+      "title": "Digital Marketing & SEO",
+      "headline": "Growth-Driven Digital Marketing & SEO",
+      "description": "Boost your online visibility, drive targeted organic traffic, and maximize ROI with data-backed marketing strategies.",
+      "actionableCta": "Grow Your Traffic",
+      "path": "/services/digital-marketing",
+      "proposalType": "seo-growth",
+      "category": "growth",
+      "timeline": "2–4 Weeks",
+      "features": [
+        "Core Web Vitals acceleration to 95+ Lighthouse",
+        "Structured Schema.org JSON-LD indexing",
+        "Generative Engine Optimization (GEO & AEO)",
+        "High-intent local SEO & Google Business optimization",
+        "Conversion rate optimization (CRO) & funnel tuning"
+      ],
+      "techStack": ["Schema.org", "Google Search Console", "Lighthouse", "Edge SEO"]
+    },
+    {
+      "id": "academy-mentorship",
+      "iconType": "academy-mentorship",
+      "serviceNumber": "08",
+      "title": "TechSasi Developer Academy & Mentorship",
+      "headline": "TechSasi Academy & Mentorship",
+      "description": "Master in-demand programming skills through hands-on training, real-world projects, and expert 1-on-1 mentorship.",
+      "actionableCta": "Start Learning Today",
+      "path": "/services/coaching",
+      "proposalType": "academy",
+      "category": "training",
+      "timeline": "8–16 Weeks",
+      "features": [
+        "Work directly on production-grade client codebases",
+        "Live GitHub pull requests & senior code reviews",
+        "Direct 1-on-1 doubt clearance & mentoring in Salem",
+        "Deploy full-stack projects to live production servers",
+        "Resume crafting & interview placement coaching"
+      ],
+      "techStack": ["React", "TypeScript", "Node.js", "Java", "Python"]
+    }
+  ]
+}

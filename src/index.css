@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    --background: 222 47% 4%; /* #06090F - Obsidian Deep Slate */
+    --foreground: 210 40% 98%;
+    
+    --card: 222 40% 7%; /* #0B101D */
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 40% 7%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 221 83% 53%; /* #2563EB - Electric Cobalt */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 221 83% 65%;
+    
+    --secondary: 220 30% 12%; /* #141B2D */
+    --secondary-foreground: 210 40% 96%;
+    
+    --muted: 220 25% 14%;
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 38 92% 50%; /* #F59E0B - Executive Amber Gold */
+    --accent-foreground: 222 47% 4%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 20% 16%;
+    --input: 220 20% 16%;
+    --ring: 221 83% 53%;
+    
+    --radius: 0.75rem;
+
+    --hero-gradient: linear-gradient(135deg, #2563EB 0%, #38BDF8 50%, #F59E0B 100%);
+    --card-gradient: linear-gradient(180deg, rgba(17, 24, 39, 0.9) 0%, rgba(10, 15, 29, 0.9) 100%);
+    --glass-bg: rgba(11, 16, 29, 0.75);
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    --shadow-elevated: 0 12px 40px -8px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 35px rgba(37, 99, 235, 0.25);
+  }
+
+  .light {
+    --background: 210 40% 98%; /* #F8FAFC */
+    --foreground: 222 47% 11%; /* #0F172A */
+    
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 221 83% 45%;
+    
+    --secondary: 210 20% 94%; /* #F1F5F9 */
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%;
+    
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%; /* #E2E8F0 */
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    --hero-gradient: linear-gradient(135deg, #2563EB 0%, #0284C7 50%, #D97706 100%);
+    --card-gradient: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+    --shadow-elevated: 0 12px 40px -8px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 35px rgba(37, 99, 235, 0.15);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-amber-500/20 selection:text-amber-500;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md border border-border;
+    background: var(--glass-bg);
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground via-slate-500 to-slate-400;
+  }
+
+  .accent-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600;
+  }
+
+  .cobalt-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500;
+  }
+  
+  .hairline-border {
+    border-color: var(--border);
+  }
+
+  .subtle-grid {
+    background-size: 48px 48px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+}
+
+/* ==============================================
+   LIGHT THEME ADAPTIVE STYLING OVERRIDES
+============================================== */
+html.light {
+  body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+
+  /* Section Canvas Transformations */
+  .bg-\[\#060910\],
+  .bg-\[\#06090F\],
+  .bg-\[\#07090E\],
+  .bg-\[\#070B14\],
+  .bg-\[\#05070D\],
+  .bg-\[\#0A0F1D\] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Cards & Elevating Surfaces */
+  .bg-\[\#0C1222\],
+  .bg-\[\#0C1222\]\/90,
+  .bg-\[\#0C111E\],
+  .bg-\[\#0B101D\],
+  .bg-\[\#090D17\],
+  .bg-\[\#0D1424\],
+  .bg-\[\#0A0E18\],
+  .bg-\[\#0E1526\],
+  .bg-zinc-950,
+  .bg-black\/80 {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Gradients on card previews */
+  .bg-gradient-to-br.from-\[\#0F1626\].to-\[\#0B101D\] {
+    background-image: linear-gradient(to bottom right, #F1F5F9, #FFFFFF) !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Inner Wells & Sub-panels */
+  .bg-black\/60,
+  .bg-black\/50,
+  .bg-black\/40,
+  .bg-black\/30 {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  .bg-white\/\[0\.03\],
+  .bg-white\/\[0\.04\],
+  .bg-white\/\[0\.05\],
+  .bg-white\/\[0\.06\],
+  .bg-white\/\[0\.08\] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Hairline Borders */
+  .border-white\/\[0\.08\],
+  .border-white\/\[0\.06\],
+  .border-white\/\[0\.05\],
+  .border-white\/\[0\.04\],
+  .border-white\/\[0\.1\],
+  .border-white\/\[0\.12\] {
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Typography adaptation */
+  .text-white {
+    color: #0F172A !important;
+  }
+
+  .text-slate-300 {
+    color: #334155 !important;
+  }
+
+  .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  .text-slate-500 {
+    color: #94A3B8 !important;
+  }
+
+  /* Secondary outline/solid buttons */
+  .bg-slate-900,
+  .bg-slate-900\/90,
+  .bg-slate-900\/80,
+  .bg-slate-900\/60 {
+    background-color: #F1F5F9 !important;
+    color: #0F172A !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  .bg-slate-900:hover,
+  .bg-slate-900\/90:hover,
+  .bg-slate-900\/80:hover {
+    background-color: #E2E8F0 !important;
+    color: #000000 !important;
+  }
+
+  /* Subtle background grid pattern in light mode */
+  .subtle-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+  }
+
+  /* Floating Quick Contact Affordance */
+  .bg-\[\#0E1422\] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #D97706 !important;
+  }
+
+  .bg-\[\#0C111E\] {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Additional Dark Background Classes from Service and Detail Pages */
+  .bg-black,
+  .bg-black\/95,
+  .bg-black\/90,
+  .bg-black\/85,
+  .bg-black\/75,
+  .bg-zinc-950\/90,
+  .bg-zinc-950\/80,
+  .bg-zinc-900,
+  .bg-zinc-900\/90,
+  .bg-zinc-900\/80,
+  .bg-zinc-900\/50,
+  .bg-zinc-900\/40,
+  .bg-zinc-800,
+  .bg-zinc-800\/60 {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Border Overrides for Light Mode */
+  .border-zinc-900,
+  .border-zinc-800,
+  .border-zinc-700,
+  .border-slate-800,
+  .border-slate-700 {
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Typography Adaptation for Zinc Text */
+  .text-zinc-100,
+  .text-zinc-200,
+  .text-zinc-300 {
+    color: #334155 !important;
+  }
+
+  .text-zinc-400,
+  .text-zinc-500 {
+    color: #64748B !important;
+  }
+
+  /* Inputs, selects, and textareas in light mode */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border-color: #CBD5E1 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #94A3B8 !important;
+  }
+
+  option {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+
+  /* Ensure text on solid colored buttons (emerald, blue, etc.) stays white */
+  button.bg-emerald-600,
+  button.bg-blue-600,
+  button.bg-indigo-600,
+  a.bg-emerald-600,
+  a.bg-blue-600,
+  .bg-emerald-600 text-white,
+  .bg-blue-600 text-white {
+    color: #FFFFFF !important;
+  }
+
+  /* Parallax and hero containers in light mode */
+  .parallax-container {
+    background-color: #F8FAFC !important;
+  }
+  .parallax-container > div {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+  }
+}
