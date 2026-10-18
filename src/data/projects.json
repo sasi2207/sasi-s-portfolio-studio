@@ -110,7 +110,7 @@
       "description": "A professional web portal for Sri Perumal Crane Service providing seamless access to equipment listings, service requests, and company offerings.",
       "image": "/projects/sri-perumal-crane-service.png",
       "technologies": ["React", "Next.js", "Tailwind CSS", "Vercel"],
-      "liveUrl": "https://sri-perumal-crine-service.vercel.app/",
+      "liveUrl": "https://sriperumalcraneservice.com/",
       "githubUrl": "",
       "featured": false,
       "metrics": {
