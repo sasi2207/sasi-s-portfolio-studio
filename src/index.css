@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* TechSasi Signature: Pure Canvas & Radiant Electric Cyber Studio */
+    --bg-primary: #f8fafc;
+    --text-primary: #090e1a;
+    --surface-ink: #040711;
+    --surface-fill: #ffffff;
+    --surface-fill-subtle: #f1f5f9;
+    --border-line: #e2e8f0;
+    --text-muted: #334155;
+    --text-subtle: #64748b;
+    --accent: #00f0ff;
+    --accent-from: #0284c7;
+    --accent-to: #38bdf8;
+    --hero-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --skeleton-base: #f1f5f9;
+    --skeleton-highlight: #e2e8f0;
+
+    /* Shadcn system compatibility */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 10%;
+    --primary: 217 91% 54%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 199 89% 48%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 222 47% 10%;
+    --muted: 210 40% 95%;
+    --muted-foreground: 215.4 20% 38%;
+    --accent-foreground: 222 47% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214.3 31.8% 90%;
+    --input: 214.3 31.8% 90%;
+    --ring: 217 91% 54%;
+    --radius: 0.75rem;
+
+    --hero-gradient: linear-gradient(135deg, #4f46e5 0%, #0284c7 50%, #06b6d4 100%);
+    --card-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --glass-bg: rgba(255, 255, 255, 0.94);
+  }
+
+  [data-theme="dark"],
+  html.dark {
+    /* TechSasi Signature: Cosmic Deep Noir & Luminous Cyber Cyan / Electric Indigo */
+    --bg-primary: #050814;
+    --text-primary: #f8fafc;
+    --surface-ink: #02040a;
+    --surface-fill: #0c1224;
+    --surface-fill-subtle: #141d38;
+    --border-line: rgba(255, 255, 255, 0.12);
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --accent: #00f0ff;
+    --accent-from: #0284c7;
+    --accent-to: #38bdf8;
+    --hero-bg: #050814;
+    --card-bg: #0a0f20;
+    --skeleton-base: #0c1224;
+    --skeleton-highlight: #141d38;
+
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 224 60% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 60% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 222 47% 11%;
+    --primary-glow: 217 91% 60%;
+    --secondary: 223 35% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 223 35% 15%;
+    --muted-foreground: 215 25% 72%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 223 35% 18%;
+    --input: 223 35% 18%;
+    --ring: 199 89% 48%;
+
+    --hero-gradient: linear-gradient(135deg, #818cf8 0%, #38bdf8 50%, #2dd4bf 100%);
+    --card-gradient: linear-gradient(180deg, #0c1224 0%, #070b18 100%);
+    --glass-bg: rgba(10, 15, 32, 0.90);
+  }
+
+  [data-theme="contrast"],
+  html.contrast {
+    /* TechSasi Signature: Pure Obsidian High-Contrast Cyber Neon */
+    --bg-primary: #000000;
+    --text-primary: #ffffff;
+    --surface-ink: #000000;
+    --surface-fill: #0a0a0a;
+    --surface-fill-subtle: #171717;
+    --border-line: #00f0ff;
+    --text-muted: #f1f5f9;
+    --text-subtle: #cbd5e1;
+    --accent: #00f0ff;
+    --accent-from: #a855f7;
+    --accent-to: #00f0ff;
+    --hero-bg: #000000;
+    --card-bg: #050505;
+    --skeleton-base: #1f1f1f;
+    --skeleton-highlight: #3a3a3a;
+
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 2%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 185 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 92%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 185 100% 50%;
+
+    --hero-gradient: linear-gradient(135deg, #a855f7 0%, #00f0ff 100%);
+    --card-gradient: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+    --glass-bg: rgba(0, 0, 0, 0.97);
+  }
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Onest', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Onest', sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--border-line);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-line);
+    backdrop-filter: blur(12px);
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--text-primary), var(--text-muted));
+  }
+
+  .accent-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--accent-from), var(--accent), var(--accent-to));
+  }
+
+  .hairline-border {
+    border-color: var(--border-line);
+  }
+
+  .subtle-grid {
+    background-size: 48px 48px;
+    background-image: 
+      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  }
+}
