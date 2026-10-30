@@ -137,79 +137,99 @@ const OfferContactSection = () => {
                 Offer Valid: Jan 1 to Jan 7
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label htmlFor="offer-name" className="block text-sm font-medium mb-2">
                     Name *
                   </label>
                   <input
+                    id="offer-name"
                     type="text"
                     name="name"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "offer-name-error" : undefined}
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 ${
                       errors.name ? "border-red-500" : "border-gray-200"
                     }`}
                     placeholder="Enter your name"
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                    <p id="offer-name-error" role="alert" className="text-red-500 text-sm mt-1">{errors.name}</p>
                   )}
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label htmlFor="offer-phone" className="block text-sm font-medium mb-2">
                     Phone *
                   </label>
                   <input
-                    type="text"
+                    id="offer-phone"
+                    type="tel"
                     name="phone"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "offer-phone-error" : undefined}
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 ${
                       errors.phone ? "border-red-500" : "border-gray-200"
                     }`}
                     placeholder="Enter mobile number"
                   />
                   {errors.phone && (
-                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    <p id="offer-phone-error" role="alert" className="text-red-500 text-sm mt-1">{errors.phone}</p>
                   )}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label htmlFor="offer-email" className="block text-sm font-medium mb-2">
                     Email *
                   </label>
                   <input
+                    id="offer-email"
                     type="email"
                     name="email"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "offer-email-error" : undefined}
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 ${
                       errors.email ? "border-red-500" : "border-gray-200"
                     }`}
                     placeholder="Enter email address"
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    <p id="offer-email-error" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>
                   )}
                 </div>
 
                 {/* Website Type */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label htmlFor="offer-website-type" className="block text-sm font-medium mb-2">
                     Website Type *
                   </label>
 
                   <select
+                    id="offer-website-type"
                     name="websiteType"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.websiteType}
+                    aria-describedby={errors.websiteType ? "offer-type-error" : undefined}
                     value={formData.websiteType}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 ${
                       errors.websiteType
                         ? "border-red-500"
                         : "border-gray-200"
@@ -226,7 +246,7 @@ const OfferContactSection = () => {
                   </select>
 
                   {errors.websiteType && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p id="offer-type-error" role="alert" className="text-red-500 text-sm mt-1">
                       {errors.websiteType}
                     </p>
                   )}
@@ -234,17 +254,22 @@ const OfferContactSection = () => {
 
                 {/* Promo Code */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label htmlFor="offer-promo-code" className="block text-sm font-medium mb-2">
                     Promo Code *
                   </label>
 
                   <input
+                    id="offer-promo-code"
                     type="text"
                     name="promoCode"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.promoCode}
+                    aria-describedby={errors.promoCode ? "offer-promo-error" : undefined}
                     value={formData.promoCode}
                     onChange={handleChange}
                     placeholder="Enter Promo Code"
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400 ${
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 ${
                       errors.promoCode
                         ? "border-red-500"
                         : "border-gray-200"
@@ -252,7 +277,7 @@ const OfferContactSection = () => {
                   />
 
                   {errors.promoCode && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p id="offer-promo-error" role="alert" className="text-red-500 text-sm mt-1">
                       {errors.promoCode}
                     </p>
                   )}
@@ -262,7 +287,8 @@ const OfferContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition shadow-md disabled:opacity-60"
+                  aria-busy={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-500 hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 text-white font-semibold py-3 transition shadow-md disabled:opacity-60 cursor-pointer"
                 >
                   <Send size={18} />
                   {isSubmitting ? "Submitting..." : "Register Now"}

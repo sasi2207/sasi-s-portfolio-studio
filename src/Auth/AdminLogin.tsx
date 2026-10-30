@@ -62,7 +62,7 @@ export default function AdminLogin({ onLoginSuccess }: Props) {
 
         {/* Error Alert Box */}
         {errorMessage && (
-          <div className="p-3.5 rounded-2xl bg-red-950/60 border border-red-800/60 text-red-400 text-xs flex items-center gap-2.5 font-mono animate-in fade-in slide-in-from-top-2 duration-200 shadow-lg">
+          <div role="alert" aria-live="assertive" className="p-3.5 rounded-2xl bg-red-950/60 border border-red-800/60 text-red-400 text-xs flex items-center gap-2.5 font-mono animate-in fade-in slide-in-from-top-2 duration-200 shadow-lg">
             <AlertCircle size={18} className="shrink-0 text-red-500" />
             <span>{errorMessage}</span>
           </div>
@@ -73,40 +73,46 @@ export default function AdminLogin({ onLoginSuccess }: Props) {
           
           {/* Username Field */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-mono font-medium text-zinc-300">Username</label>
+            <label htmlFor="admin-username" className="block text-xs font-mono font-medium text-zinc-300">Username</label>
             <div className="relative group">
               <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-orange-500 transition-colors" />
               <input
+                id="admin-username"
                 type="text"
                 name="username"
+                autoComplete="username"
                 value={formData.username}
                 onChange={handleChange}
                 required
+                aria-required="true"
                 placeholder="Enter admin username"
-                className="w-full bg-zinc-950/90 border border-zinc-800 focus:border-orange-500 rounded-2xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-4 focus:ring-orange-500/10 transition-all shadow-inner"
+                className="w-full bg-zinc-950/90 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-2xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-zinc-600 outline-none transition-all shadow-inner"
               />
             </div>
           </div>
 
           {/* Password Field with View Toggle */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-mono font-medium text-zinc-300">Password</label>
+            <label htmlFor="admin-password" className="block text-xs font-mono font-medium text-zinc-300">Password</label>
             <div className="relative group">
               <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-orange-500 transition-colors" />
               <input
+                id="admin-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
+                autoComplete="current-password"
                 value={formData.password}
                 onChange={handleChange}
                 required
+                aria-required="true"
                 placeholder="••••••••••••"
-                className="w-full bg-zinc-950/90 border border-zinc-800 focus:border-orange-500 rounded-2xl pl-11 pr-12 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-4 focus:ring-orange-500/10 transition-all shadow-inner"
+                className="w-full bg-zinc-950/90 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-2xl pl-11 pr-12 py-3.5 text-sm text-white placeholder-zinc-600 outline-none transition-all shadow-inner"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-200 transition p-1.5 rounded-lg hover:bg-zinc-800/50 cursor-pointer"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-200 transition p-1.5 rounded-lg hover:bg-zinc-800/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 cursor-pointer"
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -117,7 +123,8 @@ export default function AdminLogin({ onLoginSuccess }: Props) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-3 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-black text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-xl shadow-orange-500/20 active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+            aria-busy={loading}
+            className="w-full mt-3 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 text-zinc-950 font-black text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-xl shadow-orange-500/20 active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
           >
             {loading ? (
               <>Authenticating Credentials <Loader2 size={16} className="animate-spin text-zinc-950" /></>

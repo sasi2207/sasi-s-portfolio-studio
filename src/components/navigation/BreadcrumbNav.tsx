@@ -146,7 +146,7 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({
               {crumb.href && !isLast ? (
                 <Link
                   to={crumb.href}
-                  className="inline-flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors py-0.5 focus:outline-none focus:ring-1 focus:ring-amber-400/50 rounded"
+                  className="inline-flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors py-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded"
                 >
                   {isFirst && showHomeIcon && (
                     <Home className="w-3.5 h-3.5 text-amber-400/80 shrink-0" aria-hidden="true" />

@@ -95,29 +95,35 @@ export default function CourseEnquiryModal({ open, onClose, onSuccessSubmit }: P
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
+    <div 
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="course-enquiry-modal-title"
+      className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300"
+    >
       <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
         
         <button
           onClick={onClose}
           disabled={loading}
-          className="absolute top-4 right-4 z-20 bg-zinc-900 text-zinc-400 hover:bg-orange-500 hover:text-zinc-950 rounded-full p-2 transition duration-200 cursor-pointer disabled:opacity-50"
+          aria-label="Close course admissions dialog"
+          className="absolute top-4 right-4 z-20 bg-zinc-900 text-zinc-400 hover:bg-orange-500 hover:text-zinc-950 rounded-full p-2 transition duration-200 cursor-pointer disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
         >
-          <X size={18} />
+          <X size={18} aria-hidden="true" />
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-12 w-full">
           <div className="md:col-span-5 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-6 sm:p-10 flex flex-col justify-between border-b md:border-b-0 md:border-r border-zinc-900 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-60 h-60 bg-orange-500/[0.04] rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-60 h-60 bg-orange-500/[0.04] rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
             
             <div className="space-y-4 relative z-10 text-left">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold bg-amber-400/10 px-3 py-1 rounded-md border border-amber-400/20">
-                <Sparkles size={12} className="text-amber-400" /> Developer Academy Admissions
+                <Sparkles size={12} className="text-amber-400" aria-hidden="true" /> Developer Academy Admissions
               </div>
               
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+              <h2 id="course-enquiry-modal-title" className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
                 Technical Coaching <br />
-                <span className="text-amber-400">Admissions & Inquiry</span>
+                <span className="text-amber-400">Admissions &amp; Inquiry</span>
               </h2>
 
               <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
@@ -129,99 +135,121 @@ export default function CourseEnquiryModal({ open, onClose, onSuccessSubmit }: P
           <div className="md:col-span-7 p-6 sm:p-8 bg-zinc-950 text-left">
             <form onSubmit={handleSubmit} className="space-y-4">
               {statusMessage && (
-                <div className={`p-3 rounded-xl text-xs flex items-center gap-2 font-mono ${
-                  statusMessage.type === "success" 
-                    ? "bg-emerald-950/60 border border-emerald-800 text-emerald-400" 
-                    : "bg-red-950/60 border border-red-800 text-red-400"
-                }`}>
-                  {statusMessage.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+                <div 
+                  role={statusMessage.type === "error" ? "alert" : "status"}
+                  aria-live="polite"
+                  className={`p-3 rounded-xl text-xs flex items-center gap-2 font-mono ${
+                    statusMessage.type === "success" 
+                      ? "bg-emerald-950/60 border border-emerald-800 text-emerald-400" 
+                      : "bg-red-950/60 border border-red-800 text-red-400"
+                  }`}
+                >
+                  {statusMessage.type === "success" ? <CheckCircle2 size={16} aria-hidden="true" /> : <AlertCircle size={16} aria-hidden="true" />}
                   <span>{statusMessage.text}</span>
                 </div>
               )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1">Full Name</label>
+                  <label htmlFor="course-form-fullname" className="block text-xs font-mono text-zinc-400 mb-1">
+                    Full Name <span className="text-amber-400">*</span>
+                  </label>
                   <input
+                    id="course-form-fullname"
                     type="text"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     placeholder="e.g. Anand Kumar"
-                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1">Mobile Number</label>
+                  <label htmlFor="course-form-mobile" className="block text-xs font-mono text-zinc-400 mb-1">
+                    Mobile Number <span className="text-amber-400">*</span>
+                  </label>
                   <input
+                    id="course-form-mobile"
                     type="tel"
                     name="mobile"
                     value={formData.mobile}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     placeholder="+91 98765 43210"
-                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1">Email Address</label>
+                  <label htmlFor="course-form-email" className="block text-xs font-mono text-zinc-400 mb-1">
+                    Email Address <span className="text-amber-400">*</span>
+                  </label>
                   <input
+                    id="course-form-email"
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     placeholder="anand@example.com"
-                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1">Select Course Target</label>
+                  <label htmlFor="course-form-course" className="block text-xs font-mono text-zinc-400 mb-1">
+                    Select Course Target <span className="text-amber-400">*</span>
+                  </label>
                   <select 
+                    id="course-form-course"
                     name="course"
                     value={formData.course}
                     onChange={handleChange}
                     required
-                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white focus:outline-none transition cursor-pointer"
+                    aria-required="true"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white transition cursor-pointer"
                   >
                     <option value="Select Course" className="bg-zinc-950 text-zinc-400">Select Course</option>
-                    <option value="AI Data Science & Analytics" className="bg-zinc-950 text-white">AI Data Science & Analytics</option>
+                    <option value="AI Data Science & Analytics" className="bg-zinc-950 text-white">AI Data Science &amp; Analytics</option>
                     <option value="AI Full Stack Development" className="bg-zinc-950 text-white">AI Full Stack Development</option>
                     <option value="Java Full Stack Architecture" className="bg-zinc-950 text-white">Java Full Stack Architecture</option>
                     <option value="React JS Frontend Architecture" className="bg-zinc-950 text-white">React JS Frontend Architecture</option>
                     <option value="Python Full Stack Development" className="bg-zinc-950 text-white">Python Full Stack Development</option>
-                    <option value="PHP & Laravel Full Stack Development" className="bg-zinc-950 text-white">PHP & Laravel Full Stack Development</option>
+                    <option value="PHP & Laravel Full Stack Development" className="bg-zinc-950 text-white">PHP &amp; Laravel Full Stack Development</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-400 mb-1">Message / Requirements</label>
+                <label htmlFor="course-form-message" className="block text-xs font-mono text-zinc-400 mb-1">Message / Requirements</label>
                 <textarea
+                  id="course-form-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows={2}
                   placeholder="Tell us about your career goals..."
-                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition resize-none"
+                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition resize-none"
                 />
               </div>
 
               <button 
-                type="submit"
+                type="submit" 
                 disabled={loading}
-                className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-xl transition shadow-lg shadow-orange-500/10 cursor-pointer disabled:opacity-50"
+                aria-busy={loading}
+                className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-xl transition shadow-lg shadow-orange-500/10 cursor-pointer disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
               >
                 {loading ? (
-                  <>Processing <Loader2 size={14} className="animate-spin text-zinc-950" /></>
+                  <>Processing <Loader2 size={14} className="animate-spin text-zinc-950" aria-hidden="true" /></>
                 ) : (
-                  <>Submit TechSasi Enquiry <Send size={14} className="text-zinc-950" /></>
+                  <>Submit TechSasi Enquiry <Send size={14} className="text-zinc-950" aria-hidden="true" /></>
                 )}
               </button>
             </form>

@@ -83,19 +83,24 @@ const Register = () => {
               Register
             </h2>
 
-            <div className="space-y-5">
+            <form onSubmit={submit} className="space-y-5">
               {/* USERNAME */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="register-username" className="block text-sm font-medium mb-2">
                   Username
                 </label>
 
                 <div className="relative">
                   <UserPlus className="absolute left-4 top-1/2 -translate-y-1/2 text-orange-400" />
                   <input
+                    id="register-username"
+                    name="username"
+                    autoComplete="username"
+                    required
+                    aria-required="true"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-400 outline-none"
+                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 outline-none"
                     placeholder="Enter username"
                   />
                 </div>
@@ -103,7 +108,7 @@ const Register = () => {
 
               {/* PASSWORD */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="register-password" className="block text-sm font-medium mb-2">
                   Password
                 </label>
 
@@ -111,10 +116,15 @@ const Register = () => {
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-orange-400" />
 
                   <input
+                    id="register-password"
+                    name="password"
                     type={showPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    required
+                    aria-required="true"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-12 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-400 outline-none"
+                    className="w-full pl-12 pr-12 py-3 rounded-xl border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 outline-none"
                     placeholder="Enter password"
                   />
 
@@ -122,7 +132,8 @@ const Register = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-500"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 rounded p-1"
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
@@ -131,13 +142,14 @@ const Register = () => {
 
               {/* SUBMIT */}
               <button
-                onClick={submit}
+                type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition shadow-md disabled:opacity-60"
+                aria-busy={loading}
+                className="w-full rounded-xl bg-orange-500 hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 text-white font-semibold py-3 transition shadow-md disabled:opacity-60 cursor-pointer"
               >
                 {loading ? "Registering..." : "Create Account"}
               </button>
-            </div>
+            </form>
 
             {/* LOGIN LINK */}
             <p className="text-center text-sm text-muted-foreground mt-6">

@@ -267,76 +267,84 @@ export const Contact = () => {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-xs font-mono text-slate-700 font-medium">
+                          <label htmlFor="contact-form-name" className="text-xs font-mono text-slate-700 font-medium">
                             Full Name <span className="text-rose-500">*</span>
                           </label>
                           <input
+                            id="contact-form-name"
                             type="text"
                             required
+                            aria-required="true"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="e.g. SasiKumar"
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors"
+                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors"
                           />
                         </div>
 
                         <div className="space-y-1.5">
-                          <label className="text-xs font-mono text-slate-700 font-medium">
+                          <label htmlFor="contact-form-email" className="text-xs font-mono text-slate-700 font-medium">
                             Email Address <span className="text-rose-500">*</span>
                           </label>
                           <input
+                            id="contact-form-email"
                             type="email"
                             required
+                            aria-required="true"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="name@company.com"
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors"
+                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-xs font-mono text-slate-700 font-medium">
+                          <label htmlFor="contact-form-phone" className="text-xs font-mono text-slate-700 font-medium">
                             Phone / WhatsApp <span className="text-rose-500">*</span>
                           </label>
                           <input
+                            id="contact-form-phone"
                             type="tel"
                             required
+                            aria-required="true"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             placeholder="+91 98765 43210"
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors"
+                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors"
                           />
                         </div>
 
                         <div className="space-y-1.5">
-                          <label className="text-xs font-mono text-slate-700 font-medium">
+                          <label htmlFor="contact-form-service" className="text-xs font-mono text-slate-700 font-medium">
                             Target Service Area
                           </label>
                           <select
+                            id="contact-form-service"
                             value={formData.service}
                             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors"
+                            className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors"
                           >
                             <option value="Web Application">Web Application (React / Next)</option>
                             <option value="Mobile App Development">Mobile App (Flutter / React Native)</option>
-                            <option value="E-Commerce Platform">E-Commerce & Online Store</option>
+                            <option value="E-Commerce Platform">E-Commerce &amp; Online Store</option>
                             <option value="Custom ERP & CRM">Custom ERP / CRM System</option>
-                            <option value="Cloud Deployment">Cloud Deployment & Hosting</option>
+                            <option value="Cloud Deployment">Cloud Deployment &amp; Hosting</option>
                             <option value="Developer Training">Developer Training / Coaching</option>
                           </select>
                         </div>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-xs font-mono text-slate-700 font-medium">
+                        <label htmlFor="contact-form-budget" className="text-xs font-mono text-slate-700 font-medium">
                           Estimated Budget Range
                         </label>
                         <select
+                          id="contact-form-budget"
                           value={formData.budget}
                           onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors"
                         >
                           <option value="Under ₹25,000">Under ₹25,000 (Starter / MVP)</option>
                           <option value="₹25,000 – ₹50,000">₹25,000 – ₹50,000 (Standard Commercial)</option>
@@ -346,29 +354,31 @@ export const Contact = () => {
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-xs font-mono text-slate-700 font-medium">
-                          Project Overview & Key Requirements
+                        <label htmlFor="contact-form-message" className="text-xs font-mono text-slate-700 font-medium">
+                          Project Overview &amp; Key Requirements
                         </label>
                         <textarea
+                          id="contact-form-message"
                           rows={4}
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder="Briefly describe what you're looking to build, any existing references, and target launch timeline..."
-                          className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 transition-colors resize-none"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50/70 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-500/50 transition-colors resize-none"
                         />
                       </div>
 
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="w-full py-3.5 px-6 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#00d2ff] via-[#0088ff] to-[#0051ff] hover:brightness-105 shadow-[0_4px_18px_rgba(0,168,255,0.35)] transition-all hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+                        aria-busy={submitting}
+                        className="w-full py-3.5 px-6 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#00d2ff] via-[#0088ff] to-[#0051ff] hover:brightness-105 shadow-[0_4px_18px_rgba(0,168,255,0.35)] transition-all hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2"
                       >
                         {submitting ? (
                           <span>Processing Dispatch...</span>
                         ) : (
                           <>
                             <span>Submit Consultation Request</span>
-                            <Send className="w-3.5 h-3.5" />
+                            <Send className="w-3.5 h-3.5" aria-hidden="true" />
                           </>
                         )}
                       </button>
@@ -385,20 +395,18 @@ export const Contact = () => {
           </div>
         </section>
 
-    
-
         {/* Frequently Asked Questions */}
         <section 
           className="py-20 bg-white"
           data-aos="fade-up"
+          aria-labelledby="faq-section-title"
         >
-          
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             <div className="text-center space-y-2" data-aos="fade-up">
               <span className="text-xs font-mono font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#00b4d8] to-[#0051ff]">
                 Common Inquiries
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              <h2 id="faq-section-title" className="font-display text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
                 Frequently Asked Questions.
               </h2>
               <p className="text-xs text-slate-500 max-w-md mx-auto">
@@ -406,9 +414,11 @@ export const Contact = () => {
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3" role="region" aria-label="Frequently Asked Questions Accordion">
               {faqs.map((faq, index) => {
                 const isOpen = openFaq === index;
+                const panelId = `faq-answer-${index}`;
+                const buttonId = `faq-question-${index}`;
                 return (
                   <div
                     key={faq.q}
@@ -417,19 +427,28 @@ export const Contact = () => {
                     className="rounded-xl bg-white border border-slate-200 overflow-hidden shadow-xs hover:border-cyan-300 transition-colors"
                   >
                     <button
+                      id={buttonId}
                       type="button"
                       onClick={() => setOpenFaq(isOpen ? null : index)}
-                      className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 text-sm font-semibold text-slate-900 hover:text-cyan-600 transition-colors cursor-pointer"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 text-sm font-semibold text-slate-900 hover:text-cyan-600 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                     >
                       <span>{faq.q}</span>
                       <ChevronDown
                         className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
                           isOpen ? "rotate-180 text-cyan-600" : ""
                         }`}
+                        aria-hidden="true"
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                      <div
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={buttonId}
+                        className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100"
+                      >
                         {faq.a}
                       </div>
                     )}

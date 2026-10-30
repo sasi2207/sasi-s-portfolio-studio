@@ -174,13 +174,14 @@ export const SolutionFinder: React.FC = () => {
         data-aos="zoom-in"
         data-aos-delay="500"
       >
-        <button 
-          onClick={() => alert("Quote request clicked!")}
-          className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] hover:from-[#00b4eb] hover:to-[#005edb] active:scale-95 text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-[0_8px_25px_-5px_rgba(0,180,255,0.45)] hover:shadow-[0_12px_30px_-5px_rgba(0,180,255,0.6)] transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 border border-cyan-300/30 cursor-pointer"
+        <Link 
+          to="/proposal"
+          aria-label="Get instant quote for SEO friendly web designs"
+          className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] hover:from-[#00b4eb] hover:to-[#005edb] active:scale-95 text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-[0_8px_25px_-5px_rgba(0,180,255,0.45)] hover:shadow-[0_12px_30px_-5px_rgba(0,180,255,0.6)] transform hover:-translate-y-0.5 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 border border-cyan-300/30 cursor-pointer"
         >
           <span>Get Quote</span>
-          <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
-        </button>
+          <ArrowUpRight className="w-5 h-5 stroke-[2.5]" aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );

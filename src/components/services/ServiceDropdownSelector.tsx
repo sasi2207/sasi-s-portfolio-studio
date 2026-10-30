@@ -165,6 +165,10 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
     (s) => s.path === activePath || (s.path === "/services/mobile-app" && activePath.includes("mobile"))
   );
 
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const optionsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
   // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -174,8 +178,9 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && isOpen) {
         setIsOpen(false);
+        triggerButtonRef.current?.focus();
       }
     };
 
@@ -185,15 +190,18 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isOpen]);
 
   // Focus search input when dropdown opens
   useEffect(() => {
-    if (isOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-    if (!isOpen) {
+    if (isOpen) {
+      setFocusedIndex(-1);
+      setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 50);
+    } else {
       setFilterQuery("");
+      setFocusedIndex(-1);
     }
   }, [isOpen]);
 
@@ -212,6 +220,55 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
   const handleSelect = (page: ServicePageOption) => {
     setIsOpen(false);
     navigate(page.path);
+    triggerButtonRef.current?.focus();
+  };
+
+  const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setIsOpen(true);
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (filteredPages.length > 0) {
+        setFocusedIndex(0);
+        optionsRef.current[0]?.focus();
+      }
+    } else if (e.key === "Enter" && filteredPages.length > 0) {
+      e.preventDefault();
+      handleSelect(filteredPages[0]);
+    }
+  };
+
+  const handleOptionKeyDown = (e: React.KeyboardEvent, index: number) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIdx = index < filteredPages.length - 1 ? index + 1 : 0;
+      setFocusedIndex(nextIdx);
+      optionsRef.current[nextIdx]?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (index === 0) {
+        searchInputRef.current?.focus();
+        setFocusedIndex(-1);
+      } else {
+        const prevIdx = index - 1;
+        setFocusedIndex(prevIdx);
+        optionsRef.current[prevIdx]?.focus();
+      }
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setFocusedIndex(0);
+      optionsRef.current[0]?.focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      const lastIdx = filteredPages.length - 1;
+      setFocusedIndex(lastIdx);
+      optionsRef.current[lastIdx]?.focus();
+    }
   };
 
   const alignmentClass =
@@ -225,11 +282,14 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
     <div className={`relative inline-block text-left ${className}`} ref={dropdownRef}>
       {/* Dropdown Trigger Button */}
       <button
+        ref={triggerButtonRef}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
+        onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        className={`group inline-flex items-center justify-between gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+        aria-controls="service-dropdown-listbox"
+        className={`group inline-flex items-center justify-between gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 ${
           variant === "pill"
             ? "bg-[var(--surface-fill)] border border-[var(--border-line)] text-[var(--accent)] hover:bg-[var(--surface-fill-subtle)] shadow-xs"
             : variant === "compact"
@@ -238,7 +298,7 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
         }`}
       >
         <div className="flex items-center gap-2 min-w-0">
-          <div className="w-5 h-5 rounded-md bg-[var(--surface-fill)] text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--border-line)]">
+          <div className="w-5 h-5 rounded-md bg-[var(--surface-fill)] text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--border-line)]" aria-hidden="true">
             <Layers className="w-3.5 h-3.5" />
           </div>
           <div className="flex flex-col text-left min-w-0">
@@ -261,6 +321,7 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
             className={`w-4 h-4 text-[var(--accent)] transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""
             }`}
+            aria-hidden="true"
           />
         </div>
       </button>
@@ -274,17 +335,16 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
             className={`absolute ${alignmentClass} top-full mt-2 w-[320px] sm:w-[380px] rounded-2xl bg-[var(--card-bg)] border border-[var(--border-line)] shadow-2xl p-2.5 z-50`}
+            id="service-dropdown-listbox"
             role="listbox"
+            aria-label="Service solutions list"
           >
             {/* Header info */}
             <div className="px-3 py-2 border-b border-[var(--border-line)] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-                <span className="text-xs font-mono font-bold text-[var(--text-primary)] uppercase tracking-wider">
-                  {ALL_8_SERVICE_PAGES.length} Service Solutions
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-[var(--accent)] bg-[var(--surface-fill)] px-2 py-0.5 rounded-full border border-[var(--border-line)]">
+              <span className="text-xs font-mono font-semibold text-[var(--text-primary)] uppercase tracking-wider">
+                {ALL_8_SERVICE_PAGES.length} Service Solutions
+              </span>
+              <span className="text-[10px] font-mono text-[var(--text-subtle)] bg-[var(--surface-fill)] px-2 py-0.5 rounded-md border border-[var(--border-line)]">
                 Interactive Switcher
               </span>
             </div>
@@ -292,26 +352,28 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
             {/* Quick Filter Input */}
             <div className="p-2 border-b border-[var(--border-line)]">
               <div className="relative">
-                <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+                <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" aria-hidden="true" />
                 <input
                   ref={searchInputRef}
                   type="text"
                   placeholder="Search service name or .tsx file..."
                   value={filterQuery}
                   onChange={(e) => setFilterQuery(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
+                  aria-label="Filter service solutions"
                   className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-[var(--surface-fill)] border border-[var(--border-line)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                 />
               </div>
             </div>
 
-            {/* List of 8 service pages */}
+            {/* List of service pages */}
             <div className="max-h-[340px] overflow-y-auto scrollbar-none py-1 space-y-1">
               {filteredPages.length === 0 ? (
-                <div className="py-6 text-center text-xs text-[var(--text-muted)]">
+                <div className="py-6 text-center text-xs text-[var(--text-muted)]" role="status">
                   No service page found matching "{filterQuery}"
                 </div>
               ) : (
-                filteredPages.map((page) => {
+                filteredPages.map((page, idx) => {
                   const isCurrent =
                     page.path === activePath ||
                     (page.path === "/services/mobile-app" && activePath.includes("mobile"));
@@ -319,15 +381,18 @@ export const ServiceDropdownSelector: React.FC<ServiceDropdownSelectorProps> = (
                   return (
                     <button
                       key={page.path}
+                      ref={(el) => (optionsRef.current[idx] = el)}
                       type="button"
                       onClick={() => handleSelect(page)}
-                      className={`w-full text-left p-2.5 rounded-xl transition-all flex items-center justify-between gap-3 group cursor-pointer ${
+                      onKeyDown={(e) => handleOptionKeyDown(e, idx)}
+                      className={`w-full text-left p-2.5 rounded-xl transition-all flex items-center justify-between gap-3 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${
                         isCurrent
                           ? "bg-[var(--surface-fill)] border border-[var(--accent)]/40 text-[var(--text-primary)] font-semibold"
                           : "hover:bg-[var(--surface-fill)] text-[var(--text-primary)]"
                       }`}
                       role="option"
                       aria-selected={isCurrent}
+                      tabIndex={focusedIndex === idx ? 0 : -1}
                     >
                       <div className="flex items-start gap-2.5 min-w-0">
                         {/* Mini Service PNG Icon */}

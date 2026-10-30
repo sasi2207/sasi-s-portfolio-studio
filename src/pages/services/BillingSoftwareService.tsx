@@ -37,11 +37,14 @@ import {
   Check,
   ChevronDown,
   ArrowRight,
+  ArrowUpRight,
   Clock,
   Rocket,
   PenTool,
   Gauge,
   X,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -382,6 +385,10 @@ const included = [
 
 const faqs = [
   {
+    q: "Can I try the billing software before purchasing?",
+    a: "Yes! We offer a full 1-month free trial at billing.techsasi.com. You can test drive all POS billing, barcode scanning, thermal printing, and GST reporting features in your own business for 30 days free. When you are interested, you can purchase a lifetime license or enterprise package with full data retention.",
+  },
+  {
     q: "Why build custom billing software instead of buying a ready-made one?",
     a: "Ready-made software works well for standard shops. A custom system makes sense when you have your own pricing rules, multiple outlets, special invoice formats, hardware that needs to be connected, or you want to own the software instead of paying a monthly fee for it.",
   },
@@ -450,36 +457,67 @@ export const GstBillingPosService: React.FC = () => {
 
             {/* Left Content */}
             <div className="space-y-6 lg:col-span-7" data-aos="fade-up">
+              
+              {/* Special 1-Month Free Trial Announcement Banner */}
+              <a
+                href="https://billing.techsasi.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-cyan-400/50 bg-gradient-to-r from-cyan-500/10 via-blue-600/10 to-emerald-500/10 p-3 sm:p-4 text-xs shadow-md transition-all hover:border-cyan-400 hover:shadow-cyan-500/20 hover:bg-white"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-6 px-2.5 items-center justify-center rounded-full bg-emerald-500 text-white font-black text-[10px] uppercase tracking-wider animate-pulse">
+                    1 Month Free
+                  </span>
+                  <span className="font-semibold text-slate-900">
+                    Try our live software at <strong className="text-[#0057ff] underline decoration-cyan-400">billing.techsasi.com</strong> free for 30 days before you purchase!
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1 font-bold text-[#0057ff] group-hover:translate-x-1 transition-transform">
+                  Launch Free Trial <ArrowUpRight size={14} />
+                </span>
+              </a>
+
               <span className="inline-flex items-center gap-2 rounded-full border border-[#00f0ff]/50 bg-gradient-to-r from-[#00f0ff]/10 to-[#0057ff]/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider">
                 <Receipt size={13} className="text-[#0057ff]" />
-                <span className={gradText}>TechSasi Engineering • Enterprise Service 08</span>
+                <span className={gradText}>TechSasi Engineering • Live at billing.techsasi.com</span>
               </span>
 
               <h1 className="font-display text-4xl font-black leading-[1.1] tracking-tight text-balance sm:text-5xl lg:text-6xl text-slate-950">
                 GST Billing, POS &amp; Hardware{" "}
-                <span className={gradText}>Ready At Your Counter.</span>
+                <span className={gradText}>Try 1 Month Free.</span>
               </h1>
 
               <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                Billing software, stock control and the devices to run it, supplied and set up by one team. Create GST invoices, scan and print in seconds, and see your sales from your phone.
+                Billing software, stock control and counter hardware setup. Experience our live cloud platform completely free for 30 days at <strong className="text-slate-900">billing.techsasi.com</strong>. Test everything at your counter before you purchase!
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row pt-2">
-                <Link
-                  to={`/proposal?type=${PROPOSAL_TYPE}`}
+                <a
+                  href="https://billing.techsasi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-4 text-sm font-bold text-white shadow-[0_6px_24px_rgba(0,87,255,0.35)] transition-all hover:brightness-105 active:scale-95 ${gradBg}`}
                 >
-                  Get my billing system
+                  <Sparkles size={16} className="text-cyan-200" />
+                  Try 1 Month Free (billing.techsasi.com)
+                  <ArrowUpRight size={16} />
+                </a>
+                <Link
+                  to={`/proposal?type=${PROPOSAL_TYPE}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-6 py-4 text-sm font-bold text-slate-800 transition-all hover:border-[#0057ff] hover:text-[#0057ff] shadow-xs"
+                >
+                  Purchase Now / Get Quote
                   <ArrowRight size={16} />
                 </Link>
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#00f0ff]/60 bg-white px-7 py-4 text-sm font-bold text-slate-800 transition-all hover:border-[#0057ff] hover:text-[#0057ff] shadow-xs"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-300/80 bg-emerald-50/50 px-5 py-4 text-sm font-bold text-emerald-800 transition-all hover:bg-emerald-100 shadow-xs"
                 >
-                  <MessageCircle size={16} />
-                  Chat on WhatsApp
+                  <MessageCircle size={16} className="text-emerald-600" />
+                  WhatsApp
                 </a>
               </div>
 
@@ -517,10 +555,17 @@ export const GstBillingPosService: React.FC = () => {
                       <span className="h-3 w-3 rounded-full bg-amber-500" />
                       <span className="h-3 w-3 rounded-full bg-emerald-500" />
                     </div>
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-[11px] font-mono text-cyan-400">
-                      <Cpu size={12} />
-                      <span>POS Counter</span>
-                    </div>
+                    <a
+                      href="https://billing.techsasi.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-cyan-500/50 text-[11px] font-mono text-cyan-400 hover:text-white hover:border-cyan-400 transition"
+                      title="Open billing.techsasi.com live trial"
+                    >
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>billing.techsasi.com</span>
+                      <ArrowUpRight size={12} />
+                    </a>
                   </div>
 
                   {/* Metrics */}
@@ -587,6 +632,127 @@ export const GstBillingPosService: React.FC = () => {
               </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* ============ LIVE SOFTWARE & 1-MONTH FREE TRIAL SHOWCASE ============ */}
+        <section className="relative overflow-hidden border-b border-slate-200 py-16 sm:py-24 bg-gradient-to-b from-white via-cyan-50/20 to-slate-50">
+          <div aria-hidden="true" className="pointer-events-none absolute -top-40 right-1/4 h-96 w-96 rounded-full bg-cyan-400/15 blur-[120px]" />
+          
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="overflow-hidden rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-br from-slate-950 via-[#03153d] to-[#012572] p-8 text-white shadow-[0_20px_60px_rgba(0,180,255,0.2)] sm:p-12" data-aos="zoom-in">
+              <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+                
+                {/* Left Pitch */}
+                <div className="space-y-6 lg:col-span-7">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/50 bg-cyan-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-cyan-300">
+                    <Sparkles size={14} className="text-cyan-400" />
+                    <span>Live Cloud Release • billing.techsasi.com</span>
+                  </div>
+
+                  <h2 className="font-display text-3xl font-black leading-tight sm:text-4xl lg:text-5xl text-white">
+                    Try Our Billing Software{" "}
+                    <span className="bg-gradient-to-r from-[#00f0ff] via-cyan-300 to-[#00aaff] bg-clip-text text-transparent">
+                      1 Month Free
+                    </span>{" "}
+                    Before You Purchase.
+                  </h2>
+
+                  <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
+                    Why buy software blind? Test our production-ready POS billing engine in your own business for 30 days. Connect barcode guns, thermal receipt printers, and GST tax calculations. Zero upfront credit card or commitment.
+                  </p>
+
+                  <div className="grid gap-3 sm:grid-cols-2 pt-1 font-mono text-xs">
+                    <div className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 p-3 text-cyan-200">
+                      <Check size={16} className="text-emerald-400 shrink-0" />
+                      <span>30 Days Full Access Free</span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 p-3 text-cyan-200">
+                      <Check size={16} className="text-emerald-400 shrink-0" />
+                      <span>Instant GST Invoicing &amp; HSN</span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 p-3 text-cyan-200">
+                      <Check size={16} className="text-emerald-400 shrink-0" />
+                      <span>Thermal Print &amp; Barcode Ready</span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 p-3 text-cyan-200">
+                      <Check size={16} className="text-emerald-400 shrink-0" />
+                      <span>Keep All Data Upon Purchase</span>
+                    </div>
+                  </div>
+
+                  {/* Dual Action Buttons */}
+                  <div className="flex flex-col gap-3 sm:flex-row pt-3">
+                    <a
+                      href="https://billing.techsasi.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#00f0ff] to-[#0057ff] px-8 py-4 text-sm font-black text-slate-950 shadow-[0_8px_28px_rgba(0,240,255,0.4)] transition-all hover:brightness-110 active:scale-95"
+                    >
+                      <span>Try 1 Month Free at billing.techsasi.com</span>
+                      <ArrowUpRight size={17} className="stroke-[2.5]" />
+                    </a>
+
+                    <Link
+                      to={`/proposal?type=${PROPOSAL_TYPE}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:bg-white/20 active:scale-95"
+                    >
+                      <span>Purchase License Now</span>
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right Interactive Node Graphic */}
+                <div className="lg:col-span-5">
+                  <div className="rounded-2xl border border-cyan-400/30 bg-slate-900/90 p-6 space-y-4 backdrop-blur-md shadow-2xl">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
+                        <span className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wide">
+                          Live Trial Active
+                        </span>
+                      </div>
+                      <span className="font-mono text-[11px] text-cyan-300">
+                        Node: billing.techsasi.com
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 font-mono text-xs text-slate-300">
+                      <div className="flex justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                        <span className="text-slate-400">Software Edition:</span>
+                        <span className="font-bold text-white">TechSasi POS &amp; GST Cloud</span>
+                      </div>
+                      <div className="flex justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                        <span className="text-slate-400">Trial Duration:</span>
+                        <span className="font-bold text-emerald-400">30 Days (100% Free)</span>
+                      </div>
+                      <div className="flex justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                        <span className="text-slate-400">Setup Time:</span>
+                        <span className="font-bold text-cyan-400">&lt; 60 Seconds</span>
+                      </div>
+                      <div className="flex justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                        <span className="text-slate-400">Hardware Compatibility:</span>
+                        <span className="font-bold text-white">USB/LAN Thermal &amp; Barcode</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <a
+                        href="https://billing.techsasi.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 transition-all shadow-md active:scale-95"
+                      >
+                        <ExternalLink size={14} />
+                        Open billing.techsasi.com Direct
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </section>
 
@@ -836,6 +1002,10 @@ export const GstBillingPosService: React.FC = () => {
               <p className="mt-3 text-slate-600">
                 Software prices are starting points, and hardware is quoted separately at actual cost. We confirm a fixed quote after understanding your business.
               </p>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/60 bg-emerald-50 px-4 py-1.5 text-xs font-semibold text-emerald-800">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Want to test drive before purchasing? Try 1 Month Free at <a href="https://billing.techsasi.com" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-950">billing.techsasi.com</a></span>
+              </div>
             </div>
 
             <div className="grid items-stretch gap-6 lg:grid-cols-3">
@@ -883,17 +1053,30 @@ export const GstBillingPosService: React.FC = () => {
                     ))}
                   </ul>
 
-                  <Link
-                    to={`/proposal?type=${PROPOSAL_TYPE}&package=${pkg.id}`}
-                    className={`mt-8 inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-bold transition-all active:scale-95 ${
-                      pkg.popular
-                        ? `text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] hover:brightness-105 ${gradBg}`
-                        : "border border-[#00f0ff]/60 text-slate-800 hover:border-[#0057ff] hover:text-[#0057ff]"
-                    }`}
-                  >
-                    Choose {pkg.name}
-                    <ArrowRight size={15} />
-                  </Link>
+                  <div className="mt-8 space-y-2.5">
+                    <Link
+                      to={`/proposal?type=${PROPOSAL_TYPE}&package=${pkg.id}`}
+                      className={`w-full inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-bold transition-all active:scale-95 ${
+                        pkg.popular
+                          ? `text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] hover:brightness-105 ${gradBg}`
+                          : "border border-[#00f0ff]/60 text-slate-800 hover:border-[#0057ff] hover:text-[#0057ff]"
+                      }`}
+                    >
+                      Purchase {pkg.name}
+                      <ArrowRight size={15} />
+                    </Link>
+
+                    <a
+                      href="https://billing.techsasi.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl border border-dashed border-cyan-400 bg-cyan-50/60 hover:bg-cyan-100 py-2.5 text-xs font-bold text-cyan-900 transition-colors"
+                    >
+                      <Sparkles size={13} className="text-cyan-600" />
+                      <span>Try 1 Month Free First</span>
+                      <ArrowUpRight size={13} />
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1018,17 +1201,27 @@ export const GstBillingPosService: React.FC = () => {
                 Tell us what you sell and how many counters you run. We will reply with a solution plan, a hardware list and a fixed quote.
               </p>
               <div className="flex flex-col items-center justify-center gap-3 pt-2 sm:flex-row">
+                <a
+                  href="https://billing.techsasi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#00f0ff] to-cyan-300 px-8 py-4 text-sm font-black text-slate-950 shadow-lg transition-all hover:brightness-110 active:scale-95 sm:w-auto"
+                >
+                  <Sparkles size={16} />
+                  Try 1 Month Free (billing.techsasi.com)
+                  <ArrowUpRight size={16} />
+                </a>
                 <Link
                   to={`/proposal?type=${PROPOSAL_TYPE}`}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-bold text-[#0057ff] shadow-lg transition-all hover:bg-slate-100 active:scale-95 sm:w-auto"
                 >
-                  Start my project <ArrowRight size={16} />
+                  Purchase License <ArrowRight size={16} />
                 </Link>
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-sm font-bold backdrop-blur transition-all hover:bg-white/20 sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold backdrop-blur transition-all hover:bg-white/20 sm:w-auto"
                 >
                   <MessageCircle size={16} /> WhatsApp us
                 </a>
@@ -1038,22 +1231,24 @@ export const GstBillingPosService: React.FC = () => {
         </section>
 
         {/* ============ MOBILE STICKY BAR ============ */}
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur lg:hidden shadow-lg">
-          <div className="mx-auto flex max-w-md items-center gap-3">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 py-2.5 backdrop-blur lg:hidden shadow-lg">
+          <div className="mx-auto flex max-w-md items-center gap-2">
             <a
-              href={waLink}
+              href="https://billing.techsasi.com"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Chat on WhatsApp"
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#00f0ff]/60 text-[#0057ff]"
+              aria-label="Try 1 Month Free at billing.techsasi.com"
+              className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 text-xs font-black text-white shadow-md active:scale-95 text-center px-2"
             >
-              <MessageCircle size={20} />
+              <span>1 Mo Free Trial</span>
+              <ArrowUpRight size={13} />
             </a>
             <Link
               to={`/proposal?type=${PROPOSAL_TYPE}`}
-              className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-xl text-sm font-bold text-white shadow-[0_4px_16px_rgba(0,87,255,0.35)] active:scale-95 ${gradBg}`}
+              className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#0057ff] text-xs font-bold text-[#0057ff] active:scale-95 bg-white text-center px-2"
             >
-              Get my billing system <ArrowRight size={15} />
+              <span>Purchase</span>
+              <ArrowRight size={13} />
             </Link>
           </div>
         </div>

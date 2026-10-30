@@ -18,7 +18,7 @@ import API_URL from "./api";
 const gradText = "text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#0057ff]";
 const gradBg = "bg-gradient-to-r from-[#00f0ff] to-[#0057ff]";
 const inputCls =
-  "w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-[#0057ff] focus:ring-2 focus:ring-[#00f0ff]/30 focus:bg-white transition-all";
+  "w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-[#0057ff] focus-visible:outline-none focus-visible:border-[#0057ff] focus-visible:ring-2 focus-visible:ring-[#0057ff] focus:bg-white transition-all";
 
 interface ProjectFeature {
   id: string;
@@ -364,7 +364,7 @@ export const Proposal = () => {
                           type="button"
                           onClick={() => setFormData({ ...formData, projectType: key })}
                           aria-pressed={isSelected}
-                          className={`cursor-pointer rounded-2xl border p-4 text-left transition-all ${
+                          className={`cursor-pointer rounded-2xl border p-4 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057ff] focus-visible:ring-offset-2 ${
                             isSelected
                               ? "border-[#0057ff] bg-gradient-to-br from-[#00f0ff]/10 to-[#0057ff]/10 shadow-[0_6px_20px_rgba(0,87,255,0.15)]"
                               : "border-slate-200 bg-slate-50 hover:border-[#0057ff]/50 hover:bg-white"
@@ -401,7 +401,7 @@ export const Proposal = () => {
                           type="button"
                           onClick={() => toggleFeature(feat.id)}
                           aria-pressed={isChecked}
-                          className={`flex cursor-pointer items-start justify-between gap-3 rounded-xl border p-3 text-left transition-all ${
+                          className={`flex cursor-pointer items-start justify-between gap-3 rounded-xl border p-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057ff] focus-visible:ring-offset-2 ${
                             isChecked
                               ? "border-[#0057ff] bg-gradient-to-br from-[#00f0ff]/10 to-[#0057ff]/10"
                               : "border-slate-200 bg-slate-50 hover:border-[#0057ff]/50 hover:bg-white"
@@ -583,7 +583,8 @@ export const Proposal = () => {
                         type="button"
                         onClick={handleSubmitProposal}
                         disabled={submitting}
-                        className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] transition-all hover:brightness-105 active:scale-95 disabled:opacity-50 ${gradBg}`}
+                        aria-busy={submitting}
+                        className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] transition-all hover:brightness-105 active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057ff] focus-visible:ring-offset-2 ${gradBg}`}
                       >
                         <Send className="h-4 w-4" />
                         <span>{submitting ? "Submitting..." : "Submit to TechSasi Engineers"}</span>
@@ -592,7 +593,8 @@ export const Proposal = () => {
                       <button
                         type="button"
                         onClick={handleDownloadPDF}
-                        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-[#00f0ff]/60 bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-800 transition-all hover:border-[#0057ff] hover:text-[#0057ff] active:scale-95"
+                        aria-label="Download Executive PDF Proposal"
+                        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-[#00f0ff]/60 bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-800 transition-all hover:border-[#0057ff] hover:text-[#0057ff] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057ff] focus-visible:ring-offset-2"
                       >
                         <Download className="h-4 w-4 text-[#0057ff]" />
                         <span>Download Executive PDF</span>

@@ -336,7 +336,8 @@ const Login = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="mt-1 flex h-12 w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-[#00f0ff] to-[#0057ff] text-sm font-bold text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] transition-all hover:shadow-[0_8px_28px_rgba(0,240,255,0.5)] hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                      aria-busy={loading}
+                      className="mt-1 flex h-12 w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-[#00f0ff] to-[#0057ff] text-sm font-bold text-white shadow-[0_6px_22px_rgba(0,87,255,0.35)] transition-all hover:shadow-[0_8px_28px_rgba(0,240,255,0.5)] hover:brightness-105 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057ff] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {loading ? (
                         <>

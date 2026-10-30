@@ -318,83 +318,96 @@ export const JobApply = () => {
                   
                   {/* Full Name */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                    <label htmlFor="job-fullname" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
                       <User size={14} className="text-[var(--accent)]" /> Full Name *
                     </label>
                     <input
+                      id="job-fullname"
                       type="text"
                       name="fullName"
                       required
+                      aria-required="true"
                       value={formData.fullName}
                       onChange={handleChange}
                       placeholder="e.g. Sasi Kumar"
-                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] transition"
+                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] transition"
                     />
                   </div>
 
                   {/* Email & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                      <label htmlFor="job-email" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
                         <Mail size={14} className="text-[var(--accent)]" /> Email Address *
                       </label>
                       <input
+                        id="job-email"
                         type="email"
                         name="email"
                         required
+                        aria-required="true"
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="e.g. sasi@example.com"
-                        className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] transition"
+                        className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] transition"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                      <label htmlFor="job-phone" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
                         <Phone size={14} className="text-[var(--accent)]" /> Phone / WhatsApp Number *
                       </label>
                       <input
+                        id="job-phone"
                         type="tel"
                         name="phone"
                         required
+                        aria-required="true"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="e.g. +91 9876543210"
-                        className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] transition"
+                        className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] transition"
                       />
                     </div>
                   </div>
 
                   {/* Years of Experience */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                    <label htmlFor="job-experience" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
                       <Briefcase size={14} className="text-[var(--accent)]" /> Total Years of Relevant Experience *
                     </label>
                     <input
+                      id="job-experience"
                       type="text"
                       name="experienceYears"
                       required
+                      aria-required="true"
                       value={formData.experienceYears}
                       onChange={handleChange}
                       placeholder="e.g. Fresher / 2 Years in React.js"
-                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] transition"
+                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] transition"
                     />
                   </div>
 
                   {/* DYNAMIC PROFESSIONAL LINKS */}
                   <div className="bg-[var(--surface-fill)] border border-[var(--border-line)] p-4 md:p-5 rounded-2xl space-y-4">
                     <div className="flex justify-between items-center">
-                      <label className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] flex items-center gap-1.5">
-                        <Globe size={14} className="text-[var(--accent)]" /> Professional Profiles & Portfolios
-                      </label>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] flex items-center gap-1.5">
+                        <Globe size={14} className="text-[var(--accent)]" /> Professional Profiles &amp; Portfolios
+                      </span>
                       <span className="text-[10px] text-[var(--text-muted)] font-mono">Optional</span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                      <label htmlFor="job-link-type" className="sr-only">
+                        Link Platform
+                      </label>
                       <select
+                        id="job-link-type"
+                        aria-label="Link platform or type"
                         value={currentLinkType}
                         onChange={(e) => setCurrentLinkType(e.target.value as any)}
-                        className="bg-[var(--card-bg)] border border-[var(--border-line)] rounded-xl px-3 py-2.5 text-xs text-[var(--accent)] font-semibold focus:outline-none focus:border-[var(--accent)] cursor-pointer"
+                        className="bg-[var(--card-bg)] border border-[var(--border-line)] rounded-xl px-3 py-2.5 text-xs text-[var(--accent)] font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] cursor-pointer"
                       >
                         <option value="GitHub">GitHub</option>
                         <option value="LinkedIn">LinkedIn</option>
@@ -403,27 +416,37 @@ export const JobApply = () => {
                       </select>
 
                       <div className="sm:col-span-3 flex gap-2">
+                        <label htmlFor="job-link-url" className="sr-only">
+                          Profile or Portfolio URL
+                        </label>
                         <input
+                          id="job-link-url"
                           type="url"
+                          aria-label="Profile or Portfolio URL"
                           value={currentLinkUrl}
                           onChange={(e) => {
                             setCurrentLinkUrl(e.target.value);
                             setLinkError("");
                           }}
                           placeholder="https://..."
-                          className="flex-1 bg-[var(--card-bg)] border border-[var(--border-line)] rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] transition"
+                          className="flex-1 bg-[var(--card-bg)] border border-[var(--border-line)] rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] transition"
                         />
                         <button
                           type="button"
                           onClick={handleAddLink}
-                          className="bg-[var(--accent)] text-white px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer flex items-center gap-1 shrink-0"
+                          aria-label="Add professional link"
+                          className="bg-[var(--accent)] text-white px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition cursor-pointer flex items-center gap-1 shrink-0"
                         >
                           <Plus size={16} /> Add
                         </button>
                       </div>
                     </div>
 
-                    {linkError && <p className="text-rose-500 text-[11px]">{linkError}</p>}
+                    {linkError && (
+                      <p role="alert" className="text-rose-500 text-[11px]">
+                        {linkError}
+                      </p>
+                    )}
 
                     {linksList.length > 0 && (
                       <div className="space-y-2 pt-2">
@@ -446,7 +469,7 @@ export const JobApply = () => {
                                     href={item.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
-                                    className="text-[var(--text-primary)] hover:text-[var(--accent)] truncate flex items-center gap-1 transition"
+                                    className="text-[var(--text-primary)] hover:text-[var(--accent)] focus-visible:outline-none focus-visible:underline truncate flex items-center gap-1 transition"
                                   >
                                     {item.url} <ExternalLink size={11} />
                                   </a>
@@ -454,8 +477,9 @@ export const JobApply = () => {
                                 <button
                                   type="button"
                                   onClick={() => handleRemoveLink(item.id)}
-                                  className="text-[var(--text-muted)] hover:text-rose-500 transition p-1 cursor-pointer shrink-0"
-                                  title="Remove link"
+                                  className="text-[var(--text-muted)] hover:text-rose-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 rounded p-1 cursor-pointer shrink-0 transition"
+                                  title={`Remove ${item.type} link`}
+                                  aria-label={`Remove ${item.type} link`}
                                 >
                                   <Trash2 size={14} />
                                 </button>
@@ -469,17 +493,20 @@ export const JobApply = () => {
 
                   {/* MANUAL RESUME UPLOAD */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                    <label htmlFor="job-resume-file" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5 cursor-pointer">
                       <FileText size={14} className="text-[var(--accent)]" /> Upload Resume (PDF / DOCX, Max 2MB) *
                     </label>
 
-                    <div className="relative border-2 border-dashed border-[var(--border-line)] hover:border-[var(--accent)] bg-[var(--surface-fill)] rounded-2xl p-6 text-center transition group cursor-pointer">
+                    <div className="relative border-2 border-dashed border-[var(--border-line)] hover:border-[var(--accent)] focus-within:border-[var(--accent)] focus-within:ring-2 focus-within:ring-[var(--accent)]/30 bg-[var(--surface-fill)] rounded-2xl p-6 text-center transition group cursor-pointer">
                       <input
+                        id="job-resume-file"
                         type="file"
                         accept=".pdf,.doc,.docx"
                         required
+                        aria-required="true"
+                        aria-label="Upload resume file in PDF, DOC, or DOCX format, maximum 2MB"
                         onChange={handleFileChange}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 focus-visible:outline-none"
                       />
                       
                       <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none">
@@ -499,7 +526,7 @@ export const JobApply = () => {
                               <Upload size={18} />
                             </div>
                             <p className="text-xs text-[var(--text-primary)] font-semibold">
-                              Drag & drop your resume here, or <span className="text-[var(--accent)] underline">browse</span>
+                              Drag &amp; drop your resume here, or <span className="text-[var(--accent)] underline">browse</span>
                             </p>
                             <p className="text-[10px] text-[var(--text-muted)]">Supports PDF, DOC, DOCX up to 2MB</p>
                           </>
@@ -507,21 +534,26 @@ export const JobApply = () => {
                       </div>
                     </div>
 
-                    {resumeError && <p className="text-rose-500 text-xs mt-1 font-medium">{resumeError}</p>}
+                    {resumeError && (
+                      <p role="alert" className="text-rose-500 text-xs mt-1 font-medium">
+                        {resumeError}
+                      </p>
+                    )}
                   </div>
 
                   {/* Cover Letter */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
+                    <label htmlFor="job-cover-letter" className="block text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
                       Cover Note / Why should we hire you?
                     </label>
                     <textarea
+                      id="job-cover-letter"
                       name="coverLetter"
                       rows={4}
                       value={formData.coverLetter}
                       onChange={handleChange}
                       placeholder="Briefly describe your key skills, projects, or achievements..."
-                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl p-4 text-xs sm:text-sm focus:outline-none focus:border-[var(--accent)] text-[var(--text-primary)] resize-none transition"
+                      className="w-full bg-[var(--surface-fill)] border border-[var(--border-line)] rounded-xl p-4 text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus:border-[var(--accent)] text-[var(--text-primary)] resize-none transition"
                     />
                   </div>
 
@@ -529,7 +561,8 @@ export const JobApply = () => {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[var(--accent)] text-white font-bold py-4 rounded-xl uppercase tracking-wider text-xs sm:text-sm hover:opacity-95 transition shadow-lg shadow-[var(--accent)]/20 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                    aria-busy={submitting}
+                    className="w-full bg-[var(--accent)] text-white font-bold py-4 rounded-xl uppercase tracking-wider text-xs sm:text-sm hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition shadow-lg shadow-[var(--accent)]/20 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {submitting ? (
                       "Submitting Application..."

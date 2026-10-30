@@ -114,27 +114,31 @@ export default function ServiceEnquiryForm() {
 
             {/* Success Notification Box */}
             {successMsg && (
-              <div className="p-3 rounded-xl text-xs flex items-center gap-2 font-mono bg-emerald-950/60 border border-emerald-800 text-emerald-400">
-                <CheckCircle2 size={16} />
+              <div role="status" aria-live="polite" className="p-3 rounded-xl text-xs flex items-center gap-2 font-mono bg-emerald-950/60 border border-emerald-800 text-emerald-400">
+                <CheckCircle2 size={16} aria-hidden="true" />
                 <span>{successMsg}</span>
               </div>
             )}
 
             {/* Error Notification Box */}
             {errorMsg && (
-              <div className="p-3 rounded-xl text-xs flex items-center gap-2 font-mono bg-red-950/60 border border-red-800 text-red-400">
-                <AlertCircle size={16} />
+              <div role="alert" aria-live="polite" className="p-3 rounded-xl text-xs flex items-center gap-2 font-mono bg-red-950/60 border border-red-800 text-red-400">
+                <AlertCircle size={16} aria-hidden="true" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-mono text-zinc-400 mb-1">Full Name</label>
+              <label htmlFor="service-form-fullname" className="block text-xs font-mono text-zinc-400 mb-1">
+                Full Name <span className="text-orange-500">*</span>
+              </label>
               <input 
+                id="service-form-fullname"
                 type="text" 
                 required
+                aria-required="true"
                 placeholder="e.g. Anand Kumar"
-                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                 value={formData.full_name}
                 onChange={(e) => setFormData({...formData, full_name: e.target.value})}
               />
@@ -142,24 +146,32 @@ export default function ServiceEnquiryForm() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-mono text-zinc-400 mb-1">Email Address</label>
+                <label htmlFor="service-form-email" className="block text-xs font-mono text-zinc-400 mb-1">
+                  Email Address <span className="text-orange-500">*</span>
+                </label>
                 <input 
+                  id="service-form-email"
                   type="email" 
                   required
+                  aria-required="true"
                   placeholder="anand@example.com"
-                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-400 mb-1">Mobile Number</label>
+                <label htmlFor="service-form-mobile" className="block text-xs font-mono text-zinc-400 mb-1">
+                  Mobile Number <span className="text-orange-500">*</span>
+                </label>
                 <input 
+                  id="service-form-mobile"
                   type="tel" 
                   required
+                  aria-required="true"
                   placeholder="+91 98765 43210"
-                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition"
+                  className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition"
                   value={formData.mobile}
                   onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                 />
@@ -167,9 +179,10 @@ export default function ServiceEnquiryForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-zinc-400 mb-1">Select Service Type</label>
+              <label htmlFor="service-form-type" className="block text-xs font-mono text-zinc-400 mb-1">Select Service Type</label>
               <select 
-                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white focus:outline-none transition cursor-pointer"
+                id="service-form-type"
+                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white transition cursor-pointer"
                 value={formData.service_type}
                 onChange={(e) => setFormData({...formData, service_type: e.target.value})}
               >
@@ -182,11 +195,12 @@ export default function ServiceEnquiryForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-zinc-400 mb-1">Project Details / Message</label>
+              <label htmlFor="service-form-message" className="block text-xs font-mono text-zinc-400 mb-1">Project Details / Message</label>
               <textarea 
+                id="service-form-message"
                 rows={2}
                 placeholder="Tell us about your project requirements..."
-                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none transition resize-none"
+                className="w-full bg-zinc-900/60 border border-zinc-800 focus:border-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 rounded-xl p-3 text-sm text-white placeholder-zinc-600 transition resize-none"
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
               />
@@ -195,12 +209,13 @@ export default function ServiceEnquiryForm() {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-xl transition shadow-lg shadow-orange-500/10 cursor-pointer disabled:opacity-50"
+              aria-busy={loading}
+              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-bold text-xs px-6 py-4 rounded-xl transition shadow-lg shadow-orange-500/10 cursor-pointer disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
             >
               {loading ? (
-                <>Processing <Loader2 size={14} className="animate-spin text-zinc-950" /></>
+                <>Processing <Loader2 size={14} className="animate-spin text-zinc-950" aria-hidden="true" /></>
               ) : (
-                <>Submit Service Enquiry <Send size={14} className="text-zinc-950" /></>
+                <>Submit Service Enquiry <Send size={14} className="text-zinc-950" aria-hidden="true" /></>
               )}
             </button>
 

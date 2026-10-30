@@ -11,11 +11,11 @@ export const ContactFab = () => {
       {/* Phone Call Button */}
       <a
         href={callUrl}
-        aria-label="Direct Phone Consultation"
-        className="group relative w-11 h-11 rounded-full bg-[#0E1422] border border-white/[0.1] text-amber-400 hover:text-white hover:bg-amber-500 hover:border-amber-400 flex items-center justify-center shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+        aria-label="Direct Phone Consultation with TechSasi: Call +91 7448788879"
+        className="group relative w-11 h-11 rounded-full bg-[#0E1422] border border-white/[0.1] text-amber-400 hover:text-white hover:bg-amber-500 hover:border-amber-400 flex items-center justify-center shadow-xl transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E1422]"
       >
         <Phone size={18} />
-        <span className="absolute right-full mr-3 px-3 py-1.5 bg-[#0C111E] text-slate-200 text-xs font-mono rounded-lg border border-white/[0.1] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+        <span className="absolute right-full mr-3 px-3 py-1.5 bg-[#0C111E] text-slate-200 text-xs font-mono rounded-lg border border-white/[0.1] shadow-lg opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
           Call +91 7448788879
         </span>
       </a>
@@ -25,11 +25,11 @@ export const ContactFab = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="group relative w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-105"
+        aria-label="Chat directly on WhatsApp with TechSasi"
+        className="group relative w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E1422]"
       >
         <FaWhatsapp size={24} />
-        <span className="absolute right-full mr-3 px-3 py-1.5 bg-[#0C111E] text-slate-200 text-xs font-mono rounded-lg border border-white/[0.1] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+        <span className="absolute right-full mr-3 px-3 py-1.5 bg-[#0C111E] text-slate-200 text-xs font-mono rounded-lg border border-white/[0.1] shadow-lg opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
           WhatsApp Direct
         </span>
       </a>

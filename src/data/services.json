@@ -152,21 +152,22 @@
       "iconType": "billing",
       "serviceNumber": "08",
       "title": "GST Billing & POS Software",
-      "headline": "Ultra-Fast GST Billing & Retail POS",
-      "description": "Lightning-fast billing counter, barcode scanning, thermal receipt printing, automated GST invoicing, and real-time daily sales analytics.",
-      "actionableCta": "Supercharge Billing",
+      "headline": "Ultra-Fast GST Billing & Retail POS (Try 1 Month Free)",
+      "description": "Live at billing.techsasi.com — Try 1 month free before you purchase! Ultra-fast retail POS counter, barcode scanning, thermal printing, GST tax invoices, and real-time sales reports.",
+      "actionableCta": "Try 1 Month Free / Purchase",
       "path": "/services/billing",
       "proposalType": "billing-software",
       "category": "enterprise",
-      "timeline": "2–4 Weeks",
+      "timeline": "Instant Free Trial (30 Days)",
+      "liveUrl": "https://billing.techsasi.com",
       "features": [
+        "1-Month 100% Free Trial available now at billing.techsasi.com",
         "Sub-second counter checkout with barcode scanner & hotkeys",
         "Instant GST invoice generation, thermal print & WhatsApp sharing",
         "Real-time stock deduction, low stock alerts & purchase sync",
-        "Multi-counter cashier cash register management & shift settlement",
         "Daily profit/loss, GST R1/R3B exportable reports & E-way bills"
       ],
-      "techStack": ["React", "Electron / Web", "SQLite / Postgres", "Web Thermal Print"]
+      "techStack": ["React", "Electron / Web", "Cloud Node (billing.techsasi.com)", "Web Thermal Print"]
     },
     {
       "id": "custom-erp",
