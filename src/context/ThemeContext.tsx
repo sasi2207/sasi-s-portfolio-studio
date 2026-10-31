@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect } from "react";
 
-export type Theme = "light" | "dark" | "contrast";
+export type Theme = "light";
 export type BrandColor = "cyan" | "amber" | "emerald" | "violet" | "rose" | "gold";
 
 export interface BrandColorConfig {
@@ -92,94 +92,54 @@ export const BRAND_COLORS: Record<BrandColor, BrandColorConfig> = {
 };
 
 export interface ThemeContextType {
-  theme: Theme;
+  theme: "light";
   toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: string) => void;
   brandColor: BrandColor;
   setBrandColor: (color: BrandColor) => void;
   brandConfig: BrandColorConfig;
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
+  toggleTheme: () => {},
+  setTheme: () => {},
+  brandColor: "cyan",
+  setBrandColor: () => {},
+  brandConfig: BRAND_COLORS.cyan,
+});
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("techsasi_theme") as Theme | null;
-      if (saved === "light" || saved === "dark" || saved === "contrast") return saved;
-      return "dark";
-    }
-    return "dark";
-  });
-
-  const [brandColor, setBrandColorState] = useState<BrandColor>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("techsasi_brand_color") as BrandColor | null;
-      if (saved && BRAND_COLORS[saved]) return saved;
-      return "cyan";
-    }
-    return "cyan";
-  });
-
-  const currentBrandConfig = BRAND_COLORS[brandColor] || BRAND_COLORS.cyan;
+  const currentBrandConfig = BRAND_COLORS.cyan;
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    
-    // Manage tailwind class compatibility
-    root.classList.remove("light", "dark", "contrast");
-    if (theme === "light") {
-      root.classList.add("light");
-      root.style.colorScheme = "light";
-    } else if (theme === "contrast") {
-      root.classList.add("dark", "contrast");
-      root.style.colorScheme = "dark";
-    } else {
-      root.classList.add("dark");
-      root.style.colorScheme = "dark";
+    // Clear any previously persisted theme so user session stays locked to clean default
+    try {
+      localStorage.removeItem("techsasi_theme");
+    } catch {
+      // ignore
     }
-    
-    localStorage.setItem("techsasi_theme", theme);
-  }, [theme]);
 
-  // Apply Brand Color variables dynamically across the site
-  useEffect(() => {
     const root = document.documentElement;
+    root.setAttribute("data-theme", "light");
+    root.classList.remove("dark", "contrast");
+    root.classList.add("light");
+    root.style.colorScheme = "light";
+
     root.style.setProperty("--accent", currentBrandConfig.accent);
     root.style.setProperty("--accent-from", currentBrandConfig.accentFrom);
     root.style.setProperty("--accent-to", currentBrandConfig.accentTo);
-    root.setAttribute("data-brand-color", brandColor);
-
-    localStorage.setItem("techsasi_brand_color", brandColor);
-  }, [brandColor, currentBrandConfig]);
-
-  const toggleTheme = () => {
-    setThemeState((prev) => {
-      if (prev === "dark") return "light";
-      if (prev === "light") return "contrast";
-      return "dark";
-    });
-  };
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-  };
-
-  const setBrandColor = (newColor: BrandColor) => {
-    if (BRAND_COLORS[newColor]) {
-      setBrandColorState(newColor);
-    }
-  };
+    root.setAttribute("data-brand-color", "cyan");
+  }, [currentBrandConfig]);
 
   return (
     <ThemeContext.Provider
       value={{
-        theme,
-        toggleTheme,
-        setTheme,
-        brandColor,
-        setBrandColor,
+        theme: "light",
+        toggleTheme: () => {},
+        setTheme: () => {},
+        brandColor: "cyan",
+        setBrandColor: () => {},
         brandConfig: currentBrandConfig,
       }}
     >

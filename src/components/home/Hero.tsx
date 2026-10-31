@@ -327,10 +327,48 @@ export default function Hero() {
             </div>
           </div>
 
+          {/* Featured Live Product Trial Box */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-sky-500/10 border border-cyan-400/40 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-aos="fade-up" data-aos-delay="450">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-mono font-bold text-cyan-800 uppercase tracking-wide">
+                  Live Software • billing.techsasi.com
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 font-bold font-mono">
+                  1 Mo Free Trial
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm font-bold text-slate-900">
+                GST Billing Software: Try 1 month free before you purchase!
+              </p>
+              <p className="text-[11px] text-slate-600">
+                Test POS billing, barcode scanning and GST invoices at your counter.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href="https://billing.techsasi.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-bold text-xs transition-all shadow-sm active:scale-95"
+              >
+                <span>Try 1 Month Free</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+              <Link
+                to="/proposal?type=billing-software"
+                className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-white border border-slate-300 hover:border-cyan-500 text-slate-800 font-bold text-xs transition-all shadow-xs"
+              >
+                <span>Purchase Now</span>
+              </Link>
+            </div>
+          </div>
+
           {/* Interactive Get in Touch Button Bar */}
-          <div className="pt-4 flex flex-wrap items-center gap-4">
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <a 
-              href="https://wa.me/" 
+              href="https://wa.me/917448788897?text=Hi%20TechSasi%2C%20I%20have%20an%20engineering%20inquiry%20regarding%20a%20project." 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#00c6ff] to-[#0072ff] text-white font-semibold text-base shadow-[0_8px_25px_-5px_rgba(0,150,255,0.45)] hover:shadow-[0_12px_30px_-5px_rgba(0,180,255,0.6)] hover:-translate-y-0.5 transition-all active:scale-95 group border border-cyan-300/30"
@@ -341,6 +379,14 @@ export default function Hero() {
               <span>Get in Touch</span>
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
+
+            <Link
+              to="/services/billing"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white border border-slate-300 hover:border-cyan-500 text-slate-800 font-semibold text-base transition-all hover:-translate-y-0.5 shadow-xs"
+            >
+              <span>Explore Billing System</span>
+              <ArrowRight className="w-4 h-4 text-slate-500" />
+            </Link>
           </div>
 
         </div>

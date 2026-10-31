@@ -18,9 +18,6 @@ import {
   TrendingUp,
   Cpu,
   ArrowRight,
-  Sun,
-  Moon,
-  Contrast,
   Phone,
   GraduationCap,
   Layers,
@@ -30,7 +27,7 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { NavbarSkeleton } from "./NavbarSkeleton";
-import { useTheme } from "@/context/useTheme";
+import { GlobalAnnouncementBanner } from "@/components/common/GlobalAnnouncementBanner";
 
 // User-friendly curated services grouped into 2 intuitive columns
 const primaryEngineeringServices = [
@@ -136,8 +133,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   const [isMobileServicesExpanded, setIsMobileServicesExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isClientLoggedIn, setIsClientLoggedIn] = useState(false);
-
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   // Accessibility & Keyboard navigation refs
@@ -290,17 +285,21 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   const totalPrimaryServices = [...primaryEngineeringServices, ...enterpriseCloudServices];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full">
+      {/* Global Billing Software Announcement Banner */}
+      <GlobalAnnouncementBanner />
+
       {/* Floating Glass Navbar */}
-      <div
-        className={cn(
-          "max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3",
-          "border backdrop-blur-xl",
-          scrolled
-            ? "bg-[var(--card-bg)]/92 border-[var(--border-line)] shadow-[0_12px_36px_rgba(0,0,0,0.12)] ring-1 ring-[var(--accent)]/15"
-            : "bg-[var(--card-bg)]/80 border-[var(--border-line)]/80 shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
-        )}
-      >
+      <div className="w-full pt-2 sm:pt-3 px-3 sm:px-6 lg:px-8">
+        <div
+          className={cn(
+            "max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3",
+            "border backdrop-blur-xl",
+            scrolled
+              ? "bg-[var(--card-bg)]/92 border-[var(--border-line)] shadow-[0_12px_36px_rgba(0,0,0,0.12)] ring-1 ring-[var(--accent)]/15"
+              : "bg-[var(--card-bg)]/80 border-[var(--border-line)]/80 shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+          )}
+        >
         <nav
           className="relative flex items-center justify-between w-full h-11 sm:h-12"
           aria-label="Main Navigation"
@@ -523,23 +522,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
 
           {/* Right Action Zone */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Theme Switcher Button */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-2 rounded-xl border border-[var(--border-line)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-fill-subtle)] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
-              aria-label={`Toggle visual theme. Currently ${theme} mode.`}
-              title={`Switch theme (current: ${theme})`}
-            >
-              {theme === "dark" ? (
-                <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" />
-              ) : theme === "contrast" ? (
-                <Contrast className="w-4 h-4 text-cyan-400" aria-hidden="true" />
-              ) : (
-                <Moon className="w-4 h-4 text-slate-700" aria-hidden="true" />
-              )}
-            </button>
-
             {/* Portal Link */}
             <Link
               to={isClientLoggedIn ? "/dashboard" : "/login"}
@@ -558,6 +540,19 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
                 </>
               )}
             </Link>
+
+            {/* Try Billing Software Free Pill */}
+            <a
+              href="https://billing.techsasi.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-cyan-500/10 border border-cyan-400/50 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all active:scale-95 whitespace-nowrap shadow-xs"
+              title="Try TechSasi Billing Software 1 Month Free at billing.techsasi.com"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-cyan-500 animate-pulse" />
+              <span>Try Billing Free</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-700 dark:text-cyan-200 font-bold">1 Mo</span>
+            </a>
 
             {/* Primary Action Button */}
             <Link
@@ -588,6 +583,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
           </div>
         </nav>
       </div>
+    </div>
 
       {/* Accessible Mobile Drawer */}
       <AnimatePresence>
@@ -761,35 +757,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
                   </nav>
                 </div>
 
-                {/* Appearance & Portal Controls */}
+                {/* Portal & Client Controls */}
                 <div className="pt-4 border-t border-[var(--border-line)] space-y-2">
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--surface-fill-subtle)]/50 border border-[var(--border-line)]">
-                    <span className="text-xs text-[var(--text-muted)]">Theme</span>
-                    <button
-                      type="button"
-                      onClick={toggleTheme}
-                      className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[var(--border-line)] bg-[var(--card-bg)] text-[var(--text-primary)] flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                      aria-label={`Toggle theme. Currently ${theme} mode.`}
-                    >
-                      {theme === "dark" ? (
-                        <>
-                          <Sun className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
-                          <span>Dark Theme</span>
-                        </>
-                      ) : theme === "contrast" ? (
-                        <>
-                          <Contrast className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
-                          <span>High Contrast</span>
-                        </>
-                      ) : (
-                        <>
-                          <Moon className="w-3.5 h-3.5 text-slate-700" aria-hidden="true" />
-                          <span>Light Studio</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-
                   <Link
                     to={isClientLoggedIn ? "/dashboard" : "/login"}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -804,6 +773,43 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
                       {isClientLoggedIn ? "Active" : "Sign In"}
                     </span>
                   </Link>
+                </div>
+
+                {/* Billing Software Free Trial & Purchase Highlight Card */}
+                <div className="mt-4 p-3.5 rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-slate-950 via-[#03153d] to-[#012572] text-white space-y-2 shadow-md">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-cyan-300 uppercase tracking-wide">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      billing.techsasi.com
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 font-bold font-mono">
+                      1 Mo Free
+                    </span>
+                  </div>
+                  <p className="text-xs font-bold text-white leading-tight">
+                    GST Billing &amp; POS Software
+                  </p>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    Try 1 month free before you purchase! Test at your shop counter with zero risk.
+                  </p>
+                  <div className="flex gap-2 pt-1">
+                    <a
+                      href="https://billing.techsasi.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition-colors"
+                    >
+                      <span>Try 1 Mo Free</span>
+                      <ArrowUpRight size={13} />
+                    </a>
+                    <Link
+                      to="/proposal?type=billing-software"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-flex items-center justify-center gap-1 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs transition-colors"
+                    >
+                      <span>Purchase</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
 

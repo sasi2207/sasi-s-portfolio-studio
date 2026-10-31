@@ -88,7 +88,7 @@ export const servicePagesList = [
     file: "BillingSoftwareService.tsx",
     path: "/services/billing",
     headline: "Ultra-Fast GST Billing & Retail POS",
-    badge: "Instant GST & Barcode",
+    badge: "1 Mo Free · billing.techsasi.com",
   },
   {
     number: "09",
@@ -456,15 +456,44 @@ export const Services: React.FC = () => {
                   </div>
 
                   {/* Bottom Action Footer with Primary Actionable CTA */}
-                  <div className="pt-6 border-t border-[var(--border-line)] mt-6 flex items-center justify-start">
-                    <button
-                      type="button"
-                      onClick={() => handleCtaClick(service)}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[var(--accent-from)] to-[var(--accent)] hover:opacity-95 shadow-md transition-all duration-200 cursor-pointer transform active:scale-98 whitespace-nowrap"
-                    >
-                      <span>{service.actionableCta}</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
+                  <div className="pt-6 border-t border-[var(--border-line)] mt-6 flex flex-wrap items-center gap-2.5 justify-start">
+                    {service.id === "billing-software" ? (
+                      <>
+                        <a
+                          href="https://billing.techsasi.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-400 hover:brightness-105 shadow-md transition-all active:scale-95 whitespace-nowrap cursor-pointer"
+                        >
+                          <Sparkles className="w-4 h-4 text-slate-950" />
+                          <span>Try 1 Month Free (billing.techsasi.com)</span>
+                          <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                        <Link
+                          to="/proposal?type=billing-software"
+                          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-[var(--border-line)] bg-[var(--surface-fill)] text-[var(--text-primary)] hover:border-[var(--accent)] transition-all active:scale-95 whitespace-nowrap"
+                        >
+                          <span>Purchase Now</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                        <Link
+                          to={service.path}
+                          className="inline-flex items-center justify-center gap-1 px-3 py-2.5 rounded-xl text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap"
+                        >
+                          <span>System Specs</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleCtaClick(service)}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[var(--accent-from)] to-[var(--accent)] hover:opacity-95 shadow-md transition-all duration-200 cursor-pointer transform active:scale-98 whitespace-nowrap"
+                      >
+                        <span>{service.actionableCta}</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}

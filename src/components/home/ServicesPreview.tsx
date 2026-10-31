@@ -135,7 +135,7 @@ export default function ServicesSection() {
             Your Path to Digital Growth
           </h3>
           <p className="text-sm md:text-base text-slate-600 leading-relaxed pt-2">
-            BLAZON provides a broad range of modern technology services aimed at improving your business and accelerating digital growth. With over a decade of experience in digital services, our knowledge is highly calibrated to create solutions that are targeted to your specific goals and difficulties. We are committed to quality across all of our service offerings.
+            TechSasi provides a broad range of modern technology services aimed at improving your business and accelerating digital growth. With over a decade of experience in digital services, our knowledge is highly calibrated to create solutions that are targeted to your specific goals and difficulties. We are committed to quality across all of our service offerings.
           </p>
         </div>
 

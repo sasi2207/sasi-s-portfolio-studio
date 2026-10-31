@@ -1,9 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import { SolutionFinder } from "@/components/home/SolutionFinder";
+import { BillingSoftwareBanner } from "@/components/home/BillingSoftwareBanner";
 import TechStackScroller from "@/components/home/TechStack";
-
-
 import { ProjectsPreview } from "@/components/home/ProjectsPreview";
 import { ProcessSection } from "@/components/home/ProcessSection";
 import { FaqSection } from "@/components/home/FaqSection";
@@ -20,26 +19,28 @@ const Index = () => {
       {/* 2. Interactive "What Do You Need Built?" Solution Navigator */}
       <SolutionFinder />
 
+      {/* 3. Live Product Spotlight: Billing Software 1-Month Free Trial & Purchase */}
+      <BillingSoftwareBanner />
 
-      {/* 3. Infinite Technology & Quality Marquee */}
+      {/* 4. Infinite Technology & Quality Marquee */}
       <TechStackScroller />
 
-     <ServicesSection/>
-      
+      {/* 5. Services Section */}
+      <ServicesSection />
 
-      {/* 5. Live Client Case Studies & Production Proof */}
+      {/* 6. Live Client Case Studies & Production Proof */}
       <ProjectsPreview />
 
-      {/* 6. Why Clients Choose TechSasi: 4 Pillars of Trust */}
-  <App/>
+      {/* 7. Why Clients Choose TechSasi: 4 Pillars of Trust */}
+      <App />
 
-      {/* 7. Transparent 5-Step Journey from Idea to Launch */}
+      {/* 8. Transparent 5-Step Journey from Idea to Launch */}
       <ProcessSection />
 
-      {/* 8. Frequently Asked Questions Accordion */}
+      {/* 9. Frequently Asked Questions Accordion */}
       <FaqSection />
 
-      {/* 9. Final Welcoming Conversion Banner */}
+      {/* 10. Final Welcoming Conversion Banner */}
       <CtaSection />
     </Layout>
   );

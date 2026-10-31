@@ -111,12 +111,12 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm">
               {[
+                { title: "GST Billing Software (1 Mo Free)", path: "/services/billing" },
                 { title: "Web Apps (React & Next.js)", path: "/services/static-web" },
                 { title: "Mobile App Development", path: "/services/mobile-app" },
                 { title: "E-Commerce & Payments", path: "/services/ecommerce" },
                 { title: "Custom ERP & CRM Systems", path: "/services/business-web" },
                 { title: "Cloud Deployment & DevOps", path: "/services/deployment-hosting" },
-                { title: "Full-Stack API Architecture", path: "/services/digital-marketing" }
               ].map((item) => (
                 <li key={item.title}>
                   <Link 

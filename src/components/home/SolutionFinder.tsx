@@ -81,24 +81,24 @@ const solutions: SolutionItem[] = [
     whatsappMessage: "Hi TechSasi, I have an idea for an iOS/Android mobile app. Let's discuss."
   },
   {
-    id: "custom-erp",
-    category: "Enterprise Software",
-    title: "GST Invoicing, Inventory & ERP",
-    tagline: "Custom workflow automation software tailored exactly to your company's operational needs.",
-    targetAudience: "For distributors, factories, agencies, and service companies outgrowing generic spreadsheets.",
-    priceTag: "Modular Fixed Scope",
-    deliveryTime: "Phase-by-Phase Rollout",
+    id: "billing-software",
+    category: "Cloud Product",
+    title: "GST Billing & Retail POS Software",
+    tagline: "Live at billing.techsasi.com — Try 1 month free before you purchase! High-speed counter billing with barcode scanning & thermal printing.",
+    targetAudience: "For retail shops, supermarkets, pharmacies, cafes, and wholesale distributors.",
+    priceTag: "1-Month Free Trial",
+    deliveryTime: "Instant Free Trial (30 Days)",
     icon: Layers,
     accentColor: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30",
     features: [
-      "Automated GST invoice generation with PDF downloads",
-      "Live inventory, purchase orders & stock movement reports",
-      "Multi-branch access with granular user roles",
-      "Secure cloud database backups & audit trails"
+      "1-Month 100% Free Trial available now at billing.techsasi.com",
+      "Sub-second counter checkout with barcode scanner & hotkeys",
+      "Instant GST invoice generation, thermal print & WhatsApp sharing",
+      "Real-time stock deduction, low stock alerts & purchase sync"
     ],
-    primaryLink: "/services/dynamic-web",
-    primaryLinkText: "Explore Custom Software",
-    whatsappMessage: "Hi TechSasi, I need custom billing/ERP software for my business operations."
+    primaryLink: "/services/billing",
+    primaryLinkText: "Try 1 Month Free / Purchase",
+    whatsappMessage: "Hi TechSasi, I saw your billing software at billing.techsasi.com. I want to try the 1 month free trial and discuss purchasing."
   },
   {
     id: "coaching",

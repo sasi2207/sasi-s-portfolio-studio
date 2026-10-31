@@ -11,6 +11,8 @@ import {
   Calculator,
   ShieldCheck,
   Clock,
+  ArrowUpRight,
+  Sparkles,
 } from "lucide-react";
 import API_URL from "./api";
 
@@ -56,12 +58,12 @@ const baseProjectTypes: Record<string, { name: string; basePrice: number; baseDa
   "academy": { name: "TechSasi Academy & Mentorship", basePrice: 25000, baseDays: 60, defaultStack: "React · TypeScript · 1-on-1 Mentorship" },
 };
 
-/* The service pages send these type values. They map to the cards above. */
 const typeAliases: Record<string, string> = {
   "cloud-devops": "devops",
   "digital-marketing-seo": "seo-growth",
   "custom-workflow-erp": "custom-erp",
   "academy-mentorship": "academy",
+  "gst-billing-pos": "billing-software",
 };
 
 const resolveType = (t: string | null): string | null => {
@@ -380,6 +382,30 @@ export const Proposal = () => {
                       );
                     })}
                   </div>
+
+                  {formData.projectType === "billing-software" && (
+                    <div className="mt-4 p-4 rounded-2xl bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-300 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+                      <div className="space-y-1">
+                        <span className="font-bold text-slate-900 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
+                          <span>Live Software Available at billing.techsasi.com</span>
+                        </span>
+                        <p className="text-slate-600 text-[11px] leading-relaxed">
+                          Want to test drive before purchasing? Experience 1 month 100% free cloud trial at your counter.
+                        </p>
+                      </div>
+                      <a
+                        href="https://billing.techsasi.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold text-xs shadow-sm hover:brightness-105 transition-all shrink-0 cursor-pointer"
+                      >
+                        <span>Try 1 Month Free</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 {/* Step 2 */}
