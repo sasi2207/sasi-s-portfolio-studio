@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TechSasiLoader.css — no Tailwind needed. Animate transform/opacity only.
+   TechSasiLoader.css
    ========================================================================== */
 
 .techsasi-loader-overlay {
@@ -28,7 +28,7 @@
   background: radial-gradient(
     circle,
     rgba(0, 229, 255, 0.2) 0%,
-    rgba(0, 168, 255, 0.08) 34%,
+    rgba(0, 97, 255, 0.08) 34%,
     transparent 64%
   );
   pointer-events: none;
@@ -40,8 +40,8 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(0, 168, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 168, 255, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(0, 97, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 97, 255, 0.07) 1px, transparent 1px);
   background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(circle at 50% 44%, #000 0%, transparent 62%);
   mask-image: radial-gradient(circle at 50% 44%, #000 0%, transparent 62%);
@@ -97,7 +97,7 @@
   margin: -5px 0 0 -5px;
   border-radius: 50%;
   background: #00e5ff;
-  box-shadow: 0 0 22px 8px rgba(0, 229, 255, 0.7), 0 0 60px 20px rgba(0, 168, 255, 0.35);
+  box-shadow: 0 0 22px 8px rgba(0, 229, 255, 0.7), 0 0 60px 20px rgba(0, 97, 255, 0.35);
   z-index: 3;
 }
 
@@ -107,13 +107,13 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg); /* start drawing from 12 o'clock */
+  transform: rotate(-90deg);
   overflow: visible;
 }
 
 .ts-circle-bg {
   fill: none;
-  stroke: rgba(0, 168, 255, 0.12);
+  stroke: rgba(0, 97, 255, 0.12);
   stroke-width: 1.5;
 }
 
@@ -143,7 +143,7 @@
 .techsasi-orbit-dot {
   position: absolute;
   left: 50%;
-  top: 12px; /* 144 - radius(132) */
+  top: 12px;
   width: 12px;
   height: 12px;
   margin: -6px 0 0 -6px;
@@ -168,13 +168,13 @@
 }
 
 .ts-cube-cyan {
-  background: linear-gradient(135deg, #00e5ff, #00a8ff);
+  background: linear-gradient(135deg, #00e5ff, #0061ff);
   box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
 }
 
 .ts-cube-electric {
-  background: #007bff;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  background: #0061ff;
+  box-shadow: 0 0 10px rgba(0, 97, 255, 0.5);
 }
 
 .ts-cube-black {
@@ -196,8 +196,8 @@
   display: grid;
   place-items: center;
   box-shadow:
-    0 18px 50px rgba(0, 168, 255, 0.22),
-    0 0 0 1px rgba(0, 168, 255, 0.08),
+    0 18px 50px rgba(0, 97, 255, 0.22),
+    0 0 0 1px rgba(0, 97, 255, 0.08),
     inset 0 0 30px rgba(0, 229, 255, 0.08);
 }
 
@@ -278,18 +278,12 @@
 }
 
 .techsasi-tagline {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: #64748B;
-  white-space: nowrap;
-}
-
-.ts-bullet {
+  font-weight: 700;
+  letter-spacing: 0.35em;
   color: #0061FF;
+  white-space: nowrap;
 }
 
 .ts-tagline-rule {
@@ -381,7 +375,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Skip ---------- */
+/* ---------- Skip Button ---------- */
 .techsasi-skip {
   position: absolute;
   right: 24px;
@@ -400,12 +394,12 @@
 }
 
 .techsasi-skip:hover {
-  color: #0891b2;
+  color: #0061ff;
   background: rgba(241, 245, 249, 0.7);
 }
 
 .techsasi-skip:focus-visible {
-  outline: 2px solid #00a8ff;
+  outline: 2px solid #0061ff;
   outline-offset: 2px;
 }
 
@@ -413,11 +407,11 @@
 @media (max-width: 480px) {
   .techsasi-logo-box {
     scale: 0.82;
-    margin-block: -26px; /* compensate layout space of scaled box */
+    margin-block: -26px;
   }
   .techsasi-tagline {
     font-size: 10.5px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
   }
   .ts-tagline-rule {
     width: 22px;
@@ -428,7 +422,7 @@
   }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ---------- Reduced Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .techsasi-bg-radial,
   .techsasi-grid-backdrop,

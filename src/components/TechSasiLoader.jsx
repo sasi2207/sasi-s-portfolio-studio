@@ -12,15 +12,6 @@ import "./TechSasiLoader.css";
 /**
  * TechSasiLoader — smooth, GPU-friendly loading screen
  *
- * What changed vs. the old version (why it feels smoother):
- *  - No setInterval / Date.now() / setState every 16–20ms. Ring + progress are
- *    framer-motion MotionValues, so they update the DOM directly with ZERO React re-renders.
- *  - One async timeline instead of 8 nested setTimeouts (easy to read, cancel & tweak).
- *  - Only transform + opacity are animated (compositor friendly).
- *  - Spring-based 3D logo settle, proper easing curves, eased (non-linear) progress.
- *  - onComplete stored in a ref -> parent re-renders no longer restart the animation.
- *  - Respects prefers-reduced-motion, locks body scroll, Skip button works instantly.
- *
  * Stages: 0 seed -> 1 ring draws -> 2 logo reveals -> 3 typography -> 4 progress -> sweep -> fade out
  */
 
@@ -86,7 +77,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
   const [sweep, setSweep] = useState(false);
   const [exiting, setExiting] = useState(false);
 
-  // Motion values: update the DOM directly, no React re-render per frame
+  // Motion values: update DOM directly without triggering component re-renders per frame
   const ring = useMotionValue(0); // 0 -> 1
   const progress = useMotionValue(0); // 0 -> 100
 
@@ -111,7 +102,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
     onCompleteRef.current?.();
   }, []);
 
-  // Lock page scroll while the loader is visible
+  // Lock page scroll while loader is visible
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
@@ -138,7 +129,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
     };
 
     const sequence = async () => {
-      // reset (also makes React StrictMode double-mount safe)
+      // Reset state for React StrictMode compatibility
       ring.set(0);
       progress.set(0);
       setStage(0);
@@ -152,12 +143,12 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
       const runProgress = () =>
         run(progress, 100, {
           duration: progressSecs,
-          ease: [0.45, 0.05, 0.25, 1], // eased, feels "alive" instead of robotic-linear
+          ease: [0.45, 0.05, 0.25, 1],
           onUpdate: (v) => {
             const idx = v < 30 ? 0 : v < 60 ? 1 : v < 90 ? 2 : 3;
             if (idx !== lastIdx) {
               lastIdx = idx;
-              setStatusIdx(idx); // only 3 state updates for the whole progress run
+              setStatusIdx(idx);
             }
             overlayRef.current?.setAttribute("aria-valuenow", String(Math.round(v)));
           },
@@ -168,23 +159,23 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
         ring.set(1);
         await runProgress();
       } else {
-        await wait(350); // seed particle moment
+        await wait(350); // Seed particle expansion
         setStage(1);
         const ringDone = run(ring, 1, { duration: 1.2, ease: EASE_IN_OUT });
         await wait(600);
-        setStage(2); // logo settles in (spring)
+        setStage(2); // Logo settles via spring physics
         await wait(450);
-        setStage(3); // TECH SASI + tagline
+        setStage(3); // TECHSASI + Tagline reveal
         await wait(450);
-        setStage(4); // progress
+        setStage(4); // Progress bar initiation
         await Promise.all([ringDone, runProgress()]);
       }
 
       setStatusIdx(3);
       await wait(250);
-      setSweep(true); // cyan light sweep
+      setSweep(true); // Cyan light sweep execution
       await wait(650);
-      setExiting(true); // fade + subtle scale
+      setExiting(true); // Exit transition
       await wait(700);
       finish();
     };
@@ -235,7 +226,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
 
       <div className="techsasi-loader-stage">
         <div className="techsasi-logo-box">
-          {/* Seed particle -> bursts into the ring */}
+          {/* Seed particle */}
           <AnimatePresence>
             {stage === 0 && (
               <motion.div
@@ -289,7 +280,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
                 />
               </svg>
 
-              {/* Orbit light riding the ring head */}
+              {/* Orbit light */}
               <motion.div
                 className="techsasi-orbit"
                 style={{ rotate: orbitRotate, opacity: orbitOpacity }}
@@ -325,7 +316,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
               <div className="techsasi-emblem-disc">
                 <img
                   src="/lo.png"
-                  alt="TechSasi TS Logo"
+                  alt="TechSasi Logo"
                   className="techsasi-logo-image"
                   loading="eager"
                   decoding="async"
@@ -372,13 +363,7 @@ export const TechSasiLoader = ({ onComplete, minDuration = 2800 }) => {
             animate={textState}
           >
             <motion.span className="ts-tagline-rule" variants={ruleVariants} />
-            <span className="techsasi-tagline">
-              <span>LEARN</span>
-              <span className="ts-bullet">•</span>
-              <span>BUILD</span>
-              <span className="ts-bullet">•</span>
-              <span>GROW</span>
-            </span>
+            <span className="techsasi-tagline">WEB SOLUTIONS</span>
             <motion.span className="ts-tagline-rule reverse" variants={ruleVariants} />
           </motion.div>
 
