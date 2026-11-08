@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import img1 from "./img/Man in Blue Suit Against Ribbed Wall.png";
+import img1 from "./img/Confident Business Portrait in Blue.png";
 import {
   ArrowRight,
   ArrowUpRight,
