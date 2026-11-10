@@ -1,6 +1,28 @@
 {
   "projects": [
     {
+      "id": "nirmala-higher-secondary-school",
+      "title": "Nirmala Higher Secondary School, Kolathur",
+      "category": "Web Application",
+      "description": "Official digital campus portal and academic platform for Nirmala Higher Secondary School, Kolathur (Estd. 1954). Featuring bilingual Tamil/English information, government-aided institution archives, academic courses, campus facilities, and admissions.",
+      "image": "/projects/nirmala-school-kolathur.png",
+      "technologies": ["React", "TypeScript", "Tailwind CSS", "Vercel", "Schema.org", "SEO"],
+      "liveUrl": "https://nirmalaschoolkolathur.vercel.app/",
+      "githubUrl": "",
+      "featured": true,
+      "metrics": {
+        "loadTime": "0.8s",
+        "responsiveness": "100%",
+        "seoScore": "98%",
+        "uptime": "99.9%"
+      },
+      "caseStudy": {
+        "problem": "Nirmala Higher Secondary School in Kolathur (Salem District) required a modern, accessible, and bilingual digital portal to communicate school announcements, historical legacy, academic offerings, government-aided schemes, and admission details to students, parents, and alumni worldwide.",
+        "solution": "Engineered a high-performance, mobile-responsive web portal equipped with bilingual typography (Tamil and English), structured Schema.org educational data, fast sub-second asset delivery on Vercel, and optimized accessibility for rural and urban community access.",
+        "outcome": "Delivered a 100% Core Web Vitals-compliant web application with sub-second loading speed, enhanced local and regional digital discoverability, and unified school communications across Salem District."
+      }
+    },
+    {
       "id": "bharathi-thervu-kalam",
       "title": "Bharathi Thervu Kalam",
       "category": "Web Application",

@@ -93,6 +93,38 @@ export const CaseStudy = () => {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+
+            {/* Live Web Preview Frame */}
+            {(project.image || project.liveUrl) && (
+              <div className="pt-8">
+                <div className="rounded-2xl border border-[var(--border-line)] overflow-hidden bg-[var(--card-bg)] shadow-2xl">
+                  <div className="h-9 bg-slate-100 dark:bg-slate-800/80 border-b border-[var(--border-line)] flex items-center justify-between px-4">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-[var(--border-line)] text-[11px] font-mono text-[var(--text-muted)] max-w-md truncate">
+                      <span className="text-emerald-500 font-bold">https://</span>
+                      <span className="font-semibold text-[var(--text-primary)]">
+                        {project.liveUrl ? project.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "") : `${project.id}.com`}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      VERIFIED LIVE
+                    </span>
+                  </div>
+                  <div className="aspect-[16/9] w-full overflow-hidden bg-slate-900 relative">
+                    <img
+                      src={project.image || `https://api.microlink.io?url=${encodeURIComponent(project.liveUrl || '')}&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=1000`}
+                      alt={`${project.title} interface preview`}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

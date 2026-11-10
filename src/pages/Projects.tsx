@@ -227,16 +227,24 @@ export const Projects = () => {
                               </div>
 
                               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 flex items-center justify-center">
-                                {liveScreenshotUrl ? (
+                                {project.image || liveScreenshotUrl ? (
                                   <img
-                                    src={liveScreenshotUrl}
+                                    src={project.image || liveScreenshotUrl}
                                     alt={`${project.title} live webpage front page UI`}
                                     className="w-full h-full object-cover object-top group-hover:scale-105 group-hover:brightness-[1.02] transition-all duration-500 ease-out"
                                     loading="lazy"
+                                    onError={(e) => {
+                                      const target = e.currentTarget as HTMLImageElement;
+                                      if (project.image && target.src !== liveScreenshotUrl && liveScreenshotUrl) {
+                                        target.src = liveScreenshotUrl;
+                                      } else {
+                                        target.style.display = "none";
+                                      }
+                                    }}
                                   />
                                 ) : null}
 
-                                {!project.liveUrl && (
+                                {!project.image && !project.liveUrl && (
                                   <div className="w-full h-full p-4 flex flex-col justify-center items-center bg-slate-100 text-center">
                                     <RefreshCw className="w-6 h-6 text-[#0099ff] animate-spin mb-2" />
                                     <span className="text-xs font-mono text-slate-500">Loading Live Interface...</span>

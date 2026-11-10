@@ -7,6 +7,8 @@ interface BrandLogoProps {
   align?: "left" | "center";
   showColorDot?: boolean;
   techTextColor?: string;
+  subtitleColor?: string;
+  subtitle?: string;
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({ 
@@ -15,15 +17,17 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   align = "center",
   showColorDot = false,
   techTextColor: customTechTextColor,
+  subtitleColor: customSubtitleColor,
+  subtitle = "WEB SOLUTIONS",
 }) => {
   const isLeft = align === "left";
-  const { theme, brandConfig } = useTheme();
+  const { theme } = useTheme();
 
   const sizeClasses = {
     sm: {
-      title: "text-xl sm:text-2xl md:text-3xl",
-      subtitle: "text-[8px] sm:text-[9px] md:text-[10px]",
-      line: "w-2.5 sm:w-3 md:w-4",
+      title: "text-xl sm:text-2xl md:text-2xl",
+      subtitle: "text-[8px] sm:text-[9px] md:text-[9.5px]",
+      line: "w-2.5 sm:w-3 md:w-3.5",
     },
     md: {
       title: "text-2xl md:text-3xl",
@@ -44,9 +48,14 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   // Render "TECH" with dark text color (#111827) or white in dark containers
   const techTextColor = customTechTextColor || (theme === "light" ? "text-[#111827]" : "text-white");
+  const subtitleColor = customSubtitleColor || (theme === "light" ? "text-[#0061FF]" : "text-[#00E5FF]");
 
   return (
-    <div className={`leading-none ${isLeft ? "text-left" : "text-center"} select-none group/logo ${className}`}>
+    <div 
+      className={`leading-none ${isLeft ? "text-left" : "text-center"} select-none group/logo ${className}`}
+      title="TechSasi Web Solutions"
+      aria-label="TechSasi Web Solutions"
+    >
       <div className={`${currentSize.title} font-black tracking-tight inline-flex items-center gap-0.5 ${isLeft ? "justify-start" : "justify-center"}`}>
         {/* TECH in Dark Text (#111827) */}
         <span className={`${techTextColor} font-black transition-colors duration-200`}>
@@ -66,21 +75,21 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         )}
       </div>
 
-      <div className={`flex items-center ${isLeft ? "justify-start" : "justify-center"} gap-1.5 mt-1 ${currentSize.subtitle} font-bold uppercase text-[#64748B] tracking-wider transition-colors duration-200`}>
-        <div 
-          className={`${currentSize.line} h-[1.5px] rounded-full shrink-0 transition-colors duration-300`}
-          style={{ background: "linear-gradient(to right, #00E5FF, #0061FF)" }}
-        />
-        <span>Learn</span>
-        <span className="text-[#0061FF] font-black">•</span>
-        <span>Build</span>
-        <span className="text-[#00E5FF] font-black">•</span>
-        <span>Grow</span>
-        <div 
-          className={`${currentSize.line} h-[1.5px] rounded-full shrink-0 transition-colors duration-300`}
-          style={{ background: "linear-gradient(to right, #0061FF, #00E5FF)" }}
-        />
-      </div>
+      {subtitle && (
+        <div className={`flex items-center ${isLeft ? "justify-start" : "justify-center"} gap-1.5 mt-0.5 ${currentSize.subtitle} font-bold uppercase tracking-[0.22em] ${subtitleColor} transition-colors duration-200`}>
+          <div 
+            className={`${currentSize.line} h-[1.5px] rounded-full shrink-0 transition-colors duration-300`}
+            style={{ background: "linear-gradient(to right, #00E5FF, #0061FF)" }}
+            aria-hidden="true"
+          />
+          <span className="font-bold tracking-[0.22em]">{subtitle}</span>
+          <div 
+            className={`${currentSize.line} h-[1.5px] rounded-full shrink-0 transition-colors duration-300`}
+            style={{ background: "linear-gradient(to right, #0061FF, #00E5FF)" }}
+            aria-hidden="true"
+          />
+        </div>
+      )}
     </div>
   );
 };

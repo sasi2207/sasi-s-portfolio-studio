@@ -294,22 +294,22 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
         <div
           className={cn(
             "max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3",
-            "border backdrop-blur-xl",
+            "border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#030d24]",
             scrolled
-              ? "bg-[var(--card-bg)]/92 border-[var(--border-line)] shadow-[0_12px_36px_rgba(0,0,0,0.12)] ring-1 ring-[var(--accent)]/15"
-              : "bg-[var(--card-bg)]/80 border-[var(--border-line)]/80 shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+              ? "shadow-[0_12px_36px_rgba(0,0,0,0.12)] ring-1 ring-[#0061FF]/15"
+              : "shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
           )}
         >
         <nav
           className="relative flex items-center justify-between w-full h-11 sm:h-12"
           aria-label="Main Navigation"
         >
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Brand Logo - Aligned left with space-between to menu button */}
+          <div className="flex items-center shrink-0">
             <Link
               to="/"
               className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 rounded-lg transition-transform active:scale-95"
-              aria-label="TechSasi Home Page"
+              aria-label="TechSasi Web Solutions Home Page"
             >
               <BrandLogo align="left" size="sm" showColorDot={false} />
             </Link>
@@ -521,11 +521,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
           </div>
 
           {/* Right Action Zone */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Portal Link */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 justify-end">
+            {/* Portal Link (Desktop) */}
             <Link
               to={isClientLoggedIn ? "/dashboard" : "/login"}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border border-[var(--border-line)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-fill-subtle)] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border border-[var(--border-line)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-fill-subtle)] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               aria-label={isClientLoggedIn ? "Go to Client Dashboard" : "Sign In to Client Portal"}
             >
               {isClientLoggedIn ? (
@@ -541,12 +541,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
               )}
             </Link>
 
-            {/* Try Billing Software Free Pill */}
+            {/* Try Billing Software Free Pill (Desktop) */}
             <a
               href="https://billing.techsasi.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-[#EAF5FF] border border-[#66CCFF]/60 text-[#0061FF] hover:bg-[#66CCFF]/20 transition-all active:scale-95 whitespace-nowrap shadow-xs"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-[#EAF5FF] border border-[#66CCFF]/60 text-[#0061FF] hover:bg-[#66CCFF]/20 transition-all active:scale-95 whitespace-nowrap shadow-xs"
               title="Try TechSasi Billing Software 1 Month Free at billing.techsasi.com"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#0061FF]" />
@@ -554,22 +554,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#0061FF]/10 text-[#0061FF] font-bold">1 Mo</span>
             </a>
 
-            {/* Primary Action Button - Primary Blue #0061FF */}
-            <Link
-              to="/proposal"
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl text-white bg-[#0061FF] hover:bg-[#0033CC] transition-all duration-150 active:scale-95 whitespace-nowrap shadow-[0_4px_16px_rgba(0,97,255,0.3)] hover:shadow-[0_6px_20px_rgba(0,97,255,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0061FF] focus-visible:ring-offset-2"
-              aria-label="Request a Custom Project Proposal"
-            >
-              <span>Request Proposal</span>
-              <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </Link>
-
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Vertically centered on right */}
             <button
               ref={mobileMenuButtonRef}
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--surface-fill-subtle)] border border-[var(--border-line)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[var(--text-primary)] hover:bg-[var(--surface-fill-subtle)] border border-[var(--border-line)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-pointer"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
@@ -613,7 +603,14 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
               <div className="space-y-6">
                 {/* Drawer Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-[var(--border-line)]">
-                  <BrandLogo align="left" size="sm" showColorDot={false} />
+                  <Link
+                    to="/"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-lg"
+                    aria-label="TechSasi Web Solutions Home Page"
+                  >
+                    <BrandLogo align="left" size="sm" showColorDot={false} />
+                  </Link>
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);

@@ -82,8 +82,8 @@ export const Footer: React.FC = () => {
           
           {/* Brand & Identity (Col 1 & 2) */}
           <div className="lg:col-span-2 space-y-5">
-            <Link to="/" className="inline-block group focus-visible:outline-none" aria-label="TechSasi Home">
-              <BrandLogo align="left" size="sm" />
+            <Link to="/" className="inline-block group focus-visible:outline-none" aria-label="TechSasi Web Solutions Home">
+              <BrandLogo align="left" size="sm" techTextColor="text-white" subtitleColor="text-[#00E5FF]" />
             </Link>
 
             <p className="text-sm text-[#EAF5FF]/70 leading-relaxed max-w-sm">
