@@ -30,18 +30,20 @@ import { GlobalAnnouncementBanner } from "@/components/common/GlobalAnnouncement
 // Combined T-Mark + TECHSASI Brand Logo Component
 interface NavLogoProps {
   LinkComponent?: React.ElementType;
+  wrapperClassName?: string;
   svgClassName?: string;
   onClick?: () => void;
 }
 
 export const NavLogo: React.FC<NavLogoProps> = ({
   LinkComponent = "a",
+  wrapperClassName = "flex items-center shrink-0 translate-x-[20px] lg:translate-x-0",
   svgClassName = "h-10 sm:h-12 w-auto select-none overflow-visible text-[#0b0e14] dark:text-white",
   onClick,
 }) => {
   const linkProps = LinkComponent === "a" ? { href: "/" } : { to: "/" };
   return (
-    <div className="flex items-center shrink-0">
+    <div className={wrapperClassName}>
       <LinkComponent
         {...linkProps}
         onClick={onClick}
@@ -444,8 +446,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
             className="relative flex items-center justify-between w-full h-11 sm:h-12"
             aria-label="Main Navigation"
           >
-            {/* Brand Logo (T-Mark + TECHSASI + Slogan) */}
-            <NavLogo LinkComponent={Link} />
+            {/* Brand Logo (T-Mark + TECHSASI + Slogan) — shifted 20px right on mobile */}
+            <NavLogo
+              LinkComponent={Link}
+              wrapperClassName="flex items-center shrink-0 ml-[40px] lg:ml-0"
+            />
 
             {/* Desktop Nav Links */}
             <div className="hidden lg:flex items-center gap-1 xl:gap-2" role="menubar">
@@ -747,11 +752,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
               className="fixed top-0 right-0 z-[100] h-full w-[88%] sm:w-[380px] bg-[var(--card-bg)] text-[var(--text-primary)] border-l border-[var(--border-line)] p-6 shadow-2xl flex flex-col justify-between overflow-y-auto lg:hidden"
             >
               <div className="space-y-6">
-                {/* Drawer Header with Combined Logo */}
+                {/* Drawer Header with Combined Logo — shifted 20px right */}
                 <div className="flex items-center justify-between pb-4 border-b border-[var(--border-line)]">
                   <NavLogo
                     LinkComponent={Link}
                     onClick={() => setIsMobileMenuOpen(false)}
+                    wrapperClassName="flex items-center shrink-0 ml-[20px]"
                     svgClassName="h-8 w-auto select-none overflow-visible text-[#0b0e14] dark:text-white"
                   />
                   <button

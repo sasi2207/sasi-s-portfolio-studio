@@ -283,9 +283,7 @@ const App: React.FC = () => {
           <Sonner />
 
           {/* Premium TechSasi Website Loading Screen */}
-          {isSiteLoading && (
-            <TechSasiLoader onComplete={() => setIsSiteLoading(false)} />
-          )}
+         
 
           <ThemeProvider>
             <BrowserRouter>
