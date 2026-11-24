@@ -429,7 +429,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full">
       {/* Global Billing Software Announcement Banner */}
-      <GlobalAnnouncementBanner />
+      {/* <GlobalAnnouncementBanner /> */}
 
       {/* Floating Glass Navbar */}
       <div className="w-full pt-2 sm:pt-3 px-3 sm:px-6 lg:px-8">
